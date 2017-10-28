@@ -1,0 +1,12 @@
+[debug] [2017-10-28T19:23:30.925Z] ----------------------------------------------------------------------
+[debug] [2017-10-28T19:23:30.928Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2017-10-28T19:23:30.928Z] CLI Version:   3.13.1
+[debug] [2017-10-28T19:23:30.929Z] Platform:      darwin
+[debug] [2017-10-28T19:23:30.929Z] Node Version:  v8.7.0
+[debug] [2017-10-28T19:23:30.929Z] Time:          Sat Oct 28 2017 14:23:30 GMT-0500 (CDT)
+[debug] [2017-10-28T19:23:30.929Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-10-28T19:23:30.949Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-10-28T19:23:30.950Z] > authorizing via signed-in user
+[debug] [2017-10-28T19:23:30.951Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/gatherv0-b3651  
+ Sat Oct 28 2017 14:23:30 GMT-0500 (CDT)
