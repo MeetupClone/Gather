@@ -34,7 +34,7 @@ export default class Register extends Component {
         const password = this.emailInput.value
 
         fire.auth().createUserWithEmailAndPassword(email, password).then(result => {
-          console.log(result)
+          console.log("logged in")
         })
         .catch(error => {
           console.log(error)
@@ -53,7 +53,7 @@ export default class Register extends Component {
             <hr style={{marginTop: '10px', marginBottom:'10px'}}/>
 
 
-             <h1> Sign Up With Your Email</h1>
+             <h3> Sign Up With Your Email</h3>
             <form onSubmit={(event) => { this.authWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
             Email
             <input style={{width:"100%"}} name="email" type="email" ref={(input) => {this.emailInput = input}} placeholder="email"/>
@@ -65,7 +65,8 @@ export default class Register extends Component {
             Password
             <input style={{width:"100%"}} name="password" type="password" ref={(input) => {this.passwordInput = input}} placeholder="password"/>
           <br/>
-
+          <hr/>
+          <br/>
           <button onClick={(event) => {this.authWithEmailPassword(event)}}> Create Account </button>
             </form>
           </div>
