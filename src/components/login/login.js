@@ -83,7 +83,6 @@ export default class Login extends Component {
                         </Link>
 
 
-            <button onClick={() => {this.authWithFacebook() }}> Login With Facebook </button>
             <hr style={{marginTop: '10px', marginBottom:'10px'}}/>
 
 

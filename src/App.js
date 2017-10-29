@@ -15,6 +15,9 @@ class App extends Component {
           <Link to ="/login">
             Login
           </Link>
+          <Link to ="/user">
+            User
+          </Link>
         </header>
         <div>{routes}</div>
       </div>
