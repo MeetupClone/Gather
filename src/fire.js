@@ -9,5 +9,10 @@ const config = {
     messagingSenderId: "710004267791"
   };
 
-  var fire = firebase.initializeApp(config);
-export default fire;
+const fire = firebase.initializeApp(config);
+
+const facebookProvider = new firebase.auth.FacebookAuthProvider();
+
+const twitterProvider = new firebase.auth.TwitterAuthProvider();
+
+export {fire, facebookProvider, twitterProvider};
