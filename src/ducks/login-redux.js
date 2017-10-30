@@ -64,6 +64,7 @@ export default function login(state = initialState, action){
     case AUTH_WITH_FACEBOOK:
         firebase.auth().signInWithRedirect(facebookProvider)
             .then((user, error) => {
+              console.log(user)
                 if (error) {
                     console.log(error)
                 } else {
@@ -74,6 +75,7 @@ export default function login(state = initialState, action){
       case AUTH_WITH_TWITTER:
           firebase.auth().signInWithRedirect(twitterProvider)
               .then((user, error) => {
+                console.log(user)
                   if (error) {
                       console.log(error);
                   } else {
@@ -85,17 +87,21 @@ export default function login(state = initialState, action){
       case LOGIN_WITH_EMAIL_PASSWORD:
           firebase.auth().signInWithEmailAndPassword(action.email, action.password)
               .then(user => {
+                console.log(user)
                       Object.assign({}, state, {uid: user.uid, email: user.email, authenticated: true})
               })
           break;
 
     case GET_AUTH_INFO:
             firebase.auth().onAuthStateChanged(user => {
+              console.log(user)
+              if (user){
                Object.assign({}, state, {
                  uid: user.uid,
                  email: user.email,
                  authenticated: true
                })
+             }
             })
 
   }

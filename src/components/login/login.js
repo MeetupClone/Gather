@@ -8,9 +8,11 @@ import "./login.css";
 import "../../helpers.css";
 import axios from 'axios';
 
+import {connect} from 'react-redux';
+
 import {authWithFacebook, authWithTwitter, loginWithEmailPassword, getAuthInfo} from '../../ducks/login-redux.js'
 
-export default class Login extends Component {
+export class Login extends Component {
     constructor(props) {
         super(props);
 
@@ -119,7 +121,7 @@ export default class Login extends Component {
             return (
                 <div>
                   <button onClick= {(event) => this.signOut()}> Log Out </button>
-                  <button onClick={(event) => getAuthInfo()}> Get Auth Info</button>
+                  <button onClick={(event) => getAuthInfo(this.state)}> Get Auth Info</button>
                 </div>
             )
         } else {
@@ -162,13 +164,27 @@ export default class Login extends Component {
                     <br/>
                     <button onClick={() => {authWithTwitter()}}>Login With Twitter</button>
 
-                        <br/>
+                    <br/>
 
 
-                    </div>
+                  </div>
 
-            </div>
+                </div>
             )
         }
     }
 }
+
+
+const mapStateToProps = (state) => {
+console.log("current state is:" + JSON.stringify(state))
+};
+
+const actions = {
+  authWithFacebook,
+  authWithTwitter,
+  loginWithEmailPassword,
+  getAuthInfo
+}
+
+export default connect(mapStateToProps, actions)(Login)
