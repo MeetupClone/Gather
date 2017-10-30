@@ -8,16 +8,16 @@ import User from "./components/user/user";
 import Explore from "./components/events/explore/explore";
 import CreateEvents from './components/events/createEvents/createEvents';
 import SingleEvent from './components/events/singleEvent/singleEvent';
-import CreateGroup from './components/groups/createGroup';
-import GroupPage from './components/groups/groupPage';
-import AuthHome from './components/groups/home/authHome';
+import CreateGroup from './components/groups/createGroup/createGroup';
+import GroupPage from './components/groups/groupPage/groupPage';
+import AuthHome from './components/home/authHome/authHome';
 // change default home route to these ^ w logic
-import NotAuthHome from './components/groups/home/notAuthHome';
-import Account from './components/groups/user/account'
+import NotAuthHome from './components/home/notAuthHome/notAuthHome';
+import Account from './components/user/account/account';
 
 export default (
     <Switch>
-      
+
     <Route component={ Home } exact path="/" />
     <Route component={ Login } path="/login" /> 
     <Route component={Register} path = "/register" />
