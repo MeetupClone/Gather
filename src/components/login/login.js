@@ -9,13 +9,11 @@ import { fire as firebase, facebookProvider, twitterProvider } from "../../fire"
 import "./login.css";
 import "../../helpers.css";
 
-import {loginWithEmailPassword, getAuthInfo} from "../../ducks/login-redux"
+import { loginWithEmailPassword, getAuthInfo } from "../../ducks/login-redux"
 
 export class Login extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
-
 
         this.state = {
             uid: '',
@@ -61,21 +59,6 @@ export class Login extends Component {
             })
     }
 
-    // loginWithEmailPassword(event) {
-    //     event.preventDefault();
-    //     const email = this.emailInput.value
-    //     const password = this.passwordInput.value
-    //     console.log(email, password)
-
-    //     firebase.auth().signInWithEmailAndPassword(email, password)
-    //         .then(user => {
-    //             this.setState({
-    //                 uid: user.uid,
-    //                 email: user.email,
-    //                 authenticated: true
-    //             })
-    //             return user;
-    //         })
     //         .then(user => {
     //             const messaging = firebase.messaging()
     //             messaging.requestPermission()
@@ -87,6 +70,10 @@ export class Login extends Component {
     //         })
     // }
 
+    componentDidMount(){
+        console.log(this.state)
+    }
+
     signOut() {
         firebase.auth().signOut().then(result => {
             this.setState({
@@ -96,24 +83,8 @@ export class Login extends Component {
         })
     }
 
-    componentWillMount() {
-        // firebase.auth().onAuthStateChanged(user => {
-        //     if (user) {
-        //         this.setState({
-        //             uid: user.uid,
-        //             email: user.email,
-        //             authenticated: true
-        //         })
-        //     } else {
-        //         return false;
-        //     }
-        // }).bind(this)
-
-    }
-
-
     render() {
-        const { loginWithEmailPassword, getAuthInfo} = this.props;
+        const { loginWithEmailPassword, getAuthInfo } = this.props;
         if (this.state.authenticated) {
             return (
                 <div>
@@ -132,7 +103,7 @@ export class Login extends Component {
                             <button className="login-button box-shadow" onClick={(event)=> {
                                 event.preventDefault()
 
-                                loginWithEmailPassword(event)}}>Log In </button>
+                                loginWithEmailPassword(this.emailInput, this.passwordInput)}}>Log In </button>
                             <Link to="/register">
                             <button className="register-button box-shadow">Register </button>
                             </Link>
@@ -150,7 +121,7 @@ export class Login extends Component {
         }
     }
 }
-const mapStateToProps = (state) => {return this.state}
+const mapStateToProps = (state) => { return {} }
 
 const actions = {
     loginWithEmailPassword,

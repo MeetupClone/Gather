@@ -84,7 +84,9 @@ export default function login(state = initialState, action) {
                 });
             break;
         case LOGIN_WITH_EMAIL_PASSWORD:
-            firebase.auth().signInWithEmailAndPassword(action.email, action.password)
+        let email = action.email.value
+        let password = action.password.value
+            firebase.auth().signInWithEmailAndPassword(email, password)
                 .then(user => {
                     console.log("completed")
                     Object.assign({}, state, { uid: user.uid, email: user.email, authenticated: true })

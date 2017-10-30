@@ -4,6 +4,4 @@ import login from './ducks/login-redux'
 
 let store = createStore(login);
 
-
-console.log(store)
 export default store;

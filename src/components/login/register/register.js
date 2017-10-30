@@ -54,19 +54,18 @@ export default class Register extends Component {
         const email = this.emailInput.value
         const password = this.passwordInput.value
 
-        console.log(email,name,password)
+        console.log(email, name, password)
 
         firebase.auth().createUserWithEmailAndPassword(email, password).then(user => {
-
-                this.setState({
+                let userInfo = [user.uid, user.email, name]
+                axios.post('/api/user/createUser', userInfo)
+                return this.setState({
                     uid: user.uid,
                     email: user.email,
                     name: name,
                     authenticated: true
                 })
 
-                let userInfo = [user.uid, user.email, name]
-                axios.post('/api/user/createUser', userInfo)
             })
             .catch(error => {
                 console.log(error)
