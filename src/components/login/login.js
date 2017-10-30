@@ -2,15 +2,19 @@ import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
 
+import { connect } from "react-redux";
+
 import { fire as firebase, facebookProvider, twitterProvider } from "../../fire"
 
 import "./login.css";
 import "../../helpers.css";
-import axios from 'axios';
 
-export default class Login extends Component {
+import {loginWithEmailPassword, getAuthInfo} from "../../ducks/login-redux"
+
+export class Login extends Component {
     constructor(props) {
         super(props);
+        console.log(props)
 
 
         this.state = {
@@ -30,8 +34,6 @@ export default class Login extends Component {
         }).bind(this)
 
         this.signOut = this.signOut.bind(this);
-        this.loginWithEmailPassword = this.loginWithEmailPassword.bind(this);
-        this.getAuthInfo = this.getAuthInfo.bind(this);
         this.authWithFacebook = this.authWithFacebook.bind(this)
         this.authWithTwitter = this.authWithTwitter.bind(this);
     }
@@ -59,40 +61,31 @@ export default class Login extends Component {
             })
     }
 
-    loginWithEmailPassword(event) {
-        event.preventDefault();
-        const email = this.emailInput.value
-        const password = this.passwordInput.value
-        console.log(email, password)
+    // loginWithEmailPassword(event) {
+    //     event.preventDefault();
+    //     const email = this.emailInput.value
+    //     const password = this.passwordInput.value
+    //     console.log(email, password)
 
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(user => {
-                this.setState({
-                    uid: user.uid,
-                    email: user.email,
-                    authenticated: true
-                })
-                return user;
-            })
-            .then(user => {
-                const messaging = firebase.messaging()
-                messaging.requestPermission()
-                    .then(result => {
-                        return messaging.getToken().then(token => {
-                            axios.put('/api/user/registerFCMKey', [this.state.uid, token])
-                        })
-                    })
-            })
-    }
-
-
-    getAuthInfo() {
-        firebase.auth().onAuthStateChanged(user => {
-            console.log(user)
-            console.log(this.state)
-        })
-    }
-
+    //     firebase.auth().signInWithEmailAndPassword(email, password)
+    //         .then(user => {
+    //             this.setState({
+    //                 uid: user.uid,
+    //                 email: user.email,
+    //                 authenticated: true
+    //             })
+    //             return user;
+    //         })
+    //         .then(user => {
+    //             const messaging = firebase.messaging()
+    //             messaging.requestPermission()
+    //                 .then(result => {
+    //                     return messaging.getToken().then(token => {
+    //                         axios.put('/api/user/registerFCMKey', [this.state.uid, token])
+    //                     })
+    //                 })
+    //         })
+    // }
 
     signOut() {
         firebase.auth().signOut().then(result => {
@@ -120,6 +113,7 @@ export default class Login extends Component {
 
 
     render() {
+        const { loginWithEmailPassword, getAuthInfo} = this.props;
         if (this.state.authenticated) {
             return (
                 <div>
@@ -130,10 +124,15 @@ export default class Login extends Component {
         } else {
             return (
                 <div id="login-page">
-                        <form onSubmit={(event)=> { this.loginWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
+                        <form onSubmit={(event)=> { 
+                            event.preventDefault();
+                            loginWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
                             <input name="email" type="email" ref={(input)=> {this.emailInput = input}} placeholder="Email"/>
                             <input name="password" type="password" ref={(input)=> {this.passwordInput = input}} placeholder="Password"/>
-                            <button className="login-button box-shadow" onClick={(event)=> {this.loginWithEmailPassword(event)}}>Log In </button>
+                            <button className="login-button box-shadow" onClick={(event)=> {
+                                event.preventDefault()
+
+                                loginWithEmailPassword(event)}}>Log In </button>
                             <Link to="/register">
                             <button className="register-button box-shadow">Register </button>
                             </Link>
@@ -151,3 +150,11 @@ export default class Login extends Component {
         }
     }
 }
+const mapStateToProps = (state) => {return this.state}
+
+const actions = {
+    loginWithEmailPassword,
+    getAuthInfo
+}
+
+export default connect(mapStateToProps, actions)(Login);
