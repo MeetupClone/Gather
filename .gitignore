@@ -8,6 +8,7 @@
 
 # production
 /build
+/server/keys/config
 
 # misc
 .DS_Store
