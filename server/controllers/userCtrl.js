@@ -10,6 +10,7 @@ const createUser = (req,res) => {
 }
 
 const registerFCMKey = (req,res) => {
+	console.log(req.body)
 	req.app
 	.get('db')
 	.registerFCMKey(req.body)

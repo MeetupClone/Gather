@@ -38,6 +38,8 @@ export default class Register extends Component {
         const email = this.emailInput.value
         const password = this.passwordInput.value
 
+        console.log(email,name,password)
+
         firebase.auth().createUserWithEmailAndPassword(email, password).then(user => {
 
                 this.setState({

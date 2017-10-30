@@ -25,7 +25,7 @@ app.use(express.static('./public'));
 const userCtrl = require('./server/controllers/userCtrl')
 
 app.post('/api/user/createUser', userCtrl.createUser)
-app.post('/api/user/registerFCMKey', userCtrl.registerFCMKey)
+app.put('/api/user/registerFCMKey', userCtrl.registerFCMKey)
 
 
 

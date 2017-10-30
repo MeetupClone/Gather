@@ -1,1 +1,1 @@
-INSERT INTO users (name, email, uid) VALUES ($1, $2, $3);
+INSERT INTO users (uid, email, name) VALUES ($1, $2, $3);
