@@ -18,10 +18,10 @@ class App extends Component {
           <Link to ="/user">
             User
           </Link>
-          <Link to = "/events">
+          <Link to = "/explore">
             Explore
           </Link>
-          <Link to = "/events/create">
+          <Link to = "/event/create">
             Create Event
           </Link>
         </header>
