@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { fire, facebookProvider, twitterProvider } from "../../fire"
 
+import './login.css';
+
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -74,8 +76,8 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div>
-                <h1> Log In Page </h1>
+            <div className='body'>
+                <h1 className='login'> Login Page </h1>
 
                      <div>
                         <Link to ="/register">
@@ -83,40 +85,37 @@ export default class Login extends Component {
                         </Link>
 
 
-            <button onClick={() => {this.authWithFacebook() }}> Login With Facebook </button>
+            <button className='facebook' onClick={() => {this.authWithFacebook() }}> Login With Facebook </button>
             <hr style={{marginTop: '10px', marginBottom:'10px'}}/>
 
 
-             <h3> Sign In With Your Email</h3>
+             <h3 className='login'> Sign In With Your Email</h3>
             <form onSubmit={(event) => { this.loginWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
-            Email
-            <input style={{width:"100%"}} name="email" type="email" ref={(input) => {this.emailInput = input}} placeholder="email"/>
+            <input style={{width:"100%"}} name="email" type="email" ref={(input) => {this.emailInput = input}} placeholder="Email"/>
           <br/>
           <br/>
-            Password
-            <input style={{width:"100%"}} name="password" type="password" ref={(input) => {this.passwordInput = input}} placeholder="password"/>
+            <input style={{width:"100%"}} name="password" type="password" ref={(input) => {this.passwordInput = input}} placeholder="Password"/>
           <br/>
           <br/>
           
-          <button onClick={(event) => {this.loginWithEmailPassword(event)}}>Log In </button>
+          <button className='loginbutton' onClick={(event) => {this.loginWithEmailPassword(event)}}>Log In </button>
             </form>
             <br/>
             <br/>
                 <hr style={{marginTop: '10px', marginBottom:'10px'}}/>    
                 <br/>
 
-
-                        <button onClick={(event) => this.getAuthInfo()}> Get Auth Info</button>
+                   
+                        <button className='auth' onClick={(event) => this.getAuthInfo()}> Get Auth Info</button>
                         <br/>
                         
-                        <button onClick={() => {this.authWithFacebook() }}> Login With Facebook </button>
+                        <button className='facebook' onClick={() => {this.authWithFacebook() }}> Login With Facebook </button>
                         <br/>
-                        <button onClick={() => {this.authWithTwitter()}}>Login With Twitter</button>
+                        <button className='twitter' onClick={() => {this.authWithTwitter()}}>Login With Twitter</button>
 
                         <br/>
-                        <button onClick= {(event) => this.signOut()}> Log Out </button>
+                        <button className='buttons' onClick= {(event) => this.signOut()}> Log Out </button>
                         <br/>
-                        
 
                     </div>
             
