@@ -18,10 +18,6 @@ export default class Login extends Component {
             email: '',
             authenticated: false
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4bc33bf749e336f9abc4ed10aeee344dd5e44152
 
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
@@ -95,24 +91,6 @@ export default class Login extends Component {
             console.log(user)
             console.log(this.state)
         })
-<<<<<<< HEAD
-=======
-    //
-    //     firebase.auth().onAuthStateChanged(user => {
-    //         this.setState({
-    //             uid: user.uid,
-    //             email: user.email,
-    //             authenticated: true
-    //         })
-    //     }).bind(this)
-    //
-        this.signOut = this.signOut.bind(this);
-    //     this.loginWithEmailPassword = this.loginWithEmailPassword.bind(this);
-    //     this.getAuthInfo = this.getAuthInfo.bind(this);
-    //     this.authWithFacebook = this.authWithFacebook.bind(this);
->>>>>>> 771ef768ea4b63cf126185dbba99f70daca6dd83
-=======
->>>>>>> 4bc33bf749e336f9abc4ed10aeee344dd5e44152
     }
 
 
@@ -145,26 +123,12 @@ export default class Login extends Component {
         if (this.state.authenticated) {
             return (
                 <div>
-<<<<<<< HEAD
-<<<<<<< HEAD
                 <button className="buttons" onClick= {(event) => this.signOut()}> Log Out </button>
                 <button onClick={(event) => this.getAuthInfo()}> Get Auth Info</button>
-=======
-                  <button onClick= {(event) => this.signOut()}> Log Out </button>
-                  <button onClick={(event) => getAuthInfo(this.state)}> Get Auth Info</button>
->>>>>>> 771ef768ea4b63cf126185dbba99f70daca6dd83
-=======
-                <button className="buttons" onClick= {(event) => this.signOut()}> Log Out </button>
-                <button onClick={(event) => this.getAuthInfo()}> Get Auth Info</button>
->>>>>>> 4bc33bf749e336f9abc4ed10aeee344dd5e44152
                 </div>
             )
         } else {
             return (
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4bc33bf749e336f9abc4ed10aeee344dd5e44152
                 <div id="login-page">
                         <form onSubmit={(event)=> { this.loginWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
                             <input name="email" type="email" ref={(input)=> {this.emailInput = input}} placeholder="Email"/>
@@ -182,54 +146,6 @@ export default class Login extends Component {
                             <br/>
 
                         </div>
-<<<<<<< HEAD
-=======
-                <div>
-                  <h1 className="whiteBackground"> Log In Page </h1>
-
-                  <div>
-                    <Link to ="/register">
-                      Register
-                    </Link>
-
-
-                    <hr style={{marginTop: '10px', marginBottom:'10px'}}/>
-
-
-                    <h3>Sign In With Your Email</h3>
-                    <form onSubmit={(event) => { loginWithEmailPassword(this.emailInput, this.passwordInput) }} ref={(form) => { this.loginForm = form }}>
-                      Email
-                      <input style={{width:"100%"}} name="email" type="email" ref={(input) => {this.emailInput = input}} placeholder="email"/>
-                      <br/>
-                      <br/>
-                      Password
-                      <input style={{width:"100%"}} name="password" type="password" ref={(input) => {this.passwordInput = input}} placeholder="password"/>
-                      <br/>
-                      <br/>
-
-                      <button onClick={(event) => {loginWithEmailPassword(this.emailInput, this.passwordInput)}}>Log In </button>
-                    </form>
-                    <br/>
-                    <br/>
-                    <hr style={{marginTop: '10px', marginBottom:'10px'}}/>
-                    <br/>
-
-
-                    <button onClick={(event) => getAuthInfo()}> Get Auth Info</button>
-                    <br/>
-
-                    <button onClick={() => {authWithFacebook() }}> Login With Facebook </button>
-                    <br/>
-                    <button onClick={() => {authWithTwitter()}}>Login With Twitter</button>
-
-                    <br/>
-
-
-                  </div>
-
->>>>>>> 771ef768ea4b63cf126185dbba99f70daca6dd83
-=======
->>>>>>> 4bc33bf749e336f9abc4ed10aeee344dd5e44152
                 </div>
             )
         }
