@@ -5,11 +5,8 @@ const webp = require('webp-converter');
 const { json } = require('body-parser');
 const axios = require('axios');
 
-const { Client } = require('pg');
 
-
-
-const port = 3001;
+const port = 3000;
 
 const {herokuDb} = require('./server/keys/config.js');
 const connectionString = herokuDb
@@ -23,6 +20,14 @@ const app = express();
 app.use(json());
 
 app.use(express.static('./public'));
+
+
+const userCtrl = require('./server/controllers/userCtrl')
+
+app.post('/api/user/createUser', userCtrl.createUser)
+app.post('/api/user/registerFCMKey', userCtrl.registerFCMKey)
+
+
 
 
 app.listen(port, () => {

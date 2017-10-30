@@ -2,18 +2,31 @@ import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
 
-import { fire, facebookProvider, twitterProvider } from "../../fire"
+import { fire as firebase, facebookProvider, twitterProvider } from "../../fire"
 
 import "./login.css";
 import "../../helpers.css";
+import axios from 'axios';
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
 
+
         this.state = {
+            uid: '',
+            email: '',
             authenticated: false
         }
+
+        firebase.auth().onAuthStateChanged(user => {
+            this.setState({
+                uid: user.uid,
+                email: user.email,
+                authenticated: true
+            })
+            console.log(this.state)
+        }).bind(this)
 
         this.signOut = this.signOut.bind(this);
         this.loginWithEmailPassword = this.loginWithEmailPassword.bind(this);
@@ -21,10 +34,11 @@ export default class Login extends Component {
         this.authWithFacebook = this.authWithFacebook.bind(this);
     }
 
+
+
     authWithFacebook() {
-        fire.auth().signInWithRedirect(facebookProvider)
-            .then((result, error) => {
-                console.log("logged in")
+        firebase.auth().signInWithRedirect(facebookProvider)
+            .then((user, error) => {
                 if (error) {
                     console.log(error)
                 } else {
@@ -34,8 +48,9 @@ export default class Login extends Component {
     }
 
     authWithTwitter() {
-        fire.auth().signInWithRedirect(twitterProvider)
+        firebase.auth().signInWithRedirect(twitterProvider)
             .then((result, error) => {
+                console.log(result.uid)
                 if (error) {
                     console.log(error);
                 } else {
@@ -50,32 +65,60 @@ export default class Login extends Component {
         const email = this.emailInput.value
         const password = this.emailInput.value
 
-        fire.auth().signInWithEmailAndPassword(email, password)
-            .then(result => {
-                console.log(result)
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(user => {
+                this.setState({
+                    User: {
+                        uid: user.uid,
+                        email: user.email
+                    },
+                    authenticated: true
+                })
             })
     }
 
+
     getAuthInfo() {
-        fire.auth().onAuthStateChanged(user => {
+        firebase.auth().onAuthStateChanged(user => {
             if (user) {
+                return this.setState({
+                    uid: user.uid,
+                    email: user.email,
+                    authenticated: true
 
-                console.log(user)
-            } else {
-
-                console.log("no user")
+                })
             }
+            console.log(this.state)
         })
     }
 
-    signOut() {
-        fire.auth().signOut().then(result => {
 
+    signOut() {
+        firebase.auth().signOut().then(result => {
             console.log(result, "logged out")
         })
     }
 
+    componentWillMount() {
+        () => { console.log(this.state) }
+
+    }
+
+    // const messaging = firebase.messaging()
+    // messaging.requestPermission()
+    //     .then(result => {
+    //         return messaging.getToken().then(token => {
+    //             console.log(this.state)
+    //             // axios.put('/api/user/registerFCMKey', )
+    //         })
+    //     })
+
+
     render() {
+
+        for (var i = 0; i < 1; i++) {
+            console.log(this.state)
+        }
         return (
             <div>
                 <h1 className="whiteBackground"> Log In Page </h1>
@@ -125,4 +168,7 @@ export default class Login extends Component {
             </div>
         )
     }
+
+
+
 }

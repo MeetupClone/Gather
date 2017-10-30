@@ -12,16 +12,6 @@ class App extends Component {
 
     constructor() {
         super();
-
-        const messaging = firebase.messaging()
-        messaging.requestPermission().then(result => {
-            console.log("have permission")
-            return messaging.getToken()
-                .then(token => {
-                    console.log(token)
-                })
-        })
-
         firebase.messaging().onMessage(function(payload){
           alert(payload.notification.title)
           console.log('onMessage', payload)

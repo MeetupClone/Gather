@@ -2,6 +2,7 @@
   "name": "gather",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3000/",
   "dependencies": {
     "axios": "^0.17.0",
     "body-parser": "^1.18.2",
@@ -17,7 +18,7 @@
     "webp-converter": "^2.1.6"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
