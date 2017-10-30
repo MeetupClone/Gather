@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 
 import { fire, facebookProvider, twitterProvider } from "../../fire"
 
+import "./login.css";
+import "../../helpers.css";
+
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -75,7 +78,7 @@ export default class Login extends Component {
     render() {
         return (
             <div>
-                <h1> Log In Page </h1>
+                <h1 className="whiteBackground"> Log In Page </h1>
 
                      <div>
                         <Link to ="/register">
