@@ -20,17 +20,20 @@ export default class Login extends Component {
         }
 
         firebase.auth().onAuthStateChanged(user => {
-            this.setState({
-                uid: user.uid,
-                email: user.email,
-                authenticated: true
-            })
+            if (user) {
+                this.setState({
+                    uid: user.uid,
+                    email: user.email,
+                    authenticated: true
+                })
+            }
         }).bind(this)
 
         this.signOut = this.signOut.bind(this);
         this.loginWithEmailPassword = this.loginWithEmailPassword.bind(this);
         this.getAuthInfo = this.getAuthInfo.bind(this);
-        this.authWithFacebook = this.authWithFacebook.bind(this);
+        this.authWithFacebook = this.authWithFacebook.bind(this)
+        this.authWithTwitter = this.authWithTwitter.bind(this);
     }
 
     authWithFacebook() {
@@ -101,13 +104,17 @@ export default class Login extends Component {
     }
 
     componentWillMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            this.setState({
-                uid: user.uid,
-                email: user.email,
-                authenticated: true
-            })
-        }).bind(this)
+        // firebase.auth().onAuthStateChanged(user => {
+        //     if (user) {
+        //         this.setState({
+        //             uid: user.uid,
+        //             email: user.email,
+        //             authenticated: true
+        //         })
+        //     } else {
+        //         return false;
+        //     }
+        // }).bind(this)
 
     }
 
@@ -116,56 +123,30 @@ export default class Login extends Component {
         if (this.state.authenticated) {
             return (
                 <div>
-                <button onClick= {(event) => this.signOut()}> Log Out </button>
+                <button className="buttons" onClick= {(event) => this.signOut()}> Log Out </button>
                 <button onClick={(event) => this.getAuthInfo()}> Get Auth Info</button>
                 </div>
             )
         } else {
             return (
-                <div>
-                <h1 className="whiteBackground"> Log In Page </h1>
+                <div id="login-page">
+                        <form onSubmit={(event)=> { this.loginWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
+                            <input name="email" type="email" ref={(input)=> {this.emailInput = input}} placeholder="Email"/>
+                            <input name="password" type="password" ref={(input)=> {this.passwordInput = input}} placeholder="Password"/>
+                            <button className="login-button box-shadow" onClick={(event)=> {this.loginWithEmailPassword(event)}}>Log In </button>
+                            <Link to="/register">
+                            <button className="register-button box-shadow">Register </button>
+                            </Link>
+                        </form>
+                        <div id="providers-auth" className="center">
+                            <button className="auth-button google box-shadow"><img className="auth-icon" src={require( "./assets/google.svg")} alt="Google" />Sign In With Google </button>
+                            <button className="auth-button facebook box-shadow" onClick={()=> {this.authWithFacebook() }}><img className="auth-icon" src={require( "./assets/facebook.svg")} alt="facebook" /> Sign In With Facebook </button>
+                            <button className="auth-button twitter box-shadow" onClick={()=> {this.authWithTwitter()}}><img className="auth-icon" src={require( "./assets/twitter.svg")} alt="twitter" />Sign In With Twitter</button>
 
-                     <div>
-                        <Link to ="/register">
-                        Register 
-                        </Link>
+                            <br/>
 
-
-            <hr style={{marginTop: '10px', marginBottom:'10px'}}/>
-
-
-             <h3>Sign In With Your Email</h3>
-            <form onSubmit={(event) => { this.loginWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
-            Email
-            <input style={{width:"100%"}} name="email" type="email" ref={(input) => {this.emailInput = input}} placeholder="email"/>
-          <br/>
-          <br/>
-            Password
-            <input style={{width:"100%"}} name="password" type="password" ref={(input) => {this.passwordInput = input}} placeholder="password"/>
-          <br/>
-          <br/>
-          
-          <button onClick={(event) => {this.loginWithEmailPassword(event)}}>Log In </button>
-            </form>
-            <br/>
-            <br/>
-                <hr style={{marginTop: '10px', marginBottom:'10px'}}/>    
-                <br/>
-
-
-                        <button onClick={(event) => this.getAuthInfo()}> Get Auth Info</button>
-                        <br/>
-                        
-                        <button onClick={() => {this.authWithFacebook() }}> Login With Facebook </button>
-                        <br/>
-                        <button onClick={() => {this.authWithTwitter()}}>Login With Twitter</button>
-
-                        <br/>
-                        
-
-                    </div>
-            
-            </div>
+                        </div>
+                </div>
             )
         }
     }

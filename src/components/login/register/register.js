@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 
-import { fire as firebase, facebookProvider } from "../../../fire";
+import { fire as firebase, facebookProvider, twitterProvider } from "../../../fire";
 
-import "./register.css";
+import "../login.css";
 
 import axios from "axios"
 
@@ -18,6 +18,22 @@ export default class Register extends Component {
             name: '',
             authenticated: false
         }
+
+        this.authWithFacebook = this.authWithFacebook.bind(this)
+        this.authWithTwitter = this.authWithTwitter.bind(this);
+        this.authWithEmailPassword = this.authWithEmailPassword.bind(this)
+    }
+
+    authWithTwitter() {
+        firebase.auth().signInWithRedirect(twitterProvider)
+            .then((result, error) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log("logged in");
+                }
+
+            })
     }
 
     authWithFacebook() {
@@ -60,36 +76,22 @@ export default class Register extends Component {
     render() {
 
         return (
-            <div>
-            <h1> Register Page </h1>
-           
-           <h3> Sign Up With Facebook </h3>
-
-            <button onClick={() => {this.authWithFacebook() }}> Login With Facebook </button>
-            <hr style={{marginTop: '10px', marginBottom:'10px'}}/>
-
-
-             <h3> Sign Up With Your Email</h3>
-            <form onSubmit={(event) => { this.authWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
-            Name
-            <input style={{width:"100%"}} name="email" type="email" ref={(input) => {this.nameInput = input}} placeholder="name"/>
-          <br/>
-          <br/>
-          <br/>
-            Email
-            <input style={{width:"100%"}} name="email" type="email" ref={(input) => {this.emailInput = input}} placeholder="email"/>
-          
-          <br/>
-          <br/>
-          <br/>
-          
-            Password
-            <input style={{width:"100%"}} name="password" type="password" ref={(input) => {this.passwordInput = input}} placeholder="password"/>
-          <br/>
-          <hr/>
-          <br/>
-          <button onClick={(event) => {this.authWithEmailPassword(event)}}> Create Account </button>
+            <div id="register-page">
+            <h1> Register </h1> 
+            <form className="center" onSubmit={(event) => { this.authWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
+                <input name="email" type="email" ref={(input) => {this.nameInput = input}} placeholder="Name"/>
+                <input name="email" type="email" ref={(input) => {this.emailInput = input}} placeholder="Email"/>
+                <input name="password" type="password" ref={(input) => {this.passwordInput = input}} placeholder="Password"/>
+                <button className="login-button box-shadow" onClick={(event) => {this.authWithEmailPassword(event)}}> Create Account </button>
             </form>
+            <div id="providers-auth" className="center">
+                            <button className="auth-button google box-shadow"><img className="auth-icon" src={require( "../assets/google.svg")} alt="Google" />Sign Up With Google </button>
+                            <button className="auth-button facebook box-shadow" onClick={()=> {this.authWithFacebook() }}><img className="auth-icon" src={require( "../assets/facebook.svg")} alt="facebook" /> Sign Up With Facebook </button>
+                            <button className="auth-button twitter box-shadow" onClick={()=> {this.authWithTwitter()}}><img className="auth-icon" src={require( "../assets/twitter.svg")} alt="twitter" />Sign Up With Twitter</button>
+
+                            <br/>
+
+                        </div>
           </div>
         );
     }

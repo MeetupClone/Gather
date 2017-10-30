@@ -1,7 +1,69 @@
 body {
-  background-color: white; }
+  margin: 0;
+  padding: 0;
+  background-color: #F5FBFD; }
 
-.whiteBackground {
-  background-color: salmon; }
+.box-shadow {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+
+button {
+  border: 0;
+  border-radius: 5px; }
+
+input {
+  width: 100%;
+  margin: 1.5vh 0;
+  max-width: 70vw;
+  font-size: 20px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black; }
+
+#login-page, #register-page {
+  margin-top: 8vh;
+  padding: 0 6vw; }
+
+#providers-auth {
+  margin-top: 5vh; }
+
+.auth-icon {
+  width: 20px;
+  padding-right: 20px; }
+
+.auth-button {
+  padding: 11px;
+  width: 70vw;
+  background-color: white;
+  color: black;
+  margin: 7px 0;
+  font-size: 16px; }
+
+.facebook {
+  color: #fff;
+  text-align: center;
+  background: #4060B7;
+  border-radius: 5px;
+  outline: 0; }
+
+.login-button {
+  margin-top: 8vh;
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  color: #fff;
+  background: #08A045; }
+
+.register-button {
+  margin-top: 7px;
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  color: #fff;
+  background: #0F4C5C; }
+
+.twitter {
+  color: #fff;
+  background: #019BEA; }
 
 /*# sourceMappingURL=login.css.map */
