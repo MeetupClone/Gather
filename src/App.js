@@ -44,6 +44,12 @@ class App extends Component {
           <Link to ="/user">
             User
           </Link>
+          <Link to = "/explore">
+            Explore
+          </Link>
+          <Link to = "/event/create">
+            Create Event
+          </Link>
           <Link to ="/pushNotifications">
             Push Notifications
           </Link>
