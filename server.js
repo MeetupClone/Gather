@@ -6,7 +6,7 @@ const { json } = require('body-parser');
 const axios = require('axios');
 
 
-const port = 3000;
+const port = 3001;
 
 const {herokuDb} = require('./server/keys/config.js');
 const connectionString = herokuDb
@@ -23,9 +23,11 @@ app.use(express.static('./public'));
 
 
 const userCtrl = require('./server/controllers/userCtrl')
+const eventCtrl = require('./server/controllers/eventCtrl')
 
 app.post('/api/user/createUser', userCtrl.createUser)
 app.put('/api/user/registerFCMKey', userCtrl.registerFCMKey)
+app.get('/api/events', eventCtrl.getAllEvents)
 
 
 

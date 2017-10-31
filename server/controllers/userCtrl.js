@@ -20,6 +20,8 @@ const registerFCMKey = (req,res) => {
 }
 
 
+
+
 module.exports = {
 	createUser,
 	registerFCMKey
