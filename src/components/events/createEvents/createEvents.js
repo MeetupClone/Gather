@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import redux from 'react-redux';
-
+import { fire as firebase } from "../fire";
+import axios from 'axios';
 
 import './createEvents.css';
 
@@ -11,15 +12,26 @@ export default class CreateEvents extends Component{
   super(props)
 
 
+
 this.state = {
   eventPic: '',
   eventName: '',
-  uid: '',
+  // uid: '',
   description: '',
   location: '',
-  category: ''
+  category: '',
+  created: false,
+  website: ''
 }
 }
+
+
+CreateEvent(eventPic,  eventName, description, location, category, created, website)=>{
+  axios.post(/createEvents, eventPic,  eventName, description, location, category, website ).then(result=>{this.setState{eventPic,  eventName, description, location, category, created: 'true', website}}
+  return(let {created} = this.state if(created){confirmModal = ("Congrats! You made an Event!")}) )
+}
+
+
 
   render(){
       // const {eventPic, eventName, uid, description, location, category} = this.props
@@ -37,11 +49,17 @@ this.state = {
                 <br/>
                 <br/><input  type="text" placeholder="Category" ref={(input)=>{this.category=input}}/>
                 <br/>
+                <br/><input  type="text" placeholder="Website" ref={(input)=>{this.website=input}}/>
+                <br/>
                 <br/>
               </form><button className="upload-button"  type="text" ref={(input)=>{this.eventPic = input}}>Upload Picture</button>
               <br/>
               <br/>
-              <button className="submitEvent-button">Submit</button>
+              <button className="submitEvent-button" onClick{(event)=>{event.preventDefault() createEvents{eventPic, eventName, uid,description,
+                location,
+                category,
+                created,
+              website}}}>Submit</button>
             </div>
     )
   }
