@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import redux from 'react-redux';
 
 
+import './createEvents.css';
+
 
 export default class CreateEvents extends Component{
   constructor(props){
@@ -24,15 +26,22 @@ this.state = {
         return(
             <div>
 
-              <h1> Create Event </h1>
+              <h1 className="createTitle"> Create Event </h1>
               <form>
-                <input type="text" ref={(input)=>{this.eventName = input}}/>
-                <input type="text" ref={(input)=>{this.eventPic = input}}/>
+                <br/><input type="text"  placeholder="Name" ref={(input)=>{this.eventName = input}}/>
+                <br/>
 
-                <input  type="text" ref={(input)=>{this.description = input}}/>
-                <input  type="text" ref={(input)=>{this.location=input}}/>
-                <input  type="text" ref={(input)=>{this.category=input}}/>
-              </form>
+                <br/><input  type="text"  placeholder="Description"   ref={(input)=>{this.description = input}}/>
+                <br/>
+                <br/><input  type="text" placeholder="Location" ref={(input)=>{this.location=input}}/>
+                <br/>
+                <br/><input  type="text" placeholder="Category" ref={(input)=>{this.category=input}}/>
+                <br/>
+                <br/>
+              </form><button className="upload-button"  type="text" ref={(input)=>{this.eventPic = input}}>Upload Picture</button>
+              <br/>
+              <br/>
+              <button className="submitEvent-button">Submit</button>
             </div>
     )
   }
