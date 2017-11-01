@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import redux from 'react-redux';
-import { fire as firebase } from "../fire";
 import axios from 'axios';
 
 import './createEvents.css';
 
 
-export default class CreateEvents extends Component{
+export class CreateEvents extends Component{
   constructor(props){
   super(props)
 
@@ -21,23 +20,42 @@ this.state = {
   location: '',
   category: '',
   created: false,
-  website: ''
-}
+  website: '',
+  confirmModal: false
 }
 
 
-CreateEvent(eventPic,  eventName, description, location, category, created, website)=>{
-  axios.post(/createEvents, eventPic,  eventName, description, location, category, website ).then(result=>{this.setState{eventPic,  eventName, description, location, category, created: 'true', website}}
-  return(let {created} = this.state if(created){confirmModal = ("Congrats! You made an Event!")}) )
 }
+
+
+
+//   createEvent(eventPic,  eventName, description, location, category, created, website)  {
+//
+//     if (eventPic.length > 0 && eventName.length > 0){
+//       this.setState({confirmModal: true})
+//     }
+//     // let eventDetails = [eventPic,  eventName, description, location, category, created, websites]
+//     // axios.post('/api/event/create' , [eventDetails]).then(result=>{
+//       this.setState({eventPic,  eventName, description, location, category, created: 'true', website})
+//       // let {created} = this.state
+//       if(this.state.created){
+//         this.setState({confirmModal: true})
+//     }
+//
+// }
 
 
 
   render(){
+    let confirmModalElement = null
+    if (this.state.confirmModal === true){
+      confirmModalElement = (<h1> You've made an event</h1>)
+      return confirmModalElement
+    }
       // const {eventPic, eventName, uid, description, location, category} = this.props
         return(
             <div>
-
+              {confirmModalElement}
               <h1 className="createTitle"> Create Event </h1>
               <form>
                 <br/><input type="text"  placeholder="Name" ref={(input)=>{this.eventName = input}}/>
@@ -55,11 +73,9 @@ CreateEvent(eventPic,  eventName, description, location, category, created, webs
               </form><button className="upload-button"  type="text" ref={(input)=>{this.eventPic = input}}>Upload Picture</button>
               <br/>
               <br/>
-              <button className="submitEvent-button" onClick{(event)=>{event.preventDefault() createEvents{eventPic, eventName, uid,description,
-                location,
-                category,
-                created,
-              website}}}>Submit</button>
+              <button className="submitEvent-button" onClick={(event)=>{
+                event.preventDefault();
+                this.createEvent(this.eventPic, this.eventName, this.uid, this.description, this.location, this.category, this.created, this.website)}}>Submit</button>
             </div>
     )
   }
@@ -67,7 +83,17 @@ CreateEvent(eventPic,  eventName, description, location, category, created, webs
 
 }
 
-// const mapStateToProps = (state) => { return {} }
-// const actions = {eventPic, eventName, uid, description, location, category}
+const mapStateToProps = (state) => { return {} }
+const actions = {
+  eventPic: '',
+  eventName: '',
+  // uid: '',
+  description: '',
+  location: '',
+  category: '',
+  created: false,
+  website: '',
+  confirmModal: false
+}
 
-// export default connect(mapStateToProps, actions)(CreateEvent)
+export default connect(mapStateToProps, actions)(CreateEvents)
