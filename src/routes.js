@@ -28,9 +28,9 @@ export default (
       <Route component={ CreateEvents} exact path="/event/create"/>
       <Route component={ SingleEvent } exact path="/event/:id"/>
       <Route component={ CreateGroup } path ="/groups/creat"/>
-    <Route component={ GroupPage } path ="/groups/:id"/>
-    <Route component={ Account } exact path ="/user/account"/>
-    <Route component={ PushNotifications } path="/pushNotifications"/>
+      <Route component={ GroupPage } path ="/groups/:id"/>
+      <Route component={ Account } exact path ="/user/account"/>
+      <Route component={ PushNotifications } path="/pushNotifications"/>
   </Switch>
 
 )

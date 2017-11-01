@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 
 import {EventCards} from './eventCards/eventCards.js';
 
+import {GroupCards} from './groupCards/groupCards.js';
+
 
 
 export class ExploreSearch extends Component{
@@ -65,7 +67,7 @@ updateSearchFieldGroup(){
                 </select>
                 <button onClick={(e) => this.updateSearchFieldEvent()}>Events</button>
                 <button onClick={(e) => this.updateSearchFieldGroup()}>Group</button>
-                <p>GROUP COMPONENT</p>
+                <GroupCards searchFilter={this.state.searchFilter} searchText={this.state.searchText}/>
                 </div>
             )
         }           

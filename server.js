@@ -28,6 +28,7 @@ const eventCtrl = require('./server/controllers/eventCtrl')
 app.post('/api/user/createUser', userCtrl.createUser)
 app.put('/api/user/registerFCMKey', userCtrl.registerFCMKey)
 app.get('/api/events', eventCtrl.getAllEvents)
+app.get('/api/groups', eventCtrl.getAllGroups)
 
 
 
