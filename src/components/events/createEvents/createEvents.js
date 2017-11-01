@@ -4,7 +4,7 @@ import redux from 'react-redux';
 import axios from 'axios';
 
 import './createEvents.css';
-
+import {createEvent} from "../../../ducks/create-event"
 
 export class CreateEvents extends Component{
   constructor(props){
@@ -24,7 +24,7 @@ this.state = {
   confirmModal: false
 }
 
-
+this.handleChange = this.handleChange.bind(this);
 }
 
 
@@ -44,38 +44,49 @@ this.state = {
 //
 // }
 
-
+  handleChange(val, prop){
+    this.setState({ [prop]: val })
+  }
 
   render(){
+
+    console.log(this.props)
     let confirmModalElement = null
     if (this.state.confirmModal === true){
       confirmModalElement = (<h1> You've made an event</h1>)
       return confirmModalElement
     }
-      // const {eventPic, eventName, uid, description, location, category} = this.props
+      const {createEvent} = this.props
         return(
             <div>
               {confirmModalElement}
               <h1 className="createTitle"> Create Event </h1>
               <form>
-                <br/><input type="text"  placeholder="Name" ref={(input)=>{this.eventName = input}}/>
+                <br/><input type="text"  placeholder="Name" onChange={e=>this.handleChange(e.target.value, "eventName")}  ref={(input)=>{
+                this.eventName = input}}/>
                 <br/>
 
-                <br/><input  type="text"  placeholder="Description"   ref={(input)=>{this.description = input}}/>
+                <br/><input  type="text"  placeholder="Description"   onChange={e=>this.handleChange(e.target.value, "description")}  ref={(input)=>{
+                this.description = input}}/>
                 <br/>
-                <br/><input  type="text" placeholder="Location" ref={(input)=>{this.location=input}}/>
+                <br/><input  type="text" placeholder="Location" onChange={e=>this.handleChange(e.target.value, "location")}  ref={(input)=>{
+                this.location=input}}/>
                 <br/>
-                <br/><input  type="text" placeholder="Category" ref={(input)=>{this.category=input}}/>
+                <br/><input  type="text" placeholder="Category" onChange={e=>this.handleChange(e.target.value, "category")}  ref={(input)=>{
+                this.category=input}}/>
                 <br/>
-                <br/><input  type="text" placeholder="Website" ref={(input)=>{this.website=input}}/>
+                <br/><input  type="text" placeholder="Website" onChange={e=>this.handleChange(e.target.value, "website")}  ref={(input)=>{
+                this.website=input}}/>
                 <br/>
                 <br/>
-              </form><button className="upload-button"  type="text" ref={(input)=>{this.eventPic = input}}>Upload Picture</button>
+              </form><button className="upload-button"  type="text" onChange={e=>this.handleChange(e.target.value, "")}  ref={(input)=>{this.eventPic = input}}>Upload Picture</button>
               <br/>
               <br/>
               <button className="submitEvent-button" onClick={(event)=>{
-                event.preventDefault();
-                this.createEvent(this.eventPic, this.eventName, this.uid, this.description, this.location, this.category, this.created, this.website)}}>Submit</button>
+                console.log("state",this.state)
+                event.preventDefault()
+                createEvent(this.state)
+              }}>Submit</button>
             </div>
     )
   }
@@ -85,15 +96,7 @@ this.state = {
 
 const mapStateToProps = (state) => { return {} }
 const actions = {
-  eventPic: '',
-  eventName: '',
-  // uid: '',
-  description: '',
-  location: '',
-  category: '',
-  created: false,
-  website: '',
-  confirmModal: false
+  createEvent
 }
 
 export default connect(mapStateToProps, actions)(CreateEvents)

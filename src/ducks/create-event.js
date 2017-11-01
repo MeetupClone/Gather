@@ -15,24 +15,22 @@ const initialState = {
 
 const CREATE_EVENT = 'CREATE_EVENT';
 
-export function createEvent(initialState){
+export function createEvent(componentState){
   return {
-    type: createEvent,
-    initialState
+    type: CREATE_EVENT,
+    payload: componentState
   }
 }
 
-export default function createEvent(state = initialState, action){
+export default function createEventReducer(state = initialState, action){
     switch(action.type){
       case CREATE_EVENT:
-        createEvent(initialState => {
-          console.log(initialState)
-        })
-          return Object.assign({}, state, { initialState })
+          return Object.assign({}, state, action.payload )
           break;
 
           default :
                console.log('break error')
+               return state;
         }
 
 
