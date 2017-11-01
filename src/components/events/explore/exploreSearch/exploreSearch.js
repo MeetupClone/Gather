@@ -4,7 +4,7 @@ import {EventCards} from './eventCards/eventCards.js';
 
 import {GroupCards} from './groupCards/groupCards.js';
 
-
+//
 
 export class ExploreSearch extends Component{
     constructor(props){
