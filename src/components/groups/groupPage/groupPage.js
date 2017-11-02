@@ -6,15 +6,6 @@ import axios from 'axios';
 
 export default class GroupPage extends Component{
     constructor(props){
-<<<<<<< HEAD
-        super(props)
-
-    
-    this.state ={
-        
-    }
-    }
-=======
         super(props);
 
         this.state = {
@@ -70,7 +61,6 @@ export default class GroupPage extends Component{
 // :
 // "dinosaurs.com"
 
->>>>>>> 14c30f37c9b70c1452e5cdc5426afaabb590a29b
     render(){
         
         return(

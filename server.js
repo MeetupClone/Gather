@@ -43,6 +43,7 @@ app.post('/api/user/createUser', userCtrl.createUser)
 app.put('/api/user/registerFCMKey', userCtrl.registerFCMKey)
 app.get('/api/user/getUserInfo/:userId', userCtrl.getUserInfo)
 app.post('/api/user/profile/update', userCtrl.updateUserProfile)
+app.post('/api/groups/create', groupCtrl.createGroup)
 
 app.get('/api/events', eventCtrl.getAllEvents)
 app.get('/api/groups', eventCtrl.getAllGroups)
