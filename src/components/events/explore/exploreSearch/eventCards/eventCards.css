@@ -1,0 +1,35 @@
+.event-card-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 200px;
+    width: 100%;
+}
+
+.event-card-content-container{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.event-card-title {
+    font-weight: bold;
+    text-align: left;
+}
+
+.event-card-category{
+    text-align: left;
+}
+
+.event-card-pic{
+    max-height: 150px;
+    max-width: auto;
+    float: left;
+    margin-right: 10px;
+}
+
+.event-card-loc{
+    text-align: left;
+}
+
+.event-card-desc{
+    text-align: left;
+}
