@@ -8,12 +8,9 @@ const admin  = require('firebase-admin')
 const firebase = require('firebase')
 
 const serviceAccount = require('./server/keys/serviceAccountKey.json')
-const {herokuDb, firebaseUrl} = require('./server/keys/config.js');
+const {herokuDb} = require('./server/keys/config.js');
 
-admin.initializeApp({
-	credential: admin.credential.cert(serviceAccount),
-	databaseURL: firebaseUrl
-})
+
 
 const port = 3001;
 
@@ -31,9 +28,6 @@ app.use(express.static('./public'));
 
 
 const userCtrl = require('./server/controllers/userCtrl')
-
-const eventCtrl = require('./server/controllers/eventCtrl')
-
 const utilCtrl = require('./server/controllers/utilCtrl')
 const eventCtrl = require('./server/controllers/eventCtrl')
 const groupCtrl = require('./server/controllers/groupCtrl')
@@ -52,19 +46,11 @@ app.get('/api/event/:id', eventCtrl.getEventById)
 app.post('/api/pictures/upload', utilCtrl.uploadPicture)
 
 
-app.listen(port, () => {
-    console.log(`Listening on ${port}.`)
-})
 
 
 app.post('/api/event/create', eventCtrl.createEvent);
 
+app.listen(port, () => {
+    console.log(`Listening on ${port}.`)
+})
 
-// app.post('/addMeal', (req, res) => {
-//     req.app
-//       .get('db')
-//       .upload_pic(req.body)
-//       .then(results => {
-//         res.json(results)
-//       })
-//   });

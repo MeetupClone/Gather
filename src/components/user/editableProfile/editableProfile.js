@@ -94,12 +94,6 @@ export default class EditableProfile extends Component {
 
 
     render() {
-        let { imagePreviewUrl } = this.state;
-        let imagePreviewPic = null
-        if (imagePreviewUrl) {
-            let imagePreviewPic = (<img src={imagePreviewUrl} alt="test"/>);
-        }
-
         return (
             <div className="previewComponent">
                 <div>
