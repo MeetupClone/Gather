@@ -13,14 +13,16 @@ import GroupPage from './components/groups/groupPage/groupPage';
 import AuthHome from './components/home/authHome/authHome';
 // change default home route to these ^ w logic
 import NotAuthHome from './components/home/notAuthHome/notAuthHome';
+import Home from './components/home/home'
 import Account from './components/user/account/account';
 import PushNotifications from "./components/pushNotifications/pushNotification"
 
 
 export default (
     <Switch>
-      <Route component={ AuthHome } exact path="/" />
-      <Route component={ NotAuthHome } path="/splash" />
+      {/* <Route component={ AuthHome } exact path="/" />
+      <Route component={ NotAuthHome } path="/splash" /> */}
+      <Route component={ Home } path="/"/>
       <Route component={ Login } path="/login" />
       <Route component={ Register } path = "/register" />
       <Route component={ User } path="/user" />
