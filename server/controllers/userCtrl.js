@@ -10,7 +10,6 @@ const createUser = (req,res) => {
 }
 
 const registerFCMKey = (req,res) => {
-	console.log(req.body)
 	req.app
 	.get('db')
 	.registerFCMKey(req.body)
@@ -19,8 +18,27 @@ const registerFCMKey = (req,res) => {
 	})
 }
 
+const getUserInfo = (req,res) => {
+	req.app
+	.get('db')
+	.getUserInfo(req.params.userId)
+	.then(result => {
+		res.json(result)
+	})
+}
+
+const updateUserProfile = (req,res) => {
+	req.app
+	.get('db')
+	.updateUserProfile(req.body)
+	.then(result => {
+		console.log(result)
+	})
+}
 
 module.exports = {
 	createUser,
-	registerFCMKey
+	registerFCMKey,
+	getUserInfo,
+	updateUserProfile
 }

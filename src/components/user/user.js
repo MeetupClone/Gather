@@ -1,64 +1,90 @@
 import React, { Component } from 'react';
 
-import { fire as firebase } from "../../fire";
+import {Link} from 'react-router-dom';
+import axios from "axios";
 
+import "./profile.css"
+
+import EditableProfile from "./editableProfile/editableProfile";
+
+import { fire as firebase } from "../../fire";
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = { file: '', imagePreviewUrl: '' };
+        this.state = {
+            file: '',
+            imagePreviewUrl: '',
+            uid: '',
+            userProfilePic: '',
+            userName: '',
+            userLocation: '',
+            userDescription: '',
+            editable: false,
+            showParams: ''
+        };
     }
 
+    componentWillMount() {
+
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({
+                    uid: user.uid
+                })
+            }
+            let userId = this.state.uid
+            axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
+                this.setState({
+                    userName: result.data[0].name,
+                    userProfilePic: result.data[0].profile_image,
+                    userLocation: result.data[0].location,
+                    userDescription: result.data[0].description
+                })
+            })
+        })
 
 
-    submitImageUpload(event) {
-        event.preventDefault();
-
-        let reader = new FileReader();
-        let file = event.target.files[0];
-
-        reader.onloadend = () => {
-            this.setState({
-                file: file,
-                imagePreviewUrl: reader.result
-            });
-        }
-
-        reader.readAsDataURL(file)
-    }
-    uploadImage(event) {
-        event.preventDefault();
-        let file = this.state.file
-        const storageRef = firebase.storage().ref();
-        const uploadTask = storageRef.child('profilePictures/' + file.name).put(file);
-        uploadTask.on('state_changed', (snapshot) => {
-            console.log(snapshot)
-        }, function(error) {}, function() {
-            let downloadURL = [uploadTask.snapshot.downloadURL];
-            console.log(downloadURL)
-        });
     }
 
     render() {
-        let { imagePreviewUrl } = this.state;
-        let $imagePreview = null;
-        if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} alt="imagePicDude"/>);
-        } else {
-            $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-        }
 
-        return (
-            <div className="previewComponent">
-        <form onSubmit={(e)=>this.uploadImage(e)}>
-          <input className="fileInput" 
-            type="file" 
-            onChange={(e)=>this.submitImageUpload(e)} />
-          <button className="submitButton" 
-            type="submit" 
-            onClick={(e)=>this.uploadImage(e)}>Upload Image</button>
-        </form>
-      </div>
-        )
+        let $userGroupsEvents = null;
+        if (this.state.showParams === "events") {
+            $userGroupsEvents = (<h1>Events</h1>)
+        } else if (this.state.showParams === "attending") {
+            $userGroupsEvents = (<h1>Attending Events</h1>)
+        } else if (this.state.showParams === "groups") {
+            $userGroupsEvents = (<h1>Groups</h1>)
+        }
+        if (this.state.editable) {
+            return (
+            <EditableProfile/>
+            )
+        } else {
+            return (
+                <div>
+                <Link to="/user/edit" onClick={() => this.setState({editable: true})} > Edit </Link>
+                <img className="user-profile-pic" src={this.state.userProfilePic} alt={this.state.userName}/>
+                <h1> {this.state.userName} </h1>
+                <h3> {this.state.userLocation} </h3>
+
+                <p className="user-description">{this.state.userDescription}</p>
+
+                <div className="user-spec-buttons">
+                <button className="user-spec-button-indiv" onClick={() => 
+                    {this.setState({showParams: "events" })}}> Events </button>
+                <button className="user-spec-button-indiv" onClick={() => 
+                    {this.setState({showParams: "attending" })}}> Attending </button>
+                <button className="user-spec-button-indiv" onClick={() => 
+                    {this.setState({showParams: "groups" })}}> Groups </button>
+                </div>
+
+                {$userGroupsEvents}
+
+
+                </div>
+            )
+        }
     }
 }

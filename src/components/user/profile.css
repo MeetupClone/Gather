@@ -1,0 +1,26 @@
+.user-profile-pic {
+  margin-top: 5vh;
+  max-height: 200px;
+  max-width: 200px;
+  border-radius: 50%; }
+
+.user-description {
+  max-width: 70vw;
+  margin: auto;
+  text-align: left; }
+
+.user-spec-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 5vh auto;
+  width: 100%; }
+
+.user-spec-button-indiv {
+  color: white;
+  height: 50px;
+  width: 100px;
+  margin: 0 5px;
+  background-color: green; }
+
+/*# sourceMappingURL=user.css.map */
