@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import './groupCards.css';
 
+import {Link} from 'react-router-dom'
+
 
 
 export class GroupCards extends Component{
@@ -43,7 +45,7 @@ export class GroupCards extends Component{
     
     render(){
         const {searchText, searchFilter} = this.props;
-        console.log("search filter", this.state.searchFilter)
+        
                 if(searchText !== "" && searchFilter === "name"){
                     
                     return(
@@ -53,7 +55,7 @@ export class GroupCards extends Component{
                             return(
                                 <div className="group-card-container" id="canvas">
                                 <div className="group-card-content-container">
-                                    <p className="group-card-name">Name: {key.name}</p>
+                                <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
                                     <p className="group-card-category">Category: {key.category}</p>
                                     <p className="group-card-desc">Description: {key.description}</p>
                                 </div>
@@ -69,11 +71,11 @@ export class GroupCards extends Component{
                     return(
                         <div>{this.state.groups.map(function(key){
                             if(key.location.toLowerCase().includes(searchText.toLowerCase())){
-                              
+                                
                             return(
                                 <div className="group-card-container" id="canvas">
                                 <div className="group-card-content-container">
-                                    <p className="group-card-name">Name: {key.name}</p>
+                                <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
                                     <p className="group-card-category">Category: {key.category}</p>
                                     <p className="group-card-desc">Description: {key.description}</p>
                                 </div>
@@ -89,11 +91,11 @@ export class GroupCards extends Component{
                     return(
                         <div>{this.state.groups.map(function(key){
                             if(key.category.toLowerCase().includes(searchText.toLowerCase())){
-                              
+                                
                             return(
                                 <div className="group-card-container" id="canvas">
                                 <div className="group-card-content-container">
-                                    <p className="group-card-name">Name: {key.name}</p>
+                                    <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
                                     <p className="group-card-category">Category: {key.category}</p>
                                     <p className="group-card-desc">Description: {key.description}</p>
                                 </div>
@@ -105,13 +107,14 @@ export class GroupCards extends Component{
                     )
                 }
                 else{
+                   
                 return(
                     <div>{this.state.groups.map(function(key){
                         
                         return(
                             <div className="group-card-container" id="canvas">
                                 <div className="group-card-content-container">
-                                    <p className="group-card-name">Name: {key.name}</p>
+                                <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
                                     <p className="group-card-category">Category: {key.category}</p>
                                     <p className="group-card-desc">Description: {key.description}</p>
                                 </div>

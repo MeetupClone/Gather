@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import './eventCards.css';
 
+import {Link} from 'react-router-dom';
+
 export class EventCards extends Component{
     constructor(props){
         super(props);
@@ -52,7 +54,7 @@ export class EventCards extends Component{
                         <div className="event-card-container" id="canvas">
                         <div className="event-card-content-container">
                             <img className="event-card-pic" src={key.event_image} alt="pic not working"/>
-                            <p className="event-card-title">Title: {key.title}</p>
+                            <Link to={`/event/${key.id}`}><p className="event-card-title">Title: {key.title}</p></Link>
                             <p className="event-card-category">Category: {key.category}</p>
                             <p className="event-card-loc">Location: {key.location}</p>
                             <p className="event-card-desc">Description: {key.description}</p>
@@ -74,7 +76,7 @@ export class EventCards extends Component{
                         <div className="event-card-container" id="canvas">
                         <div className="event-card-content-container">
                             <img className="event-card-pic" src={key.event_image} alt="pic not working"/>
-                            <p className="event-card-title">Title: {key.title}</p>
+                            <Link to={`/event/${key.id}`}><p className="event-card-title">Title: {key.title}</p></Link>
                             <p className="event-card-category">Category: {key.category}</p>
                             <p className="event-card-loc">Location: {key.location}</p>
                             <p className="event-card-desc">Description: {key.description}</p>
@@ -95,7 +97,7 @@ export class EventCards extends Component{
                         <div className="event-card-container" id="canvas">
                         <div className="event-card-content-container">
                             <img className="event-card-pic" src={key.event_image} alt="pic not working"/>
-                            <p className="event-card-title">Title: {key.title}</p>
+                            <Link to={`/event/${key.id}`}><p className="event-card-title">Title: {key.title}</p></Link>
                             <p className="event-card-category">Category: {key.category}</p>
                             <p className="event-card-loc">Location: {key.location}</p>
                             <p className="event-card-desc">Description: {key.description}</p>
@@ -115,7 +117,7 @@ export class EventCards extends Component{
                     <div className="event-card-container" id="canvas">
                         <div className="event-card-content-container">
                             <img className="event-card-pic" src={key.event_image} alt="pic not working"/>
-                            <p className="event-card-title">Title: {key.title}</p>
+                            <Link to={`/event/${key.id}`}><p className="event-card-title">Title: {key.title}</p></Link>
                             <p className="event-card-category">Category: {key.category}</p>
                             <p className="event-card-loc">Location: {key.location}</p>
                             <p className="event-card-desc">Description: {key.description}</p>
