@@ -17,7 +17,6 @@ admin.initializeApp({
 
 const port = 3001;
 
-
 const connectionString = herokuDb
 
 massive(connectionString).then(db => {
@@ -33,11 +32,14 @@ app.use(express.static('./public'));
 
 const userCtrl = require('./server/controllers/userCtrl')
 const utilCtrl = require('./server/controllers/utilCtrl')
+const eventCtrl = require('./server/controllers/eventCtrl')
 
 app.post('/api/user/createUser', userCtrl.createUser)
 app.put('/api/user/registerFCMKey', userCtrl.registerFCMKey)
 app.get('/api/user/getUserInfo/:userId', userCtrl.getUserInfo)
 app.post('/api/user/profile/update', userCtrl.updateUserProfile)
+
+app.get('/api/events', eventCtrl.getAllEvents)
 
 
 app.post('/api/pictures/upload', utilCtrl.uploadPicture)

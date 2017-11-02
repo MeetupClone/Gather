@@ -36,6 +36,8 @@ const updateUserProfile = (req,res) => {
 	})
 }
 
+
+
 module.exports = {
 	createUser,
 	registerFCMKey,

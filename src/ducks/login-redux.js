@@ -50,8 +50,7 @@ export function getAuthInfo(initialState) {
 
 export function signOut() {
     return {
-        type: SIGN_OUT,
-
+        type: SIGN_OUT
     }
 }
 
@@ -107,6 +106,7 @@ export default function login(state = initialState, action) {
             break;
         default:
             console.log("break error");
+            return state;
     }
 
 }
