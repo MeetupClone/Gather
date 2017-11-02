@@ -4,6 +4,9 @@ import './App.css';
 import { Link } from "react-router-dom";
 import routes from "./routes";
 
+import './navbar/navbar.css';
+import './helpers.css';
+
 import { fire as firebase } from "./fire"
 
 
@@ -15,9 +18,9 @@ class App extends Component {
 
     constructor() {
         super();
-        firebase.messaging().onMessage(function(payload){
-          alert(payload.notification.title)
-          console.log('onMessage', payload)
+        firebase.messaging().onMessage(function(payload) {
+            alert(payload.notification.title)
+            console.log('onMessage', payload)
         });
     }
 
@@ -42,9 +45,6 @@ class App extends Component {
           </Link>
           <Link to = "/event/create">
             Create Event
-          </Link>
-          <Link to ="/pushNotifications">
-            Push Notifications
           </Link>
         </header>
         <div>{routes}</div>
