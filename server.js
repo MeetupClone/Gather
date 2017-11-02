@@ -40,6 +40,7 @@ app.get('/api/user/getUserInfo/:userId', userCtrl.getUserInfo)
 app.post('/api/user/profile/update', userCtrl.updateUserProfile)
 
 app.get('/api/events', eventCtrl.getAllEvents)
+app.get('/api/groups', eventCtrl.getAllGroups)
 
 
 app.post('/api/pictures/upload', utilCtrl.uploadPicture)

@@ -95,6 +95,7 @@ this.handleChange = this.handleChange.bind(this);
 }
 
 const mapStateToProps = (state) => { return {} }
+
 const actions = {
   createEvent
 }
