@@ -97,7 +97,6 @@ this.handleChange = this.handleChange.bind(this);
 
 }
 
-const mapStateToProps = (state) => { return state }
 
 const mapStateToProps = (state) => { return {} }
 

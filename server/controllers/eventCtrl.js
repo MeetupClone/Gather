@@ -2,8 +2,6 @@
 const createEvent = (req, res) => {
 
 const { category, eventName, eventPic, location, description} = req.body
-
-
   req.app
   .get('db')
   .createEvent([eventPic, eventName, description, location, category])
@@ -11,9 +9,7 @@ const { category, eventName, eventPic, location, description} = req.body
   .catch(err => console.log("create event endpoint not working", err));
 
 }
-  module.exports = {
-    createEvent
-  }
+
 
 
 const getAllEvents = (req, res) => {
@@ -48,6 +44,6 @@ const getEventById = (req, res) => {
 module.exports = {
     getAllEvents,
     getAllGroups,
-    getEventById
+    getEventById,
+    createEvent
 }
-
