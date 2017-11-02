@@ -25,27 +25,27 @@ export default class Login extends Component {
         };
     }
 
-    componentWillMount() {
+    // componentWillMount() {
 
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.setState({
-                    uid: user.uid
-                })
-            }
-            let userId = this.state.uid
-            axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
-                this.setState({
-                    userName: result.data[0].name,
-                    userProfilePic: result.data[0].profile_image,
-                    userLocation: result.data[0].location,
-                    userDescription: result.data[0].description
-                })
-            })
-        })
+    //     firebase.auth().onAuthStateChanged(user => {
+    //         if (user) {
+    //             this.setState({
+    //                 uid: user.uid
+    //             })
+    //         }
+    //         let userId = this.state.uid
+    //         axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
+    //             this.setState({
+    //                 userName: result.data[0].name,
+    //                 userProfilePic: result.data[0].profile_image,
+    //                 userLocation: result.data[0].location,
+    //                 userDescription: result.data[0].description
+    //             })
+    //         })
+    //     })
 
 
-    }
+    // }
 
     render() {
 

@@ -1,62 +1,72 @@
-
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import redux from 'react-redux';
-import axios from 'axios';
 
+import axios from "axios";
+import { fire as firebase } from "../../../fire"
 import './createEvents.css';
-import {createEvent} from "../../../ducks/create-event"
+import { createEvent } from "../../../ducks/create-event"
 
-export class CreateEvents extends Component{
-  constructor(props){
-  super(props)
+export class CreateEvents extends Component {
+    constructor(props) {
+        super(props)
 
-this.state = {
-  eventPic: '',
-  eventName: '',
-  // uid: '',
-  description: '',
-  location: '',
-  category: '',
-  created: false,
-  website: '',
-  confirmModal: false
-}
+        this.state = {
+            eventPic: '',
+            eventName: '',
+            uid: '',
+            description: '',
+            location: '',
+            category: '',
+            created: false,
+            website: '',
+            confirmModal: false,
+            file: '',
+            imagePreviewUrl: ''
+        }
 
-this.handleChange = this.handleChange.bind(this);
-}
-
-
-
-  createEvent(eventPic,  eventName, description, location, category, created, website)  {
-
-    if (eventPic.length > 0 && eventName.length > 0){
-      this.setState({confirmModal: true})
-    }
-    // let eventDetails = [eventPic,  eventName, description, location, category, created, websites]
-    // axios.post('/api/event/create' , [eventDetails]).then(result=>{
-      this.setState({eventPic,  eventName, description, location, category, created: 'true', website})
-      // let {created} = this.state
-      if(this.state.created){
-        this.setState({confirmModal: true})
+        firebase.auth().onAuthStateChanged(user => {
+            console.log()
+            if (user) {
+                this.setState({
+                    uid: user.uid
+                })
+            }
+        })
+        this.submitImageUpload = this.submitImageUpload.bind(this)
+        this.uploadImage = this.uploadImage.bind(this)
+        this.handleChange = this.handleChange.bind(this);
     }
 
-}
-
-  handleChange(val, prop){
-    this.setState({ [prop]: val })
-  }
-
-  render(){
-
-    let confirmModalElement = null
-    if (this.state.confirmModal === true){
-      confirmModalElement = (<h1> You've made an event</h1>)
-      return confirmModalElement
+    handleChange(val, prop) {
+        this.setState({
+            [prop]: val
+        })
     }
-      const {createEvent} = this.props
-      console.log(this.props)
-        return(
+
+
+    submitImageUpload(event) {
+        event.preventDefault();
+
+        let reader = new FileReader();
+        let file = event.target.files[0];
+        reader.onloadend = () => {
+            this.setState({
+                file: file,
+                imagePreviewUrl: reader.result
+            });
+        }
+        reader.readAsDataURL(file)
+    }
+
+
+    render() {
+        let confirmModalElement = null
+        if (this.state.created === true) {
+            confirmModalElement = (<h1> You've made an event</h1>)
+            return confirmModalElement
+        }
+        const { createEvent } = this.props
+        return (
             <div>
               {confirmModalElement}
               <h1 className="createTitle"> Create Event </h1>
@@ -78,31 +88,30 @@ this.handleChange = this.handleChange.bind(this);
                 this.website=input}}/>
                 <br/>
                 <br/>
-              </form><button className="upload-button"  type="text" onChange={e=>this.handleChange(e.target.value, "")}  ref={(input)=>{this.eventPic = input}}>Upload Picture</button>
-              <br/>
+              </form>
+              <img src={this.state.imagePreviewUrl || this.state.eventPic} alt={this.state.eventName}/>
+                <form onSubmit={(event)=>this.uploadImage(event)}>
+                 <input
+                    type="file" 
+                    onChange={(event)=>this.submitImageUpload(event)} />
+                    <br/>
+                </form>
               <br/>
               <button className="submitEvent-button" onClick={(event) => {
-                console.log("state",this.state)
                 event.preventDefault()
-                createEvent(this.state).then(result => {
-                  if(result === true){
-                    this.setState({confirmModal: true})
-                  }})
-
+                createEvent(this.state)
               }}>Submit</button>
             </div>
-    )
-  }
+        )
+    }
 
 
 }
 
-
 const mapStateToProps = (state) => { return {} }
 
-
 const actions = {
-  createEvent
+    createEvent
 }
 
 export default connect(mapStateToProps, actions)(CreateEvents)
