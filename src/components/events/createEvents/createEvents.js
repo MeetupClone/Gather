@@ -10,8 +10,6 @@ export class CreateEvents extends Component{
   constructor(props){
   super(props)
 
-
-
 this.state = {
   eventPic: '',
   eventName: '',
@@ -50,13 +48,13 @@ this.handleChange = this.handleChange.bind(this);
 
   render(){
 
-    console.log(this.props)
     let confirmModalElement = null
     if (this.state.confirmModal === true){
       confirmModalElement = (<h1> You've made an event</h1>)
       return confirmModalElement
     }
       const {createEvent} = this.props
+      console.log(this.props)
         return(
             <div>
               {confirmModalElement}
@@ -82,10 +80,14 @@ this.handleChange = this.handleChange.bind(this);
               </form><button className="upload-button"  type="text" onChange={e=>this.handleChange(e.target.value, "")}  ref={(input)=>{this.eventPic = input}}>Upload Picture</button>
               <br/>
               <br/>
-              <button className="submitEvent-button" onClick={(event)=>{
+              <button className="submitEvent-button" onClick={(event) => {
                 console.log("state",this.state)
                 event.preventDefault()
-                createEvent(this.state)
+                createEvent(this.state).then(result => {
+                  if(result === true){
+                    this.setState({confirmModal: true})
+                  }})
+
               }}>Submit</button>
             </div>
     )
@@ -94,7 +96,8 @@ this.handleChange = this.handleChange.bind(this);
 
 }
 
-const mapStateToProps = (state) => { return {} }
+const mapStateToProps = (state) => { return state }
+
 const actions = {
   createEvent
 }

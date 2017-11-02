@@ -23,6 +23,7 @@ app.use(express.static('./public'));
 
 
 const userCtrl = require('./server/controllers/userCtrl')
+const eventCtrl = require('./server/controllers/eventCtrl')
 
 app.post('/api/user/createUser', userCtrl.createUser)
 app.put('/api/user/registerFCMKey', userCtrl.registerFCMKey)
@@ -35,3 +36,14 @@ app.listen(port, () => {
 })
 
 
+app.post('/api/event/create', eventCtrl.createEvent);
+
+
+// app.post('/addMeal', (req, res) => {
+//     req.app
+//       .get('db')
+//       .upload_pic(req.body)
+//       .then(results => {
+//         res.json(results)
+//       })
+//   });
