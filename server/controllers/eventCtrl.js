@@ -13,6 +13,7 @@ const getAllGroups = (req, res) => {
     .getAllGroups()
     .then(results => res.status(200).json(results))
     .catch(err => console.log(err, "get all group endpoint not working"))
+
 }
 
 const getEventById = (req, res) => {
@@ -24,6 +25,7 @@ const getEventById = (req, res) => {
     .getEventById([id])
     .then(results => res.status(200).json(results))
     .catch(err => console.log(err, "get events by id endpoint not working"))
+
 }
 
 module.exports = {

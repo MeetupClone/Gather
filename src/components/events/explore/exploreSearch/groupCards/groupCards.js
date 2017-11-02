@@ -45,7 +45,6 @@ export class GroupCards extends Component{
     
     render(){
         const {searchText, searchFilter} = this.props;
-        
                 if(searchText !== "" && searchFilter === "name"){
                     
                     return(
@@ -56,6 +55,7 @@ export class GroupCards extends Component{
                                 <div className="group-card-container" id="canvas">
                                 <div className="group-card-content-container">
                                 <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
+                                    <p className="group-card-name">Name: {key.name}</p>
                                     <p className="group-card-category">Category: {key.category}</p>
                                     <p className="group-card-desc">Description: {key.description}</p>
                                 </div>
@@ -76,6 +76,11 @@ export class GroupCards extends Component{
                                 <div className="group-card-container" id="canvas">
                                 <div className="group-card-content-container">
                                 <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
+                              
+                            return(
+                                <div className="group-card-container" id="canvas">
+                                <div className="group-card-content-container">
+                                    <p className="group-card-name">Name: {key.name}</p>
                                     <p className="group-card-category">Category: {key.category}</p>
                                     <p className="group-card-desc">Description: {key.description}</p>
                                 </div>
@@ -96,6 +101,11 @@ export class GroupCards extends Component{
                                 <div className="group-card-container" id="canvas">
                                 <div className="group-card-content-container">
                                     <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
+                              
+                            return(
+                                <div className="group-card-container" id="canvas">
+                                <div className="group-card-content-container">
+                                    <p className="group-card-name">Name: {key.name}</p>
                                     <p className="group-card-category">Category: {key.category}</p>
                                     <p className="group-card-desc">Description: {key.description}</p>
                                 </div>
@@ -107,7 +117,7 @@ export class GroupCards extends Component{
                     )
                 }
                 else{
-                   
+
                 return(
                     <div>{this.state.groups.map(function(key){
                         
@@ -115,6 +125,7 @@ export class GroupCards extends Component{
                             <div className="group-card-container" id="canvas">
                                 <div className="group-card-content-container">
                                 <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
+                                    <p className="group-card-name">Name: {key.name}</p>
                                     <p className="group-card-category">Category: {key.category}</p>
                                     <p className="group-card-desc">Description: {key.description}</p>
                                 </div>

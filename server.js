@@ -45,7 +45,6 @@ app.get('/api/groups', eventCtrl.getAllGroups)
 app.get('/api/group/:id', groupCtrl.getGroupById)
 app.get('/api/event/:id', eventCtrl.getEventById)
 
-
 app.post('/api/pictures/upload', utilCtrl.uploadPicture)
 
 
