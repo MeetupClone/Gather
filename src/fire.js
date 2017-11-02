@@ -15,6 +15,8 @@ const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 const twitterProvider = new firebase.auth.TwitterAuthProvider();
 
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+
 const firebaseMessaging = firebase.messaging()
 
-export {fire, facebookProvider, twitterProvider, firebaseMessaging};
+export {fire, facebookProvider, twitterProvider, googleProvider, firebaseMessaging};

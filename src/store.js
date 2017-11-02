@@ -1,9 +1,9 @@
-import { createStore, combineReducers } from 'redux'; //Notice redux, not react-redux
+import { createStore, combineReducers } from 'redux'; 
 
-import login from './ducks/login-redux'
+import AuthenticationReducer from './ducks/authentication-redux'
 
-import createEventReducer from './ducks/create-event'
+import CreateEventReducer from './ducks/create-event'
 
-let store = createStore(combineReducers({login, createEventReducer}));
+let store = createStore(combineReducers({AuthenticationReducer, CreateEventReducer}));
 
 export default store;

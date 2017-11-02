@@ -29,7 +29,6 @@ export default function createEventReducer(state = initialState, action){
           break;
 
           default :
-               console.log('break error')
                return state;
         }
 

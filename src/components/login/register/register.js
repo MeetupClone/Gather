@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
+import { connect } from "react-redux";
 
-import { fire as firebase, facebookProvider, twitterProvider } from "../../../fire";
+import { authWithEmailPassword, authWithFacebook, authWithTwitter, authWithGoogle } from "../../../ducks/authentication-redux";
 
 import "../login.css";
 
-import axios from "axios"
 
-export default class Register extends Component {
+export class Register extends Component {
     constructor(props) {
         super(props);
 
@@ -18,75 +18,39 @@ export default class Register extends Component {
             name: '',
             authenticated: false
         }
-
-        this.authWithFacebook = this.authWithFacebook.bind(this)
-        this.authWithTwitter = this.authWithTwitter.bind(this);
-        this.authWithEmailPassword = this.authWithEmailPassword.bind(this)
-    }
-
-    authWithTwitter() {
-        firebase.auth().signInWithRedirect(twitterProvider)
-            .then((result, error) => {
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log("logged in");
-                }
-
-            })
-    }
-
-    authWithFacebook() {
-        firebase.auth().signInWithRedirect(facebookProvider)
-            .then((result, error) => {
-                if (error) {
-                    console.log(error)
-                } else {
-                    this.setState({ redirect: true })
-                    console.log(this.state)
-                }
-            })
-    }
-
-    authWithEmailPassword(event) {
-        event.preventDefault();
-        const name = this.nameInput.value
-        const email = this.emailInput.value
-        const password = this.passwordInput.value
-
-        console.log(email, name, password)
-
-        firebase.auth().createUserWithEmailAndPassword(email, password).then(user => {
-                let userInfo = [user.uid, user.email, name]
-                axios.post('/api/user/createUser', userInfo)
-                return this.setState({
-                    uid: user.uid,
-                    email: user.email,
-                    name: name,
-                    authenticated: true
-                })
-
-            })
-            .catch(error => {
-                console.log(error)
-            })
     }
 
     render() {
-
+        const {
+            authWithEmailPassword,
+            authWithFacebook,
+            authWithTwitter,
+            authWithGoogle
+        } = this.props
         return (
             <div id="register-page">
             <h1> Register </h1> 
-            <form className="center" onSubmit={(event) => { this.authWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
+            <form className="center" onSubmit={(event) => { 
+                event.preventDefault();
+                authWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
                 <input name="email" type="email" ref={(input) => {this.nameInput = input}} placeholder="Name"/>
                 <input name="email" type="email" ref={(input) => {this.emailInput = input}} placeholder="Email"/>
                 <input name="password" type="password" ref={(input) => {this.passwordInput = input}} placeholder="Password"/>
-                <button className="login-button box-shadow" onClick={(event) => {this.authWithEmailPassword(event)}}> Create Account </button>
+                <button className="login-button box-shadow" onClick={(event) => {
+                    event.preventDefault()
+                    authWithEmailPassword(this.emailInput.value, this.passwordInput.value)}}> Create Account </button>
             </form>
             <div id="providers-auth" className="center">
-                            <button className="auth-button google box-shadow"><img className="auth-icon" src={require( "../assets/google.svg")} alt="Google" />Sign Up With Google </button>
-                            <button className="auth-button facebook box-shadow" onClick={()=> {this.authWithFacebook() }}><img className="auth-icon" src={require( "../assets/facebook.svg")} alt="facebook" /> Sign Up With Facebook </button>
-                            <button className="auth-button twitter box-shadow" onClick={()=> {this.authWithTwitter()}}><img className="auth-icon" src={require( "../assets/twitter.svg")} alt="twitter" />Sign Up With Twitter</button>
+                            <button className="auth-button google box-shadow" onClick={(event)=> {
+                                event.preventDefault();
+                                authWithGoogle()}}><img className="auth-icon" src={require( "../assets/google.svg")} alt="Google" />Sign Up With Google </button>
+                            <button className="auth-button facebook box-shadow" onClick={(event)=> {
+                                event.preventDefault();
+                                authWithFacebook() }}>
+                                <img className="auth-icon" src={require( "../assets/facebook.svg")} alt="facebook" /> Sign Up With Facebook </button>
+                            <button className="auth-button twitter box-shadow" onClick={(event)=> {
+                                event.preventDefault();
+                                authWithTwitter()}}><img className="auth-icon" src={require( "../assets/twitter.svg")} alt="twitter" />Sign Up With Twitter</button>
 
                             <br/>
 
@@ -95,3 +59,19 @@ export default class Register extends Component {
         );
     }
 }
+
+
+const mapStateToProps = (state) => {
+    return state.AuthenticationReducer
+}
+
+
+
+const actions = {
+    authWithEmailPassword,
+    authWithFacebook,
+    authWithTwitter,
+    authWithGoogle
+}
+
+export default connect(mapStateToProps, actions)(Register);

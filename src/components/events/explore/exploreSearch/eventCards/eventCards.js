@@ -40,7 +40,7 @@ export class EventCards extends Component{
     render(){
         const {searchText, searchFilter} = this.props;
 
-        if(searchText != "" && searchFilter === "Name"){
+        if(searchText !== "" && searchFilter === "Name"){
             
             return(
                 <div>{this.state.events.map(function(key){
@@ -62,7 +62,7 @@ export class EventCards extends Component{
                 </div>
             )
         }
-        else if(searchText != "" && searchFilter === "Location"){
+        else if(searchText !== "" && searchFilter === "Location"){
             
             return(
                 <div>{this.state.events.map(function(key){
@@ -84,7 +84,7 @@ export class EventCards extends Component{
                 </div>
             )
         }
-        else if(searchText != "" && searchFilter === "Category"){
+        else if(searchText !== "" && searchFilter === "Category"){
             return(
                 <div>{this.state.events.map(function(key){
                     if(key.category.toLowerCase().includes(searchText.toLowerCase())){
