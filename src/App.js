@@ -29,7 +29,6 @@ class App extends Component {
 
     render() {
         return (
-            <div>
             <div className="App">
         <header className="App-header">
           <Link to ="/">
