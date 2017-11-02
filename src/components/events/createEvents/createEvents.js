@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import redux from 'react-redux';
@@ -95,6 +96,7 @@ this.handleChange = this.handleChange.bind(this);
 }
 
 const mapStateToProps = (state) => { return {} }
+
 const actions = {
   createEvent
 }
