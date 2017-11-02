@@ -6,6 +6,7 @@ const createEvent = (req, res) => {
 
 }
 
+
 const getAllEvents = (req, res) => {
     req.app
         .get('db')

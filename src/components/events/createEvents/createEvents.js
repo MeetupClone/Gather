@@ -43,6 +43,7 @@ export class CreateEvents extends Component {
         })
     }
 
+
     submitImageUpload(event) {
         event.preventDefault();
 
@@ -55,20 +56,6 @@ export class CreateEvents extends Component {
             });
         }
         reader.readAsDataURL(file)
-    }
-    uploadImage(event) {
-        const that = this;
-        event.preventDefault();
-        const { createEvent } = this.props
-        let userId = this.state.uid
-        let file = this.state.file
-        const storageRef = firebase.storage().ref();
-        const uploadTask = storageRef.child('profilePictures/' + file.name).put(file);
-        uploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
-            let downloadURL = uploadTask.snapshot.downloadURL;
-            that.setState({imagePreviewUrl: downloadURL, eventPic: downloadURL})
-            createEvent(this.state)
-        })
     }
 
 
