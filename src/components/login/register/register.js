@@ -38,7 +38,7 @@ export class Register extends Component {
                 <input name="password" type="password" ref={(input) => {this.passwordInput = input}} placeholder="Password"/>
                 <button className="login-button box-shadow" onClick={(event) => {
                     event.preventDefault()
-                    authWithEmailPassword(this.emailInput.value, this.passwordInput.value)}}> Create Account </button>
+                    authWithEmailPassword(this.emailInput.value, this.passwordInput.value, this.nameInput.value)}}> Create Account </button>
             </form>
             <div id="providers-auth" className="center">
                             <button className="auth-button google box-shadow" onClick={(event)=> {
@@ -62,7 +62,7 @@ export class Register extends Component {
 
 
 const mapStateToProps = (state) => {
-    return state.AuthenticationReducer
+    return {}
 }
 
 

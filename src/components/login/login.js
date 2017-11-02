@@ -9,7 +9,7 @@ import { fire as firebase } from "../../fire"
 import "./login.css";
 import "../../helpers.css";
 
-import { loginWithEmailPassword, authWithFacebook, authWithTwitter, authWithGoogle, signOut } from "../../ducks/authentication-redux"
+import { loginWithEmailPassword, authWithFacebook, authWithTwitter, authWithGoogle} from "../../ducks/authentication-redux"
 
 export class Login extends Component {
     constructor(props) {
@@ -41,7 +41,7 @@ export class Login extends Component {
     }
 
     render() {
-        const { loginWithEmailPassword, authWithFacebook, authWithTwitter, signOut } = this.props;
+        const { loginWithEmailPassword, authWithFacebook, authWithTwitter, authWithGoogle } = this.props;
         if (this.state.authenticated) {
             return (
                 <div>
@@ -78,7 +78,7 @@ export class Login extends Component {
     }
 }
 const mapStateToProps = (state) => {
-    return state.AuthenticationReducer
+    return {}
 }
 
 
@@ -87,7 +87,7 @@ const actions = {
     loginWithEmailPassword,
     authWithFacebook,
     authWithTwitter,
-    signOut
+    authWithGoogle
 }
 
 export default connect(mapStateToProps, actions)(Login);

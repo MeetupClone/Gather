@@ -29,7 +29,6 @@ class App extends Component {
 
     render() {
         return (
-            <div>
             <div className="App">
         <header className="App-header">
           <Link to ="/">
@@ -49,7 +48,6 @@ class App extends Component {
           </Link>
         </header>
         <div>{routes}</div>
-      </div>
       </div>
         );
     }

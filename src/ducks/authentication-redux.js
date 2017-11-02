@@ -1,5 +1,5 @@
 import { fire as firebase, facebookProvider, twitterProvider, googleProvider } from "../fire"
-// import axios from 'axios';
+import axios from 'axios';
 
 
 //INITIAL STATE OF DATA - IF NONE, EMPTY STRING, EMPTY ARRAY OR WHATEVER. FILLER SHIT.
@@ -53,13 +53,14 @@ export function authWithEmailPassword(email, password) {
     }
 }
 
-export function loginWithEmailPassword(email, password) {
+export function loginWithEmailPassword(email, password, name) {
     console.log(email, password)
     return {
         type: LOGIN_WITH_EMAIL_PASSWORD,
         payload: {
             email,
-            password
+            password,
+            name
         }
     }
 }
@@ -84,7 +85,9 @@ export default function AuthenticationReducer(state = initialState, action) {
         case AUTH_WITH_EMAIL_PASSWORD:
             let emailValue = action.payload.email
             let passwordValue = action.payload.password
+            let nameValue = action.payload.name
             firebase.auth().createUserWithEmailAndPassword(emailValue, passwordValue).then(user => {
+                axios.post('/api/user/createUser', [user.uid, user.email, nameValue])
                 console.log(user)
                 return Object.assign({}, state, {
                         uid: user.uid,
