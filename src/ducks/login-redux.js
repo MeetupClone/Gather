@@ -105,7 +105,6 @@ export default function login(state = initialState, action) {
             })
             break;
         default:
-            console.log("break error");
             return state;
     }
 

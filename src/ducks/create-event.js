@@ -15,6 +15,7 @@ const initialState = {
 
 const CREATE_EVENT = 'CREATE_EVENT';
 
+
 export function createEvent(componentState){
   return {
     type: CREATE_EVENT,
@@ -22,14 +23,19 @@ export function createEvent(componentState){
   }
 }
 
+
 export default function createEventReducer(state = initialState, action){
     switch(action.type){
       case CREATE_EVENT:
-          return Object.assign({}, state, action.payload )
+      axios.post('/api/event/create', action.payload).then(result => {
+        return true
+      })
+        return Object.assign({}, state, action.payload)
+
+
           break;
 
           default :
-               console.log('break error')
                return state;
         }
 
