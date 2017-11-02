@@ -1,0 +1,30 @@
+.gather-logo-home {
+    max-height: 300px;
+    max-width: auto;
+    border-radius: 100px;
+    margin: 10px 10px;
+}
+
+.home-event-card {
+    height: 175px;
+    display: flex;
+    flex-direction: row;
+    margin: 10px 10px;
+}
+
+.home-event-card-pic {
+    max-height: 175px;
+    max-width: auto;
+}
+
+.home-create-card {
+    height: 175px;
+    display: flex;
+    flex-direction: row;
+    margin: 10px 10px;
+}
+
+.home-create-card-pic {
+    max-height: 175px;
+    max-width: auto; 
+}

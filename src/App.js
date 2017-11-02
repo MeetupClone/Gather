@@ -50,7 +50,6 @@ class App extends Component {
         </header>
         <div>{routes}</div>
       </div>
-      </div>
         );
     }
 }

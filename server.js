@@ -33,6 +33,7 @@ app.use(express.static('./public'));
 const userCtrl = require('./server/controllers/userCtrl')
 const utilCtrl = require('./server/controllers/utilCtrl')
 const eventCtrl = require('./server/controllers/eventCtrl')
+const groupCtrl = require('./server/controllers/groupCtrl')
 
 app.post('/api/user/createUser', userCtrl.createUser)
 app.put('/api/user/registerFCMKey', userCtrl.registerFCMKey)
@@ -41,7 +42,8 @@ app.post('/api/user/profile/update', userCtrl.updateUserProfile)
 
 app.get('/api/events', eventCtrl.getAllEvents)
 app.get('/api/groups', eventCtrl.getAllGroups)
-
+app.get('/api/group/:id', groupCtrl.getGroupById)
+app.get('/api/event/:id', eventCtrl.getEventById)
 
 app.post('/api/pictures/upload', utilCtrl.uploadPicture)
 
