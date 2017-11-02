@@ -22,7 +22,7 @@ export default (
     <Switch>
       {/* <Route component={ AuthHome } exact path="/" />
       <Route component={ NotAuthHome } path="/splash" /> */}
-      <Route component={ Home } path="/"/>
+      <Route component={ Home } exact path="/"/>
       <Route component={ Login } path="/login" />
       <Route component={ Register } path = "/register" />
       <Route component={ User } path="/user" />
