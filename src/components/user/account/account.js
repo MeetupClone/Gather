@@ -5,7 +5,6 @@ import './account.css';
 import {Notifications} from './notifications/notifications';
 import {Preferences} from './preferences/preferences';
 import {EditInfo} from './editInfo/editInfo';
-import {InfoPage} from './info/infoPage';
 
 export default class Account extends Component{
     constructor(props){
@@ -16,8 +15,14 @@ export default class Account extends Component{
             accountState: 1,
 
         }
+
+        this.componentWillMount = this.componentWillMount.bind(this)
     }
 
+    // make a database call for user information and then pass it to kids, have to get ID from firebase UGH
+    componentWillMount(){
+
+    }
 
     render(){
 
@@ -30,7 +35,7 @@ export default class Account extends Component{
                             <li onClick={(e) => this.setState({ accountState: 1})}>Notifications</li>
                             <li onClick={(e) => this.setState({ accountState: 2})}>Preferences</li>
                             <li onClick={(e) => this.setState({ accountState: 3})}>Edit Info</li>
-                            <li onClick={(e) => this.setState({ accountState: 4})}>Info Page</li>
+                            <li>Link to Logout</li>
                         </ul>
                     </div>
                     <div className="account-right-content">
@@ -46,7 +51,7 @@ export default class Account extends Component{
                             <li onClick={(e) => this.setState({ accountState: 1})}>Notifications</li>
                             <li onClick={(e) => this.setState({ accountState: 2})}>Preferences</li>
                             <li onClick={(e) => this.setState({ accountState: 3})}>Edit Info</li>
-                            <li onClick={(e) => this.setState({ accountState: 4})}>Info Page</li>
+                            <li>Link to Logout</li>
                         </ul>
                     </div>
                     <div className="account-right-content">
@@ -62,7 +67,7 @@ export default class Account extends Component{
                             <li onClick={(e) => this.setState({ accountState: 1})}>Notifications</li>
                             <li onClick={(e) => this.setState({ accountState: 2})}>Preferences</li>
                             <li onClick={(e) => this.setState({ accountState: 3})}>Edit Info</li>
-                            <li onClick={(e) => this.setState({ accountState: 4})}>Info Page</li>
+                            <li>Link to Logout</li>
                         </ul>
                     </div>
                     <div className="account-right-content">
@@ -70,22 +75,7 @@ export default class Account extends Component{
                     </div>
                 </div>
             )
-            case 4:
-            return(
-                <div className="account-main-container">
-                    <div className="account-left-navbar">
-                        <ul className="account-left-options">
-                            <li onClick={(e) => this.setState({ accountState: 1})}>Notifications</li>
-                            <li onClick={(e) => this.setState({ accountState: 2})}>Preferences</li>
-                            <li onClick={(e) => this.setState({ accountState: 3})}>Edit Info</li>
-                            <li onClick={(e) => this.setState({ accountState: 4})}>Info Page</li>
-                        </ul>
-                    </div>
-                    <div className="account-right-content">
-                    <InfoPage/>
-                    </div>
-                </div>
-            )
+           
         }
         
 

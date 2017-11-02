@@ -13,7 +13,7 @@ export class Notifications extends Component{
 
     render(){
         return(
-            <h1> LATE NIGHT GIIIIRL CALLIN THROUGH HER HPOOOOONE </h1>
+            <h1>Manage Notification Page</h1>
         )
 }
 }

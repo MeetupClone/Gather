@@ -13,7 +13,7 @@ export class EditInfo extends Component{
 
     render(){
         return(
-            <h1> MAMA SAYS IT'S OVER WHEN YA WALK THORUGH THE DOOOOR </h1>
+            <h1> Change Profile pic, PW, </h1>
         )
 }
 }

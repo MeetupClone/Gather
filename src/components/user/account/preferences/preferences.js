@@ -13,7 +13,10 @@ export class Preferences extends Component{
 
     render(){
         return(
-            <h1> SHE DOESN'T REALLY LOVE YOU SO JUST LEAVE HER ALOOONE</h1>
+            <div>
+            <h1>Manage Preferences</h1>
+            <p>Categories they like, how much info to list on the profile</p>
+            </div>
         )
 }
 }
