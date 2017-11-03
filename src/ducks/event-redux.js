@@ -21,6 +21,10 @@ firebase.auth().onAuthStateChanged(user => {
 })
 
 const CREATE_EVENT = 'CREATE_EVENT';
+const JOIN_EVENT = 'JOIN_EVENT';
+const LEAVE_EVENT = 'LEAVE_EVENT';
+const EDIT_EVENT = 'EDIT_EVENT';
+const DELETE_EVENT = 'DELETE_EVENT';
 
 
 export function createEvent(componentState) {
@@ -30,8 +34,36 @@ export function createEvent(componentState) {
     }
 }
 
+export function joinEvent(componentState) {
+    return {
+        type: JOIN_EVENT,
+        payload: [componentState.eventId, componentState.currentUserUid]
+    }
+}
 
-export default function CreateEventReducer(state = initialState, action) {
+export function leaveEvent(componentState) {
+    return {
+        type: LEAVE_EVENT,
+        payload: [componentState.eventId, componentState.currentUserUid]
+    }
+}
+
+export function editEvent(componentState) {
+    return {
+        type: EDIT_EVENT,
+        payload: componentState
+    }
+}
+
+export function deleteEvent(componentState) {
+    return {
+        type: DELETE_EVENT,
+        payload: componentState
+    }
+}
+
+
+export default function EventReducer(state = initialState, action) {
     switch (action.type) {
         case CREATE_EVENT:
             let file = action.payload.file
@@ -44,6 +76,15 @@ export default function CreateEventReducer(state = initialState, action) {
                 return Object.assign({}, state, action.payload)
             })
             return state;
+        case JOIN_EVENT:
+            return axios.post('/api/event/join', action.payload).then(result => {
+                return Object.assign({}, state, action.payload)
+            })
+        case LEAVE_EVENT:
+            return axios.post('/api/event/leave', action.payload).then(result => {
+                return Object.assign({}, state, action.payload)
+            })
+
         default:
             return state;
     }
