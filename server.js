@@ -31,6 +31,8 @@ app.post('/api/user/createUser', userCtrl.createUser)
 app.put('/api/user/registerFCMKey', userCtrl.registerFCMKey)
 app.get('/api/user/getUserInfo/:userId', userCtrl.getUserInfo)
 app.post('/api/user/profile/update', userCtrl.updateUserProfile)
+app.get('/api/user/account/getPref/:id', userCtrl.getUserPreferences)
+app.get('/api/user/account/getCat/:id', userCtrl.getUserCategories)
 
 const utilCtrl = require('./server/controllers/utilCtrl')
 app.post('/api/pictures/upload', utilCtrl.uploadPicture)

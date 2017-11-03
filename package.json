@@ -2,7 +2,7 @@
   "name": "gather",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
+  "proxy": "http://localhost:3002/",
   "dependencies": {
     "axios": "^0.17.0",
     "body-parser": "^1.18.2",

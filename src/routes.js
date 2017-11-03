@@ -24,7 +24,7 @@ export default (
       <Route component={ Home } exact path="/"/>
       <Route component={ Login } path="/login" />
       <Route component={ Register } path = "/register" />
-      <Route component={ User } path="/user" />
+      <Route component={ User } exact path="/user" />
       <Route component={ Explore } path="/explore"/>
       <Route component={ CreateEvents} exact path="/event/create"/>
       <Route component={ EditEvent } path="/event/edit/:id" />
