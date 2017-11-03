@@ -5,9 +5,9 @@ import axios from "axios";
 
 import "./profile.css"
 
-import EditableProfile from "./editableProfile/editableProfile";
+import EditableProfile from "../editableProfile/editableProfile";
 
-import { fire as firebase } from "../../fire";
+import { fire as firebase } from "../../../fire";
 
 export default class Login extends Component {
     constructor(props) {

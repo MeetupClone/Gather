@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 
 import "./editableProfile.css"
-import "../profile.css"
+import "../profile/profile.css"
 
 import { fire as firebase } from "../../../fire";
 
@@ -94,12 +94,6 @@ export default class EditableProfile extends Component {
 
 
     render() {
-        let { imagePreviewUrl } = this.state;
-        let imagePreviewPic = null
-        if (imagePreviewUrl) {
-            let imagePreviewPic = (<img src={imagePreviewUrl} alt="test"/>);
-        }
-
         return (
             <div className="previewComponent">
                 <div>
