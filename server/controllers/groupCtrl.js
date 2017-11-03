@@ -56,6 +56,12 @@ const createGroup = (req, res) => {
         })
 }
 
+const getGroupMembers = (req, res) => {
+
+    const { ID, GROUPID} = req.body
+
+}
+
 module.exports = {
     getGroupById,
     joinGroup,

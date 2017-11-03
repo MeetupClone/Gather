@@ -50,6 +50,7 @@ export default class Account extends Component{
         axios.get(`/api/user/account/getCat/${this.state.uid}`)
         .then(result => console.log("getCat", result))
         .catch(err => console.log("getCat", err))
+
     }
 
     render(){

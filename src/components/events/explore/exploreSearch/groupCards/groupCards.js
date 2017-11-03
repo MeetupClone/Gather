@@ -32,6 +32,10 @@ export class GroupCards extends Component{
     componentWillMount(){
         axios.get('/api/groups').then(result => 
             this.setState({groups: result.data}))   
+
+        // axios.get('/api/groups/members/:id').then(result =>{
+        //     console.log('group members', result)
+        // })
             
         };
 
@@ -44,6 +48,7 @@ export class GroupCards extends Component{
     }
     
     render(){
+        console.log(this.state.groups)
         const {searchText, searchFilter} = this.props;
                 if(searchText !== "" && searchFilter === "name"){
                     return(
@@ -113,14 +118,22 @@ export class GroupCards extends Component{
                     <div>{this.state.groups.map(function(key){
                         
                         return(
-                            <div className="group-card-container" id="canvas">
-                                <div className="group-card-content-container">
-                                <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
-                                    <p className="group-card-name">Name: {key.name}</p>
-                                    <p className="group-card-category">Category: {key.category}</p>
-                                    <p className="group-card-desc">Description: {key.description}</p>
+                            <div className="group-card-container">
+                                <div className="group-card-image">
+                                    <img src={key.group_picture} alt="image"/>
                                 </div>
+                                <div className="group-card-content">
+                                    <div>
+                                        <Link to = {`/groups/${key.id}`}><p className="group-card-name">{key.name}</p></Link>
+                                    </div>
+                                    <div>
+                                        {key.category}
+                                    </div>
+                                    <div>
+                                        # Members
+                                    </div>
                                 </div>
+                            </div>
                         )
                     })}</div>
                 )

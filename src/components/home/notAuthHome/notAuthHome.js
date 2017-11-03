@@ -11,8 +11,7 @@ export default class NotAuthHome extends Component {
         }
     }
     render(){
-
-        return (
+        return(
             <div className="home">
               <div>
                 <img className="gather-logo-home" align="left" src="http://static1.squarespace.com/static/5298f415e4b05482b01af09c/t/5298f5cae4b0e021fe88cc1c/1507776280790/" alt="gather logo"/>
