@@ -14,8 +14,17 @@ const joinEvent = (req, res) => {
         })
 }
 
+const editEvent = (req, res) => {
+    req.app
+        .get('db')
+        .editEvent(req.body)
+        .then(result => {
+            console.log("edited")
+            return res.json(result)
+        })
+}
+
 const leaveEvent = (req,res) => {
-    console.log(req.body)
     req.app
         .get('db')
         .leaveEvent(req.body)
@@ -28,6 +37,15 @@ const getAttendingEvents = (req,res) => {
     req.app
         .get('db')
         .getAttendingEvents(req.params.id)
+        .then(result => {
+            return res.json(result)
+        })
+}
+
+const getAttendingEventsData = (req,res) => {
+    req.app
+        .get('db')
+        .getAttendingEventsData(req.params.id)
         .then(result => {
             return res.json(result)
         })
@@ -55,8 +73,10 @@ const getEventById = (req, res) => {
 module.exports = {
     getAllEvents,
     getAttendingEvents,
+    getAttendingEventsData,
     leaveEvent,
     getEventById,
     createEvent,
+    editEvent,
     joinEvent
 }

@@ -51,7 +51,6 @@ export default class Account extends Component{
         .then(result => console.log("getCat", result))
         .catch(err => console.log("getCat", err))
 
-        
     }
 
     render(){
