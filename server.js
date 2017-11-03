@@ -48,7 +48,10 @@ app.get('/api/event/:id', eventCtrl.getEventById)
 const groupCtrl = require('./server/controllers/groupCtrl')
 app.get('/api/group/:id', groupCtrl.getGroupById)
 app.get('/api/groups', groupCtrl.getAllGroups)
+app.get('/api/groups/getUsersGroups/:id', groupCtrl.getUsersGroups)
 app.post('/api/groups/create', groupCtrl.createGroup)
+app.post('/api/group/join', groupCtrl.joinGroup)
+app.post('/api/group/leave', groupCtrl.leaveGroup)
 
 
 app.listen(port, () => {

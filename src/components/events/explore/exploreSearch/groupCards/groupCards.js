@@ -46,7 +46,6 @@ export class GroupCards extends Component{
     render(){
         const {searchText, searchFilter} = this.props;
                 if(searchText !== "" && searchFilter === "name"){
-                    
                     return(
                         <div>{this.state.groups.map(function(key){
                             if(key.name.toLowerCase().includes(searchText.toLowerCase())){
