@@ -5,13 +5,17 @@ import axios from 'axios';
 import {RecommendedEvents} from './recommendedEvents/recommendedEvents.js';
 import {ExploreSearch} from './exploreSearch/exploreSearch';
 
+
+
+
+
 export default class Explore extends Component {
     constructor(props){
         super(props);
 
         this.state={
             events: [],
-            //needs all the, uh, UGGGH PROPS FROM KIDS HERE 
+            //needs all the, uh, UGGGH PROPS FROM KIDS HERE
         }
 
     }
@@ -24,9 +28,12 @@ export default class Explore extends Component {
 
         return(
             <div>
-                <div><RecommendedEvents/></div>
-                <div><ExploreSearch/></div>
-                <div>Footer</div>
+              <div><RecommendedEvents/></div>
+              <div><ExploreSearch/></div>
+              <div>Footer</div>
+
+
+
             </div>
         )
     }

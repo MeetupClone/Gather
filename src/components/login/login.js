@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 
-import { fire as firebase, facebookProvider, twitterProvider } from "../../fire"
+import { fire as firebase } from "../../fire"
 
 import "./login.css";
 import "../../helpers.css";
 
-import { loginWithEmailPassword, getAuthInfo } from "../../ducks/login-redux"
+import { loginWithEmailPassword, authWithFacebook, authWithTwitter, authWithGoogle} from "../../ducks/authentication-redux"
 
 export class Login extends Component {
     constructor(props) {
@@ -20,8 +20,8 @@ export class Login extends Component {
             email: '',
             authenticated: false
         }
-
         firebase.auth().onAuthStateChanged(user => {
+            console.log()
             if (user) {
                 this.setState({
                     uid: user.uid,
@@ -29,49 +29,7 @@ export class Login extends Component {
                     authenticated: true
                 })
             }
-        }).bind(this)
-
-        this.signOut = this.signOut.bind(this);
-        this.authWithFacebook = this.authWithFacebook.bind(this)
-        this.authWithTwitter = this.authWithTwitter.bind(this);
-    }
-
-    authWithFacebook() {
-        firebase.auth().signInWithRedirect(facebookProvider)
-            .then((user, error) => {
-                if (error) {
-                    console.log(error)
-                } else {
-                    console.log(this.state)
-                }
-            })
-    }
-
-    authWithTwitter() {
-        firebase.auth().signInWithRedirect(twitterProvider)
-            .then((result, error) => {
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log("logged in");
-                }
-
-            })
-    }
-
-    //         .then(user => {
-    //             const messaging = firebase.messaging()
-    //             messaging.requestPermission()
-    //                 .then(result => {
-    //                     return messaging.getToken().then(token => {
-    //                         axios.put('/api/user/registerFCMKey', [this.state.uid, token])
-    //                     })
-    //                 })
-    //         })
-    // }
-
-    componentDidMount(){
-        console.log(this.state)
+        })
     }
 
     signOut() {
@@ -79,17 +37,15 @@ export class Login extends Component {
             this.setState({
                 authenticated: false
             })
-            console.log(result, "logged out")
         })
     }
 
     render() {
-        const { loginWithEmailPassword, getAuthInfo } = this.props;
+        const { loginWithEmailPassword, authWithFacebook, authWithTwitter, authWithGoogle } = this.props;
         if (this.state.authenticated) {
             return (
                 <div>
                 <button className="buttons" onClick= {(event) => this.signOut()}> Log Out </button>
-                <button onClick={(event) => this.getAuthInfo()}> Get Auth Info</button>
                 </div>
             )
         } else {
@@ -103,15 +59,15 @@ export class Login extends Component {
                             <button className="login-button box-shadow" onClick={(event)=> {
                                 event.preventDefault()
 
-                                loginWithEmailPassword(this.emailInput, this.passwordInput)}}>Log In </button>
+                                loginWithEmailPassword(this.emailInput.value, this.passwordInput.value)}}>Log In </button>
                             <Link to="/register">
                             <button className="register-button box-shadow">Register </button>
                             </Link>
                         </form>
                         <div id="providers-auth" className="center">
-                            <button className="auth-button google box-shadow"><img className="auth-icon" src={require( "./assets/google.svg")} alt="Google" />Sign In With Google </button>
-                            <button className="auth-button facebook box-shadow" onClick={()=> {this.authWithFacebook() }}><img className="auth-icon" src={require( "./assets/facebook.svg")} alt="facebook" /> Sign In With Facebook </button>
-                            <button className="auth-button twitter box-shadow" onClick={()=> {this.authWithTwitter()}}><img className="auth-icon" src={require( "./assets/twitter.svg")} alt="twitter" />Sign In With Twitter</button>
+                            <button className="auth-button google box-shadow" onClick={()=> {authWithGoogle() }}><img className="auth-icon" src={require( "./assets/google.svg")} alt="Google" />Sign In With Google </button>
+                            <button className="auth-button facebook box-shadow" onClick={()=> {authWithFacebook() }}><img className="auth-icon" src={require( "./assets/facebook.svg")} alt="facebook" /> Sign In With Facebook </button>
+                            <button className="auth-button twitter box-shadow" onClick={()=> {authWithTwitter()}}><img className="auth-icon" src={require( "./assets/twitter.svg")} alt="twitter" />Sign In With Twitter</button>
 
                             <br/>
 
@@ -121,11 +77,17 @@ export class Login extends Component {
         }
     }
 }
-const mapStateToProps = (state) => { return {} }
+const mapStateToProps = (state) => {
+    return {}
+}
+
+
 
 const actions = {
     loginWithEmailPassword,
-    getAuthInfo
+    authWithFacebook,
+    authWithTwitter,
+    authWithGoogle
 }
 
 export default connect(mapStateToProps, actions)(Login);

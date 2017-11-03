@@ -36,7 +36,7 @@ export default class SingleEvent extends Component{
             <div>
                 <h1> Single Event Page </h1>
                 <h1>{this.state.eventName}</h1>
-                <img src={this.state.eventPic} alt="Event Image"></img>
+                <img src={this.state.eventPic} alt={this.state.eventName}></img>
                 <h3>{this.state.eventLocation}</h3>
                 <h3>{this.state.eventDate}</h3>
                 <p>{this.state.eventDescription}</p>    

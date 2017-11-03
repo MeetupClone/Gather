@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 import Login from "./components/login/login";
 import Register from "./components/login/register/register";
-import User from "./components/user/user";
+import User from "./components/user/profile/user.js"
 import EditableProfile from "./components/user/editableProfile/editableProfile";
 
 
@@ -30,7 +30,7 @@ export default (
       <Route component={ Explore } path="/explore"/>
       <Route component={ CreateEvents} exact path="/event/create"/>
       <Route component={ SingleEvent } exact path="/event/:id"/>
-      <Route component={ CreateGroup } path ="/groups/creat"/>
+      <Route component={ CreateGroup } path ="/groups/create"/>
       <Route component={ GroupPage } path ="/groups/:id"/>
       <Route component={ Account } exact path ="/user/account"/>
       <Route component={ PushNotifications } path="/pushNotifications"/>

@@ -24,6 +24,7 @@
     "react-scripts": "^1.0.14",
     "react-wysiwyg": "^2.2.1",
     "redux": "^3.7.2",
+    "redux-promise-middleware": "^4.4.1",
     "sass": "^1.0.0-beta.2",
     "webp-converter": "^2.1.6"
   },
