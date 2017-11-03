@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import AuthHome from './authHome/authHome';
+// import AuthHome from './authHome/authHome';
 import NotAuthHome from './notAuthHome/notAuthHome';
 
 

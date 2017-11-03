@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import axios from "axios";
 import { fire as firebase } from "../../../fire"
 import './createEvents.css';
 import { createEvent } from "../../../ducks/create-event"
@@ -25,7 +24,6 @@ export class CreateEvents extends Component {
         }
 
         firebase.auth().onAuthStateChanged(user => {
-            console.log()
             if (user) {
                 this.setState({
                     uid: user.uid

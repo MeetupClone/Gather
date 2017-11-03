@@ -8,6 +8,15 @@ const getGroupById = (req, res) => {
         .catch(err => console.log("getGroupById error", err))
 }
 
+const getAllGroups = (req, res) => {
+    req.app
+        .get('db')
+        .getAllGroups()
+        .then(results => res.json(results))
+        .catch(err => console.log(err, "get all group endpoint not working"))
+
+}
+
 const createGroup = (req, res) => {
     const { name, category, description, website, twitter, facebook, instagram, uid } = req.body
     req.app
@@ -21,5 +30,6 @@ const createGroup = (req, res) => {
 
 module.exports = {
     getGroupById,
-    createGroup
+    createGroup,
+    getAllGroups
 }
