@@ -3,7 +3,34 @@ const createEvent = (req, res) => {
         .get('db')
         .createEvent(req.body)
         .then(result => { return res.json(result) })
+}
 
+const joinEvent = (req, res) => {
+    req.app
+        .get('db')
+        .joinEvent(req.body)
+        .then(result => { 
+            return res.json(result) 
+        })
+}
+
+const leaveEvent = (req,res) => {
+    console.log(req.body)
+    req.app
+        .get('db')
+        .leaveEvent(req.body)
+        .then(result => {
+            return res.json(result)
+        })
+}
+
+const getAttendingEvents = (req,res) => {
+    req.app
+        .get('db')
+        .getAttendingEvents(req.params.id)
+        .then(result => {
+            return res.json(result)
+        })
 }
 
 
@@ -15,14 +42,6 @@ const getAllEvents = (req, res) => {
         .catch(err => console.log(err, "get all event endpoint not working"));
 }
 
-const getAllGroups = (req, res) => {
-    req.app
-        .get('db')
-        .getAllGroups()
-        .then(results => res.json(results))
-        .catch(err => console.log(err, "get all group endpoint not working"))
-
-}
 
 const getEventById = (req, res) => {
     const { id } = req.params;
@@ -30,13 +49,14 @@ const getEventById = (req, res) => {
         .get('db')
         .getEventById([id])
         .then(results => res.json(results))
-        .catch(err => console.log(err, "get events by id endpoint not working"))
 
 }
 
 module.exports = {
     getAllEvents,
-    getAllGroups,
+    getAttendingEvents,
+    leaveEvent,
     getEventById,
-    createEvent
+    createEvent,
+    joinEvent
 }

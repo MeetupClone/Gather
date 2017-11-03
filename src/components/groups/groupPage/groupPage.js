@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
 
 
 import axios from 'axios';
@@ -31,36 +30,6 @@ export default class GroupPage extends Component{
             
         })
     }
-
-    // this.setState({category: this.data[0].category, groupDesc: this.data[0].description}
-// category
-// :
-// "Food"
-// column9
-// :
-// null
-// description
-// :
-// "No more dino on dino crime!"
-// facebook
-// :
-// null
-// id
-// :
-// 2
-// instagram
-// :
-// null
-// name
-// :
-// "Herbivores"
-// twitter
-// :
-// null
-// website
-// :
-// "dinosaurs.com"
-
     render(){
         
         return(

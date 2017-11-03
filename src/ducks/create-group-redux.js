@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-import { fire as firebase } from "../fire"
+// import { fire as firebase } from "../fire"
 
 const initialState = {
     name: '',
