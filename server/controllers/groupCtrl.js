@@ -28,6 +28,12 @@ const createGroup = (req, res) => {
         .catch(err => console.log("not working", err));
 }
 
+const getGroupMembers = (req, res) => {
+
+    const { ID, GROUPID} = req.body
+
+}
+
 module.exports = {
     getGroupById,
     createGroup,

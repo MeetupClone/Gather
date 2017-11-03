@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
 .center {
   display: flex;
   flex-direction: column;
@@ -11,5 +13,10 @@
 
 .width-100 {
   width: 100%; }
+
+.nunito-text {
+    font-family: 'Nunito';
+  }
+
 
 /*# sourceMappingURL=helpers.css.map */
