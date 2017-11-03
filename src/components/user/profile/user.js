@@ -66,7 +66,7 @@ export default class Login extends Component {
         } else {
             return (
                 <div>
-                <Link to="/user/edit" onClick={() => this.setState({editable: true})} > Edit </Link>
+                <Link to="/user/edit" onClick={() => this.setState({editable: true})} > Edit Profile</Link>
                 <img className="user-profile-pic" src={this.state.userProfilePic} alt={this.state.userName}/>
                 <h1> {this.state.userName} </h1>
                 <h3> {this.state.userLocation} </h3>

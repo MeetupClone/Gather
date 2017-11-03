@@ -102,7 +102,7 @@ export default class EditableProfile extends Component {
                  <input className="fileInput" 
                     type="file" 
                     onChange={(event)=>this.submitImageUpload(event)} />
-                <button className="submitButton" 
+                <button className="edit-submit-button" 
                     type="submit" 
                     onClick={(event)=>this.uploadImage(event)}>Upload Image</button>
                 </form>
@@ -111,25 +111,19 @@ export default class EditableProfile extends Component {
 
                 <textarea id="noter-text-area" name="editableDescription" value={this.state.userDescription} onChange={this.handleChange}></textarea>
                 <div>
-                Twitter
-                <br/>
-                <input className="social-media-input" onChange={(event) => {
+                <input placeholder="Twitter" className="social-media-input" onChange={(event) => {
                 	this.setState({twitter: event.target.value})}} />
                 </div>
                 <div>
-                Facebook
-                <br/>
-                <input className="social-media-input" onChange={(event) => {
+                <input placeholder="Facebook" className="social-media-input" onChange={(event) => {
                 	this.setState({facebook: event.target.value})}} />
                 </div>
                 <div>
-                Instagram
-                <br/>
-                <input className="social-media-input" onChange={(event) => {
+                <input placeholder="Instagram" className="social-media-input" onChange={(event) => {
                 	this.setState({instagram: event.target.value})}} />
                 </div>
 
-                <button onClick={() => {
+                <button className="edit-profile-save" onClick={() => {
                 	this.updateProfile()
                 }}> Save Profile </button>
 
