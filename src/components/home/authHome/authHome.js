@@ -3,6 +3,8 @@ import { fire as firebase } from "../../../fire"
 
 import axios from "axios";
 
+import { Link } from 'react-router-dom';
+
 
 export default class AuthHome extends Component {
     constructor(props) {
@@ -25,7 +27,7 @@ export default class AuthHome extends Component {
             return axios.get(`/api/event/getAttendingEvents/${this.state.uid}`).then(result => {
                 result.data.map(event => {
                     axios.get(`/api/event/${event.event_id}`).then(result => {
-                        eventArr.push(result.data)
+                        eventArr.push(result.data[0])
                     })
                 })
             })
@@ -36,21 +38,34 @@ export default class AuthHome extends Component {
 
 
     render() {
-        let events = this.state.userEvents
-        let eventCard = null;
+    	let events = this.state.userEvents
 
-        eventCard = events.map(event => {
-            console.log(event)
-            return (<h1> {event[0].title} </h1>)
-        })
+    	console.log(events)
 
+    	for (var key of this.state.userEvents){
+    		console.log(key)
+    	}
 
+    	this.state.userEvents.map(x => {
+    		console.log(x.title, x.category)
+    	})
         return (
-            <div>
-            	{eventCard}
-            	Authorized mother fucker
-            	
-            </div>
+            <div>{this.state.userEvents.map(function(event){
+                    return(
+                        <div className="event-card-container" id="canvas">
+                        <div className="event-card-content-container">
+                            <img className="event-card-pic" src={event.event_image} alt="pic not working"/>
+                            <Link to={`/event/${event.id}`}><p>Title: {event.title}</p></Link>
+                            <p className="event-card-category">Category: {event.category}</p>
+                            <p className="event-card-loc">Location: {event.location}</p>
+                            <p className="event-card-desc">Description: {event.description}</p>
+                        </div>
+                        </div>
+                    )
+                }
+                )}
+                </div>
         )
+
     }
 }
