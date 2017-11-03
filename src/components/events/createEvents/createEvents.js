@@ -33,7 +33,6 @@ export class CreateEvents extends Component {
             }
         })
         this.submitImageUpload = this.submitImageUpload.bind(this)
-        this.uploadImage = this.uploadImage.bind(this)
         this.handleChange = this.handleChange.bind(this);
     }
 
