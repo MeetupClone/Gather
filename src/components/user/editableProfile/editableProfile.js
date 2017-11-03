@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 
 import "./editableProfile.css"
-import "../profile.css"
+import "../profile/profile.css"
 
 import { fire as firebase } from "../../../fire";
 

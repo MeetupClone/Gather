@@ -31,7 +31,7 @@ export function createEvent(componentState) {
 }
 
 
-export default function createEventReducer(state = initialState, action) {
+export default function CreateEventReducer(state = initialState, action) {
     switch (action.type) {
         case CREATE_EVENT:
             let file = action.payload.file
