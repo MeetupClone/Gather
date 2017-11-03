@@ -2,30 +2,58 @@ import React, {Component} from 'react';
 
 import './account.css';
 
+import axios from 'axios';
+
 import {Notifications} from './notifications/notifications';
 import {Preferences} from './preferences/preferences';
 import {EditInfo} from './editInfo/editInfo';
+
+import { getAuthInfo } from "../../../ducks/login-redux"
+import { fire as firebase} from "../../../fire"
+
 
 export default class Account extends Component{
     constructor(props){
         super(props);
 
         this.state = {
-            userId: "",
+            uid: "",
             accountState: 1,
-
+            email: "",
         }
+
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({
+                    uid: user.uid,
+                    email: user.email,
+                    authenticated: true,
+                    preferences: [],
+                    categories: []
+                })
+            }
+            else{
+                console.log("no user")
+            }
+        })
 
         this.componentWillMount = this.componentWillMount.bind(this)
     }
 
-    // make a database call for user information and then pass it to kids, have to get ID from firebase UGH
+    // make a database call for user information and then pass it to kids
     componentWillMount(){
-
+        console.log(this.state.uid)
+        axios.get(`/api/user/account/getPref/${this.state.uid}`)
+        .then(result => console.log("getPref", result))
+        .catch(err => console.log("getPref error", err))
+        
+        axios.get(`/api/user/account/getCat/${this.state.uid}`)
+        .then(result => console.log("getCat", result))
+        .catch(err => console.log("getCat", err))
     }
 
     render(){
-
+        console.log(this.state)
         switch(this.state.accountState){
             case 1:
             return(

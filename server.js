@@ -15,7 +15,7 @@ admin.initializeApp({
 	databaseURL: firebaseUrl
 })
 
-const port = 3001;
+const port = 3002;
 
 const connectionString = herokuDb
 
@@ -40,7 +40,11 @@ app.put('/api/user/registerFCMKey', userCtrl.registerFCMKey)
 app.get('/api/user/getUserInfo/:userId', userCtrl.getUserInfo)
 app.post('/api/user/profile/update', userCtrl.updateUserProfile)
 
+app.get('/api/user/account/getPref/:id', userCtrl.getUserPreferences)
+app.get('/api/user/account/getCat/:id', userCtrl.getUserCategories)
+
 app.get('/api/events', eventCtrl.getAllEvents)
+
 app.get('/api/groups', eventCtrl.getAllGroups)
 app.get('/api/group/:id', groupCtrl.getGroupById)
 app.get('/api/event/:id', eventCtrl.getEventById)
