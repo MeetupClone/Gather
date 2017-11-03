@@ -20,23 +20,38 @@ export class SingleEvent extends Component {
             eventPic: '',
             organizerUid: '',
             currentUserUid: '',
-            userAttendingEvents: []
+            userAttendingEvents: [],
+            joined: false
         }
 
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.setState({ currentUserUid: user.uid })
-                axios.get(`/api/event/getAttendingEvents/${this.state.currentUserUid}`).then(result => {
-                    result.data.map(x => {
-                        this.state.userAttendingEvents.push(x.event_id)
-                    })
-                })
-            }
-        })
+        
         this.componentWillMount = this.componentWillMount.bind(this);
     }
 
     componentWillMount() {
+
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({ currentUserUid: user.uid })
+            }
+        })
+
+        let eventsArr = []
+        axios.get(`/api/event/getAttendingEventsData/${this.state.currentUserUid}`).then(result => {
+            result.data.map(event => {
+                eventsArr.push(event.event_id)
+            })
+            this.setState({ userAttendingEvents: eventsArr })
+            console.log(eventsArr, this.state.eventId)
+            console.log(this.state.userAttendingEvents.includes(this.state.eventId))
+            if (this.state.userAttendingEvents.includes(this.state.eventId)) {
+                console.log('its it')
+                this.setState({ joined: false })
+            } else {
+                this.setState({joined: true})
+            }
+        })
+
         axios.get(`/api/event/${this.state.eventId}`).then(response => {
             this.setState({
                 eventName: response.data[0].title,
@@ -50,25 +65,28 @@ export class SingleEvent extends Component {
     }
 
     render() {
+        let that = this;
         const { joinEvent, leaveEvent } = this.props
         let joinButton = null
         let leaveButton = null
-        if (this.state.userAttendingEvents.includes(this.state.eventId)) {
-
-            joinButton = (<button onClick={(event) => {
-                joinEvent(this.state)
-            }}> Join This Event </button>)
-        } else {
+        if (this.state.joined) {
+            joinButton = (<h1> You are going to this event! </h1>)
             leaveButton = (<button onClick={(event) => {
                 leaveEvent(this.state)
+                that.setState({joined: true})
             }}> Leave Event </button>)
-            joinButton = (<h1> You are going to this event! </h1>)
+        } else {
+            joinButton = (<button onClick={(event) => {
+                joinEvent(this.state);
+                that.setState({joined: true})
+            }}> Join This Event </button>)
+
         }
 
 
         let editButton = null
         if (this.state.currentUserUid === this.state.organizerUid) {
-            editButton = <Link to={`/event/edit/${this.state.id}`}> Edit Event </Link>
+            editButton = <Link to={`/event/edit/${this.props.match.params.id}`}> Edit Event </Link>
         }
 
         return (

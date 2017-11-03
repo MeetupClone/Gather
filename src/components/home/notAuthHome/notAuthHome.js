@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import './notAuthHome.css';
-import {Footer} from '../../events/footer/footer'
-export default class NotAuthHome extends Component{
-    constructor(props){
+import { Footer } from '../../events/footer/footer'
+export default class NotAuthHome extends Component {
+    constructor(props) {
         super(props)
 
         this.state = {
@@ -11,6 +11,7 @@ export default class NotAuthHome extends Component{
         }
     }
     render(){
+
         return (
             <div className="home">
               <div>

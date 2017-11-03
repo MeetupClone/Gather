@@ -51,7 +51,7 @@ export class EventCards extends Component{
                     if(key.title.toLowerCase().includes(searchText.toLowerCase())){
                     
                     return(
-                        <div className="event-card-container" id="canvas">
+                        <div key={key.id} className="event-card-container" id="canvas">
                         <div className="event-card-content-container">
                             <img className="event-card-pic" src={key.event_image} alt="pic not working"/>
                             <Link to={`/event/${key.id}`}><p className="event-card-title">Title: {key.title}</p></Link>
@@ -73,7 +73,7 @@ export class EventCards extends Component{
                     if(key.location.toLowerCase().includes(searchText.toLowerCase())){
                       
                     return(
-                        <div className="event-card-container" id="canvas">
+                        <div key={key.id} className="event-card-container" id="canvas">
                         <div className="event-card-content-container">
                             <img className="event-card-pic" src={key.event_image} alt="pic not working"/>
                             <Link to={`/event/${key.id}`}><p className="event-card-title">Title: {key.title}</p></Link>
@@ -94,7 +94,7 @@ export class EventCards extends Component{
                     if(key.category.toLowerCase().includes(searchText.toLowerCase())){
                       
                     return(
-                        <div className="event-card-container" id="canvas">
+                        <div key={key.id} className="event-card-container" id="canvas">
                         <div className="event-card-content-container">
                             <img className="event-card-pic" src={key.event_image} alt="pic not working"/>
                             <Link to={`/event/${key.id}`}><p className="event-card-title">Title: {key.title}</p></Link>
@@ -114,7 +114,7 @@ export class EventCards extends Component{
             <div>{this.state.events.map(function(key){
                 
                 return(
-                    <div className="event-card-container" id="canvas">
+                    <div key={key.id} className="event-card-container" id="canvas">
                         <div className="event-card-content-container">
                             <img className="event-card-pic" src={key.event_image} alt="pic not working"/>
                             <Link to={`/event/${key.id}`}><p className="event-card-title">Title: {key.title}</p></Link>
