@@ -90,7 +90,6 @@ export default function login(state = initialState, action) {
                     console.log("completed")
                     Object.assign({}, state, { uid: user.uid, email: user.email, authenticated: true })
                 })
-                return state;
             break;
 
         case GET_AUTH_INFO:
@@ -106,7 +105,6 @@ export default function login(state = initialState, action) {
             })
             break;
         default:
-            console.log("break error");
             return state;
     }
 
