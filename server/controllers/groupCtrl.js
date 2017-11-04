@@ -62,10 +62,10 @@ const getGroupMembers = (req, res) => {
 }
 
 const getGroupByUserId = (req, res) => {
-
+    console.log(req.params)
     req.app
         .get('db')
-        .getGroupByUserId([req.body])
+        .getGroupByUserId(req.params.id)
         .then(results => {
             res.status(200).json(results)
         })
