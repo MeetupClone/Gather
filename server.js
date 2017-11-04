@@ -46,7 +46,7 @@ app.get('/api/event/getAttendingEvents/:id', eventCtrl.getAttendingEvents)
 app.get('/api/event/getAttendingEventsData/:id', eventCtrl.getAttendingEventsData)
 app.get('/api/events', eventCtrl.getAllEvents)
 app.get('/api/event/:id', eventCtrl.getEventById)
-app.get('/api/event/userid/:id', eventCtrl.getEventByUserId)
+app.get('/api/event/user/:id', eventCtrl.getEventByUserId)
 
 const groupCtrl = require('./server/controllers/groupCtrl')
 app.get('/api/group/:id', groupCtrl.getGroupById)

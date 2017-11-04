@@ -71,8 +71,6 @@ const getEventById = (req, res) => {
 }
 
 const getEventByUserId = (req, res) => {
-
-    req.app
         .get('db')
         .getEventByUserId([req.params.id])
         .then(results => res.status(200).json(results))
@@ -89,4 +87,5 @@ module.exports = {
     joinEvent,
     getEventByUserId,
     editEvent
+
 }

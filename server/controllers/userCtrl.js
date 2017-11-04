@@ -45,8 +45,8 @@ const getUserPreferences = (req, res) => {
 	.updateUserProfile([uid])
 	.then(result => {
 		res.status(200).json(result)
-		.catch(err => console.log("get user pref endpoint not working", err))
-	})
+		
+	}).catch(err => console.log("get user pref endpoint not working", err))
 }
 
 const getUserCategories = (req, res) => {
@@ -58,8 +58,8 @@ const getUserCategories = (req, res) => {
 	.updateUserCategories([uid])
 	.then(result => {
 		res.status(200).json(result)
-		.catch(err => console.log("get user cat endpoint not working", err))
-	})
+		
+	}).catch(err => console.log("get user cat endpoint not working", err))
 }
 
 
