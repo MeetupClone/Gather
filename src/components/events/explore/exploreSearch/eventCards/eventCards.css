@@ -1,33 +1,45 @@
+
 .event-card-container {
     margin-top: 10px;
     margin-bottom: 10px;
-    height: 200px;
+    height: 100px;
     width: 100%;
 }
 
 .event-card-content-container{
+    display: flex;
+    flex-direction: row;
+    height: 200px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
 .event-card-title {
     font-weight: bold;
+}
+
+.event-card-info {
+    display: flex;
+    flex-direction: column;
     text-align: left;
 }
 
 .event-card-category{
     text-align: left;
+    font-size: 12px;
 }
 
-.event-card-pic{
-    max-height: 150px;
-    max-width: auto;
+.event-card-date{
+    width: 100px;
+    height: 100%;
     float: left;
     margin-right: 10px;
 }
 
 .event-card-loc{
-    text-align: left;
+    font-size: 12px;
+    color: gray;
+    font-weight: bold;
 }
 
 .event-card-desc{

@@ -1,0 +1,21 @@
+.group-card-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 100px;
+    width: 100%;
+}
+
+.group-card-image {
+    max-height: 100px;
+    max-width: auto;
+    min-width: 100px;
+    float: left;
+    padding: 0px 10px;
+}
+
+.group-card-content {
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
