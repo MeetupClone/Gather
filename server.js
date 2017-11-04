@@ -40,7 +40,7 @@ app.get('/api/user/account/getCat/:id', userCtrl.getUserCategories)
 
 app.get('/api/events', eventCtrl.getAllEvents)
 app.get('/api/event/:id', eventCtrl.getEventById)
-
+app.get('/api/event/user/:id', eventCtrl.getEventByUserId)
 
 
 app.get('/api/group/:id', groupCtrl.getGroupById)
