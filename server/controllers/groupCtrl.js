@@ -25,11 +25,22 @@ const createGroup = (req, res) => {
         .then(result => {
             return res.json(result)
         })
-        .catch(err => console.log("not working", err));
+        .catch(err => console.log("create group not working", err));
 }
 
+const getGroupByUserId = (req, res) => {
+
+    req.app
+        .get('db')
+        .getGroupByUserId([req.body])
+        .then(results => {
+            res.status(200).json(results)
+        })
+        .catch(err => console.log("get group by user id not working", err))
+}
 module.exports = {
     getGroupById,
     createGroup,
-    getAllGroups
+    getAllGroups,
+    getGroupByUserId
 }

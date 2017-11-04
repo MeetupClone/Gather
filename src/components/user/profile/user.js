@@ -22,8 +22,10 @@ export default class Login extends Component {
             userLocation: '',
             userDescription: '',
             editable: false,
-            showParams: '',
-            userEvents: ''
+            showParams: 'events',
+            userEvents: [],
+            userAttending: [],
+            userGroups: []
         };
     }
 
@@ -34,7 +36,11 @@ export default class Login extends Component {
                 this.setState({
                     uid: user.uid
                 })
+                console.log(this.state.uid)
                 let userId = this.state.uid
+                axios.get(`/api/event/userid/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
+                axios.get(`/api/event/getAttendingEvents/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
+                axios.get(`/api/group/user/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
                 axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
                     this.setState({
                         userProfilePic: result.data[0].profile_image,
@@ -43,10 +49,11 @@ export default class Login extends Component {
                         userDescription: result.data[0].description
                     })
                 })
+                
             }
+
         })
-
-
+        
     }
 
     render() {

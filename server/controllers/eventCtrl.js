@@ -52,11 +52,21 @@ const getEventById = (req, res) => {
 
 }
 
+const getEventByUserId = (req, res) => {
+
+    req.app
+        .get('db')
+        .getEventByUserId([req.params.id])
+        .then(results => res.status(200).json(results))
+        .catch(err => console.log("get event by user id not working", err))
+}
+
 module.exports = {
     getAllEvents,
     getAttendingEvents,
     leaveEvent,
     getEventById,
     createEvent,
-    joinEvent
+    joinEvent,
+    getEventByUserId
 }
