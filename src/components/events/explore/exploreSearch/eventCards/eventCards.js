@@ -49,13 +49,17 @@ export class EventCards extends Component{
             return new Date(a.event_date) - new Date(b.event_date);
           });
 
+        let now = new Date();
+
         const {searchText, searchFilter} = this.props;
 
         if(searchText !== "" && searchFilter === "Name"){
             
             return(
                 <div>{this.state.events.map(function(key){
-                    if(key.title.toLowerCase().includes(searchText.toLowerCase())){
+                    let eventDate = new Date(key.event_date)
+                    console.log(eventDate)
+                    if((key.title.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                     
                     return(
 
@@ -80,7 +84,8 @@ export class EventCards extends Component{
             
             return(
                 <div>{this.state.events.map(function(key){
-                    if(key.location.toLowerCase().includes(searchText.toLowerCase())){
+                    let eventDate = new Date(key.event_date)
+                    if((key.location.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                       
                     return(
 
@@ -104,7 +109,8 @@ export class EventCards extends Component{
         else if(searchText !== "" && searchFilter === "Category"){
             return(
                 <div>{this.state.events.map(function(key){
-                    if(key.category.toLowerCase().includes(searchText.toLowerCase())){
+                    let eventDate = new Date(key.event_date)
+                    if((key.category.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                       
                     return(
 
@@ -129,7 +135,8 @@ export class EventCards extends Component{
         else{
         return(
             <div>{this.state.events.map(function(key){
-                
+                let eventDate = new Date(key.event_date)
+            if(eventDate > now){
                 return(
                     <div className="event-card-container">
                             <div key={key.id} className="event-card-date nunito-text">
@@ -137,13 +144,13 @@ export class EventCards extends Component{
                             </div>
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
-                                <div><Link to = {`/event/${key.id}`}>{key.title}</Link></div>
+                                <div><Link to = {`/event/${key.id}`} className="event-title-link">{key.title}</Link></div>
                                 <div>{key.category}</div>
                                 <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>
                             </div>
 
-                )
+                )}
             })}</div>
         )
             }
