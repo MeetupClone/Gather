@@ -3,22 +3,33 @@ import React, { Component } from 'react';
 import AuthHome from './authHome/authHome';
 import NotAuthHome from './notAuthHome/notAuthHome';
 
+import { fire as firebase } from "../../fire"
+
 
 export default class Home extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
-            sick: true,
+            uid: ''
         }
+
+        firebase.auth().onAuthStateChanged(user => {
+            this.setState({uid: user.uid})
+        })
 
     }
     render() {
-        //if statement to check firebase auth shit goes here, returns auth home comp if true and non auth comp is false 
+        let homeElement = null
+        if (this.state.uid.length > 0) {
+            homeElement = (<AuthHome/>)
+        } else {
+            homeElement = (<NotAuthHome/>)
+        }
         return (
             <div>
-        		<NotAuthHome/>
-        	</div>
+                {homeElement}
+            </div>
         );
     }
 }

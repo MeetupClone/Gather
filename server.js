@@ -1,21 +1,17 @@
 const express = require('express');
 const massive = require('massive');
 const cors = require('cors');
-const webp = require('webp-converter');
 const { json } = require('body-parser');
 const axios = require('axios');
-const admin  = require('firebase-admin')
+const admin = require('firebase-admin')
 const firebase = require('firebase')
 
 const serviceAccount = require('./server/keys/serviceAccountKey.json')
-const {herokuDb, firebaseUrl} = require('./server/keys/config.js');
+const { herokuDb } = require('./server/keys/config.js');
 
-admin.initializeApp({
-	credential: admin.credential.cert(serviceAccount),
-	databaseURL: firebaseUrl
-})
 
-const port = 3002;
+
+const port = 3001;
 
 const connectionString = herokuDb
 
@@ -31,10 +27,6 @@ app.use(express.static('./public'));
 
 
 const userCtrl = require('./server/controllers/userCtrl')
-const utilCtrl = require('./server/controllers/utilCtrl')
-const eventCtrl = require('./server/controllers/eventCtrl')
-const groupCtrl = require('./server/controllers/groupCtrl')
-
 app.post('/api/user/createUser', userCtrl.createUser)
 app.put('/api/user/registerFCMKey', userCtrl.registerFCMKey)
 app.get('/api/user/getUserInfo/:userId', userCtrl.getUserInfo)
@@ -44,17 +36,29 @@ app.put('/api/user/updatenotifs', userCtrl.updateNotifications)
 app.get('/api/user/account/getPref/:id', userCtrl.getUserPreferences)
 app.get('/api/user/account/getCat/:id', userCtrl.getUserCategories)
 
-app.get('/api/events', eventCtrl.getAllEvents)
+const utilCtrl = require('./server/controllers/utilCtrl')
+app.post('/api/pictures/upload', utilCtrl.uploadPicture)
 
-app.get('/api/groups', eventCtrl.getAllGroups)
-app.get('/api/group/:id', groupCtrl.getGroupById)
+const eventCtrl = require('./server/controllers/eventCtrl')
+app.post('/api/event/create', eventCtrl.createEvent);
+app.post('/api/event/edit', eventCtrl.editEvent);
+app.post('/api/event/join', eventCtrl.joinEvent)
+app.post('/api/event/leave', eventCtrl.leaveEvent)
+app.get('/api/event/getAttendingEvents/:id', eventCtrl.getAttendingEvents)
+app.get('/api/event/getAttendingEventsData/:id', eventCtrl.getAttendingEventsData)
+app.get('/api/events', eventCtrl.getAllEvents)
 app.get('/api/event/:id', eventCtrl.getEventById)
 
-app.post('/api/pictures/upload', utilCtrl.uploadPicture)
+
+const groupCtrl = require('./server/controllers/groupCtrl')
+app.get('/api/group/:id', groupCtrl.getGroupById)
+app.get('/api/groups', groupCtrl.getAllGroups)
+app.get('/api/groups/getUsersGroups/:id', groupCtrl.getUsersGroups)
+app.post('/api/groups/create', groupCtrl.createGroup)
+app.post('/api/group/join', groupCtrl.joinGroup)
+app.post('/api/group/leave', groupCtrl.leaveGroup)
 
 
 app.listen(port, () => {
     console.log(`Listening on ${port}.`)
 })
-
-

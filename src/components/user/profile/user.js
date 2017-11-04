@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import axios from "axios";
+
+import { fire as firebase } from "../../../fire"
 
 import "./profile.css"
 
-import EditableProfile from "./editableProfile/editableProfile";
-
-import { fire as firebase } from "../../fire";
+import EditableProfile from "../editableProfile/editableProfile";
 
 export default class Login extends Component {
     constructor(props) {
@@ -21,27 +22,28 @@ export default class Login extends Component {
             userLocation: '',
             userDescription: '',
             editable: false,
-            showParams: ''
+            showParams: '',
+            userEvents: ''
         };
     }
 
-    componentWillMount() {
 
+    componentWillMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({
                     uid: user.uid
                 })
-            }
-            let userId = this.state.uid
-            axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
-                this.setState({
-                    userName: result.data[0].name,
-                    userProfilePic: result.data[0].profile_image,
-                    userLocation: result.data[0].location,
-                    userDescription: result.data[0].description
+                let userId = this.state.uid
+                axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
+                    this.setState({
+                        userProfilePic: result.data[0].profile_image,
+                        userName: result.data[0].name,
+                        userLocation: result.data[0].location,
+                        userDescription: result.data[0].description
+                    })
                 })
-            })
+            }
         })
 
 
@@ -59,7 +61,7 @@ export default class Login extends Component {
         }
         if (this.state.editable) {
             return (
-            <EditableProfile/>
+                <EditableProfile/>
             )
         } else {
             return (
