@@ -43,6 +43,12 @@ export class EventCards extends Component{
 
     render(){
 
+        this.state.events = this.state.events.sort(function(a,b){
+            // Turn your strings into dates, and then subtract them
+            // to get a value that is either negative, positive, or zero.
+            return new Date(a.event_date) - new Date(b.event_date);
+          });
+
         const {searchText, searchFilter} = this.props;
 
         if(searchText !== "" && searchFilter === "Name"){
@@ -53,15 +59,15 @@ export class EventCards extends Component{
                     
                     return(
 
-                        <div className="event-card-container">
+                        <div key={key.id} className="event-card-container">
                             <div className="event-card-date nunito-text">
-                                {key.date}
+                                {key.event_date}
                             </div>
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
                                 <div><Link to = {`/event/${key.id}`}>{key.title}</Link></div>
                                 <div>{key.category}</div>
-                                <div className="event-card-desc">{key.description}</div>
+                                <div className="event-card-desc"><p>{key.description}</p></div>
                             </div>
                             </div>
                     )
@@ -78,9 +84,9 @@ export class EventCards extends Component{
                       
                     return(
 
-                        <div className="event-card-container">
+                        <div key={key.id} className="event-card-container">
                             <div className="event-card-date nunito-text">
-                                {key.date}
+                                {key.event_date}
                             </div>
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
@@ -102,9 +108,9 @@ export class EventCards extends Component{
                       
                     return(
 
-                        <div className="event-card-container">
+                        <div key={key.id} className="event-card-container">
                             <div className="event-card-date nunito-text">
-                                {key.date}
+                                {key.event_date}
                             </div>
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
@@ -126,14 +132,14 @@ export class EventCards extends Component{
                 
                 return(
                     <div className="event-card-container">
-                            <div className="event-card-date nunito-text">
-                                {key.date}
+                            <div key={key.id} className="event-card-date nunito-text">
+                                {key.event_date}
                             </div>
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
                                 <div><Link to = {`/event/${key.id}`}>{key.title}</Link></div>
                                 <div>{key.category}</div>
-                                <div className="event-card-desc">{key.description}</div>
+                                <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>
                             </div>
 

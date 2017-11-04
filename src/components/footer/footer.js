@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 
-import { fire as firebase } from "../../../fire"
+import { fire as firebase } from "../../fire"
 
-export class Footer extends Component{
+export default class Footer extends Component{
   constructor(props){
       super(props);
 

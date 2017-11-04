@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import './groupCards.css';
+import '../../../../../helpers.css'
 
 import {Link} from 'react-router-dom'
 
@@ -48,7 +49,7 @@ export class GroupCards extends Component{
     }
     
     render(){
-        console.log(this.state.groups)
+        
         const {searchText, searchFilter} = this.props;
                 if(searchText !== "" && searchFilter === "name"){
                     return(
@@ -56,14 +57,22 @@ export class GroupCards extends Component{
                             if(key.name.toLowerCase().includes(searchText.toLowerCase())){
                             
                             return(
-                                <div className="group-card-container" id="canvas">
-                                <div className="group-card-content-container">
-                                <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
-                                    <p className="group-card-name">Name: {key.name}</p>
-                                    <p className="group-card-category">Category: {key.category}</p>
-                                    <p className="group-card-desc">Description: {key.description}</p>
+                                <div className="group-card-container">
+                                <div className="group-card-image">
+                                    <img src={key.group_picture} alt="image"/>
                                 </div>
+                                <div className="group-card-content">
+                                    <div>
+                                        <Link to = {`/groups/${key.id}`}><p className="group-card-name">{key.name}</p></Link>
+                                    </div>
+                                    <div>
+                                        {key.category}
+                                    </div>
+                                    <div>
+                                        {key.number_of_members} Member(s)
+                                    </div>
                                 </div>
+                            </div>
                             )
                         }
                         })}
@@ -77,14 +86,22 @@ export class GroupCards extends Component{
                             if(key.location.toLowerCase().includes(searchText.toLowerCase())){
                                 
                             return(
-                                <div className="group-card-container" id="canvas">
-                                <div className="group-card-content-container">
-                                <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
-                                    <p className="group-card-name">Name: {key.name}</p>
-                                    <p className="group-card-category">Category: {key.category}</p>
-                                    <p className="group-card-desc">Description: {key.description}</p>
+                                <div className="group-card-container">
+                                <div className="group-card-image">
+                                    <img src={key.group_picture} alt="image"/>
                                 </div>
+                                <div className="group-card-content">
+                                    <div>
+                                        <Link to = {`/groups/${key.id}`}><p className="group-card-name">{key.name}</p></Link>
+                                    </div>
+                                    <div>
+                                        {key.category}
+                                    </div>
+                                    <div>
+                                        {key.number_of_members} Member(s)
+                                    </div>
                                 </div>
+                            </div>
                             )
                         }
                         })}
@@ -92,20 +109,28 @@ export class GroupCards extends Component{
                     )
                 }
                 else if(searchText !== "" && searchFilter === "category"){
-                    console.log("category")
+                    
                     return(
                         <div>{this.state.groups.map(function(key){
                             if(key.category.toLowerCase().includes(searchText.toLowerCase())){
                                 
                             return(
-                                <div className="group-card-container" id="canvas">
-                                <div className="group-card-content-container">
-                                    <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
-                                    <p className="group-card-name">Name: {key.name}</p>
-                                    <p className="group-card-category">Category: {key.category}</p>
-                                    <p className="group-card-desc">Description: {key.description}</p>
+                                <div className="group-card-container">
+                                <div className="group-card-image">
+                                    <img src={key.group_picture} alt="image"/>
                                 </div>
+                                <div className="group-card-content">
+                                    <div>
+                                        <Link to = {`/groups/${key.id}`}><p className="group-card-name">{key.name}</p></Link>
+                                    </div>
+                                    <div>
+                                        {key.category}
+                                    </div>
+                                    <div>
+                                        {key.number_of_members} Member(s)
+                                    </div>
                                 </div>
+                            </div>
                             )
                         }
                         })}
@@ -124,13 +149,13 @@ export class GroupCards extends Component{
                                 </div>
                                 <div className="group-card-content">
                                     <div>
-                                        <Link to = {`/groups/${key.id}`}><p className="group-card-name">{key.name}</p></Link>
+                                        <Link to = {`/groups/${key.id}`} className="group-card-name nunito-text"><p >{key.name}</p></Link>
                                     </div>
                                     <div>
                                         {key.category}
                                     </div>
                                     <div>
-                                        # Members
+                                        {key.number_of_members} Member(s)
                                     </div>
                                 </div>
                             </div>
