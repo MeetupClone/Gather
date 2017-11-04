@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './notAuthHome.css';
-import { Footer } from '../../events/footer/footer'
+import Footer  from '../../footer/footer'
 export default class NotAuthHome extends Component {
     constructor(props) {
         super(props)

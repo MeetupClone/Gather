@@ -10,7 +10,7 @@ import './helpers.css';
 import { fire as firebase } from "./fire"
 
 
-
+import Footer from './components/footer/footer'
 
 
 
@@ -48,6 +48,7 @@ class App extends Component {
           </Link>
         </header>
         <div>{routes}</div>
+        <Footer/>
       </div>
         );
     }
