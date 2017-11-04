@@ -8,7 +8,6 @@ import {Link} from 'react-router-dom'
 import axios from 'axios';
 
 import { getAuthInfo } from "../../../ducks/login-redux"
-import { fire as firebase} from "../../../fire"
 
 
 
