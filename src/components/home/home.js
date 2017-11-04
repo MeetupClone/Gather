@@ -3,19 +3,17 @@ import React, { Component } from 'react';
 import AuthHome from './authHome/authHome';
 import NotAuthHome from './notAuthHome/notAuthHome';
 
-import { fire as firebase} from "../../fire"
+import { fire as firebase } from "../../fire"
 
 export default class Home extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
             user: false,
             uid: ""
         }
-
         this.componentWillMount = this.componentWillMount.bind(this)
-
     }
 
     
@@ -38,6 +36,7 @@ export default class Home extends Component {
     }
 
     render() {
+
         if(this.state.user){
             return(
             <AuthHome uid={this.state.uid}/>
@@ -46,6 +45,7 @@ export default class Home extends Component {
         else{
         return (
             <NotAuthHome/>
+
         );
     }
     }

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-
+import React, { Component } from 'react';
+import { fire as firebase } from "../../../fire"
 import './authHome.css'
 import '../../../helpers.css'
 
@@ -72,5 +72,6 @@ export default class AuthHome extends Component{
                 </div>
             </div>
         )
+
     }
 }

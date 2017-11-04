@@ -14,8 +14,17 @@ const joinEvent = (req, res) => {
         })
 }
 
+const editEvent = (req, res) => {
+    req.app
+        .get('db')
+        .editEvent(req.body)
+        .then(result => {
+            console.log("edited")
+            return res.json(result)
+        })
+}
+
 const leaveEvent = (req,res) => {
-    console.log(req.body)
     req.app
         .get('db')
         .leaveEvent(req.body)
@@ -28,6 +37,15 @@ const getAttendingEvents = (req,res) => {
     req.app
         .get('db')
         .getAttendingEvents(req.params.id)
+        .then(result => {
+            return res.json(result)
+        })
+}
+
+const getAttendingEventsData = (req,res) => {
+    req.app
+        .get('db')
+        .getAttendingEventsData(req.params.id)
         .then(result => {
             return res.json(result)
         })
@@ -53,24 +71,21 @@ const getEventById = (req, res) => {
 }
 
 const getEventByUserId = (req, res) => {
-    console.log(req.body)
-    console.log("event ctrl", req.params)
-    const { id } = req.params;
-
-    req.app
         .get('db')
-        .getEventByUserId([id])
+        .getEventByUserId([req.params.id])
         .then(results => res.status(200).json(results))
-        .catch(err => console.log("get event by user id endpoint not working", err))
-
+        .catch(err => console.log("get event by user id not working", err))
 }
 
 module.exports = {
     getAllEvents,
     getAttendingEvents,
+    getAttendingEventsData,
     leaveEvent,
     getEventById,
     createEvent,
     joinEvent,
-    getEventByUserId
+    getEventByUserId,
+    editEvent
+
 }

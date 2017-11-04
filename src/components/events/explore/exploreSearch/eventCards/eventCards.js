@@ -52,6 +52,7 @@ export class EventCards extends Component{
                     if(key.title.toLowerCase().includes(searchText.toLowerCase())){
                     
                     return(
+
                         <div className="event-card-container">
                             <div className="event-card-date nunito-text">
                                 {key.date}
@@ -76,6 +77,7 @@ export class EventCards extends Component{
                     if(key.location.toLowerCase().includes(searchText.toLowerCase())){
                       
                     return(
+
                         <div className="event-card-container">
                             <div className="event-card-date nunito-text">
                                 {key.date}
@@ -99,6 +101,7 @@ export class EventCards extends Component{
                     if(key.category.toLowerCase().includes(searchText.toLowerCase())){
                       
                     return(
+
                         <div className="event-card-container">
                             <div className="event-card-date nunito-text">
                                 {key.date}
@@ -110,6 +113,7 @@ export class EventCards extends Component{
                                 <div className="event-card-desc">{key.description}</div>
                             </div>
                             </div>
+
                     )
                 }
                 })}
@@ -132,6 +136,7 @@ export class EventCards extends Component{
                                 <div className="event-card-desc">{key.description}</div>
                             </div>
                             </div>
+
                 )
             })}</div>
         )

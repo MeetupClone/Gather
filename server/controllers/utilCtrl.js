@@ -17,9 +17,7 @@ const uploadPicture = (req,res) => {
 	}
 }
 
-
-
-
 module.exports = {
 	uploadPicture
 }
+
