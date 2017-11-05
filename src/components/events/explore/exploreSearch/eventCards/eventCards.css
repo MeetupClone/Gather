@@ -45,3 +45,8 @@
 .event-card-desc{
     text-align: left;
 }
+
+.event-title-link {
+    color: black;
+    text-decoration: none;
+}

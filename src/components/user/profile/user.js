@@ -8,8 +8,6 @@ import { fire as firebase } from "../../../fire"
 
 import "./profile.css"
 
-import ImageEngine from "./imageEngine"
-
 import EditableProfile from "../editableProfile/editableProfile";
 
 export default class Login extends Component {
@@ -30,12 +28,11 @@ export default class Login extends Component {
             userGroups: []
         };
     }
-
+// this.setState({userGroups: results.data})
 
 
 
     componentWillMount() {
-
         let userId = localStorage.getItem('uid')
         // firebase.auth().onAuthStateChanged(user => {
         if (userId) {
@@ -51,6 +48,8 @@ export default class Login extends Component {
                     userName: result.data[0].name,
                     userLocation: result.data[0].location,
                     userDescription: result.data[0].description
+                    uid: userId
+                })
                 })
             })
 
@@ -61,11 +60,34 @@ export default class Login extends Component {
 
         let $userGroupsEvents = null;
         if (this.state.showParams === "events") {
-            $userGroupsEvents = (<h1>Events</h1>)
+            $userGroupsEvents = this.state.userEvents.map(key => {
+                return(
+                    <div>
+                   <Link to = {`/event/${key.id}`}>{key.title}</Link>
+                    {key.event_date}
+                    {key.location}    
+                    </div>
+                )
+            })
         } else if (this.state.showParams === "attending") {
-            $userGroupsEvents = (<h1>Attending Events</h1>)
+            $userGroupsEvents = this.state.userAttending.map(key => {
+                return(
+                    <div>
+                    <Link to = {`/event/${key.id}`}>{key.title}</Link>
+                    {key.event_date}
+                    {key.location}    
+                    </div>
+                )
+            })
         } else if (this.state.showParams === "groups") {
-            $userGroupsEvents = (<h1>Groups</h1>)
+            $userGroupsEvents = this.state.userGroups.map(key => {
+                return(
+                    <div>
+                    <Link to = {`/groups/${key.id}`}>{key.name}</Link>
+                    {key.website}    
+                    </div>
+                )
+            })
         }
         if (this.state.editable) {
             return (
@@ -75,7 +97,6 @@ export default class Login extends Component {
             return (
                 <div>
                 <Link to="/user/edit" onClick={() => this.setState({editable: true})} > Edit Profile</Link>
-                <ImageEngine ImgSrc={this.state.userProfilePic} />
                 <img className="user-profile-pic" src={this.state.userProfilePic} alt={this.state.userName}/>
                 <h1> {this.state.userName} </h1>
                 <h3> {this.state.userLocation} </h3>
@@ -92,8 +113,6 @@ export default class Login extends Component {
                 </div>
 
                 {$userGroupsEvents}
-
-
                 </div>
             )
         }
