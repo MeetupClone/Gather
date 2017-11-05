@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import axios from 'axios';
 
 import './groupCards.css';
 import '../../../../../helpers.css'
 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 
-export class GroupCards extends Component{
-    constructor(props){
+export class GroupCards extends Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -25,41 +25,41 @@ export class GroupCards extends Component{
 
     }
 
-    componentWillReceiveProps(props){
-        this.setState({searchFilter: props.searchFilter, searchText: props.searchText})
-        
+    componentWillReceiveProps(props) {
+        this.setState({ searchFilter: props.searchFilter, searchText: props.searchText })
+
     }
 
-    componentWillMount(){
-        axios.get('/api/groups').then(result => 
-            this.setState({groups: result.data}))   
+    componentWillMount() {
+        axios.get('/api/groups').then(result =>
+            this.setState({ groups: result.data }))
 
         // axios.get('/api/groups/members/:id').then(result =>{
         //     console.log('group members', result)
         // })
-            
-        };
 
-    shouldComponentUpdate(newProps, newState){
-        
+    };
+
+    shouldComponentUpdate(newProps, newState) {
+
         const updatePropsText = this.props.searchText !== newProps.searchText;
         const updatePropsFilter = this.props.searchFilter !== newProps.searchFilter;
-        
+
         return !updatePropsText || !updatePropsFilter;
     }
-    
-    render(){
-        
-        const {searchText, searchFilter} = this.props;
-                if(searchText !== "" && searchFilter === "name"){
-                    return(
-                        <div>{this.state.groups.map(function(key){
+
+    render() {
+
+        const { searchText, searchFilter } = this.props;
+        if (searchText !== "" && searchFilter === "name") {
+            return (
+                <div>{this.state.groups.map(function(key){
                             if(key.name.toLowerCase().includes(searchText.toLowerCase())){
                             
                             return(
                                 <div className="group-card-container">
                                 <div className="group-card-image">
-                                    <img src={key.group_picture} alt="image"/>
+                                    <img src={key.group_picture} alt={key.name}/>
                                 </div>
                                 <div className="group-card-content">
                                     <div>
@@ -77,18 +77,17 @@ export class GroupCards extends Component{
                         }
                         })}
                         </div>
-                    )
-                }
-                else if(searchText !== "" && searchFilter === "location"){
-                    
-                    return(
-                        <div>{this.state.groups.map(function(key){
+            )
+        } else if (searchText !== "" && searchFilter === "location") {
+
+            return (
+                <div>{this.state.groups.map(function(key){
                             if(key.location.toLowerCase().includes(searchText.toLowerCase())){
                                 
                             return(
-                                <div className="group-card-container">
+                                <div key={key.id} className="group-card-container">
                                 <div className="group-card-image">
-                                    <img src={key.group_picture} alt="image"/>
+                                    <img src={key.group_picture} alt={key.name}/>
                                 </div>
                                 <div className="group-card-content">
                                     <div>
@@ -106,18 +105,16 @@ export class GroupCards extends Component{
                         }
                         })}
                         </div>
-                    )
-                }
-                else if(searchText !== "" && searchFilter === "category"){
-                    
-                    return(
-                        <div>{this.state.groups.map(function(key){
+            )
+        } else if (searchText !== "" && searchFilter === "category") {
+
+            return (
+                <div>{this.state.groups.map(function(key){
                             if(key.category.toLowerCase().includes(searchText.toLowerCase())){
-                                
                             return(
                                 <div className="group-card-container">
                                 <div className="group-card-image">
-                                    <img src={key.group_picture} alt="image"/>
+                                    <img src={key.group_picture} alt={key.name}/>
                                 </div>
                                 <div className="group-card-content">
                                     <div>
@@ -135,17 +132,16 @@ export class GroupCards extends Component{
                         }
                         })}
                         </div>
-                    )
-                }
-                else{
+            )
+        } else {
 
-                return(
-                    <div>{this.state.groups.map(function(key){
+            return (
+                <div>{this.state.groups.map(function(key){
                         
                         return(
                             <div className="group-card-container">
                                 <div className="group-card-image">
-                                    <img src={key.group_picture} alt="image"/>
+                                    <img src={key.group_picture} alt={key.name}/>
                                 </div>
                                 <div className="group-card-content">
                                     <div>
@@ -161,7 +157,7 @@ export class GroupCards extends Component{
                             </div>
                         )
                     })}</div>
-                )
-                    }
-}
+            )
+        }
+    }
 }

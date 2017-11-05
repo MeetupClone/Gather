@@ -7,8 +7,6 @@ import axios from 'axios';
 import {Notifications} from './notifications/notifications';
 import {Preferences} from './preferences/preferences';
 import {EditInfo} from './editInfo/editInfo';
-
-import { getAuthInfo } from "../../../ducks/login-redux"
 import { fire as firebase} from "../../../fire"
 
 
@@ -71,7 +69,7 @@ export default class Account extends Component{
                     <Notifications/>
                     </div>
                 </div>
-            )
+                )
             case 2:
             return(
                 <div className="account-main-container">
@@ -104,8 +102,10 @@ export default class Account extends Component{
                     </div>
                 </div>
             )
-           
+            default: 
+            break;
         }
+
         
 
     }

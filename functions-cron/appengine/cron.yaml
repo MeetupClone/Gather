@@ -1,0 +1,9 @@
+cron:
+- description: Send Event Push Notifications
+  url: /publish/event-push-messages
+  schedule: every 15 minutes from 00:00 to 23:45
+- 
+  description: Send Event Text Messages
+  url: /publish/event-text-messages
+  schedule: every 15 minutes
+

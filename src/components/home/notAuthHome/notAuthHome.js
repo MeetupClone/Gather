@@ -3,13 +3,6 @@ import React, { Component } from 'react';
 import './notAuthHome.css';
 import Footer  from '../../footer/footer'
 export default class NotAuthHome extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            exhausted: true,
-        }
-    }
     render(){
         return(
             <div className="home">

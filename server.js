@@ -9,7 +9,10 @@ const firebase = require('firebase')
 const serviceAccount = require('./server/keys/serviceAccountKey.json')
 const { herokuDb } = require('./server/keys/config.js');
 
-
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://<DATABASE_NAME>.firebaseio.com"
+});
 
 const port = 3002;
 
@@ -17,12 +20,14 @@ const connectionString = herokuDb
 
 massive(connectionString).then(db => {
     app.set('db', db)
+}).catch(error => {
+	console.log(error)
 })
 
 const app = express();
 
 app.use(json());
-
+app.use(cors())
 app.use(express.static('./public'));
 
 

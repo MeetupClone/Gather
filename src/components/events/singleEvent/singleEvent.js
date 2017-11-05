@@ -23,34 +23,9 @@ export class SingleEvent extends Component {
             userAttendingEvents: [],
             joined: false
         }
-
-        
-        this.componentWillMount = this.componentWillMount.bind(this);
     }
 
     componentWillMount() {
-
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.setState({ currentUserUid: user.uid })
-            }
-        })
-
-        let eventsArr = []
-        axios.get(`/api/event/getAttendingEventsData/${this.state.currentUserUid}`).then(result => {
-            result.data.map(event => {
-                eventsArr.push(event.event_id)
-            })
-            this.setState({ userAttendingEvents: eventsArr })
-            console.log(eventsArr, this.state.eventId)
-            console.log(this.state.userAttendingEvents.includes(this.state.eventId))
-            if (this.state.userAttendingEvents.includes(this.state.eventId)) {
-                console.log('its it')
-                this.setState({ joined: false })
-            } else {
-                this.setState({joined: true})
-            }
-        })
 
         axios.get(`/api/event/${this.state.eventId}`).then(response => {
             this.setState({
@@ -61,6 +36,26 @@ export class SingleEvent extends Component {
                 eventDate: response.data[0].date,
                 organizerUid: response.data[0].organizer_uid
             })
+        })
+
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({ currentUserUid: user.uid })
+                let eventsArr = []
+                axios.get(`/api/event/getAttendingEventsData/${this.state.currentUserUid}`).then(result => {
+                    result.data.map(event => {
+                        eventsArr.push(event.event_id)
+                    })
+                    this.setState({ userAttendingEvents: eventsArr })
+                    if (this.state.userAttendingEvents.includes(this.state.eventId)) {
+                        this.setState({ joined: true })
+                    } else {
+                        this.setState({ joined: false })
+                    }
+                })
+
+
+            } 
         })
     }
 
@@ -73,7 +68,7 @@ export class SingleEvent extends Component {
             joinButton = (<h1> You are going to this event! </h1>)
             leaveButton = (<button onClick={(event) => {
                 leaveEvent(this.state)
-                that.setState({joined: true})
+                that.setState({joined: false})
             }}> Leave Event </button>)
         } else {
             joinButton = (<button onClick={(event) => {
