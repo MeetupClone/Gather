@@ -7,7 +7,9 @@ import {Link} from 'react-router-dom'
 
 import axios from 'axios';
 
-import { getAuthInfo } from "../../../ducks/login-redux"
+import EventsYouMayLike from './eventsYouMayLike/eventsYouMayLike';
+
+import { getAuthInfo } from "../../../ducks/login-redux";
 
 
 
@@ -55,6 +57,7 @@ export default class AuthHome extends Component{
         return(
             <div>
                 <div>
+                <h3>Your Events</h3>
                     {this.state.userEvents.map(key => {
                         return(
                             <div  className="auth-event-card-info nunito-text">
@@ -67,7 +70,7 @@ export default class AuthHome extends Component{
                     })}
                 </div>
                 <div>
-                    Events You May Like Component
+                    <EventsYouMayLike/>
                 </div>
             </div>
         )
