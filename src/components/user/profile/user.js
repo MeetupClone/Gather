@@ -47,9 +47,8 @@ export default class Login extends Component {
                     userProfilePic: result.data[0].profile_image,
                     userName: result.data[0].name,
                     userLocation: result.data[0].location,
-                    userDescription: result.data[0].description
+                    userDescription: result.data[0].description,
                     uid: userId
-                })
                 })
             })
 

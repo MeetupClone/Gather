@@ -44,6 +44,15 @@ const leaveEvent = (req, res) => {
         })
 }
 
+const deleteEvent = (req, res) => {
+    req.app
+    .get('db')
+    .deleteEvent(req.body)
+    .then(result => {
+        return res.json(result)
+    })
+}
+
 const getAttendingEvents = (req, res) => {
     req.app
         .get('db')
@@ -94,6 +103,7 @@ module.exports = {
     getAttendingEvents,
     getAttendingEventsData,
     leaveEvent,
+    deleteEvent,
     getEventById,
     createEvent,
     joinEvent,
