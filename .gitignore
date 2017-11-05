@@ -8,7 +8,7 @@
 
 # production
 /build
-/server/keys/config
+**config.js
 
 # misc
 .DS_Store

@@ -3,16 +3,16 @@ import { fire as firebase } from "../../../fire"
 import './authHome.css'
 import '../../../helpers.css'
 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import axios from 'axios';
 
-import { getAuthInfo } from "../../../ducks/login-redux"
+import "../../../components/events/explore/exploreSearch/eventCards/eventCards.css"
 
 
 
-export default class AuthHome extends Component{
-    constructor(props){
+export default class AuthHome extends Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -21,43 +21,40 @@ export default class AuthHome extends Component{
             recEvents: [],
         }
 
-         
-            
-       
+
+
+
         this.componentWillMount = this.componentWillMount.bind(this)
-    
+
     }
 
-   
 
-    componentWillMount(){
+
+    componentWillMount() {
 
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                console.log("user")
                 this.setState({
                     uid: user.uid
                 })
-                axios.get(`/api/event/user/${this.state.uid}`).then(result => this.setState({userEvents: result.data}))
+                axios.get(`/api/event/user/${this.state.uid}`).then(result => this.setState({ userEvents: result.data }))
             }
-            else{
-                console.log("no user")
-                }})
+        })
 
-        
+
     }
 
 
-    render(){
+    render() {
 
-        
-        
-        return(
+
+
+        return (
             <div>
                 <div>
                     {this.state.userEvents.map(key => {
                         return(
-                            <div  className="auth-event-card-info nunito-text">
+                            <div key={key.id} className="auth-event-card-info nunito-text">
                                 <div className="auth-event-card-loc">{key.location.toUpperCase()}</div>
                                 <div>{key.data}</div>
                                 <div><Link to = {`/event/${key.id}`} className="auth-link">{key.title}</Link></div>

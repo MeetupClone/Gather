@@ -8,6 +8,8 @@ import { fire as firebase } from "../../../fire"
 
 import "./profile.css"
 
+import ImageEngine from "./imageEngine"
+
 import EditableProfile from "../editableProfile/editableProfile";
 
 export default class Login extends Component {
@@ -30,30 +32,29 @@ export default class Login extends Component {
     }
 
 
-    componentWillMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.setState({
-                    uid: user.uid
-                })
-                console.log(this.state.uid)
-                let userId = this.state.uid
-                axios.get(`/api/event/userid/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
-                axios.get(`/api/event/getAttendingEvents/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
-                axios.get(`/api/group/user/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
-                axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
-                    this.setState({
-                        userProfilePic: result.data[0].profile_image,
-                        userName: result.data[0].name,
-                        userLocation: result.data[0].location,
-                        userDescription: result.data[0].description
-                    })
-                })
-                
-            }
 
-        })
-        
+
+    componentWillMount() {
+
+        let userId = localStorage.getItem('uid')
+        // firebase.auth().onAuthStateChanged(user => {
+        if (userId) {
+            this.setState({
+                uid: userId
+            })
+            axios.get(`/api/event/user/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
+            axios.get(`/api/event/getAttendingEvents/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
+            axios.get(`/api/group/user/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
+            axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
+                this.setState({
+                    userProfilePic: result.data[0].profile_image,
+                    userName: result.data[0].name,
+                    userLocation: result.data[0].location,
+                    userDescription: result.data[0].description
+                })
+            })
+
+        }
     }
 
     render() {
@@ -74,6 +75,7 @@ export default class Login extends Component {
             return (
                 <div>
                 <Link to="/user/edit" onClick={() => this.setState({editable: true})} > Edit Profile</Link>
+                <ImageEngine ImgSrc={this.state.userProfilePic} />
                 <img className="user-profile-pic" src={this.state.userProfilePic} alt={this.state.userName}/>
                 <h1> {this.state.userName} </h1>
                 <h3> {this.state.userLocation} </h3>

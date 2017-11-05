@@ -5,16 +5,8 @@ import routes from "../../routes";
 import './navbar.css';
 import './../../helpers.css'
 
-import { fire as firebase } from "../../fire"
-
 
 export default class Navbar extends Component {
-
-    constructor() {
-        super();
-    }
-
-
     render() {
         return (
             <div className="App">

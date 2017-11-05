@@ -131,8 +131,8 @@ export class EventCards extends Component{
             <div>{this.state.events.map(function(key){
                 
                 return(
-                    <div className="event-card-container">
-                            <div key={key.id} className="event-card-date nunito-text">
+                    <div key={key.id} className="event-card-container">
+                            <div className="event-card-date nunito-text">
                                 {key.event_date}
                             </div>
                             <div  className="event-card-info nunito-text">

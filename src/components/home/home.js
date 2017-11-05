@@ -13,40 +13,38 @@ export default class Home extends Component {
             user: false,
             uid: ""
         }
-        this.componentWillMount = this.componentWillMount.bind(this)
     }
 
-    
 
-    componentWillMount(){
-        
+
+    componentWillMount() {
+
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({
                     user: true,
                     uid: user.uid
                 })
-            }
-            else{
+            } else {
                 this.setState({
                     user: false,
                 })
-            }})
+            }
+        })
 
     }
 
     render() {
 
-        if(this.state.user){
-            return(
-            <AuthHome uid={this.state.uid}/>
+        if (this.state.user) {
+            return (
+                <AuthHome uid={this.state.uid}/>
             )
-        } 
-        else{
-        return (
-            <NotAuthHome/>
+        } else {
+            return (
+                <NotAuthHome/>
 
-        );
-    }
+            );
+        }
     }
 }
