@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { fire as firebase } from "../../../fire"
 
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import axios from 'axios';
 
@@ -11,6 +11,7 @@ import Datetime from "react-datetime"
 import { connect } from 'react-redux';
 
 import moment from "moment"
+
 
 import '../../../datePicker.css'
 
@@ -27,6 +28,7 @@ export class EditEvent extends Component {
             imagePreviewUrl: '',
             eventName: "",
             eventDate: "",
+            cronTime: "",
             eventLocation: "",
             eventDescription: "",
             eventPic: "",
@@ -70,7 +72,6 @@ export class EditEvent extends Component {
                 eventDate: response.data[0].date,
                 eventDescription: response.data[0].description,
                 eventPic: response.data[0].event_image,
-                eventDate: response.data[0].date,
                 organizerUid: response.data[0].organizer_uid
             })
         })
@@ -82,6 +83,7 @@ export class EditEvent extends Component {
         let deleteConfirm = null
         if (this.state.organizerUid !== this.state.currentUserUid) {
             notAuthenticated = (<h1> Get out!!!! </h1>)
+            deleteConfirm = (<button> Delete Event </button>)
         }
 
         return (
@@ -100,9 +102,10 @@ export class EditEvent extends Component {
                
                 Date
                 <Datetime defaultValue={this.state.eventDate} onChange={(event) => {
-                    this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm")})}}/>
+                    this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm"), cronTime: moment(event).format()})}}/>
                 <textarea type="text" id="noter-text-area" name="editableDescription" value={this.state.eventDescription} onChange={this.handleChange}></textarea>
                 <button onClick={() => {return editEvent(this.state)}}> Save Event </button>
+                {deleteConfirm}
             </div>
         )
 

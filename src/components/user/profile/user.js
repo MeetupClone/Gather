@@ -30,33 +30,30 @@ export default class Login extends Component {
     }
 // this.setState({userGroups: results.data})
 
+
+
     componentWillMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
+        let userId = localStorage.getItem('uid')
+        // firebase.auth().onAuthStateChanged(user => {
+        if (userId) {
+            this.setState({
+                uid: userId
+            })
+            axios.get(`/api/event/user/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
+            axios.get(`/api/event/getAttendingEvents/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
+            axios.get(`/api/group/user/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
+            axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
                 this.setState({
-                    uid: user.uid
+                    userProfilePic: result.data[0].profile_image,
+                    userName: result.data[0].name,
+                    userLocation: result.data[0].location,
+                    userDescription: result.data[0].description
+                    uid: userId
                 })
-                console.log(this.state.uid)
-                let userId = this.state.uid
-                axios.get(`/api/event/user/${userId}`).then(results => this.setState({userEvents: results.data})).catch(err => console.log(err))
-                
-                axios.get(`/api/event/getAttendingEventsData/${userId}`).then(results => this.setState({userAttending: results.data})).catch(err => console.log(err))
-                
-                axios.get(`/api/group/user/${userId}`).then(results => this.setState({userGroups: results.data})).catch(err => console.log(err))
-
-                axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
-                    this.setState({
-                        userProfilePic: result.data[0].profile_image,
-                        userName: result.data[0].name,
-                        userLocation: result.data[0].location,
-                        userDescription: result.data[0].description
-                    })
                 })
-                
-            }
+            })
 
-        })
-        
+        }
     }
 
     render() {
@@ -116,8 +113,6 @@ export default class Login extends Component {
                 </div>
 
                 {$userGroupsEvents}
-
-
                 </div>
             )
         }

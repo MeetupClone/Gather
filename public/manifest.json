@@ -1,16 +1,33 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "192x192",
-      "type": "image/png"
+  "short_name": "toGather",
+  "name": "toGather",
+  "description": "The best episode of King of the Hill is when Boomhauer teaches Bobby how to pick up chicks",
+  "icons": [  
+    {  
+      "src": "/images/logo-192.png",  
+      "sizes": "192x192",  
+      "type": "image/png"  
+    },  
+    {  
+      "src": "/images/logo-256.png",  
+      "sizes": "256x256",  
+      "type": "image/png"  
+    },  
+    {  
+      "src": "/images/logo-384.png",  
+      "sizes": "384x384",  
+      "type": "image/png"  
+    },  
+    {  
+      "src": "/images/logo-512.png",  
+      "sizes": "512x512",  
+      "type": "image/png"  
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "/?utm_source=homescreen",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "gcm_sender_id" : "103953800507"
+  "theme_color": "#1F9812",
+  "background_color": "#35b629",
+  "gcm_sender_id" : "103953800507",
+  "gcm_user_visible_only": true
 }
