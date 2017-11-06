@@ -76,7 +76,6 @@ export class EditEvent extends Component {
     }
 
     render() {
-        let timeConstraints = { minutes: { min: 0, max: 59, step: 15 } }
         var yesterday = Datetime.moment().subtract(1, 'day');
         var valid = function(current) {
             return current.isAfter(yesterday);
@@ -139,7 +138,7 @@ export class EditEvent extends Component {
 
 }
 
-const mapStateToProps = (state) => { return {} }
+const mapStateToProps = (state) => { return state }
 
 const actions = {
     editEvent,

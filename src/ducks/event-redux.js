@@ -72,7 +72,7 @@ export default function EventReducer(state = initialState, action) {
             const uploadTask = storageRef.child('eventPictures/' + file.name).put(file);
             uploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
                 action.payload.eventPic = uploadTask.snapshot.downloadURL;
-                axios.post('/api/event/create', action.payload)
+                axios.post('/api/event/create', action.payload).then(result => {})
             })
             return Object.assign({}, state, action.payload)
         case JOIN_EVENT:

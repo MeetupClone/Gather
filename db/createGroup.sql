@@ -1,2 +1,2 @@
-
-INSERT INTO groups (name, category, description, website, twitter, facebook, instagram, group_owner_uid) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;
+WITH rows AS (INSERT INTO groups (name, category, description, website, twitter, facebook, instagram, group_owner_uid, group_picture) VALUES (${name}, ${category}, ${description}, ${website}, ${twitter}, ${facebook}, ${instagram}, ${uid}, ${groupPic}) RETURNING id, group_owner_uid) 
+INSERT INTO groups_members (group_id, user_id) SELECT id, group_owner_uid FROM rows;

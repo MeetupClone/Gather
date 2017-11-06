@@ -1,7 +1,5 @@
 const getGroupById = (req, res) => {
-
     const { id } = req.params;
-
     req.app
         .get('db')
         .getGroupById([id]).then(response => {
@@ -14,6 +12,7 @@ const getAllGroups = (req, res) => {
         .get('db')
         .getAllGroups()
         .then(result => {
+            console.log(result)
             return res.json(result)
         })
 }
@@ -28,13 +27,12 @@ const getUsersGroups = (req, res) => {
 }
 
 const leaveGroup = (req, res) => {
-    console.log(req.body)
     req.app
-       .get('db')
-       .leaveGroup(req.body)
-       .then(result => {
-           return res.json(result)
-       })
+        .get('db')
+        .leaveGroup(req.body)
+        .then(result => {
+            return res.json(result)
+        })
 }
 
 const joinGroup = (req, res) => {
@@ -46,23 +44,43 @@ const joinGroup = (req, res) => {
         })
 }
 
-const createGroup = (req, res) => {
-    const { name, category, description, website, twitter, facebook, instagram, uid } = req.body
+const editGroup = (req, res) => {
     req.app
         .get('db')
-        .createGroup([name, category, description, website, twitter, facebook, instagram, uid])
+        .editGroup(req.body)
         .then(result => {
             return res.json(result)
         })
-        .catch(err => console.log("create group not working", err));
+}
+
+const deleteGroup = (req, res) => {
+    req.app
+        .get('db')
+        .deleteGroup(req.body)
+        .then(result => {
+            return res.json(result)
+        })
+}
+
+const createGroup = (req, res) => {
+    console.log("1")
+    console.log(req.body.uid)
+    for (var i = 0; i <= 0; i++) {
+        req.app
+            .get('db')
+            .createGroup(req.body)
+            .then(result => {
+                return res.json(result)
+            })
+            .catch(err => console.log("create group not working", err));
+    }
 }
 
 const getGroupMembers = (req, res) => {
-    const { ID, GROUPID} = req.body
+    const { ID, GROUPID } = req.body
 }
 
 const getGroupByUserId = (req, res) => {
-    console.log(req.params)
     req.app
         .get('db')
         .getGroupByUserId(req.params.id)
@@ -77,6 +95,8 @@ module.exports = {
     leaveGroup,
     getUsersGroups,
     createGroup,
+    editGroup,
+    deleteGroup,
     getAllGroups,
     getGroupByUserId
 }

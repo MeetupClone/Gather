@@ -61,6 +61,8 @@ app.post('/api/groups/create', groupCtrl.createGroup)
 app.get('/api/group/user/:id', groupCtrl.getGroupByUserId)
 app.post('/api/group/join', groupCtrl.joinGroup)
 app.post('/api/group/leave', groupCtrl.leaveGroup)
+app.post('/api/group/edit', groupCtrl.editGroup)
+app.post('/api/group/delete', groupCtrl.deleteGroup)
 
 
 app.listen(port, () => {

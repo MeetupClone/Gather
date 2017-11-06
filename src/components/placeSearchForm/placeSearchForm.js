@@ -9,7 +9,6 @@ class PlaceSearchForm extends React.Component {
         this.state = { address: '',
         placeId: '' }
         this.onChange = (address) => this.setState({ address })
-        let state = this.state
         this.updateParent = (state) => this.props.updateParent(state)
     }
 
