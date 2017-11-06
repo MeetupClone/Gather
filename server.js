@@ -9,20 +9,24 @@ const firebase = require('firebase')
 const serviceAccount = require('./server/keys/serviceAccountKey.json')
 const { herokuDb } = require('./server/keys/config.js');
 
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://<DATABASE_NAME>.firebaseio.com"
+});
 
-
-const port = 3001;
+const port = 3002;
 
 const connectionString = herokuDb
 
 massive(connectionString).then(db => {
     app.set('db', db)
+}).catch(error => {
+	console.log(error)
 })
 
 const app = express();
 
 app.use(json());
-
 app.use(express.static('./public'));
 
 
@@ -44,19 +48,24 @@ app.post('/api/event/create', eventCtrl.createEvent);
 app.post('/api/event/edit', eventCtrl.editEvent);
 app.post('/api/event/join', eventCtrl.joinEvent)
 app.post('/api/event/leave', eventCtrl.leaveEvent)
+app.post('/api/event/delete', eventCtrl.deleteEvent)
 app.get('/api/event/getAttendingEvents/:id', eventCtrl.getAttendingEvents)
 app.get('/api/event/getAttendingEventsData/:id', eventCtrl.getAttendingEventsData)
 app.get('/api/events', eventCtrl.getAllEvents)
 app.get('/api/event/:id', eventCtrl.getEventById)
-
+app.get('/api/event/user/:id', eventCtrl.getEventByUserId)
+app.get('/api/relevant/event/:id', eventCtrl.getRelevantEvents)
 
 const groupCtrl = require('./server/controllers/groupCtrl')
 app.get('/api/group/:id', groupCtrl.getGroupById)
 app.get('/api/groups', groupCtrl.getAllGroups)
 app.get('/api/groups/getUsersGroups/:id', groupCtrl.getUsersGroups)
 app.post('/api/groups/create', groupCtrl.createGroup)
+app.get('/api/group/user/:id', groupCtrl.getGroupByUserId)
 app.post('/api/group/join', groupCtrl.joinGroup)
 app.post('/api/group/leave', groupCtrl.leaveGroup)
+app.post('/api/group/edit', groupCtrl.editGroup)
+app.post('/api/group/delete', groupCtrl.deleteGroup)
 
 
 app.listen(port, () => {

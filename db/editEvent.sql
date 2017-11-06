@@ -1,1 +1,1 @@
-UPDATE events SET description = ${eventDescription}, title = ${eventName}, event_date = ${eventDate}, event_image = ${eventPic} WHERE id = ${id};
+UPDATE events SET description = ${eventDescription}, title = ${eventName}, event_date = ${eventDate}, event_image = ${eventPic}, cron_time=${cronTime}, location=${eventLocation}, place_id = ${placeId} WHERE id = ${id};

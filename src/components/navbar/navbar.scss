@@ -1,0 +1,29 @@
+.App-header {
+    background-color: #0F4C5C;
+    overflow: hidden;
+}
+
+.nav-header {
+	background-color: #00C853;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    padding: 4px 6px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.nav-header a{
+	text-decoration: none;
+	color: white;
+}
+
+.nav-header a:visited {
+	text-decoration: none;
+	color: white;
+}
+
+.nav-text {
+	font-size: 20px;
+}

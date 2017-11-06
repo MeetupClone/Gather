@@ -8,6 +8,9 @@ import { joinGroup, leaveGroup } from "../../../ducks/group-redux"
 
 import { fire as firebase } from "../../../fire"
 
+
+import GroupDashboard from "../groupDashboard/groupDashboard";
+
 export class GroupPage extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +19,7 @@ export class GroupPage extends Component {
             groupId: this.props.match.params.id,
             groupName: "",
             groupOrganizerUid: '',
+            groupPic: '',
             category: "",
             groupLocation: "",
             groupDesc: "",
@@ -25,7 +29,8 @@ export class GroupPage extends Component {
             website: "",
             userJoinedGroups: [],
             currentUserUid: '',
-            joined: false
+            joined: false,
+            edit: false
 
         }
 
@@ -49,17 +54,41 @@ export class GroupPage extends Component {
 
     componentWillMount() {
 
-        axios.get(`/api/group/${this.state.id}`).then(result => {
-            this.setState({ groupName: result.data[0].name, category: result.data[0].category, groupDesc: result.data[0].description, groupFB: result.data[0].facebook, groupTwitter: result.data[0].twitter })
+        axios.get(`/api/group/${this.props.match.params.id}`).then(result => {
+            this.setState({ groupName: result.data[0].name, 
+                category: result.data[0].category, 
+                groupDesc: result.data[0].description, 
+                groupPic: result.data[0].group_picture,
+                groupFB: result.data[0].facebook, 
+                groupOrganizerUid: result.data[0].group_owner_uid,
+                groupTwitter: result.data[0].twitter })
         })
     }
 
     render() {
+        console.log(this.state)
         let that = this;
         const { joinGroup, leaveGroup } = this.props
         let joinButton = null
         let leaveButton = null
-        if (!this.state.joined) {
+
+        if (this.state.currentUserUid === this.state.groupOrganizerUid)
+            {
+            joinButton = (
+                <div>
+                    <h1> This is your group! </h1>
+                    <button onClick={() => {this.setState({edit:true})}}> Click here to go to your group dashboard </button>
+                </div>
+                )
+        }
+
+        if (this.state.edit) {
+            console.log("yo")
+            return (<GroupDashboard props={this.state}/>)
+        }
+
+
+        if (!this.state.joined && this.state.currentUserUid !== this.state.groupOrganizerUid) {
             joinButton = (<button onClick={(event) => {
                 joinGroup(this.state);
                 that.setState({joined: true})

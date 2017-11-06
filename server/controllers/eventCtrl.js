@@ -1,3 +1,5 @@
+const axios = require('axios')
+
 const createEvent = (req, res) => {
     req.app
         .get('db')
@@ -9,8 +11,17 @@ const joinEvent = (req, res) => {
     req.app
         .get('db')
         .joinEvent(req.body)
-        .then(result => { 
-            return res.json(result) 
+        .then(result => {
+            let postUrl = 'https://iid.googleapis.com/iid/v1/' + result[0].fcm_key + '/rel/topics/' + result[0].event_id
+            axios({
+                method: 'post',
+                url: 'https://iid.googleapis.com/iid/v1/' + result[0].fcm_key + '/rel/topics/' + result[0].event_id,
+                headers: {
+                    "Content-Type": "applicaton/json",
+                    "Authorization": "key=AAAApU-NWw8:APA91bE3mN38UNc4kp2pFkJqNwBQ-C1RUxWHfRgdvTr8SN4L6NlOHRu74mIGrQWNdcI8MJopMmdmwC_PPNthcRxzbcJxKVd1yZu81qlIvILN6487N7EnFgP4ZUrkrkRLHtFLRtRL22JX"
+                }
+            })
+            return res.json(result)
         })
 }
 
@@ -24,7 +35,7 @@ const editEvent = (req, res) => {
         })
 }
 
-const leaveEvent = (req,res) => {
+const leaveEvent = (req, res) => {
     req.app
         .get('db')
         .leaveEvent(req.body)
@@ -33,7 +44,16 @@ const leaveEvent = (req,res) => {
         })
 }
 
-const getAttendingEvents = (req,res) => {
+const deleteEvent = (req, res) => {
+    req.app
+    .get('db')
+    .deleteEvent(req.body)
+    .then(result => {
+        return res.json(result)
+    })
+}
+
+const getAttendingEvents = (req, res) => {
     req.app
         .get('db')
         .getAttendingEvents(req.params.id)
@@ -42,7 +62,7 @@ const getAttendingEvents = (req,res) => {
         })
 }
 
-const getAttendingEventsData = (req,res) => {
+const getAttendingEventsData = (req, res) => {
     req.app
         .get('db')
         .getAttendingEventsData(req.params.id)
@@ -70,13 +90,33 @@ const getEventById = (req, res) => {
 
 }
 
+const getEventByUserId = (req, res) => {
+    req.app
+        .get('db')
+        .getEventByUserId([req.params.id])
+        .then(results => res.status(200).json(results))
+        .catch(err => console.log("get event by user id not working", err))
+}
+
+const getRelevantEvents = (req, res) => {
+    req.app
+        .get('db')
+        .getRelevantEvents(req.params.id)
+        .then(results => res.status(200).json(results))
+        .catch(err => console.log("get relevant events not working", err))
+}
+
 module.exports = {
     getAllEvents,
     getAttendingEvents,
     getAttendingEventsData,
     leaveEvent,
+    deleteEvent,
     getEventById,
     createEvent,
+    joinEvent,
+    getEventByUserId,
     editEvent,
-    joinEvent
+    getRelevantEvents
+
 }

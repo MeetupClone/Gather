@@ -7,8 +7,6 @@ import axios from 'axios';
 import {Notifications} from './notifications/notifications';
 import {Preferences} from './preferences/preferences';
 import {EditInfo} from './editInfo/editInfo';
-
-import { getAuthInfo } from "../../../ducks/login-redux"
 import { fire as firebase} from "../../../fire"
 
 
@@ -51,7 +49,16 @@ export default class Account extends Component{
             }
         })
 
-
+    // make a database call for user information and then pass it to kids
+    componentWillMount(){
+        console.log(this.state.uid)
+        axios.get(`/api/user/account/getPref/${this.state.uid}`)
+        .then(result => console.log("getPref", result))
+        .catch(err => console.log("getPref error", err))
+        
+        axios.get(`/api/user/account/getCat/${this.state.uid}`)
+        .then(result => console.log("getCat", result))
+        .catch(err => console.log("getCat", err))
     }
 
     render(){
@@ -72,7 +79,7 @@ export default class Account extends Component{
                     <Notifications notifications={this.state.notifications} uid={this.state.uid}/>
                     </div>
                 </div>
-            )
+                )
             case 2:
             return(
                 <div className="account-main-container">
@@ -105,8 +112,10 @@ export default class Account extends Component{
                     </div>
                 </div>
             )
-           
+            default: 
+            break;
         }
+
         
 
     }

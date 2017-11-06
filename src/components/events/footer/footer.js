@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 
+import './footer.css'
+
 export class Footer extends Component{
   constructor(props){
       super(props);
@@ -10,9 +12,11 @@ export class Footer extends Component{
 render(){
   return(
     <div>
-      <h4>Create</h4>
-      <h5><span>Home </span><span> About </span><span> Settings</span></h5>
-      <h6> This is for educational purposes</h6>
+      <button className="footer-create-button">Create</button>
+      <div className="footer-background">
+      <h5 className="footer-links"><span className="footer-home">Home </span><span className="footer-home"> About </span><span className="footer-home"> Settings</span></h5>
+      <h6 className="footer-milk-steak"> Milk Steak LLC</h6>
+    </div>
     </div>
   )
 }
