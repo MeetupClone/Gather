@@ -45,10 +45,6 @@ export class EventCards extends Component{
 
     render(){
 
-        if(!this.state.events.length){
-            console.log("nope")
-        }
-
         this.state.events = this.state.events.sort(function(a,b){
             // Turn your strings into dates, and then subtract them
             // to get a value that is either negative, positive, or zero.
