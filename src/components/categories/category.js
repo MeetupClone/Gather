@@ -39,7 +39,7 @@ this.handleChange = this.handleChange.bind(this)
             </label>
           </div>
 
-          
+
             <div className="radio">
               <label>
                 <input type="radio" value="beliefs" onClick={(event) => this.handleChange(event)} checked={true}/>
