@@ -5,6 +5,7 @@ import { fire as firebase } from "../../../fire"
 import './createEvents.css';
 import { createEvent } from "../../../ducks/event-redux"
 import PlaceSearchForm from "../../placeSearchForm/placeSearchForm";
+import Category from "../../categories/category"
 
 import Datetime from "react-datetime"
 import moment from "moment"
@@ -87,24 +88,26 @@ export class CreateEvents extends Component {
             <div>
               {confirmModalElement}
               <h1 className="createTitle"> Create Event </h1>
-                <br/><input type="text"  placeholder="Name" onChange={e=>this.handleChange(e.target.value, "eventName")}  ref={(input)=>{
-                this.eventName = input}}/>
-                <br/>
+              <br/><input type="text"  placeholder="Name" onChange={e=>this.handleChange(e.target.value, "eventName")}  ref={(input)=>{
+              this.eventName = input}}/>
+              <br/>
 
-                <br/><input  type="text"  placeholder="Description"   onChange={e=>this.handleChange(e.target.value, "description")}  ref={(input)=>{
-                this.description = input}}/>
-                <br/>
-                <br/>
-                <PlaceSearchForm palceholder="Address" updateParent={(location) => {
-                    this.setState({location: location.address, placeId: location.placeId})
-                }}/>
-                <br/>
-                <br/>
-                <Datetime isValidDate={ valid } inputProps={inputProps} timeConstraints={timeConstraints} onChange={(event) => {
-                    this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm"), cronTime: moment.utc(event).subtract(3, 'hours').format()})
-                }}/>
-                <input  type="text" placeholder="Category" onChange={e=>this.handleChange(e.target.value, "category")}  ref={(input)=>{
-                this.category=input}}/>
+              <br/><input  type="text"  placeholder="Description"   onChange={e=>this.handleChange(e.target.value, "description")}  ref={(input)=>{
+              this.description = input}}/>
+              <br/>
+              <br/>
+              <PlaceSearchForm palceholder="Address" updateParent={(location) => {
+                this.setState({location: location.address, placeId: location.placeId})
+              }}/>
+              <br/>
+              <br/>
+              <Datetime isValidDate={ valid } inputProps={inputProps} timeConstraints={timeConstraints} onChange={(event) => {
+                this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm"), cronTime: moment.utc(event).subtract(3, 'hours').format()})
+              }}/>
+              <input  type="text" placeholder="Category" onChange={e=>this.handleChange(e.target.value, "category")}  ref={(input)=>{
+              this.category=input}}/>
+              <Category/>
+
                 <br/>
                 <br/><input  type="text" placeholder="Website" onChange={e=>this.handleChange(e.target.value, "website")}  ref={(input)=>{
                 this.website=input}}/>
@@ -113,7 +116,7 @@ export class CreateEvents extends Component {
                 <img src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
                 <form>
                  <input
-                    type="file" 
+                    type="file"
                     onChange={(event)=>this.imageProcess(event)} />
                     <br/>
                 </form>
