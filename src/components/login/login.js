@@ -56,6 +56,7 @@ export class Login extends Component {
                             loginWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
                             <input name="email" type="email" ref={(input)=> {this.emailInput = input}} placeholder="Email"/>
                             <input name="password" type="password" ref={(input)=> {this.passwordInput = input}} placeholder="Password"/>
+                            <button className="forgot-password-button">Forgot Password</button>
                             <button className="login-button box-shadow" onClick={(event)=> {
                                 event.preventDefault()
 
@@ -65,9 +66,7 @@ export class Login extends Component {
                             </Link>
                         </form>
                         <div id="providers-auth" className="center">
-                            <button className="auth-button google box-shadow" onClick={()=> {authWithGoogle() }}><img className="auth-icon" src={require( "./assets/google.svg")} alt="Google" />Sign In With Google </button>
                             <button className="auth-button facebook box-shadow" onClick={()=> {authWithFacebook() }}><img className="auth-icon" src={require( "./assets/facebook.svg")} alt="facebook" /> Sign In With Facebook </button>
-                            <button className="auth-button twitter box-shadow" onClick={()=> {authWithTwitter()}}><img className="auth-icon" src={require( "./assets/twitter.svg")} alt="twitter" />Sign In With Twitter</button>
 
                             <br/>
 
@@ -86,8 +85,6 @@ const mapStateToProps = (state) => {
 const actions = {
     loginWithEmailPassword,
     authWithFacebook,
-    authWithTwitter,
-    authWithGoogle
 }
 
 export default connect(mapStateToProps, actions)(Login);
