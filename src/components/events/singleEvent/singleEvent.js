@@ -42,7 +42,7 @@ export class SingleEvent extends Component {
             if (user) {
                 this.setState({ currentUserUid: user.uid })
                 let eventsArr = []
-                axios.get(`/api/event/getAttendingEventsData/${this.state.currentUserUid}`).then(result => {
+                return axios.get(`/api/event/getAttendingEventsData/${this.state.currentUserUid}`).then(result => {
                     result.data.map(event => {
                         eventsArr.push(event.event_id)
                     })

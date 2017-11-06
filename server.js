@@ -27,7 +27,6 @@ massive(connectionString).then(db => {
 const app = express();
 
 app.use(json());
-app.use(cors())
 app.use(express.static('./public'));
 
 
@@ -47,6 +46,7 @@ app.post('/api/event/create', eventCtrl.createEvent);
 app.post('/api/event/edit', eventCtrl.editEvent);
 app.post('/api/event/join', eventCtrl.joinEvent)
 app.post('/api/event/leave', eventCtrl.leaveEvent)
+app.post('/api/event/delete', eventCtrl.deleteEvent)
 app.get('/api/event/getAttendingEvents/:id', eventCtrl.getAttendingEvents)
 app.get('/api/event/getAttendingEventsData/:id', eventCtrl.getAttendingEventsData)
 app.get('/api/events', eventCtrl.getAllEvents)
@@ -62,6 +62,8 @@ app.post('/api/groups/create', groupCtrl.createGroup)
 app.get('/api/group/user/:id', groupCtrl.getGroupByUserId)
 app.post('/api/group/join', groupCtrl.joinGroup)
 app.post('/api/group/leave', groupCtrl.leaveGroup)
+app.post('/api/group/edit', groupCtrl.editGroup)
+app.post('/api/group/delete', groupCtrl.deleteGroup)
 
 
 app.listen(port, () => {

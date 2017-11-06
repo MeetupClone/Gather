@@ -5,10 +5,6 @@ import './helpers.css';
 
 import { fire as firebase } from "./fire"
 
-import moment from "moment";
-
-
-
 // import Footer from './components/footer/footer'
 import Navbar from "./components/navbar/navbar"
 

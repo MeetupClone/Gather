@@ -28,7 +28,9 @@ export class EventCards extends Component{
 
     componentWillMount(){
         axios.get('/api/events').then(result => 
-            this.setState({events: result.data}))   
+            this.setState({events: result.data}))  
+
+            
         };
 
     shouldComponentUpdate(newProps, newState){
@@ -56,7 +58,7 @@ export class EventCards extends Component{
         if(searchText !== "" && searchFilter === "Name"){
             
             return(
-                <div>{this.state.events.map(function(key){
+                <div>{this.state.events.forEach(function(key){
                     let eventDate = new Date(key.event_date)
                     console.log(eventDate)
                     if((key.title.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){

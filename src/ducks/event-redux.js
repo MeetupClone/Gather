@@ -66,16 +66,15 @@ export function deleteEvent(componentState) {
 export default function EventReducer(state = initialState, action) {
     switch (action.type) {
         case CREATE_EVENT:
+            console.log(action.payload)
             let file = action.payload.file
             const storageRef = firebase.storage().ref();
-            const uploadTask = storageRef.child('profilePictures/' + file.name).put(file);
+            const uploadTask = storageRef.child('eventPictures/' + file.name).put(file);
             uploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
                 action.payload.eventPic = uploadTask.snapshot.downloadURL;
-                axios.post('/api/event/create', action.payload)
-                action.payload.created = true;
-                return Object.assign({}, state, action.payload)
+                axios.post('/api/event/create', action.payload).then(result => {})
             })
-            return state;
+            return Object.assign({}, state, action.payload)
         case JOIN_EVENT:
             return axios.post('/api/event/join', action.payload).then(result => {
                 console.log(result.data[0].fcm_key, result.data[0].id)
@@ -89,21 +88,25 @@ export default function EventReducer(state = initialState, action) {
                 return Object.assign({}, state, action.payload)
             })
         case EDIT_EVENT:
-            if(action.payload.file){
-            let eventFile = action.payload.file
-            const eventStorageRef = firebase.storage().ref();
-            const eventUploadTask = eventStorageRef.child('eventPictures/' + eventFile.name).put(eventFile);
             console.log(action.payload)
-            return eventUploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
-                action.payload.eventPic = eventUploadTask.snapshot.downloadURL;
+            if (action.payload.file) {
+                let eventFile = action.payload.file
+                const eventStorageRef = firebase.storage().ref();
+                const eventUploadTask = eventStorageRef.child('eventPictures/' + eventFile.name).put(eventFile);
+                console.log(action.payload)
+                return eventUploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
+                    action.payload.eventPic = eventUploadTask.snapshot.downloadURL;
+                    axios.post('/api/event/edit', action.payload)
+                    return Object.assign({}, state, action.payload)
+                })
+            } else {
                 axios.post('/api/event/edit', action.payload)
                 return Object.assign({}, state, action.payload)
-            })} else { axios.post('/api/event/edit', action.payload)
-        return Object.assign({}, state, action.payload)}
-        case DELETE_EVENT:
-            {
-                return state;
             }
+        case DELETE_EVENT:
+        console.log(action.payload)
+                axios.post('/api/event/delete', action.payload)
+                return Object.assign({}, state, action.payload)
 
         default:
             return state;

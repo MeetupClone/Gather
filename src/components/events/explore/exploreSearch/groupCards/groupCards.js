@@ -31,8 +31,11 @@ export class GroupCards extends Component {
     }
 
     componentWillMount() {
-        axios.get('/api/groups').then(result =>
-            this.setState({ groups: result.data }))
+        axios.get('/api/groups').then(result => {
+            console.log(result.data)
+            this.setState({ groups: result.data })
+            console.log(this.state)
+        })
 
         // axios.get('/api/groups/members/:id').then(result =>{
         //     console.log('group members', result)
@@ -54,10 +57,11 @@ export class GroupCards extends Component {
         if (searchText !== "" && searchFilter === "name") {
             return (
                 <div>{this.state.groups.map(function(key){
+                    console.log(key)
                             if(key.name.toLowerCase().includes(searchText.toLowerCase())){
                             
                             return(
-                                <div className="group-card-container">
+                                <div key={key.id} className="group-card-container">
                                 <div className="group-card-image">
                                     <img src={key.group_picture} alt={key.name}/>
                                 </div>
@@ -112,7 +116,7 @@ export class GroupCards extends Component {
                 <div>{this.state.groups.map(function(key){
                             if(key.category.toLowerCase().includes(searchText.toLowerCase())){
                             return(
-                                <div className="group-card-container">
+                                <div key={key.id} className="group-card-container">
                                 <div className="group-card-image">
                                     <img src={key.group_picture} alt={key.name}/>
                                 </div>
@@ -139,7 +143,7 @@ export class GroupCards extends Component {
                 <div>{this.state.groups.map(function(key){
                         
                         return(
-                            <div className="group-card-container">
+                            <div key={key.id} className="group-card-container">
                                 <div className="group-card-image">
                                     <img src={key.group_picture} alt={key.name}/>
                                 </div>
