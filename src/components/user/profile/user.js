@@ -28,7 +28,7 @@ export default class Login extends Component {
             userGroups: []
         };
     }
-// this.setState({userGroups: results.data})
+    // this.setState({userGroups: results.data})
 
 
 
@@ -60,7 +60,7 @@ export default class Login extends Component {
         let $userGroupsEvents = null;
         if (this.state.showParams === "events") {
             $userGroupsEvents = this.state.userEvents.map(key => {
-                return(
+                return (
                     <div>
                    <Link to = {`/event/${key.id}`}>{key.title}</Link>
                     {key.event_date}
@@ -70,7 +70,7 @@ export default class Login extends Component {
             })
         } else if (this.state.showParams === "attending") {
             $userGroupsEvents = this.state.userAttending.map(key => {
-                return(
+                return (
                     <div>
                     <Link to = {`/event/${key.id}`}>{key.title}</Link>
                     {key.event_date}
@@ -80,7 +80,7 @@ export default class Login extends Component {
             })
         } else if (this.state.showParams === "groups") {
             $userGroupsEvents = this.state.userGroups.map(key => {
-                return(
+                return (
                     <div>
                     <Link to = {`/groups/${key.id}`}>{key.name}</Link>
                     {key.website}    
@@ -95,7 +95,7 @@ export default class Login extends Component {
         } else {
             return (
                 <div>
-                <Link to="/user/edit" onClick={() => this.setState({editable: true})} > Edit Profile</Link>
+                
                 <img className="user-profile-pic" src={this.state.userProfilePic} alt={this.state.userName}/>
                 <h1> {this.state.userName} </h1>
                 <h3> {this.state.userLocation} </h3>
@@ -112,6 +112,9 @@ export default class Login extends Component {
                 </div>
 
                 {$userGroupsEvents}
+                <div className="center">
+                    <button className="fixed-bottom" onClick={() => this.setState({editable: true})} > Edit Profile</button>
+                    </div>
                 </div>
             )
         }
