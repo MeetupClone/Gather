@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import './eventCards.css';
+import '../../../../../helpers.css'
 
 import {Link} from 'react-router-dom';
 
@@ -27,7 +28,9 @@ export class EventCards extends Component{
 
     componentWillMount(){
         axios.get('/api/events').then(result => 
-            this.setState({events: result.data}))   
+            this.setState({events: result.data}))  
+
+            
         };
 
     shouldComponentUpdate(newProps, newState){
@@ -41,25 +44,38 @@ export class EventCards extends Component{
 
 
     render(){
-        
+
+        this.state.events = this.state.events.sort(function(a,b){
+            // Turn your strings into dates, and then subtract them
+            // to get a value that is either negative, positive, or zero.
+            return new Date(a.event_date) - new Date(b.event_date);
+          });
+
+        let now = new Date();
+
         const {searchText, searchFilter} = this.props;
 
         if(searchText !== "" && searchFilter === "Name"){
             
             return(
-                <div>{this.state.events.map(function(key){
-                    if(key.title.toLowerCase().includes(searchText.toLowerCase())){
+                <div>{this.state.events.forEach(function(key){
+                    let eventDate = new Date(key.event_date)
+                    console.log(eventDate)
+                    if((key.title.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                     
                     return(
-                        <div key={key.id} className="event-card-container" id="canvas">
-                        <div className="event-card-content-container">
-                            <img className="event-card-pic" src={key.event_image} alt="pic not working"/>
-                            <Link to={`/event/${key.id}`}><p className="event-card-title">Title: {key.title}</p></Link>
-                            <p className="event-card-category">Category: {key.category}</p>
-                            <p className="event-card-loc">Location: {key.location}</p>
-                            <p className="event-card-desc">Description: {key.description}</p>
-                        </div>
-                        </div>
+
+                        <div key={key.id} className="event-card-container">
+                            <div className="event-card-date nunito-text">
+                                {key.event_date}
+                            </div>
+                            <div  className="event-card-info nunito-text">
+                                <div className="event-card-loc">{key.location.toUpperCase()}</div>
+                                <div><Link to = {`/event/${key.id}`}>{key.title}</Link></div>
+                                <div>{key.category}</div>
+                                <div className="event-card-desc"><p>{key.description}</p></div>
+                            </div>
+                            </div>
                     )
                 }
                 })}
@@ -70,18 +86,22 @@ export class EventCards extends Component{
             
             return(
                 <div>{this.state.events.map(function(key){
-                    if(key.location.toLowerCase().includes(searchText.toLowerCase())){
+                    let eventDate = new Date(key.event_date)
+                    if((key.location.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                       
                     return(
-                        <div key={key.id} className="event-card-container" id="canvas">
-                        <div className="event-card-content-container">
-                            <img className="event-card-pic" src={key.event_image} alt="pic not working"/>
-                            <Link to={`/event/${key.id}`}><p className="event-card-title">Title: {key.title}</p></Link>
-                            <p className="event-card-category">Category: {key.category}</p>
-                            <p className="event-card-loc">Location: {key.location}</p>
-                            <p className="event-card-desc">Description: {key.description}</p>
-                        </div>
-                        </div>
+
+                        <div key={key.id} className="event-card-container">
+                            <div className="event-card-date nunito-text">
+                                {key.event_date}
+                            </div>
+                            <div  className="event-card-info nunito-text">
+                                <div className="event-card-loc">{key.location.toUpperCase()}</div>
+                                <div><Link to = {`/event/${key.id}`}>{key.title}</Link></div>
+                                <div>{key.category}</div>
+                                <div className="event-card-desc">{key.description}</div>
+                            </div>
+                            </div>
                     )
                 }
                 })}
@@ -91,18 +111,23 @@ export class EventCards extends Component{
         else if(searchText !== "" && searchFilter === "Category"){
             return(
                 <div>{this.state.events.map(function(key){
-                    if(key.category.toLowerCase().includes(searchText.toLowerCase())){
+                    let eventDate = new Date(key.event_date)
+                    if((key.category.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                       
                     return(
-                        <div key={key.id} className="event-card-container" id="canvas">
-                        <div className="event-card-content-container">
-                            <img className="event-card-pic" src={key.event_image} alt="pic not working"/>
-                            <Link to={`/event/${key.id}`}><p className="event-card-title">Title: {key.title}</p></Link>
-                            <p className="event-card-category">Category: {key.category}</p>
-                            <p className="event-card-loc">Location: {key.location}</p>
-                            <p className="event-card-desc">Description: {key.description}</p>
-                        </div>
-                        </div>
+
+                        <div key={key.id} className="event-card-container">
+                            <div className="event-card-date nunito-text">
+                                {key.event_date}
+                            </div>
+                            <div  className="event-card-info nunito-text">
+                                <div className="event-card-loc">{key.location.toUpperCase()}</div>
+                                <div><Link to = {`/event/${key.id}`}>{key.title}</Link></div>
+                                <div>{key.category}</div>
+                                <div className="event-card-desc">{key.description}</div>
+                            </div>
+                            </div>
+
                     )
                 }
                 })}
@@ -112,18 +137,22 @@ export class EventCards extends Component{
         else{
         return(
             <div>{this.state.events.map(function(key){
-                
+                let eventDate = new Date(key.event_date)
+            if(eventDate > now){
                 return(
-                    <div key={key.id} className="event-card-container" id="canvas">
-                        <div className="event-card-content-container">
-                            <img className="event-card-pic" src={key.event_image} alt="pic not working"/>
-                            <Link to={`/event/${key.id}`}><p className="event-card-title">Title: {key.title}</p></Link>
-                            <p className="event-card-category">Category: {key.category}</p>
-                            <p className="event-card-loc">Location: {key.location}</p>
-                            <p className="event-card-desc">Description: {key.description}</p>
-                        </div>
-                        </div>
-                )
+                    <div key={key.id} className="event-card-container">
+                            <div className="event-card-date nunito-text">
+                                {key.event_date}
+                            </div>
+                            <div  className="event-card-info nunito-text">
+                                <div className="event-card-loc">{key.location.toUpperCase()}</div>
+                                <div><Link to = {`/event/${key.id}`} className="event-title-link">{key.title}</Link></div>
+                                <div>{key.category}</div>
+                                <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
+                            </div>
+                            </div>
+
+                )}
             })}</div>
         )
             }

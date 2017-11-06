@@ -1,0 +1,35 @@
+.group-card-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 120px;
+    width: 100%;
+}
+
+.group-card-image {
+    max-height: 100px;
+    max-width: auto;
+    min-width: 100px;
+    float: left;
+    padding: 0px 10px;
+}
+
+.group-card-content {
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.group-card-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+.event-limit-desc {
+    height: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

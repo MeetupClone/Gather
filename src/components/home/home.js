@@ -5,31 +5,46 @@ import NotAuthHome from './notAuthHome/notAuthHome';
 
 import { fire as firebase } from "../../fire"
 
-
 export default class Home extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            uid: ''
+            user: false,
+            uid: ""
         }
+    }
+
+
+
+    componentWillMount() {
 
         firebase.auth().onAuthStateChanged(user => {
-            this.setState({uid: user.uid})
+            if (user) {
+                this.setState({
+                    user: true,
+                    uid: user.uid
+                })
+            } else {
+                this.setState({
+                    user: false,
+                })
+            }
         })
 
     }
+
     render() {
-        let homeElement = null
-        if (this.state.uid.length > 0) {
-            homeElement = (<AuthHome/>)
+
+        if (this.state.user) {
+            return (
+                <AuthHome uid={this.state.uid}/>
+            )
         } else {
-            homeElement = (<NotAuthHome/>)
+            return (
+                <NotAuthHome/>
+
+            );
         }
-        return (
-            <div>
-                {homeElement}
-            </div>
-        );
     }
 }

@@ -8,7 +8,7 @@ const config = {
     projectId: "gatherv0-b3651",
     storageBucket: "gatherv0-b3651.appspot.com",
     messagingSenderId: "710004267791"
-  };
+};
 
 firebase.initializeApp(config);
 

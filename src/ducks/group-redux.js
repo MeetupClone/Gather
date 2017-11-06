@@ -14,12 +14,6 @@ const initialState = {
     currentUserUid: ''
 }
 
-firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-        initialState.currentUserUid = user.uid
-    }
-})
-
 const CREATE_GROUP = 'CREATE_GROUP';
 const JOIN_GROUP = 'JOIN_GROUP';
 const LEAVE_GROUP = 'LEAVE_GROUP';
@@ -66,12 +60,33 @@ export function deleteGroup(componentState) {
 export default function GroupReducer(state = initialState, action) {
     switch (action.type) {
         case CREATE_GROUP:
-            return axios.post('/api/groups/create', action.payload).then(result => {
-                action.payload.created = true;
-                return Object.assign({}, state, action.payload)
-            })
+            console.log(action.payload)
+            if (action.payload.file) {
+                let file = action.payload.file
+                const storageRef = firebase.storage().ref();
+                const uploadTask = storageRef.child('eventPictures/' + file.name).put(file);
+                return uploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
+                    action.payload.groupPic = uploadTask.snapshot.downloadURL;
+                    axios.post('/api/groups/create', action.payload).then(result => { return Object.assign({}, state, action.payload) })
+                })
+            } else {
+                return axios.post('/api/groups/create', action.payload).then(result => {
+                    console.log(result)
+                    action.payload.created = true;
+                    return Object.assign({}, state, action.payload)
+                })
+            }
         case JOIN_GROUP:
             return axios.post('/api/group/join', action.payload).then(result => {
+                return Object.assign({}, state, action.payload)
+            })
+        case EDIT_GROUP:
+            return axios.post('/api/group/edit', action.payload).then(
+                result => {
+                    return Object.assign({}, state, action.payload)
+                })
+        case DELETE_GROUP:
+            return axios.post('/api/group/delete', action.payload).then(result => {
                 return Object.assign({}, state, action.payload)
             })
         case LEAVE_GROUP:
