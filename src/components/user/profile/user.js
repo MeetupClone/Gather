@@ -22,42 +22,71 @@ export default class Login extends Component {
             userLocation: '',
             userDescription: '',
             editable: false,
-            showParams: '',
-            userEvents: ''
+            showParams: 'events',
+            userEvents: [],
+            userAttending: [],
+            userGroups: []
         };
     }
+// this.setState({userGroups: results.data})
+
 
 
     componentWillMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
+        let userId = localStorage.getItem('uid')
+        // firebase.auth().onAuthStateChanged(user => {
+        if (userId) {
+            this.setState({
+                uid: userId
+            })
+            axios.get(`/api/event/user/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
+            axios.get(`/api/event/getAttendingEvents/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
+            axios.get(`/api/group/user/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
+            axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
                 this.setState({
-                    uid: user.uid
+                    userProfilePic: result.data[0].profile_image,
+                    userName: result.data[0].name,
+                    userLocation: result.data[0].location,
+                    userDescription: result.data[0].description,
+                    uid: userId
                 })
-                let userId = this.state.uid
-                axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
-                    this.setState({
-                        userProfilePic: result.data[0].profile_image,
-                        userName: result.data[0].name,
-                        userLocation: result.data[0].location,
-                        userDescription: result.data[0].description
-                    })
-                })
-            }
-        })
+            })
 
-
+        }
     }
 
     render() {
 
         let $userGroupsEvents = null;
         if (this.state.showParams === "events") {
-            $userGroupsEvents = (<h1>Events</h1>)
+            $userGroupsEvents = this.state.userEvents.map(key => {
+                return(
+                    <div>
+                   <Link to = {`/event/${key.id}`}>{key.title}</Link>
+                    {key.event_date}
+                    {key.location}    
+                    </div>
+                )
+            })
         } else if (this.state.showParams === "attending") {
-            $userGroupsEvents = (<h1>Attending Events</h1>)
+            $userGroupsEvents = this.state.userAttending.map(key => {
+                return(
+                    <div>
+                    <Link to = {`/event/${key.id}`}>{key.title}</Link>
+                    {key.event_date}
+                    {key.location}    
+                    </div>
+                )
+            })
         } else if (this.state.showParams === "groups") {
-            $userGroupsEvents = (<h1>Groups</h1>)
+            $userGroupsEvents = this.state.userGroups.map(key => {
+                return(
+                    <div>
+                    <Link to = {`/groups/${key.id}`}>{key.name}</Link>
+                    {key.website}    
+                    </div>
+                )
+            })
         }
         if (this.state.editable) {
             return (
@@ -83,8 +112,6 @@ export default class Login extends Component {
                 </div>
 
                 {$userGroupsEvents}
-
-
                 </div>
             )
         }

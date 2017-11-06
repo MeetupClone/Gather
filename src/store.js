@@ -1,10 +1,11 @@
-import { createStore, combineReducers } from 'redux'; 
+import { createStore, combineReducers } from 'redux';
+import { devToolsEnhancer } from 'redux-devtools-extension';
 
 import AuthenticationReducer from './ducks/authentication-redux'
-import CreateEventReducer from './ducks/create-event'
-import CreateGroupReducer from './ducks/create-group-redux'
-import eventReducer from './ducks/event-redux'
+import EventReducer from './ducks/event-redux'
+import GroupReducer from './ducks/group-redux'
 
-let store = createStore(combineReducers({AuthenticationReducer, CreateEventReducer, CreateGroupReducer, eventReducer}));
-
+let store = createStore(combineReducers({ AuthenticationReducer, EventReducer, GroupReducer }),
+    devToolsEnhancer()
+);
 export default store;

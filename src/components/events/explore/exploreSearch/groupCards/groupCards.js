@@ -1,15 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import axios from 'axios';
 
 import './groupCards.css';
+import '../../../../../helpers.css'
 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 
-export class GroupCards extends Component{
-    constructor(props){
+export class GroupCards extends Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -24,107 +25,143 @@ export class GroupCards extends Component{
 
     }
 
-    componentWillReceiveProps(props){
-        this.setState({searchFilter: props.searchFilter, searchText: props.searchText})
-        
+    componentWillReceiveProps(props) {
+        this.setState({ searchFilter: props.searchFilter, searchText: props.searchText })
+
     }
 
-    componentWillMount(){
-        axios.get('/api/groups').then(result => 
-            this.setState({groups: result.data}))   
-            
-        };
+    componentWillMount() {
+        axios.get('/api/groups').then(result => {
+            console.log(result.data)
+            this.setState({ groups: result.data })
+            console.log(this.state)
+        })
 
-    shouldComponentUpdate(newProps, newState){
-        
+        // axios.get('/api/groups/members/:id').then(result =>{
+        //     console.log('group members', result)
+        // })
+
+    };
+
+    shouldComponentUpdate(newProps, newState) {
+
         const updatePropsText = this.props.searchText !== newProps.searchText;
         const updatePropsFilter = this.props.searchFilter !== newProps.searchFilter;
-        
+
         return !updatePropsText || !updatePropsFilter;
     }
-    
-    render(){
-        const {searchText, searchFilter} = this.props;
-                if(searchText !== "" && searchFilter === "name"){
-                    
-                    return(
-                        <div>{this.state.groups.map(function(key){
+
+    render() {
+
+        const { searchText, searchFilter } = this.props;
+        if (searchText !== "" && searchFilter === "name") {
+            return (
+                <div>{this.state.groups.map(function(key){
+                    console.log(key)
                             if(key.name.toLowerCase().includes(searchText.toLowerCase())){
                             
                             return(
-                                <div className="group-card-container" id="canvas">
-                                <div className="group-card-content-container">
-                                <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
-                                    <p className="group-card-name">Name: {key.name}</p>
-                                    <p className="group-card-category">Category: {key.category}</p>
-                                    <p className="group-card-desc">Description: {key.description}</p>
+                                <div key={key.id} className="group-card-container">
+                                <div className="group-card-image">
+                                    <img src={key.group_picture} alt={key.name}/>
                                 </div>
+                                <div className="group-card-content">
+                                    <div>
+                                        <Link to = {`/groups/${key.id}`}><p className="group-card-name">{key.name}</p></Link>
+                                    </div>
+                                    <div>
+                                        {key.category}
+                                    </div>
+                                    <div>
+                                        {key.number_of_members} Member(s)
+                                    </div>
                                 </div>
+                            </div>
                             )
                         }
                         })}
                         </div>
-                    )
-                }
-                else if(searchText !== "" && searchFilter === "location"){
-                    
-                    return(
-                        <div>{this.state.groups.map(function(key){
+            )
+        } else if (searchText !== "" && searchFilter === "location") {
+
+            return (
+                <div>{this.state.groups.map(function(key){
                             if(key.location.toLowerCase().includes(searchText.toLowerCase())){
                                 
                             return(
-                                <div className="group-card-container" id="canvas">
-                                <div className="group-card-content-container">
-                                <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
-                                    <p className="group-card-name">Name: {key.name}</p>
-                                    <p className="group-card-category">Category: {key.category}</p>
-                                    <p className="group-card-desc">Description: {key.description}</p>
+                                <div key={key.id} className="group-card-container">
+                                <div className="group-card-image">
+                                    <img src={key.group_picture} alt={key.name}/>
                                 </div>
+                                <div className="group-card-content">
+                                    <div>
+                                        <Link to = {`/groups/${key.id}`}><p className="group-card-name">{key.name}</p></Link>
+                                    </div>
+                                    <div>
+                                        {key.category}
+                                    </div>
+                                    <div>
+                                        {key.number_of_members} Member(s)
+                                    </div>
                                 </div>
+                            </div>
                             )
                         }
                         })}
                         </div>
-                    )
-                }
-                else if(searchText !== "" && searchFilter === "category"){
-                    console.log("category")
-                    return(
-                        <div>{this.state.groups.map(function(key){
-                            if(key.category.toLowerCase().includes(searchText.toLowerCase())){
-                                
-                            return(
-                                <div className="group-card-container" id="canvas">
-                                <div className="group-card-content-container">
-                                    <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
-                                    <p className="group-card-name">Name: {key.name}</p>
-                                    <p className="group-card-category">Category: {key.category}</p>
-                                    <p className="group-card-desc">Description: {key.description}</p>
-                                </div>
-                                </div>
-                            )
-                        }
-                        })}
-                        </div>
-                    )
-                }
-                else{
+            )
+        } else if (searchText !== "" && searchFilter === "category") {
 
-                return(
-                    <div>{this.state.groups.map(function(key){
+            return (
+                <div>{this.state.groups.map(function(key){
+                            if(key.category.toLowerCase().includes(searchText.toLowerCase())){
+                            return(
+                                <div key={key.id} className="group-card-container">
+                                <div className="group-card-image">
+                                    <img src={key.group_picture} alt={key.name}/>
+                                </div>
+                                <div className="group-card-content">
+                                    <div>
+                                        <Link to = {`/groups/${key.id}`}><p className="group-card-name">{key.name}</p></Link>
+                                    </div>
+                                    <div>
+                                        {key.category}
+                                    </div>
+                                    <div>
+                                        {key.number_of_members} Member(s)
+                                    </div>
+                                </div>
+                            </div>
+                            )
+                        }
+                        })}
+                        </div>
+            )
+        } else {
+
+            return (
+                <div>{this.state.groups.map(function(key){
                         
                         return(
-                            <div className="group-card-container" id="canvas">
-                                <div className="group-card-content-container">
-                                <Link to = {`/groups/${key.id}`}><p className="group-card-name">Name: {key.name}</p></Link>
-                                    <p className="group-card-name">Name: {key.name}</p>
-                                    <p className="group-card-category">Category: {key.category}</p>
-                                    <p className="group-card-desc">Description: {key.description}</p>
+                            <div key={key.id} className="group-card-container">
+                                <div className="group-card-image">
+                                    <img src={key.group_picture} alt={key.name}/>
                                 </div>
+                                <div className="group-card-content">
+                                    <div>
+                                        <Link to = {`/groups/${key.id}`} className="group-card-name nunito-text"><p >{key.name}</p></Link>
+                                    </div>
+                                    <div>
+                                        {key.category}
+                                    </div>
+                                    <div>
+                                        {key.number_of_members} Member(s)
+                                    </div>
                                 </div>
+                            </div>
                         )
                     })}</div>
-                )
-                    }
-}
+            )
+        }
+    }
 }

@@ -9,7 +9,7 @@ import { fire as firebase } from "../../fire"
 import "./login.css";
 import "../../helpers.css";
 
-import { loginWithEmailPassword, authWithFacebook, authWithTwitter, authWithGoogle} from "../../ducks/authentication-redux"
+import { loginWithEmailPassword, authWithFacebook } from "../../ducks/authentication-redux"
 
 export class Login extends Component {
     constructor(props) {
@@ -41,7 +41,7 @@ export class Login extends Component {
     }
 
     render() {
-        const { loginWithEmailPassword, authWithFacebook, authWithTwitter, authWithGoogle } = this.props;
+        const { loginWithEmailPassword, authWithFacebook } = this.props;
         if (this.state.authenticated) {
             return (
                 <div>
@@ -56,13 +56,15 @@ export class Login extends Component {
                             loginWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
                             <input name="email" type="email" ref={(input)=> {this.emailInput = input}} placeholder="Email"/>
                             <input name="password" type="password" ref={(input)=> {this.passwordInput = input}} placeholder="Password"/>
+                            <Link to="/forgotpassword">
                             <button className="forgot-password-button">Forgot Password</button>
+                            </Link>
                             <button className="login-button box-shadow" onClick={(event)=> {
                                 event.preventDefault()
 
                                 loginWithEmailPassword(this.emailInput.value, this.passwordInput.value)}}>Log In </button>
                             <Link to="/register">
-                            <button className="register-button box-shadow">Register </button>
+                            <button className="register-button box-shadow">Create Account </button>
                             </Link>
                         </form>
                         <div id="providers-auth" className="center">

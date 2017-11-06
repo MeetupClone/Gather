@@ -1,0 +1,16 @@
+.account-main-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.account-left-navbar {
+    display: flex;
+    height: 100%;
+}
+
+.account-left-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

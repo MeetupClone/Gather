@@ -15,6 +15,7 @@ const AUTH_WITH_FACEBOOK = 'AUTH_WITH_FACEBOOK';
 const AUTH_WITH_EMAIL_PASSWORD = 'AUTH_WITH_EMAIL_PASSWORD'
 const LOGIN_WITH_EMAIL_PASSWORD = 'LOGIN_WITH_EMAIL_PASSWORD';
 const GET_AUTH_INFO = 'GET_AUTH_INFO';
+const REGISTER_FCM_KEY = 'REGISTER_FCM_KEY'
 const SIGN_OUT = 'SIGN_OUT';
 
 
@@ -62,6 +63,13 @@ export function signOut() {
     }
 }
 
+export function registerFcmKey(initialState) {
+    return {
+        type: REGISTER_FCM_KEY,
+        initialState
+    }
+}
+
 
 export default function AuthenticationReducer(state = initialState, action) {
     switch (action.type) {
@@ -74,10 +82,10 @@ export default function AuthenticationReducer(state = initialState, action) {
                 axios.post('/api/user/createUser', [user.uid, user.email, nameValue])
                 console.log(user)
                 return Object.assign({}, state, {
-                        uid: user.uid,
-                        email: user.email,
-                        authenticated: true
-                    })
+                    uid: user.uid,
+                    email: user.email,
+                    authenticated: true
+                })
             })
             return state;
         case AUTH_WITH_FACEBOOK:
@@ -86,27 +94,7 @@ export default function AuthenticationReducer(state = initialState, action) {
                     return Object.assign({}, state, { uid: user.uid, email: user.email, authenticated: true })
                 });
             return state
-        // case AUTH_WITH_TWITTER:
-        //     firebase.auth().signInWithRedirect(twitterProvider)
-        //         .then((user, error) => {
-        //             console.log(user)
-        //             return Object.assign({}, state, {
-        //                 uid: user.uid,
-        //                 email: user.email,
-        //                 authenticated: true
-        //             })
-        //         });
-        //     return state;
-        // case AUTH_WITH_GOOGLE:
-        //     firebase.auth().signInWithRedirect(googleProvider)
-        //         .then((user, error) => {
-        //             return Object.assign({}, state, {
-        //                 uid: user.uid,
-        //                 email: user.email,
-        //                 authenticated: true
-        //             })
-        //         })
-        //     return state;
+
         case LOGIN_WITH_EMAIL_PASSWORD:
             let email = action.payload.email;
             let password = action.payload.password
@@ -131,6 +119,16 @@ export default function AuthenticationReducer(state = initialState, action) {
             })
             return state
 
+        case REGISTER_FCM_KEY:
+            const messaging = firebase.messaging()
+            messaging.requestPermission().then(result => {
+                console.log("have permission")
+                return messaging.getToken()
+                    .then(token => {
+                        console.log(token)
+                    })
+            })
+            return state;
         case SIGN_OUT:
             firebase.auth().signOut().then(result => {
                 return Object.assign({}, state, {
