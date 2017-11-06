@@ -1,4 +1,4 @@
-import { fire as firebase, facebookProvider, twitterProvider, googleProvider } from "../fire"
+import { fire as firebase, facebookProvider } from "../fire"
 import axios from 'axios';
 
 
@@ -12,8 +12,6 @@ const initialState = {
 
 //CONSTANTS
 const AUTH_WITH_FACEBOOK = 'AUTH_WITH_FACEBOOK';
-const AUTH_WITH_TWITTER = 'AUTH_WITH_TWITTER';
-const AUTH_WITH_GOOGLE = 'AUTH_WITH_GOOGLE';
 const AUTH_WITH_EMAIL_PASSWORD = 'AUTH_WITH_EMAIL_PASSWORD'
 const LOGIN_WITH_EMAIL_PASSWORD = 'LOGIN_WITH_EMAIL_PASSWORD';
 const GET_AUTH_INFO = 'GET_AUTH_INFO';
@@ -26,20 +24,6 @@ const SIGN_OUT = 'SIGN_OUT';
 export function authWithFacebook(initialState) {
     return {
         type: AUTH_WITH_FACEBOOK,
-        initialState
-    }
-}
-
-export function authWithTwitter(initialState) {
-    return {
-        type: AUTH_WITH_TWITTER,
-        initialState
-    }
-}
-
-export function authWithGoogle(initialState) {
-    return {
-        type: AUTH_WITH_GOOGLE,
         initialState
     }
 }
@@ -110,27 +94,7 @@ export default function AuthenticationReducer(state = initialState, action) {
                     return Object.assign({}, state, { uid: user.uid, email: user.email, authenticated: true })
                 });
             return state
-        case AUTH_WITH_TWITTER:
-            firebase.auth().signInWithRedirect(twitterProvider)
-                .then((user, error) => {
-                    console.log(user)
-                    return Object.assign({}, state, {
-                        uid: user.uid,
-                        email: user.email,
-                        authenticated: true
-                    })
-                });
-            return state;
-        case AUTH_WITH_GOOGLE:
-            firebase.auth().signInWithRedirect(googleProvider)
-                .then((user, error) => {
-                    return Object.assign({}, state, {
-                        uid: user.uid,
-                        email: user.email,
-                        authenticated: true
-                    })
-                })
-            return state;
+
         case LOGIN_WITH_EMAIL_PASSWORD:
             let email = action.payload.email;
             let password = action.payload.password
