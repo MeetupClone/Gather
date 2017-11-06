@@ -18,25 +18,36 @@ export default class Account extends Component{
             uid: "",
             accountState: 1,
             email: "",
+            notifications: true,
+            preferences: ""
         }
 
+
+        this.componentWillMount = this.componentWillMount.bind(this)
+    }
+
+    // make a database call for user information and then pass it to kids
+    componentWillMount(){
+        
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({
                     uid: user.uid,
-                    email: user.email,
-                    authenticated: true,
-                    preferences: [],
-                    categories: []
+                    email: user.email
                 })
+                console.log(this.state)
+                axios.get(`/api/user/account/getPref/${this.state.uid}`)
+                .then(result => console.log("getPref", result))
+                .catch(err => console.log("getPref error", err))
+                
+                axios.get(`/api/user/account/getCat/${this.state.uid}`)
+                .then(result => console.log("getCat", result))
+                .catch(err => console.log("getCat", err))
             }
             else{
                 console.log("no user")
             }
         })
-
-        this.componentWillMount = this.componentWillMount.bind(this)
-    }
 
     // make a database call for user information and then pass it to kids
     componentWillMount(){
@@ -48,7 +59,6 @@ export default class Account extends Component{
         axios.get(`/api/user/account/getCat/${this.state.uid}`)
         .then(result => console.log("getCat", result))
         .catch(err => console.log("getCat", err))
-
     }
 
     render(){
@@ -66,7 +76,7 @@ export default class Account extends Component{
                         </ul>
                     </div>
                     <div className="account-right-content">
-                    <Notifications/>
+                    <Notifications notifications={this.state.notifications} uid={this.state.uid}/>
                     </div>
                 </div>
                 )
@@ -82,7 +92,7 @@ export default class Account extends Component{
                         </ul>
                     </div>
                     <div className="account-right-content">
-                    <Preferences/>                    
+                    <Preferences preferences={this.state.preferences} uid={this.state.uid}/>                    
                     </div>
                 </div>
             )

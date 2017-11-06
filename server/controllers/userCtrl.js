@@ -38,27 +38,33 @@ const updateUserProfile = (req,res) => {
 
 const getUserPreferences = (req, res) => {
 
-	const { uid } = req.body;
+	const { uid } = req.param;
 	console.log(req.body)
 	req.app
 	.get('db')
-	.updateUserProfile([uid])
+	.getUserPreferences([uid])
 	.then(result => {
 		res.status(200).json(result)
-		
+
 	}).catch(err => console.log("get user pref endpoint not working", err))
 }
 
 const getUserCategories = (req, res) => {
-	console.log(req.params)
-	const { uid } = req.params;
+	const { uid } = req.param;
 	console.log(req.body)
 	req.app
 	.get('db')
-	.updateUserCategories([uid])
+	.getUserCategories([uid])
 	.then(result => {
 		res.status(200).json(result)
-		
+	}).catch(err => console.log("get user cat endpoint not working", err))
+
+const updateNotifications = (req, res) => {
+	req.app
+		.get('db')
+		.updateNotifications(req.body)
+		.then(result => console.log("it work"))
+		.catch(err => console.log("update notifications endpoint not working", err))
 	}).catch(err => console.log("get user cat endpoint not working", err))
 }
 
@@ -69,5 +75,6 @@ module.exports = {
 	getUserInfo,
 	updateUserProfile,
 	getUserPreferences,
-	getUserCategories
+	getUserCategories,
+	updateNotifications
 }
