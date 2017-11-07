@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 import './notAuthHome.css';
 import Footer  from '../../footer/footer'
@@ -15,15 +16,14 @@ export default class NotAuthHome extends Component {
                 <div >
                   <h2>Explore</h2>
                   <p> Blah Blah Blah</p>
-                  <button className="home-buttonz"> Someone Link Me to the events page</button>
+                  <Link to="/explore">
+                  <button className="home-buttonz"> Explore</button>
+                  </Link>
                 </div>
               </div>
               <div className="home-create-card">
                 <div>
                   <img className="home-create-card-pic" src="https://petapixel.com/assets/uploads/2015/03/iStock-Unfinished-Business-5.jpg" alt="create pic"/>
-                  <h2>Create</h2>
-                  <p> Blah Blah Blah</p>
-                  <button className="home-buttonz"> Someone Link Me to the login/register page</button>
                 </div>
 
 

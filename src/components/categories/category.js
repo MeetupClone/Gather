@@ -31,12 +31,11 @@ this.handleChange = this.handleChange.bind(this)
 
 
         <div>
-
           <div className="radio">
             <label>
               <input type="radio" value="arts" onChange={(event) => this.handleChange(event)} checked={true}/>
               Arts
-            </label>
+            {/* </label> */}
           </div>
           
 

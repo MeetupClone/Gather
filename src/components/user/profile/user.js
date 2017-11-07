@@ -29,11 +29,7 @@ export default class Login extends Component {
             userGroups: []
         };
     }
-    // this.setState({userGroups: results.data})
-
-
-
-    componentWillMount() {
+    componentDidMount() {
         let userId = localStorage.getItem('uid')
         // firebase.auth().onAuthStateChanged(user => {
         if (userId) {
@@ -102,7 +98,7 @@ export default class Login extends Component {
             return (
                 <div>
                 
-                <img className="user-profile-pic" src={this.state.userProfilePic} alt={this.state.userName}/>
+                <img className="user-profile-pic" src={JSON.parse(localStorage.getItem('userData')).userPic || this.state.userProfilePic} alt={this.state.userName}/>
                 <h1> {this.state.userName} </h1>
                 <h3> {this.state.userLocation} </h3>
 
