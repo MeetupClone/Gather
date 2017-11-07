@@ -9,9 +9,8 @@ class App extends Component {
 
     constructor() {
         super();
-        console.log(JSON.parse(localStorage.getItem('userData')).uid)
         firebase.auth().onAuthStateChanged(user => {
-            if (!JSON.parse(localStorage.getItem('userData'))) {
+            if (localStorage.getItem('userData')) {
                 axios.get(`/api/user/getUserInfo/${user.uid}`).then(result => {
                     let userData = {
                         uid: user.uid,
@@ -22,6 +21,8 @@ class App extends Component {
                     }
                     localStorage.setItem('userData', JSON.stringify(userData))
                 })
+            } else {
+                console.log('yup')
             }
 
             let getEvents = axios.get('/api/events').then(result => { return result.data})

@@ -86,6 +86,7 @@ export default function AuthenticationReducer(state = initialState, action) {
             let passwordValue = action.payload.password
             let nameValue = action.payload.name
             firebase.auth().createUserWithEmailAndPassword(emailValue, passwordValue).then(user => {
+                localStorage.setItem('loggedIn', true)
                 axios.post('/api/user/createUser', [user.uid, user.email, nameValue, 'https://firebasestorage.googleapis.com/v0/b/gatherv0-b3651.appspot.com/o/defaultPic.webp?alt=media&token=73d67fbf-6f0e-40aa-8fc9-15ec9e8e4fd9'])
                 console.log(user)
                 return Object.assign({}, state, {

@@ -11,6 +11,11 @@ export default class Footer extends Component {
             user: false,
         }
 
+        
+
+    }
+
+    componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             console.log()
             if (user) {
@@ -19,7 +24,6 @@ export default class Footer extends Component {
                 })
             }
         })
-
     }
 
 
