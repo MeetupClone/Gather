@@ -20,13 +20,14 @@ export default class EditableProfile extends Component {
             userLocation: '',
             userDescription: '',
             editable: false,
+            updated: false,
             showParams: '',
             twitter: '',
             facebook: '',
             instagram: ''
         };
 
-        this.updateProfile= this.updateProfile.bind(this);
+        this.updateProfile = this.updateProfile.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
     submitImageUpload(event) {
@@ -50,18 +51,17 @@ export default class EditableProfile extends Component {
         const uploadTask = storageRef.child('profilePictures/' + file.name).put(file);
         uploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
             let downloadURL = uploadTask.snapshot.downloadURL;
-            axios.post('/api/pictures/upload', ["user", downloadURL, userId]).then(downloadURL => {
-                this.setState({ userProfilePic: downloadURL, imagePreviewUrl: downloadURL })
-                console.log(this.state)
+            this.setState({ userProfilePic: downloadURL, imagePreviewUrl: downloadURL })
+            axios.post('/api/user/profile/update', this.state).then(result => {
+                this.setState({ updated: true })
             })
-        });
+        })
     }
 
     updateProfile() {
-    	axios.post('/api/user/profile/update', this.state).then(result => {
-    		console.log("updated")
-    	})
-    	console.log(this.state)
+        axios.post('/api/user/profile/update', this.state).then(result => {
+            this.setState({ updated: true })
+        })
     }
 
     handleChange(event) {
@@ -94,48 +94,40 @@ export default class EditableProfile extends Component {
 
 
     render() {
+        let updated = null
+        if (this.state.updated) {
+            updated = (
+                <div> <h1>Your profile has been updated.</h1> </div>
+            )
+        }
         return (
             <div className="previewComponent">
                 <div>
                 <img className="user-profile-pic" src={this.state.imagePreviewUrl || this.state.userProfilePic} alt={this.state.userName}/>
-                <form onSubmit={(event)=>this.uploadImage(event)}>
                  <input className="fileInput" 
                     type="file" 
                     onChange={(event)=>this.submitImageUpload(event)} />
-                <button className="edit-submit-button" 
-                    type="submit" 
-                    onClick={(event)=>this.uploadImage(event)}>Upload Image</button>
-                </form>
                 <h1> {this.state.userName} </h1>
                 <h3> {this.state.userLocation} </h3>
 
                 <textarea id="noter-text-area" name="editableDescription" value={this.state.userDescription} onChange={this.handleChange}></textarea>
                 <div>
                 <input placeholder="Twitter" className="social-media-input" onChange={(event) => {
-                	this.setState({twitter: event.target.value})}} />
+                    this.setState({twitter: event.target.value})}} />
                 </div>
                 <div>
                 <input placeholder="Facebook" className="social-media-input" onChange={(event) => {
-                	this.setState({facebook: event.target.value})}} />
+                    this.setState({facebook: event.target.value})}} />
                 </div>
                 <div>
                 <input placeholder="Instagram" className="social-media-input" onChange={(event) => {
-                	this.setState({instagram: event.target.value})}} />
+                    this.setState({instagram: event.target.value})}} />
                 </div>
 
                 <button className="edit-profile-save" onClick={() => {
-                	this.updateProfile()
+                    this.updateProfile()
                 }}> Save Profile </button>
 
-
-                <div className="user-spec-buttons">
-                <button className="user-spec-button-indiv" onClick={() => 
-                    {this.setState({showParams: "events" })}}> Events </button>
-                <button className="user-spec-button-indiv" onClick={() => 
-                    {this.setState({showParams: "attending" })}}> Attending </button>
-                <button className="user-spec-button-indiv" onClick={() => 
-                    {this.setState({showParams: "groups" })}}> Groups </button>
-                </div>
 
                 </div> 
             </div>

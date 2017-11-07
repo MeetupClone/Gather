@@ -6,12 +6,17 @@ export class Preferences extends Component{
         super(props);
 
         this.state = {
-
+            preferences: ""
         }
     }
 
+    componentWillReceiveProps(props){
+        this.setState({preferences: this.props.preferences})
+
+    }
 
     render(){
+        console.log(this.state)
         return(
             <div>
             <h1>Manage Preferences</h1>
