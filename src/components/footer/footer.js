@@ -1,34 +1,38 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import { fire as firebase } from "../../fire";
 
 import "./footer.css";
 
-export default class Footer extends Component{
-  constructor(props){
-      super(props);
+export default class Footer extends Component {
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      user: false,
+        this.state = {
+            user: false,
+        }
+
+
+
     }
 
-    firebase.auth().onAuthStateChanged(user => {
-      console.log()
-      if (user) {
-          this.setState({
-              user: true,
-          })
-      }
-  })
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            console.log()
+            if (user) {
+                this.setState({
+                    user: true,
+                })
+            }
+        })
+    }
 
-  }
 
-
-render(){
-  if(this.state.user){
-    return(
-      <div>
+    render() {
+        if (this.state.user) {
+            return (
+                <div>
         <Link to="/event/create">
       <button className="footer-create-button">Create</button>
         </Link>
@@ -37,11 +41,10 @@ render(){
       <h6 className="footer-milk-steak"> Milk Steak LLC</h6>
     </div>
     </div>
-    )
-  }
-  else{
-    return(
-      <div>
+            )
+        } else {
+            return (
+                <div>
         <Link to="/login">
       <button className="footer-create-button">Create</button>
         </Link>
@@ -50,8 +53,8 @@ render(){
       <h6 className="footer-milk-steak"> Milk Steak LLC</h6>
     </div>
     </div>
-    )
-  }
-  
-}
+            )
+        }
+
+    }
 }

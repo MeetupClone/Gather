@@ -12,7 +12,6 @@ const getAllGroups = (req, res) => {
         .get('db')
         .getAllGroups()
         .then(result => {
-            console.log(result)
             return res.json(result)
         })
 }
@@ -63,8 +62,6 @@ const deleteGroup = (req, res) => {
 }
 
 const createGroup = (req, res) => {
-    console.log("1")
-    console.log(req.body.uid)
     for (var i = 0; i <= 0; i++) {
         req.app
             .get('db')

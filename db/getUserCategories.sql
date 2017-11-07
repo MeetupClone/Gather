@@ -1,2 +1,2 @@
-SELECT category FROM user_categories
-    WHERE userid = $1;
+SELECT * FROM user_categories
+    WHERE user_id = $1;

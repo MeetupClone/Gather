@@ -30,7 +30,6 @@ const editEvent = (req, res) => {
         .get('db')
         .editEvent(req.body)
         .then(result => {
-            console.log("edited")
             return res.json(result)
         })
 }
