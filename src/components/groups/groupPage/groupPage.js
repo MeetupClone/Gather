@@ -8,6 +8,8 @@ import { joinGroup, leaveGroup } from "../../../ducks/group-redux"
 
 import { fire as firebase } from "../../../fire"
 
+import {Link} from "react-router-dom";
+
 
 import GroupDashboard from "../groupDashboard/groupDashboard";
 
@@ -30,7 +32,8 @@ export class GroupPage extends Component {
             userJoinedGroups: [],
             currentUserUid: '',
             joined: false,
-            edit: false
+            edit: false,
+            groupEvents: []
 
         }
 
@@ -46,13 +49,20 @@ export class GroupPage extends Component {
                         })
                     }
                 })
+
             }
+            
+            
         })
 
         this.componentWillMount = this.componentWillMount.bind(this);
     }
 
     componentWillMount() {
+        console.log(this.state.groupId)
+        axios.get(`/api/event/group/${this.state.groupId}`).then(response => {
+            console.log(response.data)
+            this.setState({groupEvents: response.data})})
 
         axios.get(`/api/group/${this.props.match.params.id}`).then(result => {
             this.setState({ groupName: result.data[0].name, 
@@ -111,6 +121,15 @@ export class GroupPage extends Component {
                 <h1>GROUP PAGE</h1>
                 <h1>{this.state.groupName}</h1>
                 <h3>{this.state.groupDesc}</h3>
+                <div>{this.state.groupEvents.map(key => {
+                    return(
+                        <div>
+                            <img src={key.event_image} alt="event img"/>
+                            <Link to={`/event/${key.id}`}><p>{key.title}</p></Link>
+                            <p>{key.description}</p>
+                        </div>
+                    )
+                })}</div>
             </div>
         )
     }

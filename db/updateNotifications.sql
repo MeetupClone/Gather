@@ -1,4 +1,4 @@
 UPDATE user_preferences 
-    SET notification_settings = ${notifications} 
-    WHERE userid = ${uid}
+    SET notification_settings = $1
+    WHERE userid = $2
     RETURNING *;

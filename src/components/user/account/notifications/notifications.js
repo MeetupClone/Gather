@@ -14,20 +14,23 @@ export class Notifications extends Component {
         this.state = {
             uid: "",
             notifications: '',
-        }
+        }    
+        
+        console.log(this.state)
 
         this.changeNotificationPreferences = this.changeNotificationPreferences.bind(this);
 
     }
 
     componentWillMount() {
-
+        this.setState({notifications: this.props.notifications, uid: this.props.uid })
     }
 
-    componentWillReceiveProps(props) {
-        this.setState({ notifications: this.props.notifications, uid: this.props.uid })
+    // componentWillReceiveProps(props) {
+    //     console.log(props)
+    //     this.setState({ notifications: this.props.notifications, uid: this.props.uid })
 
-    }
+    // }
 
     changeNotificationPreferences() {
         if (!this.state.notifications) {
@@ -37,8 +40,8 @@ export class Notifications extends Component {
         }
 
         //this.setState({notifications: !this.state.notifications})
-
-        axios.put("/api/user/updatenotifs/", [this.state.notifications, this.state.uid]).then(response => console.log(response))
+        console.log(this.state)
+        axios.post("/api/user/updatenotifs/", [this.state.notifications, this.state.uid]).then(response => console.log(response))
 
     }
 

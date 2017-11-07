@@ -55,6 +55,7 @@ app.get('/api/events', eventCtrl.getAllEvents)
 app.get('/api/event/:id', eventCtrl.getEventById)
 app.get('/api/event/user/:id', eventCtrl.getEventByUserId)
 app.get('/api/relevant/event/:id', eventCtrl.getRelevantEvents)
+app.get('/api/event/group/:id', eventCtrl.getEventsByGroupId)
 
 const groupCtrl = require('./server/controllers/groupCtrl')
 app.get('/api/group/:id', groupCtrl.getGroupById)
@@ -66,6 +67,7 @@ app.post('/api/group/join', groupCtrl.joinGroup)
 app.post('/api/group/leave', groupCtrl.leaveGroup)
 app.post('/api/group/edit', groupCtrl.editGroup)
 app.post('/api/group/delete', groupCtrl.deleteGroup)
+app.get('/api/group/owner/:id', groupCtrl.getGroupByOwner)
 
 
 app.listen(port, () => {

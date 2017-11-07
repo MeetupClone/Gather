@@ -10,6 +10,8 @@ import Category from "../../categories/category"
 import Datetime from "react-datetime"
 import moment from "moment"
 
+import axios from 'axios';
+
 
 export class CreateEvents extends Component {
     constructor(props) {
@@ -30,6 +32,8 @@ export class CreateEvents extends Component {
             file: '',
             imagePreviewUrl: '',
             cronTime: '',
+            groups: null,
+            eventGroup: '',
         }
 
         firebase.auth().onAuthStateChanged(user => {
@@ -38,18 +42,31 @@ export class CreateEvents extends Component {
                     uid: user.uid
                 })
             }
+            axios.get(`/api/group/owner/${this.state.uid}`).then(response => {
+                console.log(response)
+                this.setState({groups: response.data})
+            
+            })
         })
         this.imageProcess = this.imageProcess.bind(this)
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this)
+
+
+
     }
 
     handleChange(val, prop) {
+        console.log(val, prop)
         this.setState({
             [prop]: val
         })
+        console.log(this.state)
     }
 
-
+    componentWillMount(){
+        
+        
+    }
 
     imageProcess(event) {
         event.preventDefault();
@@ -73,6 +90,23 @@ export class CreateEvents extends Component {
 
         let timeConstraints = { minutes: { min: 0, max: 59, step: 15 } }
 
+        let groupSection = null
+
+        if(this.state.groups){
+            groupSection = (<div>
+                <h4>Would you like to add a group?</h4>
+                <ol>
+                    {this.state.groups.map(key => {
+                        return(
+                            <li><button onClick={e=>this.setState({eventGroup: key.id})}>{key.name}</button></li>
+                        )
+                    })}
+                    <li><button onClick={e=>this.setState({eventGroup: null})}>No Group</button></li>
+                </ol>
+
+
+            </div>)
+        }
 
         var yesterday = Datetime.moment().subtract(1, 'day');
         var valid = function(current) {
@@ -104,6 +138,7 @@ export class CreateEvents extends Component {
               <Datetime isValidDate={ valid } inputProps={inputProps} timeConstraints={timeConstraints} onChange={(event) => {
                 this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm"), cronTime: moment.utc(event).subtract(3, 'hours').format()})
               }}/>
+              {groupSection}
               <input  type="text" placeholder="Category" onChange={e=>this.handleChange(e.target.value, "category")}  ref={(input)=>{
               this.category=input}}/>
               <Category/>

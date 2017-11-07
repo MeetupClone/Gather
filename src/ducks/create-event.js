@@ -11,7 +11,8 @@ const initialState = {
     eventCategory: '',
     created: false,
     website: '',
-    confirmModal: false
+    confirmModal: false,
+    eventGroup: null
 }
 
 firebase.auth().onAuthStateChanged(user => {

@@ -7,9 +7,10 @@ with rows as (INSERT INTO events (
                     organizer_uid,
                     event_date,
                     cron_time,
-                    place_id)
+                    place_id,
+                    eventGroup)
 
-VALUES (${eventPic}, ${eventName}, ${description}, ${location}, ${category}, ${uid}, ${eventDate}, ${cronTime}, ${placeId}) 
-RETURNING id, oragnizer_uid
+VALUES (${eventPic}, ${eventName}, ${description}, ${location}, ${category}, ${uid}, ${eventDate}, ${cronTime}, ${placeId}, ${eventGroup}) 
+RETURNING id, organizer_uid
 )
 INSERT INTO events_members (event_id, user_id) SELECT id, organizer_uid from rows;

@@ -86,6 +86,17 @@ const getGroupByUserId = (req, res) => {
         })
         .catch(err => console.log("get group by user id not working", err))
 }
+
+const getGroupByOwner = (req, res) => {
+    req.app
+        .get('db')
+        .getGroupByOwner(req.params.id)
+        .then(results => {
+            res.status(200).json(results)
+        })
+        .catch(err => console.log("get group by owner enderpoint not working", err))
+}
+
 module.exports = {
     getGroupById,
     joinGroup,
@@ -95,5 +106,6 @@ module.exports = {
     editGroup,
     deleteGroup,
     getAllGroups,
-    getGroupByUserId
+    getGroupByUserId,
+    getGroupByOwner
 }

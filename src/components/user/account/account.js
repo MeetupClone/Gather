@@ -37,13 +37,13 @@ export default class Account extends Component{
                 })
                 axios.get(`/api/user/account/getPref/${this.state.uid}`)
                    .then(result => {
-                        console.log("getPref", result);
+                        this.setState({notifications: result.data.notification_settings, preferences: result.data.preference_settings})
                 })
                     .catch(err => console.log("getPref error", err))
                 
                 axios.get(`/api/user/account/getCat/${this.state.uid}`)
                     .then(result => {
-                        console.log("getCat", result);
+                        this.setState({userCat: result.data})
                 })
                     .catch(err => console.log("getCat", err))
             }
@@ -54,6 +54,26 @@ export default class Account extends Component{
     }
     
     render(){
+
+        //fiddle with this!
+
+        let displayMe = null;
+
+        switch(this.state.accountState){
+            case 1:
+            displayMe = (<Notifications notifications={this.state.notifications} uid={this.state.uid}/>)
+            break;
+
+            case 2:
+            displayMe = (<Preferences preferences={this.state.preferences} uid={this.state.uid} userCat={this.state.userCat}/>)
+            break;
+
+            case 3:
+            displayMe = (<EditInfo/>)
+            break;
+        }
+
+        console.log(this.state)
         switch(this.state.accountState){
             case 1:
             return(
@@ -83,7 +103,7 @@ export default class Account extends Component{
                         </ul>
                     </div>
                     <div className="account-right-content">
-                    <Preferences preferences={this.state.preferences} uid={this.state.uid}/>                    
+                    <Preferences preferences={this.state.preferences} uid={this.state.uid} userCat={this.state.userCat}/>                    
                     </div>
                 </div>
             )
