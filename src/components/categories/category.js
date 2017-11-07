@@ -30,7 +30,7 @@ this.handleChange = this.handleChange.bind(this)
 
 
 
-        <form>
+        <div>
 
           <div className="radio">
             <label>
@@ -188,7 +188,7 @@ this.handleChange = this.handleChange.bind(this)
               Writing
             </label>
           </div>
-        </form>
+        </div>
 
 
 

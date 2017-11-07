@@ -9,6 +9,10 @@ const initialState = {
     authenticated: false
 }
 
+let pic = require('../assets/defaultPic.webp')
+console.log(pic)
+
+console.log(require('../assets/defaultPic.webp'))
 
 //CONSTANTS
 const AUTH_WITH_FACEBOOK = 'AUTH_WITH_FACEBOOK';
@@ -24,7 +28,16 @@ const SIGN_OUT = 'SIGN_OUT';
 export function authWithFacebook(initialState) {
     return {
         type: AUTH_WITH_FACEBOOK,
-        initialState
+        payload: firebase.auth().signInWithPopup(facebookProvider)
+            .then(result => {
+                console.log(result)
+                if (result.additionalUserInfo.isNewUser) {
+                    console.log(result, "from redux")
+                    return axios.post('/api/user/createUser', [result.user.uid, result.user.email, result.user.displayName, result.user.photoUrl])
+                }
+                return result.user
+
+            })
     }
 }
 
@@ -79,7 +92,7 @@ export default function AuthenticationReducer(state = initialState, action) {
             let passwordValue = action.payload.password
             let nameValue = action.payload.name
             firebase.auth().createUserWithEmailAndPassword(emailValue, passwordValue).then(user => {
-                axios.post('/api/user/createUser', [user.uid, user.email, nameValue])
+                axios.post('/api/user/createUser', [user.uid, user.email, nameValue, 'https://firebasestorage.googleapis.com/v0/b/gatherv0-b3651.appspot.com/o/defaultPic.webp?alt=media&token=73d67fbf-6f0e-40aa-8fc9-15ec9e8e4fd9'])
                 console.log(user)
                 return Object.assign({}, state, {
                     uid: user.uid,
@@ -87,13 +100,18 @@ export default function AuthenticationReducer(state = initialState, action) {
                     authenticated: true
                 })
             })
-            return state;
-        case AUTH_WITH_FACEBOOK:
-            firebase.auth().signInWithRedirect(facebookProvider)
-                .then((user, error) => {
-                    return Object.assign({}, state, { uid: user.uid, email: user.email, authenticated: true })
-                });
-            return state
+            return Object.assign({}, state, { authenticated: true })
+
+        case AUTH_WITH_FACEBOOK + "_PENDING":
+            console.log('pending')
+            return Object.assign({}, state, { authenticated: false })
+
+
+        case AUTH_WITH_FACEBOOK + "_FULFILLED":
+            console.log(action.payload)
+            return Object.assign({}, state, { user: action.payload, authenticated: true })
+
+
 
         case LOGIN_WITH_EMAIL_PASSWORD:
             let email = action.payload.email;
@@ -114,7 +132,6 @@ export default function AuthenticationReducer(state = initialState, action) {
                 return Object.assign({}, state, {
                     uid: user.uid,
                     email: user.email,
-
                 })
             })
             return state

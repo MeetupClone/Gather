@@ -5,6 +5,8 @@ import './helpers.css';
 
 import { fire as firebase } from "./fire"
 
+import axios from "axios";
+
 // import Footer from './components/footer/footer'
 import Navbar from "./components/navbar/navbar"
 
@@ -20,6 +22,15 @@ class App extends Component {
             if (user) {
                 localStorage.setItem('uid', user.uid)
                 console.log(localStorage.getItem('uid'))
+
+
+                axios.get(`/api/user/account/getPref/${user.uid}`).then(result => {
+                    console.log(result)
+                })
+                // .then(result => console.log("getPref", result))
+                // .catch(err => console.log("getPref error", err))
+                
+                axios.get(`/api/user/account/getCat/${user.uid}`)
             }
         })
 

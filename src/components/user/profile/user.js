@@ -43,6 +43,7 @@ export default class Login extends Component {
             axios.get(`/api/event/getAttendingEvents/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
             axios.get(`/api/group/user/${userId}`).then(results => console.log(results)).catch(err => console.log(err))
             axios.get(`/api/user/getUserInfo/${userId}`).then(result => {
+                console.log(result)
                 this.setState({
                     userProfilePic: result.data[0].profile_image,
                     userName: result.data[0].name,

@@ -1,77 +1,71 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 
 import axios from 'axios';
 
-export class Notifications extends Component{
-    constructor(props){
+import { fire as firebase } from "../../../../fire"
+
+export class Notifications extends Component {
+    constructor(props) {
         super(props);
+
+        console.log(props)
 
         this.state = {
             uid: "",
-            notifications: false,
+            notifications: '',
         }
 
-        this.turnNotificationsOn = this.turnNotificationsOn.bind(this);
-        this.turnNotificationsOff = this.turnNotificationsOff.bind(this);
+        this.changeNotificationPreferences = this.changeNotificationPreferences.bind(this);
 
     }
 
-    componentWillReceiveProps(props){
-        console.log(this.props)
-        this.setState({notifications: this.props.notifications, uid: this.props.uid})
+    componentWillMount() {
 
     }
 
-    turnNotificationsOn(){
-        this.setState({notifications: true})
+    componentWillReceiveProps(props) {
+        this.setState({ notifications: this.props.notifications, uid: this.props.uid })
 
-        console.log(this.state.notifications)
+    }
+
+    changeNotificationPreferences() {
+        if (!this.state.notifications) {
+            this.setState({ notifications: true })
+        } else {
+            this.setState({ notifications: false })
+        }
 
         axios.put("/api/user/updatenotifs/", [this.state.notifications, this.state.uid]).then(response => console.log(response))
-        
-    }
 
-    turnNotificationsOff(){
-        this.setState({notifications: false})
-
-        console.log(this.state.notifications)
-
-        axios.put("/api/user/updatenotifs/", this.state).then(response => console.log(response))
     }
 
 
-    render(){
-        if(this.state.notifications === false){
-            return(
+    render() {
+        let notificationText = null
+        let notificationButton = null
+        if (this.state.notifications) {
+            notificationText = (<h3>You currently have notifications turned on.</h3>)
+            notificationButton = (<button onClick={(e) => {
+                            this.changeNotificationPreferences()
+                    }}>Turn Off Notifications</button>)
+        } else {
+            notificationText = (
                 <div>
-                <h1>Manage Notification Page</h1>
                 <h3>You currently have notifications turned off.</h3>
-                <button onClick={(e) => {
-                            this.setState({notifications: true})
-                            console.log(this.state.notifications)
-                    }}>Allow Notifications</button>
-                <button onClick={(e) => {
-                            this.setState({notifications: false})
-                            console.log(this.state.notifications)
-                    }}>Allow No Notifications</button>
+                <h4>Turn on notifications to recieve reminders about events!</h4>
+                </div>)
+            notificationButton = (<button onClick={(e) => {
+                            this.changeNotificationPreferences()
+                    }}>Turn On Notifications</button>)
+        }
+
+        return (
+            <div>
+                <h1>Manage Notification Page</h1>
+                {notificationText}
+                {notificationButton} 
                 </div>
         )
     }
-        else{
-            return(
-                <div>
-                <h1>Manage Notification Page</h1>
-                <h3>You currently have notifications turned on.</h3>
-                <button onClick={(e) => {
-                            this.setState({notifications: true})
-                            console.log(this.state.notifications)
-                  }}>Allow Notifications</button>
-                <button onClick={(e) => {
-                            this.setState({notifications: false})
-                            console.log(this.state.notifications)
-                    }}>Allow No Notifications</button>
-                </div>
-            )
-        }
-}
+
 }

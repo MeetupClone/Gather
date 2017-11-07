@@ -21,7 +21,6 @@ export class Login extends Component {
             authenticated: false
         }
         firebase.auth().onAuthStateChanged(user => {
-            console.log()
             if (user) {
                 this.setState({
                     uid: user.uid,
@@ -40,7 +39,12 @@ export class Login extends Component {
         })
     }
 
+    componentWillReceiveProps(x,y){
+        
+    }
+
     render() {
+        console.log(this.props)
         const { loginWithEmailPassword, authWithFacebook } = this.props;
         if (this.state.authenticated) {
             return (
@@ -69,9 +73,7 @@ export class Login extends Component {
                         </form>
                         <div id="providers-auth" className="center">
                             <button className="auth-button facebook box-shadow" onClick={()=> {authWithFacebook() }}><img className="auth-icon" src={require( "./assets/facebook.svg")} alt="facebook" /> Sign In With Facebook </button>
-
                             <br/>
-
                         </div>
                 </div>
             )
