@@ -23,4 +23,13 @@
   margin: 0 5px;
   background-color: green; }
 
-/*# sourceMappingURL=user.css.map */
+.social-media-input {
+  width: 70vw; }
+
+.fixed-bottom {
+  text-align: center;
+  position: fixed;
+  bottom: 10px;
+  padding: 0 auto; }
+
+/*# sourceMappingURL=profile.css.map */

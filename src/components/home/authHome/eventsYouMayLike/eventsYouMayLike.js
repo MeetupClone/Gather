@@ -29,7 +29,6 @@ export default class EventsYouMayLike extends Component{
     componentWillMount(){
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                console.log("user")
                 this.setState({
                 uid: user.uid
                 })
@@ -55,9 +54,6 @@ export default class EventsYouMayLike extends Component{
 
 
         render() {
-        
-            console.log(this.state.userEvents)
-
                 return(
                     <div>
                     <h4>Events You May Like</h4>

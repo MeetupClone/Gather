@@ -24,10 +24,9 @@ export default class Account extends Component{
         }
 
 
-        this.componentWillMount = this.componentWillMount.bind(this)
+        // this.componentWillMount = this.componentWillMount.bind(this)
     }
 
-    // make a database call for user information and then pass it to kids
     componentWillMount(){
         
         firebase.auth().onAuthStateChanged(user => {
@@ -37,20 +36,19 @@ export default class Account extends Component{
                     email: user.email
                 })
                 axios.get(`/api/user/account/getPref/${this.state.uid}`)
-                .then(result => console.log(result))
-                .catch(err => console.log("getPref error", err))
+                // .then(result => console.log("getPref", result))
+                // .catch(err => console.log("getPref error", err))
                 
                 axios.get(`/api/user/account/getCat/${this.state.uid}`)
-                .then(result => this.setState({userCat: result.data}))
-                .catch(err => console.log("getCat", err))
+                // .then(result => console.log("getCat", result))
+                // .catch(err => console.log("getCat", err))
             }
             else{
                 console.log("no user")
             }
         })
     }
-
-
+    
     render(){
         switch(this.state.accountState){
             case 1:

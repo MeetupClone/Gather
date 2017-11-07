@@ -1,114 +1,73 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 
 
 import { fire as firebase} from "../../../../fire"
 import axios from 'axios';
 
-export class Notifications extends Component{
-    constructor(props){
+import { fire as firebase } from "../../../../fire"
+
+export class Notifications extends Component {
+    constructor(props) {
         super(props);
+
+        console.log(props)
 
         this.state = {
             uid: "",
-            preferences: [],
-            notifications: false,
+            notifications: '',
         }
 
-        this.turnNotificationsOn = this.turnNotificationsOn.bind(this);
-        this.turnNotificationsOff = this.turnNotificationsOff.bind(this);
+        this.changeNotificationPreferences = this.changeNotificationPreferences.bind(this);
 
     }
 
-    componentWillMount(){
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.setState({
-                    uid: user.uid,
-                    email: user.email
-                })
-                axios.get(`/api/user/account/getPref/${this.state.uid}`)
-                .then(result => {
-                    console.log(result.data )
-                    this.setState({notifications: result.data[0].notification_settings})})
-                .catch(err => console.log("getPref error", err))
-            }
-            else{
-                console.log("no user")
-            }
+    componentWillMount() {
+
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({ notifications: this.props.notifications, uid: this.props.uid })
+
+    }
+
+    changeNotificationPreferences() {
+        if (!this.state.notifications) {
+            this.setState({ notifications: true })
+        } else {
+            this.setState({ notifications: false })
         }
-        )
-    }
 
-    turnNotificationsOn(){
+        axios.put("/api/user/updatenotifs/", [this.state.notifications, this.state.uid]).then(response => console.log(response))
 
     }
 
-    turnNotificationsOff(){
-        
-    }
 
-
-    render(){
-        if(!this.state.notifications){
-            return(
+    render() {
+        let notificationText = null
+        let notificationButton = null
+        if (this.state.notifications) {
+            notificationText = (<h3>You currently have notifications turned on.</h3>)
+            notificationButton = (<button onClick={(e) => {
+                            this.changeNotificationPreferences()
+                    }}>Turn Off Notifications</button>)
+        } else {
+            notificationText = (
                 <div>
-                <h1>Manage Notification Page</h1>
                 <h3>You currently have notifications turned off.</h3>
-                <button onClick={(event) => {
-                                    this.setState({notifications: true})
-        
-        console.log(this.state.notifications)
+                <h4>Turn on notifications to recieve reminders about events!</h4>
+                </div>)
+            notificationButton = (<button onClick={(e) => {
+                            this.changeNotificationPreferences()
+                    }}>Turn On Notifications</button>)
+        }
 
-        axios.post("/api/user/updatenotifs", this.state)
-            .then(response => console.log(response))
-            .catch(err => console.log("he screm AHHHH", err))
-        
-                    }}>Allow Notifications</button>
-                <button onClick={(event) => {
-                            this.setState({notifications: false})
-
-        console.log(this.state.notifications)
-
-        axios.post("/api/user/updatenotifs", this.state)
-            .then(response => console.log(response))
-            .catch(err => console.log("he screm AHHH", err));
-                    }}>Allow No Notifications</button>
+        return (
+            <div>
+                <h1>Manage Notification Page</h1>
+                {notificationText}
+                {notificationButton} 
                 </div>
         )
     }
-        else if(this.state.notifications){
-            return(
-                <div>
-                <h1>Manage Notification Page</h1>
-                <h3>You currently have notifications turned on.</h3>
-                <button onClick={(event) => {
-                                    this.setState({notifications: true})
-        
-        console.log(this.state.notifications)
 
-        axios.post("/api/user/updatenotifs", this.state)
-            .then(response => console.log(response))
-            .catch(err => console.log("he screm AHHHH", err))
-        
-                    }}>Allow Notifications</button>
-                <button onClick={(event) => {
-                            this.setState({notifications: false})
-
-        console.log(this.state.notifications)
-
-        axios.post("/api/user/updatenotifs", this.state)
-            .then(response => console.log(response))
-            .catch(err => console.log("he screm AHHH", err));
-                    }}>Allow No Notifications</button>
-                </div>
-            )
-        }
-        else{
-            return(
-                <div>
-                    <h4>Loading...</h4>
-                </div>
-            )
-        }
-}
 }

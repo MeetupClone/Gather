@@ -27,4 +27,7 @@
   color: white; }
 
 .nav-text {
-  font-size: 20px; }
+  font-size: 20px;
+  position: fixed;
+  top: 10px; }
+

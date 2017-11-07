@@ -37,20 +37,22 @@ const updateUserProfile = (req,res) => {
 }
 
 const getUserPreferences = (req, res) => {
+	const { uid } = req.param;
 	req.app
 	.get('db')
 	.getUserPreferences(req.params.id)
 	.then(result => {
 		res.status(200).json(result)
-		
 	}).catch(err => console.log("get user pref endpoint not working", err))
 }
 
 const getUserCategories = (req, res) => {
+	const { uid } = req.param;
 	req.app
 	.get('db')
 	.getUserCategories(req.params.id)
 	.then(result => {
+		console.log(result)
 		res.status(200).json(result)
 	}).catch(err => console.log("get user cat endpoint not working", err))
 }
@@ -62,7 +64,7 @@ const updateNotifications = (req, res) => {
 		.updateNotifications(req.body)
 		.then(result => res.status(200).json(result))
 		.catch(err => console.log("update notifications endpoint not working", err))
-}
+	}
 
 
 module.exports = {

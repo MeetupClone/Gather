@@ -9,7 +9,7 @@ import { fire as firebase } from "../../fire"
 import "./login.css";
 import "../../helpers.css";
 
-import { loginWithEmailPassword, authWithFacebook, authWithTwitter, authWithGoogle} from "../../ducks/authentication-redux"
+import { loginWithEmailPassword, authWithFacebook } from "../../ducks/authentication-redux"
 
 export class Login extends Component {
     constructor(props) {
@@ -17,19 +17,20 @@ export class Login extends Component {
 
         this.state = {
             uid: '',
+            password: '',
+            name:'', 
             email: '',
             authenticated: false
         }
-        firebase.auth().onAuthStateChanged(user => {
-            console.log()
-            if (user) {
-                this.setState({
-                    uid: user.uid,
-                    email: user.email,
-                    authenticated: true
-                })
-            }
-        })
+        // firebase.auth().onAuthStateChanged(user => {
+        //     if (user) {
+        //         this.setState({
+        //             uid: user.uid,
+        //             email: user.email,
+        //             authenticated: true
+        //         })
+        //     }
+        // })
     }
 
     signOut() {
@@ -40,8 +41,12 @@ export class Login extends Component {
         })
     }
 
+    componentWillReceiveProps(x,y){
+        
+    }
+
     render() {
-        const { loginWithEmailPassword, authWithFacebook, authWithTwitter, authWithGoogle } = this.props;
+        const { loginWithEmailPassword, authWithFacebook } = this.props;
         if (this.state.authenticated) {
             return (
                 <div>
@@ -53,24 +58,22 @@ export class Login extends Component {
                 <div id="login-page">
                         <form onSubmit={(event)=> { 
                             event.preventDefault();
-                            loginWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
-                            <input name="email" type="email" ref={(input)=> {this.emailInput = input}} placeholder="Email"/>
-                            <input name="password" type="password" ref={(input)=> {this.passwordInput = input}} placeholder="Password"/>
+                            loginWithEmailPassword(this.emailInput.value, this.passwordInput.value)}}>
+                            <input name="email" type="email" onChange={(event) => {this.setState({email: event.target.value})}} placeholder="Email"/>
+                            <input name="password" type="password" onChange={(event) => {this.setState({password: event.target.value})}} placeholder="Password"/>
+                            <Link to="/forgotpassword">
+                            <button className="forgot-password-button">Forgot Password</button>
+                            </Link>
                             <button className="login-button box-shadow" onClick={(event)=> {
                                 event.preventDefault()
-
-                                loginWithEmailPassword(this.emailInput.value, this.passwordInput.value)}}>Log In </button>
+                                loginWithEmailPassword(this.state)}}>Log In </button>
                             <Link to="/register">
-                            <button className="register-button box-shadow">Register </button>
+                            <button className="register-button box-shadow">Create Account </button>
                             </Link>
                         </form>
                         <div id="providers-auth" className="center">
-                            <button className="auth-button google box-shadow" onClick={()=> {authWithGoogle() }}><img className="auth-icon" src={require( "./assets/google.svg")} alt="Google" />Sign In With Google </button>
                             <button className="auth-button facebook box-shadow" onClick={()=> {authWithFacebook() }}><img className="auth-icon" src={require( "./assets/facebook.svg")} alt="facebook" /> Sign In With Facebook </button>
-                            <button className="auth-button twitter box-shadow" onClick={()=> {authWithTwitter()}}><img className="auth-icon" src={require( "./assets/twitter.svg")} alt="twitter" />Sign In With Twitter</button>
-
                             <br/>
-
                         </div>
                 </div>
             )
@@ -86,8 +89,6 @@ const mapStateToProps = (state) => {
 const actions = {
     loginWithEmailPassword,
     authWithFacebook,
-    authWithTwitter,
-    authWithGoogle
 }
 
 export default connect(mapStateToProps, actions)(Login);

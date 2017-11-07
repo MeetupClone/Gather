@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createGroup } from "../../../ducks/group-redux"
 import { fire as firebase } from "../../../fire"
-
+import Category from "../../categories/category"
 export class CreateGroup extends Component {
     constructor(props) {
         super(props)
@@ -66,10 +66,11 @@ export class CreateGroup extends Component {
                 <input type="text" placeholder="Name" onChange={e=>this.handleChange(e.target.value, "name")} ref={(input) => {this.name = input}}></input>
                 <input type="text" placeholder="Category" onChange={e=>this.handleChange(e.target.value, "category")} ref={(input) => {this.category = input}}></input>
                 <input type="text" placeholder="Description" onChange={e=>this.handleChange(e.target.value, "description")} ref={(input) => {this.description = input}}></input>
-                  <img src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
-                 <input
-                    type="file" 
-                    onChange={(event)=>this.imageProcess(event)} />
+                <img src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
+                <input
+                  type="file"
+                  onChange={(event)=>this.imageProcess(event)} />
+                <Category/>
                 <input type="text" placeholder="Website" onChange={e=>this.handleChange(e.target.value, "website")} ref={(input) => {this.website = input}}></input>
                 <input type="text" placeholder="Twitter" onChange={e=>this.handleChange(e.target.value, "twitter")} ref={(input) => {this.twitter = input}}></input>
                 <input type="text" placeholder="Facebook" onChange={e=>this.handleChange(e.target.value, "facebook")} ref={(input) => {this.facebook = input}}></input>
@@ -87,7 +88,7 @@ export class CreateGroup extends Component {
 
 
 
-const mapStateToProps = (state) => { 
+const mapStateToProps = (state) => {
     console.log(state)
     return state }
 
