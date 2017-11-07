@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { fire as firebase} from "../../../../fire"
 import axios from 'axios';
 
-import { fire as firebase } from "../../../../fire"
 
 export class Notifications extends Component {
     constructor(props) {
@@ -36,6 +35,8 @@ export class Notifications extends Component {
         } else {
             this.setState({ notifications: false })
         }
+
+        //this.setState({notifications: !this.state.notifications})
 
         axios.put("/api/user/updatenotifs/", [this.state.notifications, this.state.uid]).then(response => console.log(response))
 

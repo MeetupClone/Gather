@@ -21,8 +21,8 @@ class App extends Component {
                         userDescription: result.data[0].description
                     }
                     localStorage.setItem('userData', JSON.stringify(userData))
-                })
-            }
+                 })
+          }
 
             let getEvents = axios.get('/api/events').then(result => { return result.data})
 

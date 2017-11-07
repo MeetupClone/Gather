@@ -36,12 +36,16 @@ export default class Account extends Component{
                     email: user.email
                 })
                 axios.get(`/api/user/account/getPref/${this.state.uid}`)
-                // .then(result => console.log("getPref", result))
-                // .catch(err => console.log("getPref error", err))
+                   .then(result => {
+                        console.log("getPref", result);
+                })
+                    .catch(err => console.log("getPref error", err))
                 
                 axios.get(`/api/user/account/getCat/${this.state.uid}`)
-                // .then(result => console.log("getCat", result))
-                // .catch(err => console.log("getCat", err))
+                    .then(result => {
+                        console.log("getCat", result);
+                })
+                    .catch(err => console.log("getCat", err))
             }
             else{
                 console.log("no user")
