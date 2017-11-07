@@ -19,7 +19,8 @@ export default class Account extends Component{
             accountState: 1,
             email: "",
             notifications: true,
-            preferences: ""
+            preferences: [],
+            userCat: []
         }
 
 
@@ -35,13 +36,12 @@ export default class Account extends Component{
                     uid: user.uid,
                     email: user.email
                 })
-                console.log(this.state)
                 axios.get(`/api/user/account/getPref/${this.state.uid}`)
-                .then(result => console.log("getPref", result))
+                .then(result => console.log(result))
                 .catch(err => console.log("getPref error", err))
                 
                 axios.get(`/api/user/account/getCat/${this.state.uid}`)
-                .then(result => console.log("getCat", result))
+                .then(result => this.setState({userCat: result.data}))
                 .catch(err => console.log("getCat", err))
             }
             else{
@@ -52,7 +52,6 @@ export default class Account extends Component{
 
 
     render(){
-        console.log(this.state)
         switch(this.state.accountState){
             case 1:
             return(

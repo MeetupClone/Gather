@@ -11,6 +11,7 @@ export class Preferences extends Component{
     }
 
     componentWillReceiveProps(props){
+        console.log(props)
         this.setState({preferences: this.props.preferences})
 
     }
