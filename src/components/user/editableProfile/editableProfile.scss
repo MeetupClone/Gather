@@ -21,4 +21,15 @@ textarea {
     font-size: 20px;
     color: #fff;
     background: #0F4C5C;
+		transition: all 0.3s ease-in-out;
+-webkit-transition: all 0.3s ease-in-out;
+-moz-transition: all 0.3s ease-in-out;
+
+}
+
+.edit-submit-button:hover {
+  box-shadow: 3px 3px 30px 3px rgba(37, 244, 120, .4);
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: rgba(55, 59, 82, .1);
 }

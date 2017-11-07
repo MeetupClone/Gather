@@ -63,9 +63,19 @@ input {
     font-size: 20px;
     color: #fff;
     background: #08A045;
-
+		transition: all 0.3s ease-in-out;
+-webkit-transition: all 0.3s ease-in-out;
+-moz-transition: all 0.3s ease-in-out;
 		// letter-spacing: 10px;
 }
+
+.login-button:hover {
+  box-shadow: 3px 3px 30px 3px rgba(37, 244, 120, .4);
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: rgba(55, 59, 82, .1);
+}
+
 
 .register-button {
     margin-top: 7px;
@@ -75,11 +85,22 @@ input {
     color: #fff;
     background: #0F4C5C;
 		// letter-spacing: 10px;
+		transition: all 0.3s ease-in-out;
+-webkit-transition: all 0.3s ease-in-out;
+-moz-transition: all 0.3s ease-in-out;
+
 }
 
 .twitter {
     color: #fff;
     background: #019BEA;
+}
+
+.register-button:hover {
+  box-shadow: 3px 3px 30px 3px rgba(37, 244, 120, .4);
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: rgba(55, 59, 82, .1);
 }
 
 .forgot-password-button {
@@ -89,5 +110,17 @@ input {
     background-color: #08A045;
     color: white;
     margin: 7px 0;
-    font-size: 16px; 
+    font-size: 16px;
+		transition: all 0.3s ease-in-out;
+-webkit-transition: all 0.3s ease-in-out;
+-moz-transition: all 0.3s ease-in-out;
+
+}
+
+
+.forgot-password-button:hover {
+  box-shadow: 3px 3px 30px 3px rgba(37, 244, 120, .4);
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: rgba(55, 59, 82, .1);
 }

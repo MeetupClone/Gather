@@ -8,8 +8,18 @@
     font-size: 20px;
     color: #fff;
     background: #08A045;
-
 		letter-spacing: 3px;
+		transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+}
+
+
+.upload-button:hover {
+	box-shadow: 3px 3px 30px 3px rgba(37, 244, 120, .4);
+	text-decoration: none;
+ 	border-radius: 5px;
+
 }
 
 .submitEvent-button {
@@ -23,6 +33,13 @@
     transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
+}
+
+.submitEvent-button:hover {
+	box-shadow: 3px 3px 30px 3px rgba(37, 244, 120, .4);
+	text-decoration: none;
+ 	border-radius: 5px;
+
 }
 
 
