@@ -8,8 +8,6 @@ const initialState = {
     email: '',
     authenticated: false
 }
-
-
 //CONSTANTS
 const AUTH_WITH_FACEBOOK = 'AUTH_WITH_FACEBOOK';
 const AUTH_WITH_EMAIL_PASSWORD = 'AUTH_WITH_EMAIL_PASSWORD'
@@ -24,36 +22,45 @@ const SIGN_OUT = 'SIGN_OUT';
 export function authWithFacebook(initialState) {
     return {
         type: AUTH_WITH_FACEBOOK,
-        initialState
+        payload: firebase.auth().signInWithPopup(facebookProvider)
+            .then(result => {
+                console.log(result)
+                if (result.additionalUserInfo.isNewUser) {
+                    console.log(result, "from redux")
+                    return axios.post('/api/user/createUser', [result.user.uid, result.user.email, result.user.displayName, result.user.photoUrl])
+                }
+                return result.user
+
+            })
     }
 }
 
-export function authWithEmailPassword(email, password) {
+export function authWithEmailPassword(initialState) {
     return {
         type: AUTH_WITH_EMAIL_PASSWORD,
-        payload: {
-            email,
-            password
-        }
+        payload: firebase.auth().signInWithEmailAndPassword(initialState.email, initialState.password)
+            .then(user => {
+                return user
+            })
     }
 }
 
-export function loginWithEmailPassword(email, password, name) {
-    console.log(email, password)
+export function loginWithEmailPassword(initialState) {
+    console.log(initialState)
     return {
         type: LOGIN_WITH_EMAIL_PASSWORD,
-        payload: {
-            email,
-            password,
-            name
-        }
+        payload: firebase.auth().signInWithEmailAndPassword(initialState.email, initialState.password)
+            .then(user => {
+                console.log(user)
+                return user
+            })
     }
 }
 
 export function getAuthInfo(initialState) {
     return {
         type: GET_AUTH_INFO,
-        initialState
+        payload: firebase.auth().onAuthStateChanged(user => { return user })
     }
 }
 
@@ -79,7 +86,7 @@ export default function AuthenticationReducer(state = initialState, action) {
             let passwordValue = action.payload.password
             let nameValue = action.payload.name
             firebase.auth().createUserWithEmailAndPassword(emailValue, passwordValue).then(user => {
-                axios.post('/api/user/createUser', [user.uid, user.email, nameValue])
+                axios.post('/api/user/createUser', [user.uid, user.email, nameValue, 'https://firebasestorage.googleapis.com/v0/b/gatherv0-b3651.appspot.com/o/defaultPic.webp?alt=media&token=73d67fbf-6f0e-40aa-8fc9-15ec9e8e4fd9'])
                 console.log(user)
                 return Object.assign({}, state, {
                     uid: user.uid,
@@ -87,38 +94,25 @@ export default function AuthenticationReducer(state = initialState, action) {
                     authenticated: true
                 })
             })
-            return state;
-        case AUTH_WITH_FACEBOOK:
-            firebase.auth().signInWithRedirect(facebookProvider)
-                .then((user, error) => {
-                    return Object.assign({}, state, { uid: user.uid, email: user.email, authenticated: true })
-                });
-            return state
+            return Object.assign({}, state, { authenticated: true })
 
-        case LOGIN_WITH_EMAIL_PASSWORD:
-            let email = action.payload.email;
-            let password = action.payload.password
-            firebase.auth().signInWithEmailAndPassword(email, password)
-                .then(user => {
-                    return Object.assign({}, state, {
-                        uid: user.uid,
-                        email: user.email,
-                        authenticated: true
-                    })
-                })
-            return state;
+        case AUTH_WITH_FACEBOOK + "_PENDING":
+            return Object.assign({}, state, { authenticated: false })
+        case AUTH_WITH_FACEBOOK + "_FULFILLED":
+            let user = action.payload
+            return { user, authenticated: true }
 
-        case GET_AUTH_INFO:
-            firebase.auth().onAuthStateChanged(user => {
-                console.log(user)
-                return Object.assign({}, state, {
-                    uid: user.uid,
-                    email: user.email,
+        case LOGIN_WITH_EMAIL_PASSWORD + "_PENDING":
+            return Object.assign({}, state, { authenticated: false })
 
-                })
-            })
-            return state
-
+        case LOGIN_WITH_EMAIL_PASSWORD + "_FULFILLED":
+            let userInfo = action.payload
+            return { userInfo, authenticated: true }
+        case GET_AUTH_INFO + "_PENDING":
+            return Object.assign({}, state, { authenticated: false })
+        case GET_AUTH_INFO + "_FULFILLED":
+            let userInfo2 = action.payload
+            return { userInfo2, authenticated: true }
         case REGISTER_FCM_KEY:
             const messaging = firebase.messaging()
             messaging.requestPermission().then(result => {
