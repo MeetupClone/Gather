@@ -37,7 +37,6 @@ export default class Footer extends Component {
         </Link>
       <div className="footer-background">
       <h5 className="footer-links"><Link to="/" className="footer-home">Home </Link><Link to="/faq" className="footer-home"> About </Link><Link to="/user/account" className="footer-home"> Settings</Link></h5>
-      <h6 className="footer-milk-steak"> Milk Steak LLC</h6>
     </div>
     </div>
             )
@@ -49,7 +48,6 @@ export default class Footer extends Component {
         </Link>
       <div className="footer-background">
       <h5 className="footer-links"><Link to="/" className="footer-home">Home</Link><Link to="/faq" className="footer-home"> About</Link><Link to="/user/account" className="footer-home">Settings</Link></h5>
-      <h6 className="footer-milk-steak"> Milk Steak LLC</h6>
     </div>
     </div>
             )

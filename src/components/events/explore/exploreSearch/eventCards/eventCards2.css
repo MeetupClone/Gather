@@ -35,7 +35,7 @@
   font-weight: bold; }
 
 .event-card-desc {
-  text-align: center; }
+  text-align: left; }
 
 .event-title-link {
   color: black;
@@ -43,7 +43,12 @@
 
 .event-card-loading-container {
   justify-content: space-around;
-  border: 25px solid;
-  box-shadow: 10px 10px 5px #888888; }
+  background-color: white;
+  height: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23); }
 
 /*# sourceMappingURL=eventCards.css.map */
+
+/*# sourceMappingURL=eventCards2.css.map */

@@ -1,8 +1,6 @@
 .footer-all {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  margin-top: -200px; }
+  position: absolute;
+  width: 100%;}
 
 .footer-links {
   text-align: left;
@@ -30,6 +28,15 @@
   height: 50px;
   font-size: 20px;
   color: #fff;
-  background: #08A045; }
+  background: #08A045;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out; }
+
+.footer-create-button:hover {
+  box-shadow: 3px 3px 30px 3px rgba(37, 244, 120, 0.4);
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: rgba(55, 59, 82, 0.1); }
 
 /*# sourceMappingURL=footer.css.map */
