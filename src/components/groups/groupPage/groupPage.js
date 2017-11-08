@@ -33,7 +33,8 @@ export class GroupPage extends Component {
             currentUserUid: '',
             joined: false,
             edit: false,
-            groupEvents: []
+            groupEvents: [],
+            groupMembers: 0
 
         }
 
@@ -71,7 +72,9 @@ export class GroupPage extends Component {
                 groupPic: result.data[0].group_picture,
                 groupFB: result.data[0].facebook, 
                 groupOrganizerUid: result.data[0].group_owner_uid,
-                groupTwitter: result.data[0].twitter })
+                groupTwitter: result.data[0].twitter,
+                groupMembers: result.data[0].members
+            })
         })
     }
 
@@ -119,6 +122,7 @@ export class GroupPage extends Component {
             {leaveButton}
                 <h1>GROUP PAGE</h1>
                 <h1>{this.state.groupName}</h1>
+                <h3>{this.state.groupMembers} Member(s)</h3>
                 <h3>{this.state.groupDesc}</h3>
                 <div>{this.state.groupEvents.map(key => {
                     return(
