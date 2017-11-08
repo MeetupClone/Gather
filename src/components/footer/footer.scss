@@ -19,7 +19,7 @@
 .footer-milk-steak {
     color: white;
     text-align: right;
-    margin-right: 25px;     
+    margin-right: 25px;
 }
 
 .footer-create-button {
@@ -29,4 +29,15 @@
     font-size: 20px;
     color: #fff;
     background: #08A045;
+    transition: all 0.3s ease-in-out;
+-webkit-transition: all 0.3s ease-in-out;
+-moz-transition: all 0.3s ease-in-out;
+
+}
+
+.footer-create-button:hover {
+  box-shadow: 3px 3px 30px 3px rgba(37, 244, 120, .4);
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: rgba(55, 59, 82, .1);
 }

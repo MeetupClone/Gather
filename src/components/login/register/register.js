@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { authWithEmailPassword, authWithFacebook } from "../../../ducks/authentication-redux";
 
 import "../login.css";
-
+import Category from "../../categories/category"
 
 export class Register extends Component {
     constructor(props) {
@@ -34,6 +34,7 @@ export class Register extends Component {
                 <input name="email" type="email" ref={(input) => {this.nameInput = input}} placeholder="Name"/>
                 <input name="email" type="email" ref={(input) => {this.emailInput = input}} placeholder="Email"/>
                 <input name="password" type="password" ref={(input) => {this.passwordInput = input}} placeholder="Password"/>
+                <Category/>
                 <button className="login-button box-shadow" onClick={(event) => {
                     event.preventDefault()
                     authWithEmailPassword(this.emailInput.value, this.passwordInput.value, this.nameInput.value)}}> Create Account </button>

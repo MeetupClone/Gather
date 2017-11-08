@@ -14,7 +14,6 @@ import moment from "moment"
 export class CreateEvents extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             eventPic: '',
             eventName: '',
@@ -23,15 +22,14 @@ export class CreateEvents extends Component {
             eventDate: '',
             location: '',
             placeId: '',
-            category: '',
+            categories: '',
             created: false,
             website: '',
             confirmModal: false,
             file: '',
             imagePreviewUrl: '',
-            cronTime: '',
+            cronTime: ''
         }
-
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({
@@ -39,6 +37,7 @@ export class CreateEvents extends Component {
                 })
             }
         })
+        this.updateParent = (state) => this.props.updateParent(this.state)
         this.imageProcess = this.imageProcess.bind(this)
         this.handleChange = this.handleChange.bind(this);
     }
@@ -96,7 +95,7 @@ export class CreateEvents extends Component {
               this.description = input}}/>
               <br/>
               <br/>
-              <PlaceSearchForm palceholder="Address" updateParent={(location) => {
+              <PlaceSearchForm placeholder="Address" updateParent={(location) => {
                 this.setState({location: location.address, placeId: location.placeId})
               }}/>
               <br/>
@@ -106,8 +105,8 @@ export class CreateEvents extends Component {
               }}/>
               <input  type="text" placeholder="Category" onChange={e=>this.handleChange(e.target.value, "category")}  ref={(input)=>{
               this.category=input}}/>
-              <Category/>
-
+              <Category updateParent={(state) => {
+                this.setState({categories: state})}}/>
                 <br/>
                 <br/><input  type="text" placeholder="Website" onChange={e=>this.handleChange(e.target.value, "website")}  ref={(input)=>{
                 this.website=input}}/>

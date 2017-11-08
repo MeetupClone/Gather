@@ -43,7 +43,6 @@ const getUserPreferences = (req, res) => {
 	.getUserPreferences(req.params.id)
 	.then(result => {
 		res.status(200).json(result)
-
 	}).catch(err => console.log("get user pref endpoint not working", err))
 }
 
@@ -53,7 +52,6 @@ const getUserCategories = (req, res) => {
 	.get('db')
 	.getUserCategories(req.params.id)
 	.then(result => {
-		console.log(result)
 		res.status(200).json(result)
 	}).catch(err => console.log("get user cat endpoint not working", err))
 }

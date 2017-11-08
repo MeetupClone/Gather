@@ -10,6 +10,7 @@ with rows as (INSERT INTO events (
                     place_id)
 
 VALUES (${eventPic}, ${eventName}, ${description}, ${location}, ${category}, ${uid}, ${eventDate}, ${cronTime}, ${placeId}) 
-RETURNING id, oragnizer_uid
+RETURNING id, organizer_uid
 )
 INSERT INTO events_members (event_id, user_id) SELECT id, organizer_uid from rows;
+SELECT id FROM events ORDER BY id DESC limit 1;

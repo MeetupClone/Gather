@@ -9,7 +9,7 @@ export class CreateGroup extends Component {
 
         this.state = {
             name: '',
-            category: '',
+            categories: '',
             description: '',
             website: '',
             twitter: '',
@@ -26,8 +26,9 @@ export class CreateGroup extends Component {
                 this.setState({ uid: user.uid })
             }
         })
-        this.imageProcess = this.imageProcess.bind(this)
+        this.imageProcess = this.imageProcess.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.updateParent = (state) => this.props.updateParent(this.state)
     }
 
     handleChange(val, prop) {
@@ -63,18 +64,19 @@ export class CreateGroup extends Component {
               {confirmModalElement}
               <h1>Create Group</h1>
               <form>
-                <input type="text" placeholder="Name" onChange={e=>this.handleChange(e.target.value, "name")} ref={(input) => {this.name = input}}></input>
-                <input type="text" placeholder="Category" onChange={e=>this.handleChange(e.target.value, "category")} ref={(input) => {this.category = input}}></input>
-                <input type="text" placeholder="Description" onChange={e=>this.handleChange(e.target.value, "description")} ref={(input) => {this.description = input}}></input>
+                
                 <img src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
                 <input
                   type="file"
-                  onChange={(event)=>this.imageProcess(event)} />
-                <Category/>
-                <input type="text" placeholder="Website" onChange={e=>this.handleChange(e.target.value, "website")} ref={(input) => {this.website = input}}></input>
-                <input type="text" placeholder="Twitter" onChange={e=>this.handleChange(e.target.value, "twitter")} ref={(input) => {this.twitter = input}}></input>
-                <input type="text" placeholder="Facebook" onChange={e=>this.handleChange(e.target.value, "facebook")} ref={(input) => {this.facebook = input}}></input>
-                <input type="text" placeholder="Instagram" onChange={e=>this.handleChange(e.target.value, "instagram")} ref={(input) => {this.instagram = input}}></input>
+                  onChange={(event)=>this.imageProcess(event)} /> 
+                  <input type="text" placeholder="Name" onChange={e=>this.handleChange(e.target.value, "name")} />
+                <input type="text" placeholder="Description" onChange={e=>this.handleChange(e.target.value, "description")} />
+                <Category updateParent={(state) => {
+                this.setState({categories: state})}}/>                
+                <input type="text" placeholder="Website" onChange={e=>this.handleChange(e.target.value, "website")} ></input>
+                <input type="text" placeholder="Twitter" onChange={e=>this.handleChange(e.target.value, "twitter")} ></input>
+                <input type="text" placeholder="Facebook" onChange={e=>this.handleChange(e.target.value, "facebook")} ></input>
+                <input type="text" placeholder="Instagram" onChange={e=>this.handleChange(e.target.value, "instagram")} ></input>
               </form>
               <button onClick={(event) => {
                 event.preventDefault()
@@ -89,8 +91,8 @@ export class CreateGroup extends Component {
 
 
 const mapStateToProps = (state) => {
-    console.log(state)
-    return state }
+    return state
+}
 
 const actions = {
     createGroup
