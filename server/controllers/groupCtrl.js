@@ -62,15 +62,16 @@ const deleteGroup = (req, res) => {
 }
 
 const createGroup = (req, res) => {
-    for (var i = 0; i <= 0; i++) {
-        req.app
-            .get('db')
-            .createGroup(req.body)
-            .then(result => {
-                return res.json(result)
+    req.app
+        .get('db')
+        .createGroup(req.body)
+        .then(result => {
+            req.body.categories.map(x => {
+                x = x.toLowerCase();
+                req.app.get('db').insertGroupCategories(result[0].id, x)
             })
-            .catch(err => console.log("create group not working", err));
-    }
+        })
+        .catch(err => console.log("create group not working", err));
 }
 
 const getGroupMembers = (req, res) => {

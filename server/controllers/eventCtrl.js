@@ -4,7 +4,13 @@ const createEvent = (req, res) => {
     req.app
         .get('db')
         .createEvent(req.body)
-        .then(result => { return res.json(result) })
+        .then(result => {
+            req.body.categories.map(x => {
+                x = x.toLowerCase();
+                req.app.get('db').insertEventCategories(result[0].id, x)
+            })
+            return res.json(result)
+        })
 }
 
 const joinEvent = (req, res) => {
@@ -45,11 +51,11 @@ const leaveEvent = (req, res) => {
 
 const deleteEvent = (req, res) => {
     req.app
-    .get('db')
-    .deleteEvent(req.body)
-    .then(result => {
-        return res.json(result)
-    })
+        .get('db')
+        .deleteEvent(req.body)
+        .then(result => {
+            return res.json(result)
+        })
 }
 
 const getAttendingEvents = (req, res) => {

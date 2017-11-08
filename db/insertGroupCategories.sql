@@ -1,0 +1,1 @@
+INSERT INTO category_groups (group_id, category_name) VALUES ($1, $2);

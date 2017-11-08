@@ -1,0 +1,1 @@
+INSERT INTO category_events (event_id, category_name) VALUES ($1, $2);
