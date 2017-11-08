@@ -8,31 +8,33 @@ import './../../helpers.css'
 
 
 export default class Navbar extends Component {
+    constructor(props){
+        super(props)
+
+        this.state = {
+            authenticated: false
+        }
+    }
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user){
+                this.setState({authenticated: true})
+            }
+        })
+    }
+
     render() {
         let accountButton = null
-        if (localStorage.getItem('userData')) {
-            if (JSON.parse(localStorage.getItem('userData')).uid) {
+        if (this.state.authenticated) {
                 accountButton = (<Link to = "/user">
-		            <img src={require('./assets/settings.svg')} alt ="Settings"/>
-		          </Link>)
+                    <img src={require('./assets/settings.svg')} alt ="Settings"/>
+                  </Link>)
             } else {
                 accountButton = (<Link to = "/login">
-		             Log In 
-		          </Link>)
+                     Log In 
+                  </Link>)
             }
-        } else {
-            firebase.auth().onAuthStateChanged(user => {
-                if (user) {
-                    accountButton = (<Link to = "/login">
-		             Log In 
-		          </Link>)
-                } else {
-                	accountButton = (<Link to = "/user">
-		            <img src={require('./assets/settings.svg')} alt ="Settings"/>
-		          </Link>)
-                }
-            })
-        }
         return (
             <div className="App">
 		        <header className="nav-header nunito-text">

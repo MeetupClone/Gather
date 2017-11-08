@@ -29,7 +29,7 @@ export class EventCards extends Component {
 
     componentWillMount() {
         axios.get('/api/events').then(result =>
-            this.setState({ loading: true, events: result.data }))
+            this.setState({ loading: false, events: result.data }))
 
 
     };
