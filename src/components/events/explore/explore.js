@@ -23,7 +23,6 @@ export default class Explore extends Component {
     }
 
     componentWillMount() {
-        console.log(JSON.parse(localStorage.getItem('events')))
         if (JSON.parse(localStorage.getItem('events'))) {
             console.log("there")
             this.setState({ events: JSON.parse(localStorage.getItem('events')).events })

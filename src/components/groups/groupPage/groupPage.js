@@ -93,7 +93,6 @@ export class GroupPage extends Component {
         }
 
         if (this.state.edit) {
-            console.log("yo")
             return (<GroupDashboard props={this.state}/>)
         }
 

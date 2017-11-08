@@ -9,6 +9,7 @@ class App extends Component {
 
     constructor() {
         super();
+        localStorage.setItem('userData', '')
         firebase.auth().onAuthStateChanged(user => {
             if (localStorage.getItem('userData')) {
                 axios.get(`/api/user/getUserInfo/${user.uid}`).then(result => {
