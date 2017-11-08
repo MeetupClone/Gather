@@ -8,6 +8,12 @@ const initialState = {
     email: '',
     authenticated: false
 }
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        initialState.uid = user.uid
+    }
+})
+
 //CONSTANTS
 const AUTH_WITH_FACEBOOK = 'AUTH_WITH_FACEBOOK';
 const AUTH_WITH_EMAIL_PASSWORD = 'AUTH_WITH_EMAIL_PASSWORD'
