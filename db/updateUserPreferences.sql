@@ -1,4 +1,4 @@
 UPDATE user_preferences 
-    SET notification_settings = $1
+    SET preference_settings = $1
     WHERE userid = $2
     RETURNING *;

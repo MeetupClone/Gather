@@ -15,15 +15,20 @@ export default class Account extends Component{
         super(props);
 
         this.state = {
-            uid: "",
+            uid: "sZGGK82kTvg5vwrIfpfaM1Kzmk22",
             accountState: 1,
             email: "",
             notifications: true,
-            preferences: ""
+            preferences: [],
+            userCat: []
         }
 
 
-        // this.componentWillMount = this.componentWillMount.bind(this)
+        this.changeView = this.changeView.bind(this)
+    }
+
+    changeView(val){
+        this.setState({accountState: val})
     }
 
     componentWillMount(){
@@ -34,14 +39,17 @@ export default class Account extends Component{
                     uid: user.uid,
                     email: user.email
                 })
-                console.log(this.state)
                 axios.get(`/api/user/account/getPref/${this.state.uid}`)
-                // .then(result => console.log("getPref", result))
-                // .catch(err => console.log("getPref error", err))
+                   .then(result => {
+                        this.setState({notifications: result.data.notification_settings, preferences: result.data.preference_settings})
+                })
+                    .catch(err => console.log("getPref error", err))
                 
                 axios.get(`/api/user/account/getCat/${this.state.uid}`)
-                // .then(result => console.log("getCat", result))
-                // .catch(err => console.log("getCat", err))
+                    .then(result => {
+                        this.setState({userCat: result.data})
+                })
+                    .catch(err => console.log("getCat", err))
             }
             else{
                 console.log("no user")
@@ -50,58 +58,34 @@ export default class Account extends Component{
     }
     
     render(){
+
+        //fiddle with this!
+
+        let displayMe = null;
+
         switch(this.state.accountState){
             case 1:
+            displayMe = (<Notifications notifications={this.state.notifications} uid={this.state.uid}/>)
+            break;
+
+            case 2:
+            displayMe = (<Preferences preferences={this.state.preferences} uid={this.state.uid} userCat={this.state.userCat}/>)
+            break;
+        }
             return(
                 <div className="account-main-container">
                     <div className="account-left-navbar">
                         <ul className="account-left-options">
-                            <li onClick={(e) => this.setState({ accountState: 1})}>Notifications</li>
-                            <li onClick={(e) => this.setState({ accountState: 2})}>Preferences</li>
-                            <li onClick={(e) => this.setState({ accountState: 3})}>Edit Info</li>
+                            <li onClick={(e) => this.changeView(1)}>Notifications</li>
+                            <li onClick={(e) => this.changeView(2)}>Preferences</li>
                             <li>Link to Logout</li>
                         </ul>
                     </div>
                     <div className="account-right-content">
-                    <Notifications notifications={this.state.notifications} uid={this.state.uid}/>
+                    {displayMe}
                     </div>
                 </div>
                 )
-            case 2:
-            return(
-                <div className="account-main-container">
-                    <div className="account-left-navbar">
-                        <ul className="account-left-options">
-                            <li onClick={(e) => this.setState({ accountState: 1})}>Notifications</li>
-                            <li onClick={(e) => this.setState({ accountState: 2})}>Preferences</li>
-                            <li onClick={(e) => this.setState({ accountState: 3})}>Edit Info</li>
-                            <li>Link to Logout</li>
-                        </ul>
-                    </div>
-                    <div className="account-right-content">
-                    <Preferences preferences={this.state.preferences} uid={this.state.uid}/>                    
-                    </div>
-                </div>
-            )
-            case 3:
-            return(
-                <div className="account-main-container">
-                    <div className="account-left-navbar">
-                        <ul className="account-left-options">
-                            <li onClick={(e) => this.setState({ accountState: 1})}>Notifications</li>
-                            <li onClick={(e) => this.setState({ accountState: 2})}>Preferences</li>
-                            <li onClick={(e) => this.setState({ accountState: 3})}>Edit Info</li>
-                            <li>Link to Logout</li>
-                        </ul>
-                    </div>
-                    <div className="account-right-content">
-                    <EditInfo/>
-                    </div>
-                </div>
-            )
-            default: 
-            break;
-        }
 
         
 

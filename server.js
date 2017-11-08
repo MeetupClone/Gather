@@ -35,7 +35,8 @@ app.post('/api/user/createUser', userCtrl.createUser)
 app.put('/api/user/registerFCMKey', userCtrl.registerFCMKey)
 app.get('/api/user/getUserInfo/:userId', userCtrl.getUserInfo)
 app.post('/api/user/profile/update', userCtrl.updateUserProfile)
-app.put('/api/user/updatenotifs', userCtrl.updateNotifications)
+app.post('/api/user/updatenotifs', userCtrl.updateNotifications)
+app.post('/api/user/updateprefs', userCtrl.updatePreferences)
 
 app.get('/api/user/account/getPref/:id', userCtrl.getUserPreferences)
 app.get('/api/user/account/getCat/:id', userCtrl.getUserCategories)
@@ -55,6 +56,7 @@ app.get('/api/events', eventCtrl.getAllEvents)
 app.get('/api/event/:id', eventCtrl.getEventById)
 app.get('/api/event/user/:id', eventCtrl.getEventByUserId)
 app.get('/api/relevant/event/:id', eventCtrl.getRelevantEvents)
+app.get('/api/event/group/:id', eventCtrl.getEventsByGroupId)
 
 const groupCtrl = require('./server/controllers/groupCtrl')
 app.get('/api/group/:id', groupCtrl.getGroupById)
@@ -66,6 +68,7 @@ app.post('/api/group/join', groupCtrl.joinGroup)
 app.post('/api/group/leave', groupCtrl.leaveGroup)
 app.post('/api/group/edit', groupCtrl.editGroup)
 app.post('/api/group/delete', groupCtrl.deleteGroup)
+app.get('/api/group/owner/:id', groupCtrl.getGroupByOwner)
 
 
 app.listen(port, () => {

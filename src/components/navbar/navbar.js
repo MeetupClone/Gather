@@ -35,7 +35,7 @@ export default class Navbar extends Component {
         }
         return (
             <div className="App">
-		        <header className="nav-header nunito-text t">
+		        <header className="nav-header nunito-text">
 		          <Link to ="/">
 		            <img src={require('./assets/home.svg')} alt ="Home"/>
 		          </Link>

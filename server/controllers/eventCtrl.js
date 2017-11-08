@@ -111,6 +111,14 @@ const getRelevantEvents = (req, res) => {
         .catch(err => console.log("get relevant events not working", err))
 }
 
+const getEventsByGroupId = (req, res) => {
+    req.app
+        .get('db')
+        .getEventsByGroupId(req.params.id)
+        .then(results => res.status(200).json(results))
+        .catch(err => console.log("get events by group id endpoint not working", err))
+}
+
 module.exports = {
     getAllEvents,
     getAttendingEvents,
@@ -122,6 +130,7 @@ module.exports = {
     joinEvent,
     getEventByUserId,
     editEvent,
-    getRelevantEvents
+    getRelevantEvents,
+    getEventsByGroupId
 
 }
