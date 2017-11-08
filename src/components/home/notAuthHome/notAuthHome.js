@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import './notAuthHome.css';
+import "../../../helpers.css";
+
 import Footer  from '../../footer/footer'
 export default class NotAuthHome extends Component {
     render(){
@@ -12,10 +14,8 @@ export default class NotAuthHome extends Component {
                 <h3>gath·er <br/> 1. come together; assemble or accumulate.</h3>
               </div>
               <div className="home-event-card">
-                <img className="home-event-card-pic" src="https://petapixel.com/assets/uploads/2015/03/iStock-Unfinished-Business-5.jpg" alt="event pic"/>
+                <img className="home-event-card-pic" src="http://www.joshuanhook.com/wp-content/uploads/2017/07/explore.jpg" alt="event pic"/>
                 <div >
-                  <h2>Explore</h2>
-                  <p> Blah Blah Blah</p>
                   <Link to="/explore">
                   <button className="home-buttonz"> Explore</button>
                   </Link>
@@ -23,12 +23,12 @@ export default class NotAuthHome extends Component {
               </div>
               <div className="home-create-card">
                 <div>
-                  <img className="home-create-card-pic" src="https://petapixel.com/assets/uploads/2015/03/iStock-Unfinished-Business-5.jpg" alt="create pic"/>
+                  <img className="home-create-card-pic" src="https://cdn.yourstory.com/wp-content/uploads/2016/11/creative-daily-life.png" alt="create pic"/>
                 </div>
 
 
-              </div>
               <Footer/>
+              </div>
             </div>
         )
     }

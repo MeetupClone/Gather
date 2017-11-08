@@ -5,6 +5,8 @@ import axios from 'axios';
 import { RecommendedEvents } from './recommendedEvents/recommendedEvents.js';
 import { ExploreSearch } from './exploreSearch/exploreSearch';
 
+import Footer  from '../../footer/footer'
+
 
 
 
@@ -38,10 +40,7 @@ export default class Explore extends Component {
             <div>
               <div><RecommendedEvents/></div>
               <div><ExploreSearch/></div>
-              <div>Footer</div>
-
-
-
+              <div><Footer/></div>
             </div>
         )
     }

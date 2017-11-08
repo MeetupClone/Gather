@@ -31,24 +31,24 @@ export default class Footer extends Component {
     render() {
         if (this.state.user) {
             return (
-                <div>
+                <div className="footer-all">
         <Link to="/event/create">
       <button className="footer-create-button">Create</button>
         </Link>
       <div className="footer-background">
-      <h5 className="footer-links"><Link to="/" className="footer-home">Home </Link><Link to="/faq"> About </Link><span className="footer-home"> Settings</span></h5>
+      <h5 className="footer-links"><Link to="/" className="footer-home">Home </Link><Link to="/faq" className="footer-home"> About </Link><Link to="/user/account" className="footer-home"> Settings</Link></h5>
       <h6 className="footer-milk-steak"> Milk Steak LLC</h6>
     </div>
     </div>
             )
         } else {
             return (
-                <div>
+                <div className="footer-all">
         <Link to="/login">
       <button className="footer-create-button">Create</button>
         </Link>
       <div className="footer-background">
-      <h5 className="footer-links"><Link to="/" className="footer-home">Home </Link><Link to="/faq"> About </Link><Link to="/user/account" className="footer-home"> Settings</Link></h5>
+      <h5 className="footer-links"><Link to="/" className="footer-home">Home</Link><Link to="/faq" className="footer-home"> About</Link><Link to="/user/account" className="footer-home">Settings</Link></h5>
       <h6 className="footer-milk-steak"> Milk Steak LLC</h6>
     </div>
     </div>

@@ -145,7 +145,7 @@ export class GroupCards extends Component {
                         return(
                             <div key={key.id} className="group-card-container">
                                 <div className="group-card-image">
-                                    <img src={key.group_picture} alt={key.name}/>
+                                    <img className="group-card-image" src={key.group_picture} alt={key.name}/>
                                 </div>
                                 <div className="group-card-content">
                                     <div>

@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fire as firebase } from "../../../fire"
+import { fire as firebase } from "../../../fire";
 import './createEvents.css';
-import { createEvent } from "../../../ducks/event-redux"
+import { createEvent } from "../../../ducks/event-redux";
 import PlaceSearchForm from "../../placeSearchForm/placeSearchForm";
-import Category from "../../categories/category"
+import Category from "../../categories/category";
 
-import Datetime from "react-datetime"
-import moment from "moment"
+import Datetime from "react-datetime";
+import moment from "moment";
+
+import axios from 'axios';
 
 
 export class CreateEvents extends Component {
