@@ -20,7 +20,7 @@ export class Login extends Component {
             password: '',
             name:'', 
             email: '',
-            authenticated: false
+            authenticated: false,
         }
         // firebase.auth().onAuthStateChanged(user => {
         //     if (user) {
