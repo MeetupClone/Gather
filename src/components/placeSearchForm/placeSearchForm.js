@@ -9,6 +9,7 @@ class PlaceSearchForm extends React.Component {
         this.state = { address: '',
         placeId: '' }
         this.onChange = (address) => this.setState({ address })
+        let state = this.state
         this.updateParent = (state) => this.props.updateParent(state)
     }
 
@@ -21,8 +22,6 @@ class PlaceSearchForm extends React.Component {
             })
     }
 
-    updateP
-
     render() {
         const inputProps = {
             value: this.state.address,
@@ -30,7 +29,6 @@ class PlaceSearchForm extends React.Component {
             onBlur: this.handleFormSubmit,
             placeholder: 'Pick a Location'
         }
-
         const AutocompleteItem = ({ formattedSuggestion }) => (
             <div>
       			<strong>{ formattedSuggestion.mainText }</strong>{' '}

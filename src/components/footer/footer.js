@@ -19,7 +19,6 @@ export default class Footer extends Component {
 
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
-            console.log()
             if (user) {
                 this.setState({
                     user: true,

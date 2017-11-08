@@ -21,9 +21,17 @@ export default class Navbar extends Component {
 		          </Link>)
             }
         } else {
-        	firebase.auth().onAuthStateChanged(user => {
-        		console.log(user)
-        	})
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    accountButton = (<Link to = "/login">
+		             Log In 
+		          </Link>)
+                } else {
+                	accountButton = (<Link to = "/user">
+		            <img src={require('./assets/settings.svg')} alt ="Settings"/>
+		          </Link>)
+                }
+            })
         }
         return (
             <div className="App">
