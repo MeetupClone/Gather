@@ -1,64 +1,80 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import axios from 'axios';
 
 import './eventCards.css';
 import '../../../../../helpers.css'
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export class EventCards extends Component{
-    constructor(props){
+export class EventCards extends Component {
+    constructor(props) {
         super(props);
 
-        this.state ={
+        this.state = {
             events: [],
             searchFilter: "name",
             searchText: "",
             searchField: 1,
+            loading: true
         }
 
-      this.componentWillMount = this.componentWillMount.bind(this);
-    }
-    
-    componentWillReceiveProps(props){
-        this.setState({searchFilter: props.searchFilter, searchText: props.searchText})
-
+        this.componentWillMount = this.componentWillMount.bind(this);
     }
 
-    componentWillMount(){
-        axios.get('/api/events').then(result => 
-            this.setState({events: result.data}))  
+    componentWillReceiveProps(props) {
+        this.setState({ searchFilter: props.searchFilter, searchText: props.searchText })
 
-            
-        };
+    }
 
-    shouldComponentUpdate(newProps, newState){
-        
+    componentWillMount() {
+        axios.get('/api/events').then(result =>
+            this.setState({ loading: true, events: result.data }))
+
+
+    };
+
+    shouldComponentUpdate(newProps, newState) {
+
         const updatePropsText = this.props.searchText !== newProps.searchText;
         const updatePropsFilter = this.props.searchFilter !== newProps.searchFilter;
 
         return !updatePropsText || !updatePropsFilter;
     }
-    
 
 
-    render(){
 
-        this.state.events = this.state.events.sort(function(a,b){
+    render() {
+        this.state.events = this.state.events.sort(function(a, b) {
             // Turn your strings into dates, and then subtract them
             // to get a value that is either negative, positive, or zero.
             return new Date(a.event_date) - new Date(b.event_date);
-          });
+        });
 
         let now = new Date();
 
-        const {searchText, searchFilter} = this.props;
+        const { searchText, searchFilter } = this.props;
+        let appShell = null;
 
-        if(searchText !== "" && searchFilter === "Name"){
-            
-            return(
-                <div>{this.state.events.forEach(function(key){
+        if (this.state.loading) {
+            let arr = []
+            for (var i = 0; i < 5; i++) {
+                arr.push(
+                <h1 key = {i}> loading </h1>
+                )
+            }
+            appShell = arr;
+
+            return (<div>{appShell}</div>)
+        } else {
+
+
+
+        if (searchText !== "" && searchFilter === "Name") {
+
+            return (
+                <div>
+                {this.state.events.forEach(function(key){
                     let eventDate = new Date(key.event_date)
                     console.log(eventDate)
                     if((key.title.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
@@ -81,10 +97,9 @@ export class EventCards extends Component{
                 })}
                 </div>
             )
-        }
-        else if(searchText !== "" && searchFilter === "Location"){
-            
-            return(
+        } else if (searchText !== "" && searchFilter === "Location") {
+
+            return (
                 <div>{this.state.events.map(function(key){
                     let eventDate = new Date(key.event_date)
                     if((key.location.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
@@ -107,9 +122,8 @@ export class EventCards extends Component{
                 })}
                 </div>
             )
-        }
-        else if(searchText !== "" && searchFilter === "Category"){
-            return(
+        } else if (searchText !== "" && searchFilter === "Category") {
+            return (
                 <div>{this.state.events.map(function(key){
                     let eventDate = new Date(key.event_date)
                     if((key.category.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
@@ -133,10 +147,9 @@ export class EventCards extends Component{
                 })}
                 </div>
             )
-        }
-        else{
-        return(
-            <div>{this.state.events.map(function(key){
+        } else {
+            return (
+                <div>{this.state.events.map(function(key){
                 let eventDate = new Date(key.event_date)
             if(eventDate > now){
                 return(
@@ -154,7 +167,8 @@ export class EventCards extends Component{
 
                 )}
             })}</div>
-        )
-            }
+            )
+        }
+    }
     }
 }

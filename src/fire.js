@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 
-const config = {
-    apiKey: "AIzaSyCuFloA8xjTLD0tWlYJyF8JLQMV3PKAbb0",
+ var config = {
+    apiKey: "AIzaSyBG4KjhU5SvvCJd7H3FmffrJdh-TKx4-aw",
     authDomain: "gatherv0-b3651.firebaseapp.com",
     databaseURL: "https://gatherv0-b3651.firebaseio.com",
     projectId: "gatherv0-b3651",
@@ -9,6 +9,7 @@ const config = {
     messagingSenderId: "710004267791"
   };
 
+  
 const fire = firebase.initializeApp(config);
 
 const facebookProvider = new firebase.auth.FacebookAuthProvider();
