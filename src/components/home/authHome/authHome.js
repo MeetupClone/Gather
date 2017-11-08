@@ -3,7 +3,8 @@ import { fire as firebase } from "../../../fire"
 import './authHome.css'
 import '../../../helpers.css'
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Footer  from '../../footer/footer'
 
 import axios from 'axios';
 import EventsYouMayLike from './eventsYouMayLike/eventsYouMayLike';
@@ -68,6 +69,7 @@ export default class AuthHome extends Component {
                 <div>
                     <EventsYouMayLike/>
                 </div>
+                <Footer/>
             </div>
         )
 

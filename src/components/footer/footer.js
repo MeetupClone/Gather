@@ -13,7 +13,7 @@ export default class Footer extends Component {
             user: false,
         }
 
-        
+
 
     }
 
@@ -30,46 +30,31 @@ export default class Footer extends Component {
 
 
     render() {
-
-<<<<<<< HEAD
-render(){
-  if(this.state.user){
-    return(
-      <div>
+        if (this.state.user) {
+            return (
+                <div className="footer-all">
         <Link to="/event/create">
       <button className="footer-create-button">Create</button>
         </Link>
       <div className="footer-background">
-      <h5 className="footer-links"><Link to="/" className="footer-home">Home </Link><Link to="/faq"> About </Link><span className="footer-home"> Settings</span></h5>
+      <h5 className="footer-links"><Link to="/" className="footer-home">Home </Link><Link to="/faq" className="footer-home"> About </Link><Link to="/user/account" className="footer-home"> Settings</Link></h5>
       <h6 className="footer-milk-steak"> Milk Steak LLC</h6>
     </div>
     </div>
-    )
-  }
-  else{
-    return(
-      <div>
+            )
+        } else {
+            return (
+                <div className="footer-all">
         <Link to="/login">
       <button className="footer-create-button">Create</button>
         </Link>
       <div className="footer-background">
-      <h5 className="footer-links"><Link to="/" className="footer-home">Home </Link><Link to="/faq"> About </Link><Link to="/user/account" className="footer-home"> Settings</Link></h5>
+      <h5 className="footer-links"><Link to="/" className="footer-home">Home</Link><Link to="/faq" className="footer-home"> About</Link><Link to="/user/account" className="footer-home">Settings</Link></h5>
       <h6 className="footer-milk-steak"> Milk Steak LLC</h6>
     </div>
     </div>
-    )
-  }
-  
-}
-}
-=======
-        return (
-            <div>
-        <Link to = "/event/create"><h4>Create</h4></Link>
-        <h5><Link to = "/"><span>Home </span></Link><Link to = ""><span> About </span></Link><Link to = "/user/account"><span> Settings</span></Link></h5>
-        <h6> This is for educational purposes</h6>
-      </div>
-        )
+            )
+        }
+
     }
 }
->>>>>>> ff1fd9300a4c88030acd343db436612150383f4b
