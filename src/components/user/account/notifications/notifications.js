@@ -10,7 +10,7 @@ export class Notifications extends Component {
         super(props);
 
         this.state = {
-            uid: "sZGGK82kTvg5vwrIfpfaM1Kzmk22",
+            uid: "",
             notifications: "",
         }    
 
