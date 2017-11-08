@@ -9,39 +9,28 @@ export class Notifications extends Component {
     constructor(props) {
         super(props);
 
-        console.log(props)
-
         this.state = {
-            uid: "",
-            notifications: '',
+            uid: "sZGGK82kTvg5vwrIfpfaM1Kzmk22",
+            notifications: "",
         }    
-        
-        console.log(this.state)
 
         this.changeNotificationPreferences = this.changeNotificationPreferences.bind(this);
 
     }
 
-    componentWillMount() {
-        this.setState({notifications: this.props.notifications, uid: this.props.uid })
+    componentDidMount() {
+        axios.get(`/api/user/account/getPref/${this.state.uid}`)
+        .then(result => {
+             this.setState({notifications: result.data[0].notification_settings})
+             
+     })
+         .catch(err => console.log("getPref error", err))
     }
 
-    // componentWillReceiveProps(props) {
-    //     console.log(props)
-    //     this.setState({ notifications: this.props.notifications, uid: this.props.uid })
-
-    // }
 
     changeNotificationPreferences() {
-        if (!this.state.notifications) {
-            this.setState({ notifications: true })
-        } else {
-            this.setState({ notifications: false })
-        }
-
-        //this.setState({notifications: !this.state.notifications})
-        console.log(this.state)
-        axios.post("/api/user/updatenotifs/", [this.state.notifications, this.state.uid]).then(response => console.log(response))
+        axios.post("/api/user/updatenotifs/", [!this.state.notifications, this.state.uid]).then(response => console.log(response))
+        this.setState({notifications: !this.state.notifications})
 
     }
 

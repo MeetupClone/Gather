@@ -8,54 +8,67 @@ export class Preferences extends Component{
         super(props);
 
         this.state = {
-            uid: "",
+            uid: "sZGGK82kTvg5vwrIfpfaM1Kzmk22",
             preferences: "",
             userCat: []
         }
+
+        this.changePreferences = this.changePreferences.bind(this)
+
     }
 
-    componentWillMount(){
-        this.setState({preferences: this.props.preferences, uid: this.props.uid, userCat: this.props.userCat})
+    componentDidMount(){
+
+        axios.get(`/api/user/account/getPref/${this.state.uid}`)
+        .then(result => {
+            this.setState({preferences: result.data[0].preference_settings})
+     })
+         .catch(err => console.log("getPref error", err))
+     
+     axios.get(`/api/user/account/getCat/${this.state.uid}`)
+         .then(result => {
+             this.setState({userCat: result.data})
+     })
+         .catch(err => console.log("getCat", err))
     }
 
-    componentWillReceiveProps(props){
-        console.log(props)
-        this.setState({preferences: this.props.preferences, uid: this.props.uid, userCat: this.props.userCat})
-    
+
+    changePreferences(){
+        axios.post("/api/user/updateprefs", [!this.state.preferences, this.state.uid]).then(response => console.log(response))
+        this.setState({preferences: !this.state.preferences})
+        console.log(this.state)
     }
-    changePreferences(){}
 
     render(){
         let preferenceText = null;
         let preferenceButton = null;
         if (this.state.preferences){
-            // notificationText = (<h3>You currently have notifications turned on.</h3>)
-            //     notificationButton = (<button onClick={(e) => {
-            //                     this.changeNotificationPreferences()
-            //             }}>Turn Off Notifications</button>)
+            preferenceText = (<p>You are currently sharing information on your profile.</p>)
+                preferenceButton = (<button onClick={(e) => {
+                                this.changePreferences()
+                        }}>Turn On Privacy Mode</button>)
         }
         else{
-            //         <div>
-//         <h3>You currently have notifications turned off.</h3>
-//         <h4>Turn on notifications to recieve reminders about events!</h4>
-//         </div>)
-//     notificationButton = (<button onClick={(e) => {
-//                     this.changeNotificationPreferences()
-//             }}>Turn On Notifications</button>)
+            preferenceText = (<div>
+        <p>You currently have no information displayed on your profile.</p>
+        </div>)
+    preferenceButton = (<button onClick={(e) => {
+                    this.changePreferences()
+            }}>Turn Off Privacy Mode</button>)
         }
 
         return(
             <div>
             <h1>Manage Preferences</h1>
-            <h4>Topics You Like</h4>
+            <h4>Categories You Like</h4>
             <p>{this.state.userCat.map(key => {
                 return(
                     <div>{key.category}</div>
                 )
             })}</p>
-            <h1>ADD EDITING THING HERE</h1>
             <h4>Privacy Settings</h4>
-            just copy the notification thing
+            {preferenceText}
+            {preferenceButton}
             </div>
         )
         

@@ -65,6 +65,14 @@ const updateNotifications = (req, res) => {
 		.catch(err => console.log("update notifications endpoint not working", err))
 	}
 
+const updatePreferences = (req, res) => {
+	console.log(req.body)
+	req.app
+		.get('db')
+		.updateUserPreferences(req.body)
+		.then(result => res.status(200).json(result))
+		.catch(err => console.log("update Preferences endpoint not working", err))
+}
 
 module.exports = {
 	createUser,
@@ -73,5 +81,6 @@ module.exports = {
 	updateUserProfile,
 	getUserPreferences,
 	getUserCategories,
-	updateNotifications
+	updateNotifications,
+	updatePreferences
 }

@@ -36,6 +36,7 @@ app.put('/api/user/registerFCMKey', userCtrl.registerFCMKey)
 app.get('/api/user/getUserInfo/:userId', userCtrl.getUserInfo)
 app.post('/api/user/profile/update', userCtrl.updateUserProfile)
 app.post('/api/user/updatenotifs', userCtrl.updateNotifications)
+app.post('/api/user/updateprefs', userCtrl.updatePreferences)
 
 app.get('/api/user/account/getPref/:id', userCtrl.getUserPreferences)
 app.get('/api/user/account/getCat/:id', userCtrl.getUserCategories)

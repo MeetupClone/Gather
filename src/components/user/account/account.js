@@ -15,7 +15,7 @@ export default class Account extends Component{
         super(props);
 
         this.state = {
-            uid: "",
+            uid: "sZGGK82kTvg5vwrIfpfaM1Kzmk22",
             accountState: 1,
             email: "",
             notifications: true,
@@ -24,7 +24,11 @@ export default class Account extends Component{
         }
 
 
-        // this.componentWillMount = this.componentWillMount.bind(this)
+        this.changeView = this.changeView.bind(this)
+    }
+
+    changeView(val){
+        this.setState({accountState: val})
     }
 
     componentWillMount(){
@@ -67,65 +71,21 @@ export default class Account extends Component{
             case 2:
             displayMe = (<Preferences preferences={this.state.preferences} uid={this.state.uid} userCat={this.state.userCat}/>)
             break;
-
-            case 3:
-            displayMe = (<EditInfo/>)
-            break;
         }
-
-        console.log(this.state)
-        switch(this.state.accountState){
-            case 1:
             return(
                 <div className="account-main-container">
                     <div className="account-left-navbar">
                         <ul className="account-left-options">
-                            <li onClick={(e) => this.setState({ accountState: 1})}>Notifications</li>
-                            <li onClick={(e) => this.setState({ accountState: 2})}>Preferences</li>
-                            <li onClick={(e) => this.setState({ accountState: 3})}>Edit Info</li>
+                            <li onClick={(e) => this.changeView(1)}>Notifications</li>
+                            <li onClick={(e) => this.changeView(2)}>Preferences</li>
                             <li>Link to Logout</li>
                         </ul>
                     </div>
                     <div className="account-right-content">
-                    <Notifications notifications={this.state.notifications} uid={this.state.uid}/>
+                    {displayMe}
                     </div>
                 </div>
                 )
-            case 2:
-            return(
-                <div className="account-main-container">
-                    <div className="account-left-navbar">
-                        <ul className="account-left-options">
-                            <li onClick={(e) => this.setState({ accountState: 1})}>Notifications</li>
-                            <li onClick={(e) => this.setState({ accountState: 2})}>Preferences</li>
-                            <li onClick={(e) => this.setState({ accountState: 3})}>Edit Info</li>
-                            <li>Link to Logout</li>
-                        </ul>
-                    </div>
-                    <div className="account-right-content">
-                    <Preferences preferences={this.state.preferences} uid={this.state.uid} userCat={this.state.userCat}/>                    
-                    </div>
-                </div>
-            )
-            case 3:
-            return(
-                <div className="account-main-container">
-                    <div className="account-left-navbar">
-                        <ul className="account-left-options">
-                            <li onClick={(e) => this.setState({ accountState: 1})}>Notifications</li>
-                            <li onClick={(e) => this.setState({ accountState: 2})}>Preferences</li>
-                            <li onClick={(e) => this.setState({ accountState: 3})}>Edit Info</li>
-                            <li>Link to Logout</li>
-                        </ul>
-                    </div>
-                    <div className="account-right-content">
-                    <EditInfo/>
-                    </div>
-                </div>
-            )
-            default: 
-            break;
-        }
 
         
 
