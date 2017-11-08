@@ -53,8 +53,6 @@ export class SingleEvent extends Component {
                         this.setState({ joined: false })
                     }
                 })
-
-
             } 
         })
     }
@@ -62,20 +60,19 @@ export class SingleEvent extends Component {
     render() {
         let that = this;
         const { joinEvent, leaveEvent } = this.props
+
+
         let joinButton = null
         let leaveButton = null
-        if (this.state.joined) {
-            joinButton = (<h1> You are going to this event! </h1>)
-            leaveButton = (<button onClick={(event) => {
-                leaveEvent(this.state)
-                that.setState({joined: false})
-            }}> Leave Event </button>)
-        } else {
-            joinButton = (<button onClick={(event) => {
-                joinEvent(this.state);
-                that.setState({joined: true})
-            }}> Join This Event </button>)
 
+        if (this.state.currentUserUid === this.state.organizerUid)
+            {
+            joinButton = (
+                <div>
+                    <h1> This is your event! </h1>
+                    <Link to={`/event/edit/${this.props.match.params.id}`}><button onClick={() => {this.setState({edit:true})}}> Click here to go to edit your event. </button></Link>
+                </div>
+                )
         }
 
 
@@ -86,14 +83,14 @@ export class SingleEvent extends Component {
 
         return (
             <div>
-            {editButton}
+                {joinButton} 
                 <h1>{this.state.eventName}</h1>
                 <img src={this.state.eventPic} alt={this.state.eventName}></img>
                 <h3>{this.state.eventLocation}</h3>
                 <h3>{this.state.eventDate}</h3>
                 <p>{this.state.eventDescription}</p>
                 {leaveButton}
-                {joinButton}   
+  
             </div>
         )
     }
