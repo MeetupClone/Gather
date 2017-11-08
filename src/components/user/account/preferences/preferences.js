@@ -8,7 +8,7 @@ export class Preferences extends Component{
         super(props);
 
         this.state = {
-            uid: "sZGGK82kTvg5vwrIfpfaM1Kzmk22",
+            uid: "",
             preferences: "",
             userCat: []
         }

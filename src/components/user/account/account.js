@@ -15,7 +15,7 @@ export default class Account extends Component{
         super(props);
 
         this.state = {
-            uid: "sZGGK82kTvg5vwrIfpfaM1Kzmk22",
+            uid: "",
             accountState: 1,
             email: "",
             notifications: true,
