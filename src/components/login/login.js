@@ -70,7 +70,7 @@ export class Login extends Component {
                             <button className="login-button box-shadow" onClick={(event)=> {
                                 event.preventDefault()
 
-                                loginWithEmailPassword(this.state)}}>SIGN IN </button>
+                                
 
                                 loginWithEmailPassword(this.state).then(result => {
                                     this.props.history.push('/')
