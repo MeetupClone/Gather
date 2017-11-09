@@ -10,6 +10,9 @@ import { fire as firebase } from "../../../fire"
 
 import {Link} from "react-router-dom";
 
+import Twitter from '../../twitter/twitter'
+import Facebook from '../../facebook/facebook'
+import Email from '../../email/email'
 
 import GroupDashboard from "../groupDashboard/groupDashboard";
 
@@ -124,6 +127,9 @@ export class GroupPage extends Component {
                 <h1>{this.state.groupName}</h1>
                 <h3>{this.state.groupMembers} Member(s)</h3>
                 <h3>{this.state.groupDesc}</h3>
+                <Twitter/>
+                <Facebook/><br/>
+                <Email/>
                 <div>{this.state.groupEvents.map(key => {
                     return(
                         <div>
