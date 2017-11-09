@@ -66,10 +66,12 @@ export default class EventsYouMayLike extends Component{
                         {this.state.eventsArr.map(function(event){
 
                         return(
-                            <div className="recc-events-card-info nunito-text">
-                            <div className="recc-events-location">{event.location.toUpperCase()}</div>
-                            <div>{event.title}</div>
-                            <div>{event.category}</div>
+                            <div key={event.id}>
+                                <div className="recc-events-card-info nunito-text">
+                                <div className="recc-events-location">{event.location.toUpperCase()}</div>
+                                <div>{event.title}</div>
+                                <div>{event.category}</div>
+                                </div>
                             </div>
                         )
                     })}

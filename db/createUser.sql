@@ -1,1 +1,1 @@
-INSERT INTO users (uid, email, name, profile_image) VALUES ($1, $2, $3, $4);
+INSERT INTO users (uid, email, name, profile_image) VALUES ($1, $2, $3, $4) RETURNING uid;

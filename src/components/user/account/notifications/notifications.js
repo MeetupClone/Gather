@@ -32,8 +32,8 @@ export class Notifications extends Component {
 
 
     changeNotificationPreferences() {
-        axios.post("/api/user/updatenotifs/", [!this.state.notifications, this.state.uid]).then(response => console.log(response))
-        this.setState({notifications: !this.state.notifications})
+        axios.post("/api/user/updatenotifs/", [!this.state.notifications, this.state.uid]).then(
+        this.setState({notifications: !this.state.notifications}))
 
     }
 

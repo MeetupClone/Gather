@@ -58,10 +58,7 @@ export class SingleEvent extends Component {
     }
 
     render() {
-        let that = this;
-        const { joinEvent, leaveEvent } = this.props
-
-
+        const { joinEvent } = this.props
         let joinButton = null
         let leaveButton = null
 
