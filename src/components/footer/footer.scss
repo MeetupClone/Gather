@@ -3,43 +3,87 @@
     bottom: 0px;
     width: 100%;
     margin-top: -200px;
-    clear: both;
+    background-color: #007F35
 }
 
-.footer-links {
-    text-align: left;
-    background-color: #0F4C5C;
-    overflow: hidden;
-    padding-top: 10px;
+.footer-link-section {
+    text-align: center;
+    padding: 1.5vh;
+    margin-bottom: 1vh;
 }
 
-.footer-background {
-    margin-top: -9px;
-    height: 100%;
-    background-color: #0F4C5C;
+.footer-links{
+    padding: 0 2vw;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
 }
+
+.create-button-space{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+// .row-flex {
+//     display: flex;
+//     flex-direction: row;
+//     align-items: center;
+// }
+
 
 .footer-home {
     color: white;
     margin: 20px;;
 }
 
-.footer-create-button {
-    margin-bottom: -30px;
-    width: 100%;
-    height: 50px;
+.inner-create-buttons {
+    text-decoration: none;
+    margin-top: 2vh;
     font-size: 20px;
     color: #fff;
     background: #08A045;
+    height: 6vh;
+    width: 40vw;
     transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
-
 }
 
+.footer-create-button {
+    margin-top: 2vh;
+    font-size: 20px;
+    color: #fff;
+    background: #08A045;
+    height: 6vh;
+    width: 80vw;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+}
+
+.footer-login-button {
+    margin-top: 2vh;
+    font-size: 20px;
+    color: #fff;
+    background: #42A5F5;
+    height: 6vh;
+    width: 80vw;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+}
 .footer-create-button:hover {
   box-shadow: 3px 3px 30px 3px rgba(37, 244, 120, .4);
   text-decoration: none;
   border-radius: 5px;
   background-color: rgba(55, 59, 82, .1);
 }
+
+.login-text {
+    color: white;
+    font-size: 20px;
+}
+
+
