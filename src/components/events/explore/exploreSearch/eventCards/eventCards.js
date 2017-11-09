@@ -6,16 +6,8 @@ import './eventCards2.css';
 import '../../../../../helpers.css'
 
 import { Link } from 'react-router-dom';
-<< << << << <<
-HEAD
+import Footer from '../../../../footer/footer'
 
-    ===
-    === =
-    import Footer from '../../../../footer/footer'
-
-
-    >>>
-    >>> > 204505748 d682a9050e64e3179f5d07ebedffc6f
 export class EventCards extends Component {
     constructor(props) {
         super(props);
@@ -37,63 +29,53 @@ export class EventCards extends Component {
     }
 
     componentWillMount() {
-        axios.get('/api/events').then(result =>
-            << << << << <<
-            HEAD this.setState({ loading: false, events: result.data }))
+        axios.get('/api/events').then(result => this.setState({ loading: false, events: result.data }))
 
 
     };
 
-    ===
-    === =
-    this.setState({ loading: true, events: result.data }))
 
+    shouldComponentUpdate(newProps, newState) {
 
-};
+        const updatePropsText = this.props.searchText !== newProps.searchText;
+        const updatePropsFilter = this.props.searchFilter !== newProps.searchFilter;
 
->>>
->>> > 204505748 d682a9050e64e3179f5d07ebedffc6f
-shouldComponentUpdate(newProps, newState) {
-
-    const updatePropsText = this.props.searchText !== newProps.searchText;
-    const updatePropsFilter = this.props.searchFilter !== newProps.searchFilter;
-
-    return !updatePropsText || !updatePropsFilter;
-}
+        return !updatePropsText || !updatePropsFilter;
+    }
 
 
 
-render() {
-    this.state.events = this.state.events.sort(function(a, b) {
-        // Turn your strings into dates, and then subtract them
-        // to get a value that is either negative, positive, or zero.
-        return new Date(a.event_date) - new Date(b.event_date);
-    });
+    render() {
+        this.state.events = this.state.events.sort(function(a, b) {
+            // Turn your strings into dates, and then subtract them
+            // to get a value that is either negative, positive, or zero.
+            return new Date(a.event_date) - new Date(b.event_date);
+        });
 
-    let now = new Date();
+        let now = new Date();
 
-    const { searchText, searchFilter } = this.props;
-    let appShell = null;
+        const { searchText, searchFilter } = this.props;
+        let appShell = null;
 
-    if (this.state.loading) {
-        let arr = []
+        if (this.state.loading) {
+            let arr = []
 
-        for (var i = 0; i < 8; i++) {
-            arr.push(
-                <h1 className="event-card-loading-container" key = {i}> loading </h1>
-            )
-        }
-        appShell = arr;
+            for (var i = 0; i < 8; i++) {
+                arr.push(
+                    <h1 className="event-card-loading-container" key = {i}> loading </h1>
+                )
+            }
+            appShell = arr;
 
-        return (<div>{appShell}</div>)
-    } else {
+            return (<div>{appShell}</div>)
+        } else {
 
 
 
-        if (searchText !== "" && searchFilter === "Name") {
+            if (searchText !== "" && searchFilter === "Name") {
 
-            return (
-                <div>
+                return (
+                    <div>
                 {this.state.events.map(function(key){
                     let eventDate = new Date(key.event_date)
                     if((key.title.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
@@ -115,11 +97,11 @@ render() {
                 }
                 })}
                 </div>
-            )
-        } else if (searchText !== "" && searchFilter === "Location") {
+                )
+            } else if (searchText !== "" && searchFilter === "Location") {
 
-            return (
-                <div>{this.state.events.map(function(key){
+                return (
+                    <div>{this.state.events.map(function(key){
                     let eventDate = new Date(key.event_date)
                     if((key.location.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                       
@@ -140,10 +122,10 @@ render() {
                 }
                 })}
                 </div>
-            )
-        } else if (searchText !== "" && searchFilter === "Category") {
-            return (
-                <div>{this.state.events.map(function(key){
+                )
+            } else if (searchText !== "" && searchFilter === "Category") {
+                return (
+                    <div>{this.state.events.map(function(key){
                     let eventDate = new Date(key.event_date)
                     if((key.category.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                       
@@ -165,10 +147,10 @@ render() {
                 }
                 })}
                 </div>
-            )
-        } else {
-            return (
-                <div>{this.state.events.map(function(key){
+                )
+            } else {
+                return (
+                    <div>{this.state.events.map(function(key){
                 let eventDate = new Date(key.event_date)
             if(eventDate > now){
                 return(
@@ -186,7 +168,8 @@ render() {
 
                 )}
             })}</div>
-            )
+                )
+            }
         }
     }
 }
