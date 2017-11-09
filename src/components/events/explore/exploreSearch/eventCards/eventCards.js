@@ -8,6 +8,7 @@ import '../../../../../helpers.css'
 import { Link } from 'react-router-dom';
 import Footer from '../../../../footer/footer'
 
+
 export class EventCards extends Component {
     constructor(props) {
         super(props);
@@ -52,6 +53,7 @@ export class EventCards extends Component {
             return new Date(a.event_date) - new Date(b.event_date);
         });
 
+
         let now = new Date();
 
         const { searchText, searchFilter } = this.props;
@@ -93,6 +95,7 @@ export class EventCards extends Component {
                                 <div className="event-card-desc"><p>{key.description}</p></div>
                             </div>
                             </div>
+
                     )
                 }
                 })}

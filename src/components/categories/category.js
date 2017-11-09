@@ -36,6 +36,7 @@ export default class Category extends Component {
         }
         this.updateParent = (state) => this.props.updateParent(state)
         this.handleChange = this.handleChange.bind(this)
+        this.removeCat = this.removeCat.bind(this)
 
     }
 
@@ -48,13 +49,22 @@ export default class Category extends Component {
         this.updateParent(this.state.categories)
     }
 
+    removeCat = (cat) => {
+        let arr = this.state.categories;
+        arr.splice(arr.indexOf(cat), 1)
+        this.setState({ categories: arr})
+        this.updateParent(this.state.categories)
+    }
 
 
 
     render() {
         let selectedCats = this.state.categories.map(x => {
             return (
-                <button key={x} value={x}> {x} </button>
+                <button key={x} value={x} onClick={(event) => {
+                    // event.preventDefault();
+                    this.removeCat(x);
+                }}> {x} </button>
             )
         })
 
