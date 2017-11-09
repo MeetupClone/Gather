@@ -9,7 +9,7 @@ import Footer  from '../../footer/footer'
 import axios from 'axios';
 import EventsYouMayLike from './eventsYouMayLike/eventsYouMayLike';
 
-import "../../../components/events/explore/exploreSearch/eventCards/eventCards.css"
+import "../../../components/events/explore/exploreSearch/eventCards/eventCards2.css"
 
 
 

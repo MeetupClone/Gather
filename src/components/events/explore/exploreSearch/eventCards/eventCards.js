@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
-import './eventCards.css';
+import './eventCards2.css';
 import '../../../../../helpers.css'
 
 import { Link } from 'react-router-dom';
+<< << << << <<
+HEAD
 
+    ===
+    === =
+    import Footer from '../../../../footer/footer'
+
+
+    >>>
+    >>> > 204505748 d682a9050e64e3179f5d07ebedffc6f
 export class EventCards extends Component {
     constructor(props) {
         super(props);
@@ -29,44 +38,55 @@ export class EventCards extends Component {
 
     componentWillMount() {
         axios.get('/api/events').then(result =>
-            this.setState({ loading: false, events: result.data }))
+            << << << << <<
+            HEAD this.setState({ loading: false, events: result.data }))
 
 
     };
 
-    shouldComponentUpdate(newProps, newState) {
-
-        const updatePropsText = this.props.searchText !== newProps.searchText;
-        const updatePropsFilter = this.props.searchFilter !== newProps.searchFilter;
-
-        return !updatePropsText || !updatePropsFilter;
-    }
+    ===
+    === =
+    this.setState({ loading: true, events: result.data }))
 
 
+};
 
-    render() {
-        this.state.events = this.state.events.sort(function(a, b) {
-            // Turn your strings into dates, and then subtract them
-            // to get a value that is either negative, positive, or zero.
-            return new Date(a.event_date) - new Date(b.event_date);
-        });
+>>>
+>>> > 204505748 d682a9050e64e3179f5d07ebedffc6f
+shouldComponentUpdate(newProps, newState) {
 
-        let now = new Date();
+    const updatePropsText = this.props.searchText !== newProps.searchText;
+    const updatePropsFilter = this.props.searchFilter !== newProps.searchFilter;
 
-        const { searchText, searchFilter } = this.props;
-        let appShell = null;
+    return !updatePropsText || !updatePropsFilter;
+}
 
-        if (this.state.loading) {
-            let arr = []
-            for (var i = 0; i < 5; i++) {
-                arr.push(
-                <h1 key = {i}> loading </h1>
-                )
-            }
-            appShell = arr;
 
-            return (<div>{appShell}</div>)
-        } else {
+
+render() {
+    this.state.events = this.state.events.sort(function(a, b) {
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return new Date(a.event_date) - new Date(b.event_date);
+    });
+
+    let now = new Date();
+
+    const { searchText, searchFilter } = this.props;
+    let appShell = null;
+
+    if (this.state.loading) {
+        let arr = []
+
+        for (var i = 0; i < 8; i++) {
+            arr.push(
+                <h1 className="event-card-loading-container" key = {i}> loading </h1>
+            )
+        }
+        appShell = arr;
+
+        return (<div>{appShell}</div>)
+    } else {
 
 
 
@@ -168,6 +188,5 @@ export class EventCards extends Component {
             })}</div>
             )
         }
-    }
     }
 }

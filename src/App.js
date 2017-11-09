@@ -26,18 +26,18 @@ class App extends Component {
                 console.log('yup')
             }
 
-            let getEvents = axios.get('/api/events').then(result => { return result.data})
+            // let getEvents = axios.get('/api/events').then(result => { return result.data})
 
-            let getCat = axios.get(`/api/user/account/getCat/${user.uid}`).then(result => {
-                return result.data
-            })
-            let getPref = axios.get(`/api/user/account/getPref/${user.uid}`).then(result => {
-                return result.data
-            })
-            Promise.all([getEvents, getCat, getPref]).then(result => {
-                let offlineData = {events: result[0]}
-                localStorage.setItem('events', JSON.stringify(offlineData))
-            })
+            // let getCat = axios.get(`/api/user/account/getCat/${user.uid}`).then(result => {
+            //     return result.data
+            // })
+            // let getPref = axios.get(`/api/user/account/getPref/${user.uid}`).then(result => {
+            //     return result.data
+            // })
+            // Promise.all([getEvents, getCat, getPref]).then(result => {
+            //     let offlineData = {events: result[0]}
+            //     localStorage.setItem('events', JSON.stringify(offlineData))
+            // })
         })
 
 

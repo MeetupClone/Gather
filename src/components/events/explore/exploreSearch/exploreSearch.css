@@ -1,0 +1,19 @@
+.events-button {
+    width: 20%;
+    height: 20px;
+    font-size: 10px;
+    color: #fff;
+    background: #08A045; 
+}
+
+.group-button {
+    width: 20%;
+    height: 20px;
+    font-size: 10px;
+    color: #fff;
+    background: #08A045; 
+}
+
+.search {
+    text-align: center;
+}
