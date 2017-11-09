@@ -38,7 +38,7 @@ export default class EventsYouMayLike extends Component{
                 axios.get(`/api/relevant/event/${this.state.uid}`)
                 .then(results => {
                     console.log(results)
-                    this.setState({eventsArr: this.state.userEvents.concat(results.data)})})
+                    this.setState({reccEvents: results.data})})
                 .catch(err => console.log("relevant event not working", err))
         
                 
@@ -63,13 +63,13 @@ export default class EventsYouMayLike extends Component{
                 return(
                     <div>
                     <h4>Events You May Like</h4>
-                        {this.state.eventsArr.map(function(event){
+                        {this.state.reccEvents.map(function(event){
 
                         return(
-                            <div key={event.id}>
+                            <div key={event.id + event.category_name}>
                                 <div className="recc-events-card-info nunito-text">
                                 <div className="recc-events-location">{event.location.toUpperCase()}</div>
-                                <div>{event.title}</div>
+                                <Link to = {`/event/${event.id}`}><div>{event.title}</div></Link>
                                 <div>{event.category}</div>
                                 </div>
                             </div>

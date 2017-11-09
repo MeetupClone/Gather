@@ -19,8 +19,7 @@ export default class AuthHome extends Component {
 
         this.state = {
             uid: "",
-            userEvents: [],
-            recEvents: [],
+            userEvents: []
         }
 
 
