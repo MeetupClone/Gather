@@ -10,6 +10,9 @@ import Category from "../../categories/category";
 import Datetime from "react-datetime";
 import moment from "moment";
 
+import Facebook from '../../facebook/facebook'
+import Twitter from '../../twitter/twitter'
+import Email from '../../email/email'
 
 export class CreateEvents extends Component {
     constructor(props) {
@@ -23,7 +26,7 @@ export class CreateEvents extends Component {
             location: '',
             placeId: '',
             categories: '',
-            created: false,
+            created: null,
             website: '',
             confirmModal: false,
             file: '',
@@ -64,8 +67,9 @@ export class CreateEvents extends Component {
         reader.readAsDataURL(file)
     }
 
-
+    
     render() {
+        console.log(this.props)
         let inputProps = {
             placeholder: "Pick a Date and Time"
         }
@@ -79,7 +83,11 @@ export class CreateEvents extends Component {
         };
         let confirmModalElement = null
         if (this.state.created === true) {
-            confirmModalElement = (<h1> You've made an event</h1>)
+            confirmModalElement = (<div><h1> Congratulations, you've made an event!</h1>
+            <h3>Share your event!</h3>
+            <Twitter/>
+            <Facebook/>
+            <Email/></div>)
             return confirmModalElement
         }
         const { createEvent } = this.props
@@ -123,6 +131,7 @@ export class CreateEvents extends Component {
               <button className="submitEvent-button" onClick={(event) => {
                 event.preventDefault()
                 createEvent(this.state)
+                console.log(createEvent(this.state))
               }}>Submit</button>
             </div>
         )

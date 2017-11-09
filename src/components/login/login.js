@@ -69,9 +69,6 @@ export class Login extends Component {
                             <input name="password" type="password" onChange={(event) => {this.setState({password: event.target.value})}} placeholder="Password"/>
                             <button className="login-button box-shadow" onClick={(event)=> {
                                 event.preventDefault()
-
-                                
-
                                 loginWithEmailPassword(this.state).then(result => {
                                     this.props.history.push('/')
                                 })}}>Log In </button>
