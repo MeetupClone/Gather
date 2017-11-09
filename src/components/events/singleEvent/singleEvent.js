@@ -7,6 +7,8 @@ import { joinEvent, leaveEvent } from "../../../ducks/event-redux"
 
 import { fire as firebase } from "../../../fire"
 
+import {EventComment} from "../comments/eventComment"
+
 export class SingleEvent extends Component {
     constructor(props) {
         super(props);
@@ -91,6 +93,7 @@ export class SingleEvent extends Component {
                 <h3>{this.state.eventMembers} Member(s)</h3>
                 <p>{this.state.eventDescription}</p>
                 {leaveButton}
+                <EventComment/>
   
             </div>
         )

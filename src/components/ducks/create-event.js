@@ -50,5 +50,5 @@ export default function CreateEventReducer(state = initialState, action) {
     }
 
 
-
+    
 }
