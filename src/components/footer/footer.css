@@ -1,6 +1,9 @@
 .footer-all {
-  position: absolute;
-  width: 100%;}
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  margin-top: -200px;
+  clear: both; }
 
 .footer-links {
   text-align: left;
@@ -16,11 +19,6 @@
 .footer-home {
   color: white;
   margin: 20px; }
-
-.footer-milk-steak {
-  color: white;
-  text-align: right;
-  margin-right: 25px; }
 
 .footer-create-button {
   margin-bottom: -30px;

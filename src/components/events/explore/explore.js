@@ -5,6 +5,7 @@ import axios from 'axios';
 import { RecommendedEvents } from './recommendedEvents/recommendedEvents.js';
 import { ExploreSearch } from './exploreSearch/exploreSearch';
 import "../../../helpers.css"
+import "./explore.css"
 import Footer  from '../../footer/footer'
 
 
@@ -37,7 +38,7 @@ export default class Explore extends Component {
     render() {
 
         return (
-            <div className="background-color">
+            <div className="explore-page">
               <div><RecommendedEvents/></div>
               <div><ExploreSearch/></div>
               <Footer/>
