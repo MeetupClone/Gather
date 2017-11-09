@@ -52,9 +52,9 @@ updateSearchFieldGroup(){
                 </select>
                 <button onClick={(e) => this.updateSearchFieldEvent()}>Events</button>
                 <button onClick={(e) => this.updateSearchFieldGroup()}>Group</button>
-                A
+                
                 <EventCards searchFilter={this.state.searchFilter} searchText={this.state.searchText}/>
-                B
+                
                 </div>
                 )
         }else{
