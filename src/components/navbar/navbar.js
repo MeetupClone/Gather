@@ -16,7 +16,7 @@ export default class Navbar extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user){
                 this.setState({authenticated: true})
@@ -39,17 +39,17 @@ export default class Navbar extends Component {
             }
         return (
             <div className="App">
-		        <header className="nav-header nunito-text">
-		          <Link to ="/">
-		            <img src={require('./assets/home.svg')} alt ="Home"/>
-		          </Link>
-		          <Link to ="/explore">
-		            <img src={require('./assets/explore.svg')} alt ="Explore"/>
-		          </Link>
-		          {accountButton}
-		        </header>
-        		<div>{routes}</div>
-      		</div>
+                <header className="nav-header nunito-text">
+                  <Link to ="/">
+                    <img src={require('./assets/home.svg')} alt ="Home"/>
+                  </Link>
+                  <Link to ="/explore">
+                    <img src={require('./assets/explore.svg')} alt ="Explore"/>
+                  </Link>
+                  {accountButton}
+                </header>
+                <div>{routes}</div>
+            </div>
         );
     }
 }

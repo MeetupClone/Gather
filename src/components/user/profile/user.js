@@ -28,14 +28,38 @@ export default class Login extends Component {
             userAttending: [],
             userGroups: []
         };
+
+        this.addRipple = this.addRipple.bind(this)
     }
+
+    addRipple(event){
+        event.target.classList.add('clicked')
+    }
+
     componentDidMount() {
         let userId = null
-
+        console.log(localStorage.getItem('uid'))
         if (localStorage.getItem('uid')) {
-            this.setState({
-                uid: userId
-            })
+            
+            let user = localStorage.getItem('uid')
+            console.log(this.state.uid)
+            axios.get(`/api/event/user/${user}`).then(result => { this.setState({ userEvents: result.data }) })
+                axios.get(`/api/event/getAttendingEventsData/${user}`).then(result => {
+                    this.setState({ userAttending: result.data })
+                }).catch(error => {
+                    console.log(error)
+                })
+                axios.get(`/api/group/user/${user}`).then(result => { this.setState({ userGroups: result.data }) })
+                axios.get(`/api/user/getUserInfo/${user}`).then(result => {
+                    console.log(result)
+                    this.setState({
+                        userProfilePic: result.data[0].profile_image,
+                        userName: result.data[0].name,
+                        userLocation: result.data[0].location,
+                        userDescription: result.data[0].description,
+                        uid: user.uid
+                    })
+                })
         } else {
             firebase.auth().onAuthStateChanged(user => {
                 axios.get(`/api/event/user/${user.uid}`).then(result => { this.setState({ userEvents: result.data }) })
@@ -46,7 +70,7 @@ export default class Login extends Component {
                 })
                 axios.get(`/api/group/user/${user.uid}`).then(result => { this.setState({ userGroups: result.data }) })
                 axios.get(`/api/user/getUserInfo/${user.uid}`).then(result => {
-                    // console.log(result)
+                    console.log(result.data)
                     this.setState({
                         userProfilePic: result.data[0].profile_image,
                         userName: result.data[0].name,
@@ -61,95 +85,121 @@ export default class Login extends Component {
     }
 
     render() {
-        let $userGroupsEvents = null;
-        if (this.state.showParams === "events") {
-            if (!this.state.userEvents.length) {
-                $userGroupsEvents = (
-                    <div> 
+        let $userDescription = null
+        if (!this.state.userDescription) { 
+            $userDescription = (<div>
+                <h5> Consider adding a description so people can learn more about you.
+                </h5>
+                </div>)
+        } else {
+            $userDescription = (<p className="user-description"> {this.state.userDescription} </p>)
+        }
+
+        if (localStorage.getItem('uid')) {
+            let $userGroupsEvents = null;
+            if (this.state.showParams === "events") {
+                if (!this.state.userEvents.length) {
+                    $userGroupsEvents = (
+                        <div> 
 
                         <h1> You haven't created any events!</h1>
                         <Link to="/event/create"><button> Create an Event </button>  </Link>
                         </div>)
-            } else {
-                $userGroupsEvents = this.state.userEvents.map(key => {
-                    return (
-                        <div key={key.id}>
+                } else {
+                    $userGroupsEvents = this.state.userEvents.map(key => {
+                        return (
+                            <div key={key.id}>
                    <Link to = {`/event/${key.id}`}>{key.title}</Link>
                     {key.event_date}
                     {key.location}    
                     </div>
-                    )
-                })
-            }
-        } else if (this.state.showParams === "attending") {
-            if (!this.state.userAttending.length) {
-                $userGroupsEvents = (
-                    <div> 
+                        )
+                    })
+                }
+            } else if (this.state.showParams === "attending") {
+                if (!this.state.userAttending.length) {
+                    $userGroupsEvents = (
+                        <div> 
 
                         <h1> You haven't joined any events!</h1>
                         <Link to="/explore"><button> Find Some Events </button>  </Link>
                         </div>)
-            } else {
-                $userGroupsEvents = this.state.userAttending.map(key => {
-                    return (
-                        <div key={key.id}>
+                } else {
+                    $userGroupsEvents = this.state.userAttending.map(key => {
+                        return (
+                            <div key={key.id}>
                     <Link to = {`/event/${key.id}`}>{key.title}</Link>
                     {key.event_date}
                     {key.location}    
                     </div>
-                    )
-                })
-            }
-        } else if (this.state.showParams === "groups") {
-            if (!this.state.userGroups.length) {
-                $userGroupsEvents = (<div> 
+                        )
+                    })
+                }
+            } else if (this.state.showParams === "groups") {
+                if (!this.state.userGroups.length) {
+                    $userGroupsEvents = (<div> 
 
                         <h1> You haven't joined any groups!</h1>
                         <Link to="/explore"><button> Join some Groups </button></Link>
                         <br/>
                         <Link to="/groups/create"><button> Create a Group! </button></Link>
                         </div>)
-            } else {
-                $userGroupsEvents = this.state.userGroups.map(key => {
-                    return (
-                        <div key={key.id}>
+                } else {
+                    $userGroupsEvents = this.state.userGroups.map(key => {
+                        return (
+                            <div key={key.id}>
                     <Link to = {`/groups/${key.id}`}>{key.name}</Link>
                     {key.website}    
                     </div>
-                    )
-                })
+                        )
+                    })
+                }
             }
-        }
-        if (this.state.editable) {
-            return (
-                <EditableProfile/>
-            )
-        } else {
-            return (
-                <div>
+            if (this.state.editable) {
+                return (
+                    <EditableProfile/>
+                )
+            } else {
+                return (
+                    <div>
                 
-                <img className="user-profile-pic" src={this.state.userProfilePic } alt={this.state.userName}/>
+                <div>
+                <img className="user-profile-pic" src={this.state.userProfilePic || 'https://firebasestorage.googleapis.com/v0/b/gatherv0-b3651.appspot.com/o/defaultPic.webp?alt=media&token=73d67fbf-6f0e-40aa-8fc9-15ec9e8e4fd9'} alt={this.state.userName}/>
+                </div>
                 <h1> {this.state.userName} </h1>
                 <h3> {this.state.userLocation} </h3>
 
-                <p className="user-description">{this.state.userDescription}</p>
+                {$userDescription}
+
+                <button className="edit-button" onClick={() => this.setState({editable: true})} >Edit Profile</button>
 
                 <div className="user-spec-buttons">
-                <button className="user-spec-button-indiv" onClick={() => 
+                <button className="user-spec-button-indiv btn-active" onClick={(event) => 
                     {this.setState({showParams: "events" })}}> Events </button>
-                <button className="user-spec-button-indiv" onClick={() => 
+                <button className="user-spec-button-indiv btn-active" onClick={() => 
                     {this.setState({showParams: "attending" })}}> Attending </button>
-                <button className="user-spec-button-indiv" onClick={() => 
+                <button className="user-spec-button-indiv btn-active" onClick={() => 
                     {this.setState({showParams: "groups" })}}> Groups </button>
                 </div>
-
                 {$userGroupsEvents}
-                <div className="center-row fixed-bottom">
-                    <button onClick={() => this.setState({editable: true})} >Edit Profile</button>
-                    <Link to ="/user/account"><button onClick={() => this.setState({accountSettings: true})} >Edit Account</button></Link>
-                    </div>
+                <div>
+                <Link to ="/user/account"><button className="account-button" onClick={() => this.setState({accountSettings: true})} >Edit Account</button></Link>
                 </div>
-            )
+                </div>
+                )
+            }
+        } else {
+            return(
+                <div>
+                <h1> How'd you get here!?!</h1>
+                <br/>
+                <h3> You need to be logged in to be able to edit your profile. </h3>
+                <br/>
+                <button><Link to='/login'> Login or Create an account here. </Link> </button> 
+                </div> 
+
+
+                )
         }
     }
 }

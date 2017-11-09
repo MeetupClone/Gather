@@ -29,7 +29,6 @@ export function authWithFacebook(categories) {
     return {
         type: AUTH_WITH_FACEBOOK,
         payload: 
-
         firebase.auth().signInWithPopup(facebookProvider)
             .then(result => {
                 console.log(result)
@@ -65,7 +64,7 @@ export function loginWithEmailPassword(initialState) {
         type: LOGIN_WITH_EMAIL_PASSWORD,
         payload: firebase.auth().signInWithEmailAndPassword(initialState.email, initialState.password)
             .then(user => {
-                console.log(user)
+                localStorage.setItem('uid', user.uid)
                 return user
             })
     }
