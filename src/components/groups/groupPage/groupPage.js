@@ -128,7 +128,7 @@ export class GroupPage extends Component {
                 <h3>{this.state.groupMembers} Member(s)</h3>
                 <h3>{this.state.groupDesc}</h3>
                 <Twitter/>
-                <Facebook/><br/>
+                <Facebook/>
                 <Email/>
                 <div>{this.state.groupEvents.map(key => {
                     return(
