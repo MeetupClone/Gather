@@ -74,7 +74,7 @@ export class EventCards extends Component {
 
             return (
                 <div>
-                {this.state.events.forEach(function(key){
+                {this.state.events.map(function(key){
                     let eventDate = new Date(key.event_date)
                     console.log(eventDate)
                     if((key.title.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
