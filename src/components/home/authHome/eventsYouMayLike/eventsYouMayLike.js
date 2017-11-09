@@ -32,24 +32,30 @@ export default class EventsYouMayLike extends Component{
                 this.setState({
                 uid: user.uid
                 })
-            axios.get(`/api/relevant/event/${this.state.uid}`)
-                .then(results => this.setState({reccEvents: results.data}))
-                .catch(err => console.log("relevant event not working", err))
-
-            axios.get(`/api/event/user/${this.state.uid}`)
+                axios.get(`/api/event/user/${this.state.uid}`)
                 .then(result => this.setState({userEvents: result.data}))
-            
-            this.setState({eventsArr: this.state.reccEvents.concat(this.state.userEvents)})
+                console.log(this.state)
+                axios.get(`/api/relevant/event/${this.state.uid}`)
+                .then(results => {
+                    console.log(results)
+                    this.setState({eventsArr: this.state.userEvents.concat(results.data)})})
+                .catch(err => console.log("relevant event not working", err))
+        
                 
-             _.uniq(this.state.eventsArr, function (item) {
-                return item.title + item.category;
-            })
-            
-
             }
             else{
                 console.log("no user")
                             }})
+
+        
+        this.state.eventsArr = _.uniq(this.state.eventsArr)                  
+        console.log(this.state.eventsArr)
+    }
+
+    componentDidMount(){
+        
+    
+       
     }
 
 
@@ -60,10 +66,12 @@ export default class EventsYouMayLike extends Component{
                         {this.state.eventsArr.map(function(event){
 
                         return(
-                            <div className="recc-events-card-info nunito-text">
-                            <div className="recc-events-location">{event.location.toUpperCase()}</div>
-                            <div>{event.title}</div>
-                            <div>{event.category}</div>
+                            <div key={event.id}>
+                                <div className="recc-events-card-info nunito-text">
+                                <div className="recc-events-location">{event.location.toUpperCase()}</div>
+                                <div>{event.title}</div>
+                                <div>{event.category}</div>
+                                </div>
                             </div>
                         )
                     })}

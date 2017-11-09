@@ -73,6 +73,8 @@ input {
   background: #087f23;
   letter-spacing: 2px;
   font-weight: 400;
+  background: #08A045; 
+
 }
 
 .register-button {
@@ -107,4 +109,6 @@ input {
     letter-spacing: 2px;
     font-weight: 500;
   }
+
 /*# sourceMappingURL=login.css.map */
+

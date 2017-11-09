@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
-import './eventCards.css';
+import './eventCards2.css';
 import '../../../../../helpers.css'
 
 import { Link } from 'react-router-dom';
+import Footer from '../../../../footer/footer'
 
 export class EventCards extends Component {
     constructor(props) {
@@ -28,11 +29,11 @@ export class EventCards extends Component {
     }
 
     componentWillMount() {
-        axios.get('/api/events').then(result =>
-            this.setState({ loading: false, events: result.data }))
+        axios.get('/api/events').then(result => this.setState({ loading: false, events: result.data }))
 
 
     };
+
 
     shouldComponentUpdate(newProps, newState) {
 
@@ -58,9 +59,10 @@ export class EventCards extends Component {
 
         if (this.state.loading) {
             let arr = []
-            for (var i = 0; i < 5; i++) {
+
+            for (var i = 0; i < 8; i++) {
                 arr.push(
-                <h1 key = {i}> loading </h1>
+                    <h1 className="event-card-loading-container" key = {i}> loading </h1>
                 )
             }
             appShell = arr;
@@ -70,13 +72,12 @@ export class EventCards extends Component {
 
 
 
-        if (searchText !== "" && searchFilter === "Name") {
+            if (searchText !== "" && searchFilter === "Name") {
 
-            return (
-                <div>
-                {this.state.events.forEach(function(key){
+                return (
+                    <div>
+                {this.state.events.map(function(key){
                     let eventDate = new Date(key.event_date)
-                    console.log(eventDate)
                     if((key.title.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                     
                     return(
@@ -96,11 +97,11 @@ export class EventCards extends Component {
                 }
                 })}
                 </div>
-            )
-        } else if (searchText !== "" && searchFilter === "Location") {
+                )
+            } else if (searchText !== "" && searchFilter === "Location") {
 
-            return (
-                <div>{this.state.events.map(function(key){
+                return (
+                    <div>{this.state.events.map(function(key){
                     let eventDate = new Date(key.event_date)
                     if((key.location.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                       
@@ -121,10 +122,10 @@ export class EventCards extends Component {
                 }
                 })}
                 </div>
-            )
-        } else if (searchText !== "" && searchFilter === "Category") {
-            return (
-                <div>{this.state.events.map(function(key){
+                )
+            } else if (searchText !== "" && searchFilter === "Category") {
+                return (
+                    <div>{this.state.events.map(function(key){
                     let eventDate = new Date(key.event_date)
                     if((key.category.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                       
@@ -146,10 +147,10 @@ export class EventCards extends Component {
                 }
                 })}
                 </div>
-            )
-        } else {
-            return (
-                <div>{this.state.events.map(function(key){
+                )
+            } else {
+                return (
+                    <div>{this.state.events.map(function(key){
                 let eventDate = new Date(key.event_date)
             if(eventDate > now){
                 return(
@@ -167,8 +168,8 @@ export class EventCards extends Component {
 
                 )}
             })}</div>
-            )
+                )
+            }
         }
-    }
     }
 }

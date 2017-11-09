@@ -4,6 +4,8 @@ import {EventCards} from './eventCards/eventCards.js';
 
 import {GroupCards} from './groupCards/groupCards.js';
 
+import "./exploreSearch.css"
+
 //
 
 export class ExploreSearch extends Component{
@@ -43,30 +45,32 @@ updateSearchFieldGroup(){
         if(this.state.searchField === 0){
             return(
                 <div>
-                <input type="text" placeholder="Search" onChange={(e) => this.updateSearchText(e.target.value)}/>
+                <input className="search" type="text" placeholder="Search" onChange={(e) => this.updateSearchText(e.target.value)}/>
                 <select onChange={(e) => this.updateSearchFilter(e.target.value)}>
                     <option value="Name">Name</option>
                     <option value="Location">Location</option>
                     <option value="Category">Category</option>
                     <option value="Group-Events">Group Events</option>
                 </select>
-                <button onClick={(e) => this.updateSearchFieldEvent()}>Events</button>
-                <button onClick={(e) => this.updateSearchFieldGroup()}>Group</button>
+
+                <button className="events-button" onClick={(e) => this.updateSearchFieldEvent()}>Events</button>
+                <button className="group-button" onClick={(e) => this.updateSearchFieldGroup()}>Group</button>
                 <EventCards searchFilter={this.state.searchFilter} searchText={this.state.searchText}/>
+                
                 </div>
                 )
         }else{
             return(
                 <div>
-                <input type="text" placeholder="Search" onChange={(e) => this.updateSearchText(e.target.value)}/>
+                <input className="search" type="text" placeholder="Search" onChange={(e) => this.updateSearchText(e.target.value)}/>
                 <select onChange={(e) => this.updateSearchFilter(e.target.value)}>
                     <option value="name">Name</option>
                     <option value="location">Location</option>
                     <option value="category">Category</option>
                     <option value="group-events">Group Events</option>
                 </select>
-                <button onClick={(e) => this.updateSearchFieldEvent()}>Events</button>
-                <button onClick={(e) => this.updateSearchFieldGroup()}>Group</button>
+                <button className="events-button" onClick={(e) => this.updateSearchFieldEvent()}>Events</button>
+                <button className="group-button" onClick={(e) => this.updateSearchFieldGroup()}>Group</button>
                 <GroupCards searchFilter={this.state.searchFilter} searchText={this.state.searchText}/>
                 </div>
             )

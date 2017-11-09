@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 
+import { connect } from 'react-redux';
+import { getAuthInfo } from "../../../../ducks/authentication-redux"
+
 import { fire as firebase} from "../../../../fire"
 import axios from 'axios';
 
@@ -8,11 +11,11 @@ import axios from 'axios';
 export class Notifications extends Component {
     constructor(props) {
         super(props);
-
+       
         this.state = {
-            uid: "",
+            uid: this.props.uid,
             notifications: "",
-        }    
+        } 
 
         this.changeNotificationPreferences = this.changeNotificationPreferences.bind(this);
 
@@ -29,13 +32,14 @@ export class Notifications extends Component {
 
 
     changeNotificationPreferences() {
-        axios.post("/api/user/updatenotifs/", [!this.state.notifications, this.state.uid]).then(response => console.log(response))
-        this.setState({notifications: !this.state.notifications})
+        axios.post("/api/user/updatenotifs/", [!this.state.notifications, this.state.uid]).then(
+        this.setState({notifications: !this.state.notifications}))
 
     }
 
 
     render() {
+        console.log(this.props)
         let notificationText = null
         let notificationButton = null
         if (this.state.notifications) {
@@ -64,3 +68,13 @@ export class Notifications extends Component {
     }
 
 }
+
+const mapStateToProps = (state) => {
+    return state
+}
+
+const actions = {
+    getAuthInfo
+}
+
+export default connect(mapStateToProps, actions)(Notifications)

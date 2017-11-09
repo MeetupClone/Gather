@@ -8,6 +8,12 @@ const initialState = {
     email: '',
     authenticated: false
 }
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        initialState.uid = user.uid
+    }
+})
+
 //CONSTANTS
 const AUTH_WITH_FACEBOOK = 'AUTH_WITH_FACEBOOK';
 const AUTH_WITH_EMAIL_PASSWORD = 'AUTH_WITH_EMAIL_PASSWORD'
@@ -19,15 +25,23 @@ const SIGN_OUT = 'SIGN_OUT';
 
 //ACTION BUILDERS REMEMBER TO EXPORT THEM
 
-export function authWithFacebook(initialState) {
+export function authWithFacebook(categories) {
     return {
         type: AUTH_WITH_FACEBOOK,
-        payload: firebase.auth().signInWithPopup(facebookProvider)
+        payload: 
+
+        firebase.auth().signInWithPopup(facebookProvider)
             .then(result => {
                 console.log(result)
                 if (result.additionalUserInfo.isNewUser) {
                     console.log(result, "from redux")
-                    return axios.post('/api/user/createUser', [result.user.uid, result.user.email, result.user.displayName, result.user.photoUrl])
+                    return axios.post('/api/user/createUser', [result.user.uid, result.user.email, result.user.displayName, result.user.photoURL, categories]).then(result => {
+                        return true
+                    })
+                } else {
+                    axios.post('/api/user/createUser', [result.user.uid, result.user.email, result.user.displayName, result.user.photoURL, categories]).then(result => {
+                        return true
+                    })
                 }
                 return result.user
 
@@ -102,10 +116,8 @@ export default function AuthenticationReducer(state = initialState, action) {
         case AUTH_WITH_FACEBOOK + "_FULFILLED":
             let user = action.payload
             return { user, authenticated: true }
-
         case LOGIN_WITH_EMAIL_PASSWORD + "_PENDING":
             return Object.assign({}, state, { authenticated: false })
-
         case LOGIN_WITH_EMAIL_PASSWORD + "_FULFILLED":
             let userInfo = action.payload
             return { userInfo, authenticated: true }

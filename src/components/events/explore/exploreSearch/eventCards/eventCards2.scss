@@ -1,0 +1,102 @@
+.event-card-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 100px;
+    width: 100%; 
+}
+  
+<<<<<<< Updated upstream
+  .event-card-content-container {
+=======
+ .event-card-content-container {
+>>>>>>> Stashed changes
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+    padding-left: 10px;
+    padding-right: 10px; 
+}
+  
+<<<<<<< Updated upstream
+  .event-card-title {
+    font-weight: bold; 
+}
+  
+  .event-card-info {
+=======
+ .event-card-title {
+    font-weight: bold; 
+}
+  
+ .event-card-info {
+>>>>>>> Stashed changes
+    display: flex;
+    flex-direction: column;
+    text-align: left; 
+}
+  
+<<<<<<< Updated upstream
+  .event-card-category {
+=======
+ .event-card-category {
+>>>>>>> Stashed changes
+    text-align: left;
+    font-size: 12px; 
+}
+  
+<<<<<<< Updated upstream
+  .event-card-date {
+=======
+ .event-card-date {
+>>>>>>> Stashed changes
+    width: 100px;
+    height: 100%;
+    float: left;
+    margin-right: 10px; 
+}
+  
+<<<<<<< Updated upstream
+  .event-card-loc {
+=======
+ .event-card-loc {
+>>>>>>> Stashed changes
+    font-size: 12px;
+    color: gray;
+    font-weight: bold; 
+}
+  
+<<<<<<< Updated upstream
+  .event-card-desc {
+    text-align: left; 
+}
+  
+  .event-title-link {
+=======
+ .event-card-desc {
+    text-align: left; 
+}
+  
+ .event-title-link {
+>>>>>>> Stashed changes
+    color: black;
+    text-decoration: none; 
+}
+  
+<<<<<<< Updated upstream
+  .event-card-loading-container {
+=======
+ .event-card-loading-container {
+>>>>>>> Stashed changes
+    justify-content: space-around;
+    background-color: white;
+    height: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
+  }
+<<<<<<< Updated upstream
+  
+  /*# sourceMappingURL=eventCards.css.map */
+=======
+>>>>>>> Stashed changes
+  

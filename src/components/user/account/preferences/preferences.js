@@ -8,7 +8,7 @@ export class Preferences extends Component{
         super(props);
 
         this.state = {
-            uid: "",
+            uid: this.props.uid,
             preferences: "",
             userCat: []
         }
@@ -17,7 +17,7 @@ export class Preferences extends Component{
 
     }
 
-    componentDidMount(){
+    componentWillMount(){
 
         axios.get(`/api/user/account/getPref/${this.state.uid}`)
         .then(result => {

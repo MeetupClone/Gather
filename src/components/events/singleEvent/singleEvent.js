@@ -21,20 +21,23 @@ export class SingleEvent extends Component {
             organizerUid: '',
             currentUserUid: '',
             userAttendingEvents: [],
-            joined: false
+            joined: false,
+            eventMembers: 0
         }
     }
 
     componentWillMount() {
 
         axios.get(`/api/event/${this.state.eventId}`).then(response => {
+            console.log(response)
             this.setState({
                 eventName: response.data[0].title,
                 eventLocation: response.data[0].location,
                 eventDescription: response.data[0].description,
                 eventPic: response.data[0].event_image,
                 eventDate: response.data[0].date,
-                organizerUid: response.data[0].organizer_uid
+                organizerUid: response.data[0].organizer_uid,
+                eventMembers: response.data[0].members
             })
         })
 
@@ -58,10 +61,7 @@ export class SingleEvent extends Component {
     }
 
     render() {
-        let that = this;
-        const { joinEvent, leaveEvent } = this.props
-
-
+        const { joinEvent } = this.props
         let joinButton = null
         let leaveButton = null
 
@@ -88,6 +88,7 @@ export class SingleEvent extends Component {
                 <img src={this.state.eventPic} alt={this.state.eventName}></img>
                 <h3>{this.state.eventLocation}</h3>
                 <h3>{this.state.eventDate}</h3>
+                <h3>{this.state.eventMembers} Member(s)</h3>
                 <p>{this.state.eventDescription}</p>
                 {leaveButton}
   
