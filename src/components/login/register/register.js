@@ -41,12 +41,12 @@ export class Register extends Component {
         } = this.props
         return (
             <div id="register-page">
-            <h1> Register </h1> 
+            <h1 id="register-title"> Register </h1> 
 
                 <input name="name" type="name" onChange={(event) => this.setState({name: event.target.value})} placeholder="Name"/>
                 <input name="email" type="email" onChange={(event) => this.setState({email : event.target.value})} placeholder="Email"/>
                 <input name="password" type="password" onChange={(event) => this.setState({password: event.target.value})} placeholder="Password"/>
-                <Category updateParent={(state) => {
+                <Category className="categorySelector" updateParent={(state) => {
                 this.setState({categoriesAdded : true, categories: state})}}/>
                 {createButton}
             <div id="providers-auth" className="center">
