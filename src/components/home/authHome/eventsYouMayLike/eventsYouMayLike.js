@@ -36,14 +36,14 @@ export default class EventsYouMayLike extends Component {
                     .then(result => this.setState({ userEvents: result.data }))
                 console.log(this.state)
                 axios.get(`/api/relevant/event/${this.state.uid}`)
-                    .then(results => {
-                        console.log(results)
-                        this.setState({ eventsArr: this.state.userEvents.concat(results.data) })
-                    })
-                    .catch(err => console.log("relevant event not working", err))
-
-
-            } else {
+                .then(results => {
+                    console.log(results)
+                    this.setState({reccEvents: results.data})})
+                .catch(err => console.log("relevant event not working", err))
+        
+                
+            }
+            else{
                 console.log("no user")
             }
         })
@@ -70,7 +70,7 @@ export default class EventsYouMayLike extends Component {
                             <div key={event.id + event.category_name}>
                                 <div className="recc-events-card-info nunito-text">
                                 <div className="recc-events-location">{event.location.toUpperCase()}</div>
-                                <div>{event.title}</div>
+                                <Link to = {`/event/${event.id}`}><div>{event.title}</div></Link>
                                 <div>{event.category}</div>
                                 </div>
                             </div>
