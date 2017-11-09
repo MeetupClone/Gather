@@ -1,5 +1,6 @@
 with rows as (
-    INSERT INTO events (
+	INSERT INTO events (
+
                     event_image,
                     title,
                     description,

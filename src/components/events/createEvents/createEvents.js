@@ -129,6 +129,7 @@ export class CreateEvents extends Component {
                 </form>
               <br/>
               <button className="submitEvent-button" onClick={(event) => {
+                event.preventDefault()
                 createEvent(this.state)
                 console.log(createEvent(this.state))
               }}>Submit</button>

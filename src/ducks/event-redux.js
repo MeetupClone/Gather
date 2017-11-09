@@ -106,23 +106,13 @@ export default function EventReducer(state = initialState, action) {
             return axios.post('/api/event/leave', action.payload).then(result => {
                 return Object.assign({}, state, action.payload)
             })
-        case EDIT_EVENT:
-            if (action.payload.file) {
-                let eventFile = action.payload.file
-                const eventStorageRef = firebase.storage().ref();
-                const eventUploadTask = eventStorageRef.child('eventPictures/' + eventFile.name).put(eventFile);
-                console.log(action.payload)
-                eventUploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
-                    action.payload.eventPic = eventUploadTask.snapshot.downloadURL;
-                    axios.post('/api/event/edit', action.payload)
-                    return Object.assign({}, state, action.payload)
-                })
-            }
+        case EDIT_EVENT + "_PENDING":
+        return Object.assign({}, state, {loading: true})
+        case EDIT_EVENT + "_FULFILLED":
+            return Object.assign({}, state, {loading: false})
         case DELETE_EVENT:
-            console.log(action.payload)
             axios.post('/api/event/delete', action.payload)
             return Object.assign({}, state, action.payload)
-
         default:
             console.log("whelp")
             return state;
