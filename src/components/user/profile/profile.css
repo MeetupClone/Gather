@@ -1,7 +1,7 @@
 .user-profile-pic {
   margin-top: 5vh;
-  max-height: 200px;
-  max-width: 200px;
+  max-height: 150px !important;
+  max-width: 150px !important;
   border-radius: 50%; }
 
 .user-description {
@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 5vh auto;
+  margin: 3vh auto;
   width: 100%; }
 
 .user-spec-button-indiv {
@@ -21,7 +21,27 @@
   height: 50px;
   width: 100px;
   margin: 0 5px;
-  background-color: green; }
+  font-size: 15px;
+  padding: 16px;
+  border-radius: 2px;
+  background-color: #42A5F5;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: 0; }
+  .user-spec-button-indiv:focus {
+    background: #0b78d0; }
+
+.btn-active {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
+  .btn-active:active {
+    transform: scale(1.01);
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4); }
 
 .social-media-input {
   width: 70vw; }
@@ -31,5 +51,24 @@
   position: fixed;
   bottom: 10px;
   padding: 0 auto; }
+
+.account-button {
+  background-color: #FF5252;
+  border-radius: 0;
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+  height: 6vh;
+  width: 30vw;
+  margin-left: 70vw;
+  margin-top: 3vh;
+  position: relative;
+  bottom: 0;
+  right: 0; }
+
+.edit-button {
+  text-decoration: none;
+  height: 25px;
+  width: 100px; }
 
 /*# sourceMappingURL=profile.css.map */
