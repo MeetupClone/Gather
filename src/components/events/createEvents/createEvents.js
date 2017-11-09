@@ -10,8 +10,6 @@ import Category from "../../categories/category";
 import Datetime from "react-datetime";
 import moment from "moment";
 
-import axios from 'axios';
-
 
 export class CreateEvents extends Component {
     constructor(props) {

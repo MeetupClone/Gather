@@ -54,17 +54,23 @@ export default class Login extends Component {
                         userDescription: result.data[0].description,
                         uid: user.uid
                     })
-                    console.log(this.state)
                 })
 
             })
         }
     }
 
-        render() {
+    render() {
+        let $userGroupsEvents = null;
+        if (this.state.showParams === "events") {
+            if (!this.state.userEvents.length) {
+                $userGroupsEvents = (
+                    <div> 
 
-            let $userGroupsEvents = null;
-            if (this.state.showParams === "events") {
+                        <h1> You haven't created any events!</h1>
+                        <Link to="/event/create"><button> Create an Event </button>  </Link>
+                        </div>)
+            } else {
                 $userGroupsEvents = this.state.userEvents.map(key => {
                     return (
                         <div key={key.id}>
@@ -74,7 +80,16 @@ export default class Login extends Component {
                     </div>
                     )
                 })
-            } else if (this.state.showParams === "attending") {
+            }
+        } else if (this.state.showParams === "attending") {
+            if (!this.state.userAttending.length) {
+                $userGroupsEvents = (
+                    <div> 
+
+                        <h1> You haven't joined any events!</h1>
+                        <Link to="/explore"><button> Find Some Events </button>  </Link>
+                        </div>)
+            } else {
                 $userGroupsEvents = this.state.userAttending.map(key => {
                     return (
                         <div key={key.id}>
@@ -84,7 +99,17 @@ export default class Login extends Component {
                     </div>
                     )
                 })
-            } else if (this.state.showParams === "groups") {
+            }
+        } else if (this.state.showParams === "groups") {
+            if (!this.state.userGroups.length) {
+                $userGroupsEvents = (<div> 
+
+                        <h1> You haven't joined any groups!</h1>
+                        <Link to="/explore"><button> Join some Groups </button></Link>
+                        <br/>
+                        <Link to="/groups/create"><button> Create a Group! </button></Link>
+                        </div>)
+            } else {
                 $userGroupsEvents = this.state.userGroups.map(key => {
                     return (
                         <div key={key.id}>
@@ -94,13 +119,14 @@ export default class Login extends Component {
                     )
                 })
             }
-            if (this.state.editable) {
-                return (
-                    <EditableProfile/>
-                )
-            } else {
-                return (
-                    <div>
+        }
+        if (this.state.editable) {
+            return (
+                <EditableProfile/>
+            )
+        } else {
+            return (
+                <div>
                 
                 <img className="user-profile-pic" src={this.state.userProfilePic } alt={this.state.userName}/>
                 <h1> {this.state.userName} </h1>
@@ -123,7 +149,7 @@ export default class Login extends Component {
                     <Link to ="/user/account"><button onClick={() => this.setState({accountSettings: true})} >Edit Account</button></Link>
                     </div>
                 </div>
-                )
-            }
+            )
         }
     }
+}

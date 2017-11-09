@@ -51,7 +51,20 @@ export function leaveEvent(componentState) {
 export function editEvent(componentState) {
     return {
         type: EDIT_EVENT,
-        payload: componentState
+        payload: (componentState) => {
+            if (componentState.file) {
+                let eventFile = componentState.file
+                const eventStorageRef = firebase.storage().ref();
+                const eventUploadTask = eventStorageRef.child('eventPictures/' + eventFile.name).put(eventFile);
+                console.log(componentState)
+                eventUploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
+                    componentState.eventPic = eventUploadTask.snapshot.downloadURL;
+                    axios.post('/api/event/edit', componentState).then(result => {
+                        return result
+                    })
+                })
+            }
+        }
     }
 }
 
@@ -88,25 +101,21 @@ export default function EventReducer(state = initialState, action) {
                 return Object.assign({}, state, action.payload)
             })
         case EDIT_EVENT:
-            console.log(action.payload)
             if (action.payload.file) {
                 let eventFile = action.payload.file
                 const eventStorageRef = firebase.storage().ref();
                 const eventUploadTask = eventStorageRef.child('eventPictures/' + eventFile.name).put(eventFile);
                 console.log(action.payload)
-                return eventUploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
+                eventUploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
                     action.payload.eventPic = eventUploadTask.snapshot.downloadURL;
                     axios.post('/api/event/edit', action.payload)
                     return Object.assign({}, state, action.payload)
                 })
-            } else {
-                axios.post('/api/event/edit', action.payload)
-                return Object.assign({}, state, action.payload)
             }
         case DELETE_EVENT:
-        console.log(action.payload)
-                axios.post('/api/event/delete', action.payload)
-                return Object.assign({}, state, action.payload)
+            console.log(action.payload)
+            axios.post('/api/event/delete', action.payload)
+            return Object.assign({}, state, action.payload)
 
         default:
             return state;

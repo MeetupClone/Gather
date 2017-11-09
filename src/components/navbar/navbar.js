@@ -20,6 +20,8 @@ export default class Navbar extends Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user){
                 this.setState({authenticated: true})
+            } else {
+                this.setState({authenticated: false})
             }
         })
     }

@@ -25,14 +25,30 @@ export class Register extends Component {
     }
 
     render() {
-        let createButton = null
+        let createButtons = null
 
         if (this.state.categoriesAdded) {
-            createButton = (<button className="login-button box-shadow" onClick={(event) => {
+            createButtons = (
+                <div>
+                <button className="login-button box-shadow" onClick={(event) => {
                 event.preventDefault()
-                authWithEmailPassword(this.state)}}> Create Account </button>)
+                authWithEmailPassword(this.state)}}> Create Account </button>
+<div id="providers-auth" className="center">
+                            <button className="auth-button facebook box-shadow" onClick={(event)=> {
+                                event.preventDefault();
+                                authWithFacebook(this.state.categories) }}>
+                                <img className="auth-icon" src={require( "../assets/facebook.svg")} alt="facebook" /> Sign Up With Facebook </button>
+                        </div>
+                        </div>
+           )
         } else {
-            createButton = (<button className="login-button box-shadow"> Add Categories to Create an Account </button>)
+            createButtons = (
+                <div>
+                <h1> Choose some categories! </h1>
+                <h3>These allow us to provide you with events that you may like </h3>
+                <h6> You can change these any time in your account settings </h6>
+                </div>
+                )
         }
     
         const {
@@ -48,16 +64,7 @@ export class Register extends Component {
                 <input name="password" type="password" onChange={(event) => this.setState({password: event.target.value})} placeholder="Password"/>
                 <Category updateParent={(state) => {
                 this.setState({categoriesAdded : true, categories: state})}}/>
-                {createButton}
-            <div id="providers-auth" className="center">
-                            <button className="auth-button facebook box-shadow" onClick={(event)=> {
-                                event.preventDefault();
-                                authWithFacebook() }}>
-                                <img className="auth-icon" src={require( "../assets/facebook.svg")} alt="facebook" /> Sign Up With Facebook </button>
-
-                            <br/>
-
-                        </div>
+                {createButtons}
           </div>
         );
     }

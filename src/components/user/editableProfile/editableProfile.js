@@ -125,7 +125,9 @@ export default class EditableProfile extends Component {
                 </div>
 
                 <button className="edit-profile-save" onClick={() => {
-                    this.updateProfile()
+                    this.updateProfile(this.state).then(result => {
+                        this.setState({editable: false})
+                    })
                 }}> Save Profile </button>
 
 

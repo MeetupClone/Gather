@@ -46,6 +46,7 @@ export class Login extends Component {
     }
 
     render() {
+        console.log(this.props)
         const { loginWithEmailPassword, authWithFacebook } = this.props;
         if (this.state.authenticated) {
             return (
@@ -66,7 +67,9 @@ export class Login extends Component {
                             </Link>
                             <button className="login-button box-shadow" onClick={(event)=> {
                                 event.preventDefault()
-                                loginWithEmailPassword(this.state)}}>Log In </button>
+                                loginWithEmailPassword(this.state).then(result => {
+                                    this.props.history.push('/')
+                                })}}>Log In </button>
                             <Link to="/register">
                             <button className="register-button box-shadow">Create Account </button>
                             </Link>
