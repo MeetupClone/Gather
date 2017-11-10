@@ -21,6 +21,7 @@ export default class AuthHome extends Component {
             uid: "",
             userEvents: [],
             recEvents: [],
+            loading: true
         }
 
 
@@ -39,7 +40,7 @@ export default class AuthHome extends Component {
                 this.setState({
                     uid: user.uid
                 })
-                axios.get(`/api/event/user/${this.state.uid}`).then(result => this.setState({ userEvents: result.data }))
+                axios.get(`/api/event/user/${this.state.uid}`).then(result => this.setState({ loading: false, userEvents: result.data }))
             }
         })
 
@@ -48,7 +49,20 @@ export default class AuthHome extends Component {
 
 
     render() {
+        let appShell = null;
 
+        if(this.state.loading){
+            let arr = []
+
+            for(var i = 0; i < 8; i++){
+                arr.push(
+                    <h1 className="home-page-loading-container" key = {i}> loading </h1>
+                )
+            }
+            appShell = arr;
+
+            return (<div>{appShell}</div>)
+        } else {
 
 
         return (
@@ -66,7 +80,7 @@ export default class AuthHome extends Component {
                         )
                     })}
                 </div>
-                <div>
+                <div className="footer-padding">
                     <EventsYouMayLike/>
                 </div>
                 <Footer/>
@@ -74,4 +88,5 @@ export default class AuthHome extends Component {
         )
 
     }
+}
 }

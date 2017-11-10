@@ -38,3 +38,16 @@
     color: black;
     text-decoration: none;
 }
+
+.footer-padding {
+    padding-bottom: 110px;
+}
+
+.home-page-loading-container {
+    justify-content: space-around;
+    background-color: white;
+    height: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
+}

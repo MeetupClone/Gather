@@ -103,10 +103,12 @@ export class CreateEvents extends Component {
               <Datetime isValidDate={ valid } inputProps={inputProps} timeConstraints={timeConstraints} onChange={(event) => {
                 this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm"), cronTime: moment.utc(event).subtract(3, 'hours').format()})
               }}/>
-              <input  type="text" placeholder="Category" onChange={e=>this.handleChange(e.target.value, "category")}  ref={(input)=>{
-              this.category=input}}/>
-              <Category updateParent={(state) => {
-                this.setState({categories: state})}}/>
+              <div className="category-title"> Categories
+              <Category className="category-button" placeholder="Categories" onClick={e=>this.handleChange(e.target.value, "category")}  ref={(input)=>{
+                  this.category=input}}
+                  updateParent={(state) => {
+                    this.setState({categories: state})}}/>
+                </div>
                 <br/>
                 <br/><input  type="text" placeholder="Website" onChange={e=>this.handleChange(e.target.value, "website")}  ref={(input)=>{
                 this.website=input}}/>

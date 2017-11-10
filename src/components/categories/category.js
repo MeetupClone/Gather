@@ -54,12 +54,12 @@ export default class Category extends Component {
     render() {
         let selectedCats = this.state.categories.map(x => {
             return (
-                <button key={x} value={x}> {x} </button>
+                <button className="category-buttons" key={x} value={x}> {x} </button>
             )
         })
 
         let showCats = this.state.showCategories.map(x => {
-          return (<button key ={x} value={x} onClick={(event) => {
+          return (<button className="category-buttons" key ={x} value={x} onClick={(event) => {
                 event.preventDefault();
                 this.handleChange(event.target.value)}}> {x}
               </button>)

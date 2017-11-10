@@ -17,7 +17,8 @@ export class GroupCards extends Component {
             groups: [],
             searchFilter: "name",
             searchText: "",
-            searchField: 1
+            searchField: 1,
+            loading: true
         }
 
         this.componentWillMount = this.componentWillMount.bind(this);
@@ -33,7 +34,7 @@ export class GroupCards extends Component {
     componentWillMount() {
         axios.get('/api/groups').then(result => {
             console.log(result.data)
-            this.setState({ groups: result.data })
+            this.setState({ loading: false, groups: result.data })
             console.log(this.state)
         })
 
@@ -54,6 +55,20 @@ export class GroupCards extends Component {
     render() {
 
         const { searchText, searchFilter } = this.props;
+        let appShell = null;
+
+        if(this.state.loading){
+            let arr = []
+
+            for(var i = 0; i < 8; i++){
+                arr.push(
+                    <h1 className="group-card-loading-container" key = {i}> loading </h1>
+                )
+            }
+            appShell = arr;
+
+            return (<div>{appShell}</div>)
+        } else {
         if (searchText !== "" && searchFilter === "name") {
             return (
                 <div>{this.state.groups.map(function(key){
@@ -164,4 +179,5 @@ export class GroupCards extends Component {
             )
         }
     }
+}
 }
