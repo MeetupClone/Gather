@@ -3,6 +3,8 @@
     margin-bottom: 20px;
     height: 120px;
     width: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
+    
 }
 
 .group-card-image {
@@ -32,4 +34,33 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.events-button {
+    width: 20%;
+    height: 20px;
+    font-size: 10px;
+    color: #fff;
+    background: #08A045; 
+}
+
+.group-button {
+    width: 20%;
+    height: 20px;
+    font-size: 10px;
+    color: #fff;
+    background: #08A045; 
+}
+
+.search {
+    text-align: center;
+}
+
+.group-card-loading-container {
+    justify-content: space-around;
+    background-color: white;
+    height: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
 }

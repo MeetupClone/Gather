@@ -45,7 +45,6 @@ export default class EditableProfile extends Component {
     }
     uploadImage(event) {
         event.preventDefault();
-        let userId = this.state.uid
         let file = this.state.file
         const storageRef = firebase.storage().ref();
         const uploadTask = storageRef.child('profilePictures/' + file.name).put(file);
@@ -125,7 +124,9 @@ export default class EditableProfile extends Component {
                 </div>
 
                 <button className="edit-profile-save" onClick={() => {
-                    this.updateProfile()
+                    this.updateProfile(this.state).then(result => {
+                        this.setState({editable: false})
+                    })
                 }}> Save Profile </button>
 
 

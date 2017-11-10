@@ -5,7 +5,12 @@ const createUser = (req,res) => {
 	.get('db')
 	.createUser(req.body)
 	.then(result => {
-		console.log("userSaved")
+		req.body[4].map(x => {
+			req.app
+			.get('db')
+			.insertUserCategories(result[0].uid, x.toLowerCase())
+		})
+		return true;
 	})
 }
 

@@ -7,6 +7,8 @@ import { joinEvent, leaveEvent } from "../../../ducks/event-redux"
 
 import { fire as firebase } from "../../../fire"
 
+import {EventComment} from "../comments/eventComment"
+
 export class SingleEvent extends Component {
     constructor(props) {
         super(props);
@@ -21,20 +23,23 @@ export class SingleEvent extends Component {
             organizerUid: '',
             currentUserUid: '',
             userAttendingEvents: [],
-            joined: false
+            joined: false,
+            eventMembers: 0
         }
     }
 
     componentWillMount() {
 
         axios.get(`/api/event/${this.state.eventId}`).then(response => {
+            console.log(response)
             this.setState({
                 eventName: response.data[0].title,
                 eventLocation: response.data[0].location,
                 eventDescription: response.data[0].description,
                 eventPic: response.data[0].event_image,
                 eventDate: response.data[0].date,
-                organizerUid: response.data[0].organizer_uid
+                organizerUid: response.data[0].organizer_uid,
+                eventMembers: response.data[0].members
             })
         })
 
@@ -53,47 +58,37 @@ export class SingleEvent extends Component {
                         this.setState({ joined: false })
                     }
                 })
-
-
             } 
         })
     }
 
     render() {
-        let that = this;
-        const { joinEvent, leaveEvent } = this.props
+        const { joinEvent } = this.props
         let joinButton = null
         let leaveButton = null
-        if (this.state.joined) {
-            joinButton = (<h1> You are going to this event! </h1>)
-            leaveButton = (<button onClick={(event) => {
-                leaveEvent(this.state)
-                that.setState({joined: false})
-            }}> Leave Event </button>)
-        } else {
-            joinButton = (<button onClick={(event) => {
-                joinEvent(this.state);
-                that.setState({joined: true})
-            }}> Join This Event </button>)
 
-        }
-
-
-        let editButton = null
-        if (this.state.currentUserUid === this.state.organizerUid) {
-            editButton = <Link to={`/event/edit/${this.props.match.params.id}`}> Edit Event </Link>
+        if (this.state.currentUserUid === this.state.organizerUid)
+            {
+            joinButton = (
+                <div>
+                    <h1> This is your event! </h1>
+                    <Link to={`/event/edit/${this.props.match.params.id}`}><button onClick={() => {this.setState({edit:true})}}> Click here to edit your event. </button></Link>
+                </div>
+                )
         }
 
         return (
             <div>
-            {editButton}
+                {joinButton} 
                 <h1>{this.state.eventName}</h1>
                 <img src={this.state.eventPic} alt={this.state.eventName}></img>
                 <h3>{this.state.eventLocation}</h3>
                 <h3>{this.state.eventDate}</h3>
+                <h3>{this.state.eventMembers} Member(s)</h3>
                 <p>{this.state.eventDescription}</p>
                 {leaveButton}
-                {joinButton}   
+                <EventComment/>
+  
             </div>
         )
     }

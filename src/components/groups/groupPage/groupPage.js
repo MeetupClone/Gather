@@ -10,6 +10,9 @@ import { fire as firebase } from "../../../fire"
 
 import {Link} from "react-router-dom";
 
+import Twitter from '../../twitter/twitter'
+import Facebook from '../../facebook/facebook'
+import Email from '../../email/email'
 
 import GroupDashboard from "../groupDashboard/groupDashboard";
 
@@ -25,7 +28,7 @@ export class GroupPage extends Component {
             category: "",
             groupLocation: "",
             groupDesc: "",
-            groupMembers: [],
+            groupMembers: 0,
             groupFB: "",
             groupTwitter: "",
             website: "",
@@ -71,7 +74,9 @@ export class GroupPage extends Component {
                 groupPic: result.data[0].group_picture,
                 groupFB: result.data[0].facebook, 
                 groupOrganizerUid: result.data[0].group_owner_uid,
-                groupTwitter: result.data[0].twitter })
+                groupTwitter: result.data[0].twitter,
+                groupMembers: result.data[0].members
+            })
         })
     }
 
@@ -93,7 +98,6 @@ export class GroupPage extends Component {
         }
 
         if (this.state.edit) {
-            console.log("yo")
             return (<GroupDashboard props={this.state}/>)
         }
 
@@ -118,9 +122,12 @@ export class GroupPage extends Component {
             <div>
             {joinButton}
             {leaveButton}
-                <h1>GROUP PAGE</h1>
                 <h1>{this.state.groupName}</h1>
+                <h3>{this.state.groupMembers} Member(s)</h3>
                 <h3>{this.state.groupDesc}</h3>
+                <Twitter/>
+                <Facebook/>
+                <Email/>
                 <div>{this.state.groupEvents.map(key => {
                     return(
                         <div>

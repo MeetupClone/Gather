@@ -3,13 +3,14 @@ import React from "react"
 
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete'
 
+import './placeSearchForm.css'
+
 class PlaceSearchForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = { address: '',
         placeId: '' }
         this.onChange = (address) => this.setState({ address })
-        let state = this.state
         this.updateParent = (state) => this.props.updateParent(state)
     }
 
@@ -23,6 +24,14 @@ class PlaceSearchForm extends React.Component {
     }
 
     render() {
+
+        const cssClasses = {
+            root: 'root',
+            input: 'form-control',
+            autocompleteContainer: 'auto-complete-container'
+        }
+
+
         const inputProps = {
             value: this.state.address,
             onChange: this.onChange,
@@ -40,7 +49,7 @@ class PlaceSearchForm extends React.Component {
         return (
 
             <form>
-        		<PlacesAutocomplete inputProps={inputProps} autocompleteItem={AutocompleteItem} />
+        		<PlacesAutocomplete googleLogo={false} inputProps={inputProps} autocompleteItem={AutocompleteItem} classNames={cssClasses}/>
       		</form>
         )
     }

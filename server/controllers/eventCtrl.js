@@ -6,8 +6,8 @@ const createEvent = (req, res) => {
         .createEvent(req.body)
         .then(result => {
             req.body.categories.map(x => {
-                x = x.toLowerCase();
-                req.app.get('db').insertEventCategories(result[0].id, x)
+                console.log(x.toLowerCase())
+                req.app.get('db').insertEventCategories(result[0].id, x.toLowerCase(0))
             })
             return res.json(result)
         })
@@ -21,7 +21,7 @@ const joinEvent = (req, res) => {
             let postUrl = 'https://iid.googleapis.com/iid/v1/' + result[0].fcm_key + '/rel/topics/' + result[0].event_id
             axios({
                 method: 'post',
-                url: 'https://iid.googleapis.com/iid/v1/' + result[0].fcm_key + '/rel/topics/' + result[0].event_id,
+                url: postUrl,
                 headers: {
                     "Content-Type": "applicaton/json",
                     "Authorization": "key=AAAApU-NWw8:APA91bE3mN38UNc4kp2pFkJqNwBQ-C1RUxWHfRgdvTr8SN4L6NlOHRu74mIGrQWNdcI8MJopMmdmwC_PPNthcRxzbcJxKVd1yZu81qlIvILN6487N7EnFgP4ZUrkrkRLHtFLRtRL22JX"
@@ -81,7 +81,7 @@ const getAllEvents = (req, res) => {
     req.app
         .get('db')
         .getAllEvents()
-        .then(result => res.json(result))
+        .then(result => res.status(200).json(result))
         .catch(err => console.log(err, "get all event endpoint not working"));
 }
 

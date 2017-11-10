@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #F5FBFD; }
+  background-color: #F5F5F6; }
 
 .box-shadow {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
@@ -12,20 +12,23 @@ button {
 
 input {
   width: 100%;
+  padding-top: 15px;
   margin: 1.5vh 0;
-  max-width: 70vw;
+  max-width: 90vw;
   font-size: 20px;
   border: 0;
   outline: 0;
   background: transparent;
-  border-bottom: 1px solid black; }
+  border-bottom: 1px solid black;
+  letter-spacing: 2px;
+}
 
 #login-page, #register-page {
   margin-top: 8vh;
   padding: 0 6vw; }
 
 #providers-auth {
-  margin-top: 5vh; }
+  margin-top: 1vh; }
 
 .auth-icon {
   width: 20px;
@@ -39,40 +42,73 @@ input {
   margin: 7px 0;
   font-size: 16px; }
 
+
+  .loginLogo {
+   letter-spacing: 3px;
+   font-weight: 400;
+   font-size: 2.9em;
+   margin: 1px;
+   margin-top: -25px;
+  }
+
 .facebook {
   color: #fff;
   text-align: center;
   background: #4060B7;
   border-radius: 5px;
-  outline: 0; }
+  outline: 0; 
+  letter-spacing: 1px;
+  font-size: 12px;
+  font-weight: 400;
+  width: 100%;
+
+}
 
 .login-button {
-  margin-top: 8vh;
+  margin-top: 4vh;
   width: 100%;
-  height: 50px;
-  font-size: 20px;
+  height: 40px;
+  font-size: 14px;
   color: #fff;
-  background: #08A045; }
+  background: #087f23;
+  letter-spacing: 2px;
+  font-weight: 400;
+  background: #08A045; 
+
+}
 
 .register-button {
-  margin-top: 7px;
-  width: 100%;
-  height: 50px;
-  font-size: 20px;
+  margin-top: -20px;
+  width: 90%;
+  height: 39px;
+  font-size: 14px;
   color: #fff;
-  background: #0F4C5C; }
+  background: #4caf50; 
+  letter-spacing: 2px;
+  font-weight: 400;
+}
 
 .twitter {
   color: #fff;
   background: #019BEA; }
 
 .forgot-password-button {
-  margin-top: 7px;
+  margin-top: 9px;
   padding: 11px;
-  width: 70vw;
-  background-color: #08A045;
+  width: 80vw;
+  background-color: #992c22;
   color: white;
   margin: 7px 0;
-  font-size: 16px; }
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  height: 35px;
+}
+
+  #register-title {
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
 
 /*# sourceMappingURL=login.css.map */
+

@@ -4,7 +4,8 @@ import axios from 'axios';
 
 import { RecommendedEvents } from './recommendedEvents/recommendedEvents.js';
 import { ExploreSearch } from './exploreSearch/exploreSearch';
-
+import "../../../helpers.css"
+import "./explore.css"
 import Footer  from '../../footer/footer'
 
 
@@ -23,7 +24,6 @@ export default class Explore extends Component {
     }
 
     componentWillMount() {
-        console.log(JSON.parse(localStorage.getItem('events')))
         if (JSON.parse(localStorage.getItem('events'))) {
             console.log("there")
             this.setState({ events: JSON.parse(localStorage.getItem('events')).events })
@@ -37,10 +37,10 @@ export default class Explore extends Component {
     render() {
 
         return (
-            <div>
+            <div className="explore-page">
               <div><RecommendedEvents/></div>
               <div><ExploreSearch/></div>
-              <div><Footer/></div>
+              <Footer/>
             </div>
         )
     }

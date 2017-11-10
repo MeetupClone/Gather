@@ -13,41 +13,58 @@ export class Register extends Component {
 
 
         this.state = {
-            uid: '',
             email: '',
+            password: '',
             name: '',
-            authenticated: false
+            authenticated: false,
+            categoriesAdded: false,
+            categories: []
         }
+
+        this.updateParent = (state) => this.props.updateParent(this.state)
     }
 
     render() {
+        let createButtons = null
+
+        if (this.state.categoriesAdded) {
+            createButtons = (
+                <div>
+                <button className="login-button box-shadow" onClick={(event) => {
+                event.preventDefault()
+                authWithEmailPassword(this.state)}}> Create Account </button>
+<div id="providers-auth" className="center">
+                            <button className="auth-button facebook box-shadow" onClick={(event)=> {
+                                event.preventDefault();
+                                authWithFacebook(this.state.categories) }}>
+                                <img className="auth-icon" src={require( "../assets/facebook.svg")} alt="facebook" /> Sign Up With Facebook </button>
+                        </div>
+                        </div>
+           )
+        } else {
+            createButtons = (
+                <div>
+                <h1> Choose some categories! </h1>
+                <h3>These allow us to provide you with events that you may like </h3>
+                <h6> You can change these any time in your account settings </h6>
+                </div>
+                )
+        }
+    
         const {
             authWithEmailPassword,
             authWithFacebook,
         } = this.props
         return (
             <div id="register-page">
-            <h1> Register </h1> 
-            <form className="center" onSubmit={(event) => { 
-                event.preventDefault();
-                authWithEmailPassword(event) }} ref={(form) => { this.loginForm = form }}>
-                <input name="email" type="email" ref={(input) => {this.nameInput = input}} placeholder="Name"/>
-                <input name="email" type="email" ref={(input) => {this.emailInput = input}} placeholder="Email"/>
-                <input name="password" type="password" ref={(input) => {this.passwordInput = input}} placeholder="Password"/>
-                <Category/>
-                <button className="login-button box-shadow" onClick={(event) => {
-                    event.preventDefault()
-                    authWithEmailPassword(this.emailInput.value, this.passwordInput.value, this.nameInput.value)}}> Create Account </button>
-            </form>
-            <div id="providers-auth" className="center">
-                            <button className="auth-button facebook box-shadow" onClick={(event)=> {
-                                event.preventDefault();
-                                authWithFacebook() }}>
-                                <img className="auth-icon" src={require( "../assets/facebook.svg")} alt="facebook" /> Sign Up With Facebook </button>
+            <h1 id="register-title"> Register </h1> 
 
-                            <br/>
-
-                        </div>
+                <input name="name" type="name" onChange={(event) => this.setState({name: event.target.value})} placeholder="Name"/>
+                <input name="email" type="email" onChange={(event) => this.setState({email : event.target.value})} placeholder="Email"/>
+                <input name="password" type="password" onChange={(event) => this.setState({password: event.target.value})} placeholder="Password"/>
+                <Category className="categorySelector" updateParent={(state) => {
+                this.setState({categoriesAdded : true, categories: state})}}/>
+                {createButtons}
           </div>
         );
     }

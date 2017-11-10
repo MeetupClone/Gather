@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import routes from "../../routes";
 
 import "./faq.css";
 import "../../helpers.css";

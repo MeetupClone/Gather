@@ -1,0 +1,17 @@
+.root {
+  margin: auto;
+  position: relative;
+  padding-bottom: 0;
+  width: 90%; }
+
+.form-group {
+  width: 90%; }
+
+.auto-complete-container {
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  width: 100%;
+  z-index: 25; }
+
+/*# sourceMappingURL=placeSearchForm.css.map */

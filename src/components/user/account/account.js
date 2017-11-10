@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import './account.css';
 
 import axios from 'axios';
-
 import { connect } from 'react-redux';
 import { getAuthInfo } from "../../../ducks/authentication-redux"
 
@@ -35,6 +34,7 @@ export class Account extends Component{
     }
     
     render(){
+        console.log(this.props)
         //fiddle with this!
 
         let displayMe = null;
@@ -47,6 +47,8 @@ export class Account extends Component{
             case 2:
             displayMe = (<Preferences uid={this.state.uid}/>)
             break;
+            default:
+            break;
         }
             return(
                 <div className="account-main-container">
@@ -54,7 +56,9 @@ export class Account extends Component{
                         <ul className="account-left-options">
                             <li onClick={(e) => this.changeView(1)}>Notifications</li>
                             <li onClick={(e) => this.changeView(2)}>Preferences</li>
-                            <li>Link to Logout</li>
+                            <li onClick={(e)=> {firebase.auth().signOut().then(result => {
+                                this.props.history.push('/')
+                            })}}>Link to Logout</li>
                         </ul>
                     </div>
                     <div className="account-right-content">

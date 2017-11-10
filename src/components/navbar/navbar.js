@@ -8,44 +8,48 @@ import './../../helpers.css'
 
 
 export default class Navbar extends Component {
+    constructor(props){
+        super(props)
+
+        this.state = {
+            authenticated: false
+        }
+    }
+
+    componentWillMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user){
+                this.setState({authenticated: true})
+            } else {
+                this.setState({authenticated: false})
+            }
+        })
+    }
+
     render() {
         let accountButton = null
-        if (localStorage.getItem('userData')) {
-            if (JSON.parse(localStorage.getItem('userData')).uid) {
+        if (this.state.authenticated) {
                 accountButton = (<Link to = "/user">
-		            <img src={require('./assets/settings.svg')} alt ="Settings"/>
-		          </Link>)
+                    <img className="nav-icon" src={require('./assets/settings.svg')} alt ="Settings"/>
+                  </Link>)
             } else {
-                accountButton = (<Link to = "/login">
-		             Log In 
-		          </Link>)
+                accountButton = (<Link className="nav-text" to = "/login">
+                     Log In 
+                  </Link>)
             }
-        } else {
-            firebase.auth().onAuthStateChanged(user => {
-                if (user) {
-                    accountButton = (<Link to = "/login">
-		             Log In 
-		          </Link>)
-                } else {
-                	accountButton = (<Link to = "/user">
-		            <img src={require('./assets/settings.svg')} alt ="Settings"/>
-		          </Link>)
-                }
-            })
-        }
         return (
             <div className="App">
-		        <header className="nav-header nunito-text">
-		          <Link to ="/">
-		            <img src={require('./assets/home.svg')} alt ="Home"/>
-		          </Link>
-		          <Link to ="/explore">
-		            <img src={require('./assets/explore.svg')} alt ="Explore"/>
-		          </Link>
-		          {accountButton}
-		        </header>
-        		<div>{routes}</div>
-      		</div>
+                <div className="nav-header nunito-text">
+                  <Link to ="/">
+                    <img className="nav-icon" src={require('./assets/home.svg')} alt ="Home"/>
+                  </Link>
+                  <Link to ="/explore">
+                    <img className="nav-icon" src={require('./assets/explore.svg')} alt ="Explore"/>
+                  </Link>
+                  {accountButton}
+                </div>
+                <div> {routes} </div>
+            </div>
         );
     }
 }
