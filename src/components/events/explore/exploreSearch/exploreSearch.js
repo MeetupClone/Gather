@@ -67,7 +67,7 @@ export class ExploreSearch extends Component {
                 <div>
                 <input className="search" type="text" placeholder="Search" onChange={(e) => this.updateSearchText(e.target.value)}/>
                 <span className="filter-dropdown">
-                <select onChange={(e) => this.updateSearchFilter(e.target.value)}>
+                <select className="categorySelector" onChange={(e) => this.updateSearchFilter(e.target.value)}>
                     <option value="name">Name</option>
                     <option value="location">Location</option>
                     <option value="category">Category</option>

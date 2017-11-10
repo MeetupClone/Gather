@@ -9,13 +9,47 @@
   text-transform: uppercase;
   text-decoration: none;
   background-color: transparent;
-  background-color: lightblue; }
+  background-color: lightblue; 
+  letter-spacing: 2px;
+  font-size: 9px;
+}
 
 .category-buttons:nth-child(odd) {
   background: #2196F3;
-  color: lightblue; }
+  color: lightblue;
+  letter-spacing: 2px;
+}
 
 .category-buttons:focus {
+  letter-spacing: 2px;
   outline: none; }
+
+
+
+  .category-buttonss {
+    justify-content: space-around;
+    font-family: 'Nunito', sans-serif;
+    padding: 12px 30px;
+    color: lightblue;
+    border-radius: 30px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: transparent;
+    background-color: #000d33;
+    letter-spacing: 2px;
+    font-size: 9px;
+  }
+  
+  .category-buttonss:nth-child(odd) {
+    background: #1a0000;
+    color: lightblue; 
+    letter-spacing: 2px;
+  }
+  
+  .category-buttonss:focus {
+    outline: none; 
+    letter-spacing: 2px;
+  }  
 
 /*# sourceMappingURL=category.css.map */
