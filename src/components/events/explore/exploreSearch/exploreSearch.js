@@ -75,8 +75,8 @@ export class ExploreSearch extends Component {
                 </select>
                 </span>
                 <span className="filter-buttons">
-                    <button className="events-button" onClick={(e) => this.updateSearchFieldEvent()}>Events</button>
-                    <button className="group-button" onClick={(e) => this.updateSearchFieldGroup()}>Group</button>
+                    <button className="events-button" onClick={(e) => this.updateSearchFieldEvent()}>EVENTS</button>
+                    <button className="group-button" onClick={(e) => this.updateSearchFieldGroup()}>GROUP</button>
                 </span>
                 <GroupCards searchFilter={this.state.searchFilter} searchText={this.state.searchText}/>
                 </div>

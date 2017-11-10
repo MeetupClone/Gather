@@ -71,6 +71,7 @@ export default class AuthHome extends Component {
 
             return (
                 <div>
+                <div>
                 <h3 className= "nunito-text">Your Events</h3>
                     {this.state.userEvents.map(key => {
                         return(
@@ -87,6 +88,7 @@ export default class AuthHome extends Component {
                     <EventsYouMayLike/>
                     <Footer/>
                 </div>
+            </div>
             </div>
             )
         }
