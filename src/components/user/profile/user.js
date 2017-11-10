@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 
 import axios from "axios";
 
-import { fire as firebase } from "../../../fire"
+import { fire as firebase } from "../../../fire";
+import Footer from '../../footer/footer';
+
+import moment from "moment";
 
 import "./profile.css"
 import '../../../helpers.css'
@@ -125,7 +128,6 @@ export default class Login extends Component {
                                 <div className="event-card-desc"><p>{key.description}</p></div>
                             </div>
                             </div>
-                            </Link>
                         )
                     })
                 }
@@ -140,19 +142,13 @@ export default class Login extends Component {
                 } else {
                     $userGroupsEvents = this.state.userAttending.map(key => {
                         return (
-                            <Link to = {`/event/${key.id}`}>
-                            <div key={key.id} className="event-card-container nunito-text">
-                            <div className="event-card-date nunito-text">
-                                {key.event_date}
-                            </div>
-                            <div  className="event-card-info nunito-text">
-                                <div className="event-card-loc">{key.location.toUpperCase()}</div>
-                                <div>{key.title}</div>
-                                <div>{key.category}</div>
-                                <div className="event-card-desc"><p>{key.description}</p></div>
-                            </div>
-                            </div>
-                            </Link>
+                      Link to = {`/event/${key.id}`}>
+                     <div className="events-styles" key={key.id}>
+                    {key.title}
+                    <div>{moment(key.event_date).format("MM-DD-YYYY h:MM a")}</div>
+                    <div>{key.location}</div>    
+                    </div>
+</Link>
                         )
                     })
                 }
@@ -168,10 +164,10 @@ export default class Login extends Component {
                 } else {
                     $userGroupsEvents = this.state.userGroups.map(key => {
                         return (
-                            <Link to = {`/groups/${key.id}`}>
-                            <div key={key.id}>
-                    <div className="user-prof-group-name nunito-text">{key.name}</div>
-                    <div className="user-prof-group-page nunito-text">{key.website}</div>
+<div className="events-styles" key={key.id}>
+                    <Link to = {`/groups/${key.id}`}>{key.name}</Link>
+                    <div>{key.website}</div>    
+
                     </div>
                     </Link>
                         )
@@ -205,9 +201,12 @@ export default class Login extends Component {
                     {this.setState({showParams: "groups" })}}> Groups </button>
                 </div>
                 {$userGroupsEvents}
-                <div>
-                <Link to ="/user/account"><button className="account-button  nunito-text" onClick={() => this.setState({accountSettings: true})} >Edit Account</button></Link>
+
+                <div className="footer-padding">
+                <Link to ="/user/account"><button className="account-button" onClick={() => this.setState({accountSettings: true})} >Edit Account</button></Link>
+
                 </div>
+                <Footer/>
                 </div>
                 )
             }

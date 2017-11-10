@@ -24,7 +24,7 @@ export class SingleEvent extends Component {
             currentUserUid: '',
             userAttendingEvents: [],
             joined: false,
-            eventMembers: 0
+            eventMembers: 0,
         }
     }
 

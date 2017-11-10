@@ -6,7 +6,8 @@ import '../../../helpers.css'
 
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { getAuthInfo } from "../../../ducks/authentication-redux"
+import { getAuthInfo } from "../../../ducks/authentication-redux";
+import Footer from '../../footer/footer';
 
 import {Notifications} from './notifications/notifications';
 import {Preferences} from './preferences/preferences';
@@ -55,13 +56,13 @@ export class Account extends Component{
             return(
                 <div className="account-main-container nunito-text">
                     <div className="account-left-navbar">
-                        <ul className="account-left-options">
-                            <li onClick={(e) => this.changeView(1)}>Notifications</li>
-                            <li onClick={(e) => this.changeView(2)}>Preferences</li>
-                            <li onClick={(e)=> {firebase.auth().signOut().then(result => {
+                        <div className="account-left-options">
+                            <div onClick={(e) => this.changeView(1)}>Notifications</div>
+                            <div onClick={(e) => this.changeView(2)}>Preferences</div>
+                            <div onClick={(e)=> {firebase.auth().signOut().then(result => {
                                 this.props.history.push('/')
-                            })}}>Link to Logout</li>
-                        </ul>
+                            })}}>Link to Logout</div>
+                        </div>
                     </div>
                     <div className="account-right-content">
                     {displayMe}
