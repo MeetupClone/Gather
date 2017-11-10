@@ -18,3 +18,9 @@
     flex-direction: column;
     justify-content: space-around;
 }
+
+.group-page-picture {
+    max-height: 200px;
+    max-width: auto;
+    border-radius: 10px;
+}
