@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import DateTime from 'react-datetime';
 import moment from 'moment';
 import {fire as firebase} from "../../../fire";
 import axios from 'axios';
@@ -46,8 +45,6 @@ export class EventComment extends Component {
 
     render(){
         const {postComment} = this.props;
-        let comment = null
-
         if(this.state.userName){
             return (
                 <div>

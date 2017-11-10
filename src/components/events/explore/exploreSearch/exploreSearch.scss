@@ -1,0 +1,49 @@
+.events-button {
+    margin-left: 2vw;
+    width: 20%;
+    height: 25px;
+    font-size: 12px;
+    color: #fff;
+    background: #08A045;
+}
+
+.group-button {
+    margin-left: 3vw;
+    width: 20%;
+    height: 25px;
+    font-size: 12px;
+    color: #fff;
+    background: #08A045;
+}
+
+.search {
+    border-bottom: 1px solid #757575;
+}
+
+
+.search:focus {
+    outline: none;
+}
+
+.group {
+    position: relative;
+    margin-bottom: 45px;
+}
+
+.label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.filter-dropdown {
+    margin-left: 10vw;
+}
+

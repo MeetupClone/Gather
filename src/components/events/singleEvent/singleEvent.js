@@ -72,15 +72,9 @@ export class SingleEvent extends Component {
             joinButton = (
                 <div>
                     <h1> This is your event! </h1>
-                    <Link to={`/event/edit/${this.props.match.params.id}`}><button onClick={() => {this.setState({edit:true})}}> Click here to go to edit your event. </button></Link>
+                    <Link to={`/event/edit/${this.props.match.params.id}`}><button onClick={() => {this.setState({edit:true})}}> Click here to edit your event. </button></Link>
                 </div>
                 )
-        }
-
-
-        let editButton = null
-        if (this.state.currentUserUid === this.state.organizerUid) {
-            editButton = <Link to={`/event/edit/${this.props.match.params.id}`}> Edit Event </Link>
         }
 
         return (

@@ -1,15 +1,14 @@
 .App-header {
-  background-color: #087f23;
+  background-color: #0F4C5C;
   overflow: hidden; }
 
 .nav-header {
-  background-color: #087f23;
-  height: 8vh;
+  background-color: #00C853;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   text-align: center;
-  padding: 4px 6px;
+  padding: 10px 6px;
   text-decoration: none;
   font-size: 20px; }
 
@@ -17,17 +16,17 @@
   text-decoration: none;
   color: white; }
 
-.nav-header img {
-	margin: 1vh auto;
-	height: 6vh;
-}
-
 .nav-header a:visited {
   text-decoration: none;
   color: white; }
 
 .nav-text {
-  font-size: 20px;
-  position: fixed;
-  top: 10px; }
+  margin: auto 0;
+  font-size: 20px; }
 
+.nav-icon {
+  margin: auto;
+  min-height: 6vh;
+  min-width: 6vh; }
+
+/*# sourceMappingURL=navbar.css.map */
