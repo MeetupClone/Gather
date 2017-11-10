@@ -19,13 +19,13 @@ export class Preferences extends Component{
 
     componentWillMount(){
 
-        axios.get(`/api/user/account/getPref/${this.state.uid}`)
+        axios.get(`/api/user/account/getPref/${localStorage.getItem('uid')}`)
         .then(result => {
             this.setState({preferences: result.data[0].preference_settings})
      })
          .catch(err => console.log("getPref error", err))
      
-     axios.get(`/api/user/account/getCat/${this.state.uid}`)
+     axios.get(`/api/user/account/getCat/${localStorage.getItem('uid')}`)
          .then(result => {
              this.setState({userCat: result.data})
      })
@@ -61,14 +61,17 @@ export class Preferences extends Component{
             <div>
             <h1>Manage Preferences</h1>
             <h4>Categories You Like</h4>
-            <p>{this.state.userCat.map(key => {
+            <div>{this.state.userCat.map((key,i) => {
+                let category = key.category
                 return(
-                    <div>{key.category}</div>
+                    <p key={i}>{category.charAt(0).toUpperCase() + category.slice(1)}</p>
                 )
-            })}</p>
+            })}</div>
             <h4>Privacy Settings</h4>
+            <div>
             {preferenceText}
             {preferenceButton}
+            </div>
             </div>
         )
         

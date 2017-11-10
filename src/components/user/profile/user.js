@@ -37,8 +37,6 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        let userId = null
-        console.log(localStorage.getItem('uid'))
         if (localStorage.getItem('uid')) {
             
             let user = localStorage.getItem('uid')

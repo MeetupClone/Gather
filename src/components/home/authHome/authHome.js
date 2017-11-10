@@ -4,7 +4,7 @@ import './authHome.css'
 import '../../../helpers.css'
 
 import { Link } from 'react-router-dom';
-import Footer  from '../../footer/footer'
+import Footer from '../../footer/footer'
 
 import axios from 'axios';
 import EventsYouMayLike from './eventsYouMayLike/eventsYouMayLike';
@@ -19,7 +19,8 @@ export default class AuthHome extends Component {
 
         this.state = {
             uid: "",
-            userEvents: []
+            userEvents: [],
+            loading: true
         }
 
 
@@ -38,7 +39,12 @@ export default class AuthHome extends Component {
                 this.setState({
                     uid: user.uid
                 })
-                axios.get(`/api/event/user/${this.state.uid}`).then(result => this.setState({ userEvents: result.data }))
+                axios.get(`/api/event/user/${this.state.uid}`).then(result => {
+                    this.setState({ loading: false, userEvents: result.data })
+                    console.log(this.state.userEvents)
+
+                })
+
             }
         })
 
@@ -47,30 +53,41 @@ export default class AuthHome extends Component {
 
 
     render() {
+        let appShell = null;
+        if (this.state.loading) {
+            let arr = []
+
+            for (var i = 0; i < 8; i++) {
+                arr.push(
+                    <div className="event-card-loading-container" key={i}></div>
+                )
+            }
+            appShell = arr;
+
+            return (<div>
+                <h3 className= "nunito-text">Your Events</h3>
+                {appShell}
+                <Footer/>
+                </div>)
+        } else {
 
 
-
-        return (
-            <div>
+            return (
                 <div>
-                <h3>Your Events</h3>
+                <h3 className= "nunito-text">Your Events</h3>
                     {this.state.userEvents.map(key => {
                         return(
-                            <div key={key.id} className="auth-event-card-info nunito-text">
-                                <div className="auth-event-card-loc">{key.location.toUpperCase()}</div>
-                                <div>{key.data}</div>
+                            <div key={key.id} className="auth-event-card-container nunito-text">
+                                <div className="auth-event-card-loc">{key.location}</div>
                                 <div><Link to = {`/event/${key.id}`} className="auth-link">{key.title}</Link></div>
                                 <div>{key.category}</div>
                             </div>
                         )
                     })}
-                </div>
-                <div>
                     <EventsYouMayLike/>
-                </div>
                 <Footer/>
             </div>
-        )
-
+            )
+        }
     }
 }

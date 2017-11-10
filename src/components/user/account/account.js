@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import './account.css';
 
 import axios from 'axios';
-
 import { connect } from 'react-redux';
 import { getAuthInfo } from "../../../ducks/authentication-redux"
 
@@ -47,6 +46,8 @@ export class Account extends Component{
 
             case 2:
             displayMe = (<Preferences uid={this.state.uid}/>)
+            break;
+            default:
             break;
         }
             return(

@@ -21,17 +21,8 @@ export class Login extends Component {
             password: '',
             name:'', 
             email: '',
-            authenticated: false,
+            authenticated: false
         }
-        // firebase.auth().onAuthStateChanged(user => {
-        //     if (user) {
-        //         this.setState({
-        //             uid: user.uid,
-        //             email: user.email,
-        //             authenticated: true
-        //         })
-        //     }
-        // })
     }
 
     signOut() {
@@ -40,10 +31,6 @@ export class Login extends Component {
                 authenticated: false
             })
         })
-    }
-
-    componentWillReceiveProps(x,y){
-        
     }
 
     render() {
@@ -59,7 +46,6 @@ export class Login extends Component {
             return (
                 <div id="login-page">
                     <h1 className="loginLogo">GATHER</h1>
-                    <h3>LOG IN </h3>
                     <img src="images/logo-192.png" alt="gatherLogo" height="100" width="100"/>
                     <br/>
                         <form onSubmit={(event)=> { 
@@ -83,7 +69,7 @@ export class Login extends Component {
                         </form>
                         <div id="providers-auth" className="center">
                             
-                            <Link to="/forgotpassword">
+                            <Link to="/login/forgotPassword">
                             <button className="forgot-password-button">Forgot Password</button>
                             </Link>
                         </div>

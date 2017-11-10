@@ -48,7 +48,6 @@ export default class Footer extends Component {
                 }
             }}> Groups
                 </button>)
-        let nonAuthed = null
         let loginButton = (<button className="footer-login-button" onClick={() => {this.props.history.push('/login')}}>Login</button>)
          if (this.state.createButton){
             createButton = (
