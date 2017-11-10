@@ -2,54 +2,54 @@
 .category-buttons {
   justify-content: space-around;
   font-family: 'Nunito', sans-serif;
+  padding: 8px;
+  padding-right: 8px;
+  margin: 2px;
+  color: white;
+  width: 30%;
+  border-radius: 5px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: transparent;
+  background-color: #42A5F5;
+  overflow: none; }
+
+.category-buttons:nth-child(odd) {
+  background: #2196F3;
+  color: white;
+  letter-spacing: 2px; }
+
+.category-buttonss {
+  justify-content: space-around;
+  font-family: 'Nunito', sans-serif;
   padding: 12px 30px;
-  color: #2196F3;
+  color: lightblue;
   border-radius: 30px;
   letter-spacing: 0.3px;
   text-transform: uppercase;
   text-decoration: none;
   background-color: transparent;
-  background-color: lightblue; 
+  background-color: #000d33;
   letter-spacing: 2px;
-  font-size: 9px;
-}
+  font-size: 9px; }
 
-.category-buttons:nth-child(odd) {
-  background: #2196F3;
+.category-buttonss:nth-child(odd) {
+  background: #1a0000;
   color: lightblue;
-  letter-spacing: 2px;
-}
+  letter-spacing: 2px; }
+
+.category-buttonss:focus {
+  outline: none;
+  letter-spacing: 2px; }
+
+.category-container {
+  width: 92%;
+  margin: 0 auto; }
 
 .category-buttons:focus {
-  letter-spacing: 2px;
   outline: none; }
 
-
-
-  .category-buttonss {
-    justify-content: space-around;
-    font-family: 'Nunito', sans-serif;
-    padding: 12px 30px;
-    color: lightblue;
-    border-radius: 30px;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
-    text-decoration: none;
-    background-color: transparent;
-    background-color: #000d33;
-    letter-spacing: 2px;
-    font-size: 9px;
-  }
-  
-  .category-buttonss:nth-child(odd) {
-    background: #1a0000;
-    color: lightblue; 
-    letter-spacing: 2px;
-  }
-  
-  .category-buttonss:focus {
-    outline: none; 
-    letter-spacing: 2px;
-  }  
+/*# sourceMappingURL=category.css.map */
 
 /*# sourceMappingURL=category.css.map */

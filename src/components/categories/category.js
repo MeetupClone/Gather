@@ -92,13 +92,13 @@ export default class Category extends Component {
 
 
 
-
-            <div>
+<div>
+            <div className="category-container">
             {selectedCats}
-            <br/>
-            <br/>
-            <br/>
+            </div>
+            <div className="category-container">
             {showCats}
+            </div>
          
         </div>
 
