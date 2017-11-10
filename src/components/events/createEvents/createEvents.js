@@ -78,7 +78,6 @@ export class CreateEvents extends Component {
         } else {
             return false
         }
-
     }
 
 
@@ -102,30 +101,33 @@ export class CreateEvents extends Component {
             <div>
               {confirmModalElement}
               <h1 className="createTitle"> Create Event </h1>
-              <input required type="text"  placeholder="Name" onChange={e=>this.handleChange(e.target.value, "eventName")}  ref={(input)=>{
+              <input required type="text" className="nunito-text"   placeholder="Name" onChange={e=>this.handleChange(e.target.value, "eventName")}  ref={(input)=>{
               this.eventName = input}}/>
-              <input required type="text"  placeholder="Description"   onChange={e=>this.handleChange(e.target.value, "description")}/>
+              <input required type="text" className="nunito-text"  placeholder="Description"   onChange={e=>this.handleChange(e.target.value, "description")}/>
               <PlaceSearchForm placeholder="Address" updateParent={(location) => {
                 this.setState({location: location.address, placeId: location.placeId})
               }}/>
               <input className="event-datetime" required type="date" min={moment().format('YYYY-MM-DD')}onChange={(event) => {
                 this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm")})
               }}/>
-   
-              <input className="event-datetime nunito-text" required type="time" onChange={(event) => {
+            
+              <input step="900" className="event-datetime nunito-text" required type="time" onChange={(event) => {
                 console.log(event.target.value)
                 this.setState({eventTime: event.target.value, cronTime: moment.utc(event).subtract(3, 'hours').format()})}}/>
+
               <div className="category-title"> Categories
               <Category className="category-button" required updateParent={(state) => {
                 this.setState({categories: state})}}/>
               </div>
                 <img className="event-picture" src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
                 <form>
-                 <input
+                 <input id="input"className="input-picture btn-active"
                     type="file"
                     onChange={(event)=>this.imageProcess(event)} />
+                    <label className="input-label" htmlFor="input"> Add an Event Photo </label>
                 </form>
-              <button type="submit" className="submitEvent-button" onClick={(event) => {
+
+              <button type="submit" className="submit-event-button btn-active" onClick={(event) => {
                 event.preventDefault()
                 createEvent(this.state)
               }}>Submit</button>
