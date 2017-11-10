@@ -39,4 +39,8 @@
 .createTitle {
   font-family: 'Nunito', sans-serif; }
 
+.category-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: bold; }
+
 /*# sourceMappingURL=createEvents.css.map */

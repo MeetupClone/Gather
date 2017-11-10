@@ -3,6 +3,8 @@
     margin-bottom: 20px;
     height: 120px;
     width: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
+    
 }
 
 .group-card-image {
@@ -52,4 +54,13 @@
 
 .search {
     text-align: center;
+}
+
+.group-card-loading-container {
+    justify-content: space-around;
+    background-color: white;
+    height: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
 }

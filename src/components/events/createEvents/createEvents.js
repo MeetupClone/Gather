@@ -109,11 +109,14 @@ export class CreateEvents extends Component {
               <input required type="date" min={moment().format('YYYY-MM-DD')}onChange={(event) => {
                 this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm")})
               }}/>
+   
               <input required type="time" onChange={(event) => {
                 console.log(event.target.value)
                 this.setState({eventTime: event.target.value, cronTime: moment.utc(event).subtract(3, 'hours').format()})}}/>
-              <Category required updateParent={(state) => {
+              <div className="category-title"> Categories
+              <Category className="category-button" required updateParent={(state) => {
                 this.setState({categories: state})}}/>
+              </div>
                 <br/>
                 <img src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
               
