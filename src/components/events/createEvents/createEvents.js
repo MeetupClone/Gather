@@ -121,7 +121,7 @@ export class CreateEvents extends Component {
               </div>
                 <img className="event-picture" src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
                 <form>
-                 <input id="input"className="input-picture btn-active"
+                 <input id="input" className="input-picture btn-active"
                     type="file"
                     onChange={(event)=>this.imageProcess(event)} />
                     <label className="input-label" htmlFor="input"> Add an Event Photo </label>
