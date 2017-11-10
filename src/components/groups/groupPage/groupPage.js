@@ -89,6 +89,14 @@ export class GroupPage extends Component {
         const { joinGroup, leaveGroup } = this.props
         let joinButton = null
         let leaveButton = null
+        let groupImage = null
+
+        if(this.state.category){
+            groupImage = require(`../../../web-p-category-pics/${this.state.category}.webp`);
+        }
+        else{
+            groupImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5VYjjU6OM1lm1QyggD1_ShdKTc-kWDT-FcCeL5qlYCg2oZxIWQg";
+        }
 
         if (this.state.currentUserUid === this.state.groupOrganizerUid)
             {
@@ -120,12 +128,12 @@ export class GroupPage extends Component {
             }}> Leave Group </button>)
         }
 
-
         return (
             <div className="nunito-text">
            
                 <h1>{this.state.groupName}</h1>
-                {<img src={this.state.groupPic} />}
+                <img src={groupImage} alt=":-(" className="group-page-picture"/>
+                {/* <img src={require(groupImage)  || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5VYjjU6OM1lm1QyggD1_ShdKTc-kWDT-FcCeL5qlYCg2oZxIWQg"} alt=":D"/> */}
                 <h3>{this.state.groupMembers} Member(s)</h3>
                 <p>{this.state.groupDesc}</p>
                 <Twitter/>
@@ -134,7 +142,7 @@ export class GroupPage extends Component {
                 <div>{this.state.groupEvents.map(key => {
                     return(
                         <div>
-                            <img src={key.event_image} alt="event img"/>
+                            {/* <img src={key.event_image || `../../../assets/web-p-category-pics/${this.state.category}` || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5VYjjU6OM1lm1QyggD1_ShdKTc-kWDT-FcCeL5qlYCg2oZxIWQg"} alt="event img"/> */}
                             <Link to={`/event/${key.id}`}><p>{key.title}</p></Link>
                             <p>{key.description}</p>
                         </div>
