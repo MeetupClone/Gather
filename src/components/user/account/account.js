@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 
 import './account.css';
 
+import '../../../helpers.css'
+
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getAuthInfo } from "../../../ducks/authentication-redux"
@@ -51,7 +53,7 @@ export class Account extends Component{
             break;
         }
             return(
-                <div className="account-main-container">
+                <div className="account-main-container nunito-text">
                     <div className="account-left-navbar">
                         <ul className="account-left-options">
                             <li onClick={(e) => this.changeView(1)}>Notifications</li>
