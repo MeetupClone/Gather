@@ -18,7 +18,7 @@ export class EventCards extends Component {
             searchFilter: "name",
             searchText: "",
             searchField: 1,
-            loading: false
+            loading: true
         }
 
         this.componentWillMount = this.componentWillMount.bind(this);
@@ -55,19 +55,8 @@ export class EventCards extends Component {
 
 
     render() {
-<<<<<<< HEAD
-
-        let commentButton = null;
-
-        this.state.events = this.state.events.sort(function(a, b) {
-            // Turn your strings into dates, and then subtract them
-            // to get a value that is either negative, positive, or zero.
-            return new Date(a.event_date) - new Date(b.event_date);
-        });
-=======
        
 
->>>>>>> 30c6a4e72003260ab2559a1ed258c89524ccdc1b
 
         let now = new Date();
 
