@@ -1,25 +1,61 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:300,400,700');
 
-.category-buttons {
-  justify-content: space-around;
-  font-family: 'Nunito', sans-serif;
-  padding: 12px 30px;  
-  color: #2196F3;
-  border-radius: 30px;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  text-decoration: none;
-  background-color: transparent;
-  background-color: lightblue; 
+$button-color: #42A5F5;
+
+.category-buttons-container {
+    width: 92%;
+    margin: 5vh auto;
 }
+
+.category-buttons {
+    justify-content: space-around;
+    font-family: 'Nunito', sans-serif;
+    padding: 8px;
+    padding-right: 8px;
+    margin: 2px;
+    color: white;
+    width: 30%;
+    border-radius: 5px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: transparent;
+    background-color: $button-color;
+    overflow: none;
+}
+
+.category-chosen-buttons {
+    justify-content: space-around;
+    font-family: 'Nunito', sans-serif;
+    padding: 8px;
+    padding-right: 8px;
+    margin: 2px;
+    color: lighten($button-color, 30%);
+    width: 30%;
+    border-radius: 5px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    background-color: #000d33;
+    letter-spacing: .6px;
+}
+
 
 .category-buttons:nth-child(odd) {
-  background: #2196F3;
-  color: lightblue;
+    background: darken($button-color, 18%);
+    color: white;
 }
 
-.category-buttons:focus{
-  outline: none;
+.category-buttons:focus {
+    outline: none;
 }
 
+.category-chosen-buttons:nth-child(odd) {
+    background: #1a0000;
+    color: lightblue;
+    letter-spacing: 2px;
+}
 
+.category-chosen-buttons:focus {
+    outline: none;
+    letter-spacing: 2px;
+}

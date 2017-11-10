@@ -1,3 +1,9 @@
+
+* {
+  color: black;
+  text-decoration: none;
+}
+
 .user-profile-pic {
   margin-top: 5vh;
   max-height: 150px !important;
@@ -85,5 +91,66 @@
   margin-left: 20px;
   margin-right: 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23); }
+
+  .user-prof-group-name{
+    font-size: 30px;
+  }
+
+
+  .event-card-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 100px;
+    width: 90%;
+    margin: 10px auto;
+    background-color: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+  
+  .event-card-content-container {
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+    padding-left: 10px;
+    padding-right: 10px; }
+  
+  .event-card-title {
+    font-weight: bold; }
+  
+  .event-card-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left; }
+  
+  .event-card-category {
+    text-align: left;
+    font-size: 12px; }
+  
+  .event-card-date {
+    width: 100px;
+    height: 100%;
+    float: left;
+    margin-right: 10px; }
+  
+  .event-card-loc {
+    font-size: 12px;
+    color: gray;
+    font-weight: bold; }
+  
+  .event-card-desc {
+    text-align: left; }
+  
+  .event-title-link {
+    color: black;
+    text-decoration: none; }
+  
+  .event-card-loading-container {
+    justify-content: space-around;
+    background-color: white;
+    height: 100px;
+    width: 90%;
+    margin: 10px auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23); }
+
+
 
 /*# sourceMappingURL=profile.css.map */

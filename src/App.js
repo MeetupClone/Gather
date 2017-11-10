@@ -3,7 +3,7 @@ import './App.css';
 import './helpers.css';
 import { fire as firebase } from "./fire"
 import axios from "axios";
-// import Footer from './components/footer/footer'
+import Footer from './components/footer/footer'
 import Navbar from "./components/navbar/navbar"
 class App extends Component {
 
@@ -63,6 +63,7 @@ class App extends Component {
 
             <div className="App">
             <Navbar/>
+            <Footer/>
             </div>
 
         );

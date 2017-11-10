@@ -10,6 +10,9 @@ import { fire as firebase } from "../../../fire"
 
 import {Link} from "react-router-dom";
 
+import './groupPage.css'
+import '../../../helpers.css'
+
 import Twitter from '../../twitter/twitter'
 import Facebook from '../../facebook/facebook'
 import Email from '../../email/email'
@@ -90,9 +93,9 @@ export class GroupPage extends Component {
         if (this.state.currentUserUid === this.state.groupOrganizerUid)
             {
             joinButton = (
-                <div>
-                    <h1> This is your group! </h1>
-                    <button onClick={() => {this.setState({edit:true})}}> Click here to go to your group dashboard </button>
+                <div className="group-page-specific-container">
+                    <h4> This is your group! </h4>
+                    <button className="group-page-join-button" onClick={() => {this.setState({edit:true})}}> Click here to go to your group dashboard </button>
                 </div>
                 )
         }
@@ -119,12 +122,12 @@ export class GroupPage extends Component {
 
 
         return (
-            <div>
-            {joinButton}
-            {leaveButton}
+            <div className="nunito-text">
+           
                 <h1>{this.state.groupName}</h1>
+                {<img src={this.state.groupPic} />}
                 <h3>{this.state.groupMembers} Member(s)</h3>
-                <h3>{this.state.groupDesc}</h3>
+                <p>{this.state.groupDesc}</p>
                 <Twitter/>
                 <Facebook/>
                 <Email/>
@@ -137,6 +140,8 @@ export class GroupPage extends Component {
                         </div>
                     )
                 })}</div>
+                {joinButton}
+                {leaveButton}
             </div>
         )
     }

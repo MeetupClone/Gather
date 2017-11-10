@@ -75,9 +75,6 @@ export class EventCards extends Component {
 
             return (<div>{appShell}</div>)
         } else {
-
-
-
             if (searchText !== "" && searchFilter === "Name") {
                 const {events} = this.props
                 return (
@@ -87,14 +84,14 @@ export class EventCards extends Component {
                     if((key.title.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                     
                     return(
-                         <Link to = {`/event/${key.id}`}>
-                    <div key={key.id} className="event-card-container">
+                         <Link key={key.id} to = {`/event/${key.id}`}>
+                    <div className="event-card-container">
                             <div className="event-card-date nunito-text">
                                 {key.event_date}
                             </div>
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
-                                <div><Link to = {`/event/${key.id}`} className="event-title-link">{key.title}</Link></div>
+                                <div>{key.title}</div>
                                 <div>{key.category}</div>
                                 <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>
@@ -112,19 +109,19 @@ export class EventCards extends Component {
                     if((key.location.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                       
                     return(
- <Link to = {`/event/${key.id}`}>
-                    <div key={key.id} className="event-card-container">
+                    <Link key={key.id} to = {`/event/${key.id}`}>
+                        <div key={key.id} className="event-card-container">
                             <div className="event-card-date nunito-text">
                                 {key.event_date}
                             </div>
                             <div  className="event-card-info nunito-text">
-                                <div className="event-card-loc">{key.location.toUpperCase()}</div>
-                                <div><Link to = {`/event/${key.id}`} className="event-title-link">{key.title}</Link></div>
-                                <div>{key.category}</div>
-                                <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
+                                    <div className="event-card-loc">{key.location.toUpperCase()}</div>
+                                    <div>{key.title}</div>
+                                    <div>{key.category}</div>
+                                    <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>
-                            </div>
-                            </Link>
+                        </div>
+                    </Link>
 
                 )}
             })}</div>
@@ -136,14 +133,14 @@ export class EventCards extends Component {
                     if((key.category.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                       
                     return(
- <Link to = {`/event/${key.id}`}>
+                    <Link key={key.id} to = {`/event/${key.id}`}>
                     <div key={key.id} className="event-card-container">
                             <div className="event-card-date nunito-text">
                                 {key.event_date}
                             </div>
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
-                                <div><Link to = {`/event/${key.id}`} className="event-title-link">{key.title}</Link></div>
+                                <div>{key.title}</div>
                                 <div>{key.category}</div>
                                 <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>
@@ -159,14 +156,14 @@ export class EventCards extends Component {
                 let eventDate = new Date(key.event_date)
             if(eventDate > now){
                 return(
-                    <Link to = {`/event/${key.id}`}>
-                    <div key={key.id} className="event-card-container">
+                    <Link key={key.id}  to = {`/event/${key.id}`}>
+                    <div className="event-card-container">
                             <div className="event-card-date nunito-text">
                                 {key.event_date}
                             </div>
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
-                                <div><Link to = {`/event/${key.id}`} className="event-title-link">{key.title}</Link></div>
+                                <div>{key.title}</div>
                                 <div>{key.category}</div>
                                 <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>

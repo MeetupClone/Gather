@@ -34,7 +34,6 @@ export class Login extends Component {
     }
 
     render() {
-        console.log(this.props)
         const { loginWithEmailPassword, authWithFacebook } = this.props;
         if (this.state.authenticated) {
             return (
@@ -45,8 +44,7 @@ export class Login extends Component {
         } else {
             return (
                 <div id="login-page">
-                    <h1 className="loginLogo">GATHER</h1>
-                    <img src="images/logo-192.png" alt="gatherLogo" height="100" width="100"/>
+                    <img src={require('../../assets/logo.svg')} alt="gatherLogo" height="100" width="100"/>
                     <br/>
                         <form onSubmit={(event)=> { 
                             event.preventDefault();

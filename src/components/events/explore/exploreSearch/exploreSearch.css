@@ -1,10 +1,21 @@
+.categorySelector {
+  border: 1px solid;
+  letter-spacing: 2px;
+  color: green;
+}
+
+
 .events-button {
   margin-left: 2vw;
   width: 20%;
   height: 25px;
   font-size: 12px;
   color: #fff;
-  background: #08A045; }
+  background: #08A045;
+  letter-spacing: 1px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
 
 .group-button {
   margin-left: 3vw;
@@ -12,10 +23,15 @@
   height: 25px;
   font-size: 12px;
   color: #fff;
-  background: #08A045; }
+  background: #08A045;
+  letter-spacing: 1px;
+}
 
 .search {
+  margin-top: 20px;
+  margin-bottom: 20px;
   border-bottom: 1px solid #757575; }
+  
 
 .search:focus {
   outline: none; }
@@ -42,4 +58,31 @@
 Link {
   text-decoration: none; }
 
+*{
+  text-decoration: none;
+  color: black;
+}
+
+
+.input-picture {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.input-picture-label + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.input-picture-label:focus + label,
+.input-picture-label + label:hover {
+    background-color: red;
+}
 /*# sourceMappingURL=exploreSearch.css.map */

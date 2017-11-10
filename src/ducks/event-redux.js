@@ -30,15 +30,16 @@ const DELETE_EVENT = 'DELETE_EVENT';
 export function createEvent(componentState) {
     return {
         type: CREATE_EVENT,
-        payload: new Promise(() => {
+        payload: new Promise((resolve, reject) => {
             let eventFile = componentState.file
             const eventStorageRef = firebase.storage().ref();
             const eventUploadTask = eventStorageRef.child('eventPictures/' + eventFile.name).put(eventFile);
             eventUploadTask.on('state_changed', (snapshot) => {}, function(error) {}, function() {
                 componentState.eventPic = eventUploadTask.snapshot.downloadURL;
+                resolve(componentState)
             })
         }).then(result => {
-            axios.post('/api/event/create', componentState).then(result => {
+           return axios.post('/api/event/create', componentState).then(result => {
                 return { result }
             })
         })
@@ -89,11 +90,9 @@ export function deleteEvent(componentState) {
 export default function EventReducer(state = initialState, action) {
     switch (action.type) {
         case CREATE_EVENT + "_PENDING":
-            console.log("fuck")
-            return { created: false }
-        case CREATE_EVENT + "_FUFILLED":
-            console.log("done")
-            return { created: true }
+            return { loading: true, created: false }
+        case CREATE_EVENT + "_FULFILLED":
+            return { loading: false, created: true }
         case JOIN_EVENT:
             return axios.post('/api/event/join', action.payload).then(result => {
                 console.log(result.data[0].fcm_key, result.data[0].id)

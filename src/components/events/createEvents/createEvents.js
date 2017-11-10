@@ -7,6 +7,8 @@ import { createEvent } from "../../../ducks/event-redux";
 import PlaceSearchForm from "../../placeSearchForm/placeSearchForm";
 import Category from "../../categories/category";
 
+import "./createEvents.css"
+
 import Datetime from "react-datetime";
 import moment from "moment";
 
@@ -27,7 +29,7 @@ export class CreateEvents extends Component {
             location: '',
             placeId: '',
             categories: '',
-            created: null,
+            created: this.props.EventReducer.created,
             website: '',
             confirmModal: false,
             file: '',
@@ -69,14 +71,17 @@ export class CreateEvents extends Component {
     }
 
 
-    render() {
-        console.log(this.props)
-        let inputProps = {
-            placeholder: "Pick a Date and Time"
+
+    shouldComponentUpdate(newProps, newState) {
+        if (newState.imagePreviewUrl || this.state === newState || this.state.created !== newState.created) {
+            return true
+        } else {
+            return false
         }
+    }
 
-        let timeConstraints = { minutes: { min: 0, max: 59, step: 15 } }
 
+    render(){
 
         var yesterday = Datetime.moment().subtract(1, 'day');
         var valid = function(current) {
@@ -88,45 +93,41 @@ export class CreateEvents extends Component {
             <h3>Share your event!</h3>
             <Twitter/>
             <Facebook/>
-            <Email/></div>)
-            return confirmModalElement
+            <Email/>
+            </div>)
         }
         const { createEvent } = this.props
         return (
             <div>
               {confirmModalElement}
               <h1 className="createTitle"> Create Event </h1>
-              <br/>
-              <input required type="text"  placeholder="Name" onChange={e=>this.handleChange(e.target.value, "eventName")}  ref={(input)=>{
+              <input required type="text" className="nunito-text"   placeholder="Name" onChange={e=>this.handleChange(e.target.value, "eventName")}  ref={(input)=>{
               this.eventName = input}}/>
-              <br/>
-              <input required type="text"  placeholder="Description"   onChange={e=>this.handleChange(e.target.value, "description")}/>
+              <input required type="text" className="nunito-text"  placeholder="Description"   onChange={e=>this.handleChange(e.target.value, "description")}/>
               <PlaceSearchForm placeholder="Address" updateParent={(location) => {
                 this.setState({location: location.address, placeId: location.placeId})
               }}/>
-              <br/>
-              <br/>
-              <input required type="date" min={moment().format('YYYY-MM-DD')}onChange={(event) => {
+              <input className="event-datetime" required type="date" min={moment().format('YYYY-MM-DD')}onChange={(event) => {
                 this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm")})
               }}/>
-   
-              <input required type="time" onChange={(event) => {
+            
+              <input step="900" className="event-datetime nunito-text" required type="time" onChange={(event) => {
                 console.log(event.target.value)
                 this.setState({eventTime: event.target.value, cronTime: moment.utc(event).subtract(3, 'hours').format()})}}/>
+
               <div className="category-title"> Categories
               <Category className="category-button" required updateParent={(state) => {
                 this.setState({categories: state})}}/>
               </div>
-                <br/>
-                <img src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
-              
-                 <input required
+                <img className="event-picture" src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
+                <form>
+                 <input id="input" className="input-picture btn-active"
                     type="file"
                     onChange={(event)=>this.imageProcess(event)} />
-                    <br/>
-    
-              <br/>
-              <button type="submit" className="submitEvent-button" onClick={(event) => {
+                    <label className="input-label" htmlFor="input"> Add an Event Photo </label>
+                </form>
+
+              <button type="submit" className="submit-event-button btn-active" onClick={(event) => {
                 event.preventDefault()
                 createEvent(this.state)
               }}>Submit</button>

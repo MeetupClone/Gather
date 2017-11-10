@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { createGroup } from "../../../ducks/group-redux"
 import { fire as firebase } from "../../../fire"
 import Category from "../../categories/category"
+
+import "./createGroup.css";
+
+
 export class CreateGroup extends Component {
     constructor(props) {
         super(props)
@@ -61,15 +65,19 @@ export class CreateGroup extends Component {
         }
         return (
             <div>
+
+
               {confirmModalElement}
               <h1>Create Group</h1>
               <form>
                 
-                <img src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
-                <input
-                  type="file"
-                  onChange={(event)=>this.imageProcess(event)} /> 
-                  <input type="text" placeholder="Name" onChange={e=>this.handleChange(e.target.value, "name")} />
+                <img className="group-picture" src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
+                 <input id="input" className="input-picture btn-active"
+                    type="file"
+                    onChange={(event)=>this.imageProcess(event)} />
+                    <label className="input-label" htmlFor="input"> Add a Group Photo </label>
+                </form>
+                <input type="text" placeholder="Name" onChange={e=>this.handleChange(e.target.value, "name")} />
                 <input type="text" placeholder="Description" onChange={e=>this.handleChange(e.target.value, "description")} />
                 <Category updateParent={(state) => {
                 this.setState({categories: state})}}/>                
@@ -77,8 +85,7 @@ export class CreateGroup extends Component {
                 <input type="text" placeholder="Twitter" onChange={e=>this.handleChange(e.target.value, "twitter")} ></input>
                 <input type="text" placeholder="Facebook" onChange={e=>this.handleChange(e.target.value, "facebook")} ></input>
                 <input type="text" placeholder="Instagram" onChange={e=>this.handleChange(e.target.value, "instagram")} ></input>
-              </form>
-              <button onClick={(event) => {
+                    <button className="submit-group-button btn-active" onClick={(event) => {
                 event.preventDefault()
                 createGroup(this.state)
                 this.setState({confirmModalElement: true})

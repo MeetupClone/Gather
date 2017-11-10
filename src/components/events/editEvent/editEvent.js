@@ -94,7 +94,6 @@ export class EditEvent extends Component {
         }
 
         if (this.state.eventName === this.state.confirmDeleteInput) {
-
             finalDeleteButton = (<button onClick={() => deleteEvent(this.state)}> Delete Event </button>)
         }
 
@@ -103,13 +102,17 @@ export class EditEvent extends Component {
                 <div> 
                 <h1> Are you sure you want to delete this event? </h1>
                 <h3> Type the name of your event to delete the event. </h3>
-                <input onChange={(event) => {this.setState({confirmDeleteInput: event.target.value})}} />
+                <input onChange={(event) => {this.setState({confirmDeleteInput: event.target.value}).then(result => {
+
+                })}} />
                     {finalDeleteButton}
                 </div>)
         }
 
         return (
             <div>
+            {deleteConfirm}
+            {deleteConfirmPopup}
             {notAuthenticated}
             <input type="text" value={this.state.eventName} onChange={(event) => {return this.setState({eventName: event.target.value})}}/>
                 <img src={this.state.imagePreviewUrl || this.state.eventPic} alt={this.state.eventName}></img>
@@ -129,8 +132,7 @@ export class EditEvent extends Component {
                     this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm"), cronTime: moment.utc(event).subtract(3, 'hours').format()})}}/>
                 <textarea type="text" id="noter-text-area" name="editableDescription" value={this.state.eventDescription} onChange={this.handleChange}></textarea>
                 <button onClick={() => {return editEvent(this.state)}}> Save Event </button>
-                {deleteConfirm}
-                {deleteConfirmPopup}
+                
             </div>
         )
 
