@@ -1,3 +1,10 @@
+.categorySelector {
+  border: 1px solid;
+  letter-spacing: 2px;
+  color: green;
+}
+
+
 .events-button {
   margin-left: 2vw;
   width: 20%;
@@ -21,7 +28,10 @@
 }
 
 .search {
+  margin-top: 20px;
+  margin-bottom: 20px;
   border-bottom: 1px solid #757575; }
+  
 
 .search:focus {
   outline: none; }

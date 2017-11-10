@@ -1,0 +1,26 @@
+.group-page-join-button {
+    color: #fff;
+    text-align: center;
+    background: #4060B7;
+    border-radius: 5px;
+    outline: 0; 
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 400;
+    width: 50%;
+    display: flex;
+    justify-content: space-around; 
+    margin: 0px 25%;
+}
+
+.group-page-specific-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.group-page-picture {
+    max-height: 200px;
+    max-width: auto;
+    border-radius: 10px;
+}

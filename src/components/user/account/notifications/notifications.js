@@ -43,10 +43,12 @@ export class Notifications extends Component {
         let notificationText = null
         let notificationButton = null
         if (this.state.notifications) {
+            <div>
             notificationText = (<h3>You currently have notifications turned on.</h3>)
             notificationButton = (<button onClick={(e) => {
                             this.changeNotificationPreferences()
                     }}>Turn Off Notifications</button>)
+            </div>
         } else {
             notificationText = (
                 <div>

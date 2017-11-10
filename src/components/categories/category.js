@@ -5,6 +5,7 @@ import underscore from 'underscore';
 export default class Category extends Component {
     constructor(props) {
         super(props)
+        console.log(props)
         this.state = {
             categories: [],
             showCategories: ['Arts',
@@ -52,6 +53,8 @@ export default class Category extends Component {
         })
         this.updateParent(this.state.categories)
     }
+
+ 
 
     removeCat = (cat) => {
         this.state.categories.map((x, i) => {
