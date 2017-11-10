@@ -3,15 +3,19 @@
   width: 100px; }
 
 .home-event-card-pic {
-  width: 100%; }
+  width: 98%;
+  border-radius: 10px;
+ }
 
 .home-create-card-pic {
   margin-top: 30px;
-  width: 100%;
-  padding-bottom: 110px; }
+  padding-bottom: 110px;
+  border-radius: 10px;
+  width: 98%; }
+
 
 .home-buttonz {
-  width: 100%;
+  width: 98%;
   height: 50px;
   font-size: 20px;
   color: #fff;

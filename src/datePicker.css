@@ -6,7 +6,7 @@
   position: absolute;
   width: 250px;
   padding: 4px;
-  margin-top: 1px;
+  margin: auto;
   z-index: 99999 !important;
   background: #fff;
   box-shadow: 0 1px 3px rgba(0,0,0,.1);
@@ -26,7 +26,7 @@
 
 .rdtPicker table {
   width: 100%;
-  margin: 0;
+  margin: 0 auto;
 }
 .rdtPicker td,
 .rdtPicker th {
@@ -207,3 +207,5 @@ td.rdtYear:hover {
   font-size: 1.2em;
   margin-top: 37px;
 }
+
+/*# sourceMappingURL=datePicker.css.map */
