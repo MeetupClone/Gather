@@ -1,17 +1,22 @@
 .auth-event-card-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
   height: 100px;
   width: 90%;
-  margin: 10px auto;
+  margin: 1vh auto;
   background-color: white;
   border: none;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  letter-spacing: 1px;
-}
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+
+.auth-event-card-content-container {
+  display: flex;
+  flex-direction: row;
+  height: 200px;
+  padding-left: 10px;
+  padding-right: 10px; }
 
 .auth-event-card-title {
-  font-weight: bold; 
-  letter-spacing: 1px;
-}
+  font-weight: bold; }
 
 .auth-event-card-info {
   display: flex;
@@ -19,35 +24,25 @@
   width: 50%;
   margin: 10px auto;
   padding: 0px 30px 0px 30px;
-  justify-content: center;
-  letter-spacing: 1px;
-}
+  justify-content: center; }
 
 .auth-event-card-loc {
   font-size: 12px;
   color: gray;
-  font-weight: bold;
-  letter-spacing: 1px
-}
+  font-weight: bold; }
 
 .auth-link {
-
-    color: black;
-    text-decoration: none;
-    letter-spacing: 1px;
-}
-
-.footer-padding {
-    padding-bottom: 110px;
-}
+  color: black;
+  text-decoration: none; }
 
 .home-page-loading-container {
-    justify-content: space-around;
-    background-color: white;
-    height: 50px;
-    margin-left: 20px;
-    margin-right: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
-    letter-spacing: 1px;
-}
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 100px;
+  width: 90%;
+  margin: 1vh auto;
+  background-color: white;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23); }
 
+/*# sourceMappingURL=authHome.css.map */

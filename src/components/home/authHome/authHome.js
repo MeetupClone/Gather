@@ -59,12 +59,16 @@ export default class AuthHome extends Component {
 
             for(var i = 0; i < 8; i++){
                 arr.push(
-                    <h1 className="home-page-loading-container" key = {i}> loading </h1>
+                    <h1 className="home-page-loading-container" key = {i}></h1>
                 )
             }
             appShell = arr;
 
-            return (<div>{appShell}</div>)
+            return (<div>
+                <h3 className= "nunito-text">Your Events</h3>
+                {appShell}
+                <Footer/>
+                </div>)
 
         } else {
 
