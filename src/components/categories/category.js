@@ -71,7 +71,7 @@ export default class Category extends Component {
         let selectedCats = this.state.categories.map(x => {
             return (
 
-                <button className="category-buttons" key={x} value={x} onClick={(event) => {
+                <button className="category-buttonss" key={x} value={x} onClick={(event) => {
                     event.preventDefault();
                     this.removeCat(x);
                 }}> {x} </button>
@@ -92,13 +92,13 @@ export default class Category extends Component {
 
 
 
-
-            <div>
+<div>
+            <div className="category-container">
             {selectedCats}
-            <br/>
-            <br/>
-            <br/>
+            </div>
+            <div className="category-container">
             {showCats}
+            </div>
          
         </div>
 
