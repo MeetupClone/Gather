@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:300,400,700");
+.category-buttons-container {
+  width: 92%;
+  margin: 5vh auto; }
+
 .category-buttons {
   justify-content: space-around;
   font-family: 'Nunito', sans-serif;
@@ -8,48 +12,41 @@
   color: white;
   width: 30%;
   border-radius: 5px;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
   text-decoration: none;
   background-color: transparent;
   background-color: #42A5F5;
   overflow: none; }
 
-.category-buttons:nth-child(odd) {
-  background: #2196F3;
-  color: white;
-  letter-spacing: 2px; }
-
-.category-buttonss {
+.category-chosen-buttons {
   justify-content: space-around;
   font-family: 'Nunito', sans-serif;
-  padding: 12px 30px;
-  color: lightblue;
-  border-radius: 30px;
+  padding: 8px;
+  padding-right: 8px;
+  margin: 2px;
+  color: #d3eafd;
+  width: 30%;
+  border-radius: 5px;
   letter-spacing: 0.3px;
   text-transform: uppercase;
-  text-decoration: none;
-  background-color: transparent;
   background-color: #000d33;
-  letter-spacing: 2px;
-  font-size: 9px; }
+  letter-spacing: .6px; }
 
-.category-buttonss:nth-child(odd) {
-  background: #1a0000;
-  color: lightblue;
-  letter-spacing: 2px; }
-
-.category-buttonss:focus {
-  outline: none;
-  letter-spacing: 2px; }
-
-.category-container {
-  width: 92%;
-  margin: 0 auto; }
+.category-buttons:nth-child(odd) {
+  background: #0b78d0;
+  color: white; }
 
 .category-buttons:focus {
   outline: none; }
 
-/*# sourceMappingURL=category.css.map */
+.category-chosen-buttons:nth-child(odd) {
+  background: #1a0000;
+  color: lightblue;
+  letter-spacing: 2px; }
+
+.category-chosen-buttons:focus {
+  outline: none;
+  letter-spacing: 2px; }
 
 /*# sourceMappingURL=category.css.map */

@@ -26,7 +26,6 @@ export default class Category extends Component {
                 'Other',
                 'Outdoors',
                 'Pets',
-                'Photography',
                 'Sci-Fi',
                 'Social',
                 'Sports',
@@ -70,8 +69,7 @@ export default class Category extends Component {
     render() {
         let selectedCats = this.state.categories.map(x => {
             return (
-
-                <button className="category-buttonss" key={x} value={x} onClick={(event) => {
+                <button className="category-chosen-buttons" key={x} value={x} onClick={(event) => {
                     event.preventDefault();
                     this.removeCat(x);
                 }}> {x} </button>
@@ -81,26 +79,27 @@ export default class Category extends Component {
 
         let showCats = this.state.showCategories.map(x => {
 
-          return (<button className="category-buttons" key ={x} value={x} onClick={(event) => {
+          return (
+            <button className="category-buttons random-color" key ={x} value={x} onClick={(event) => {
 
                 event.preventDefault();
                 this.handleChange(event.target.value)}}> {x}
-              </button>)
+              </button>
+              )
         })
 
         return (
 
 
 
-<div>
-            <div className="category-container">
-            {selectedCats}
+            <div>
+                <div className="category-buttons-container">
+                {selectedCats}
+                </div>
+                <div className="category-buttons-container">
+                {showCats}
+                </div>
             </div>
-            <div className="category-container">
-            {showCats}
-            </div>
-         
-        </div>
 
 
 
