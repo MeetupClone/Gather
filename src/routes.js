@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from "react-router-dom";
 
 import Login from "./components/login/login";
+import ForgotPassword from "./components/login/forgotPassword/forgotPassword"
 import Register from "./components/login/register/register";
 import User from "./components/user/profile/user.js"
 
@@ -21,7 +22,8 @@ export default (
       {/* <Route component={ AuthHome } exact path="/" />
       <Route component={ NotAuthHome } path="/splash" /> */}
       <Route component={ Home } exact path="/"/>
-      <Route component={ Login } path="/login" />
+      <Route component={ Login } exact path="/login" />
+      <Route component={ ForgotPassword} exact path="/login/forgotPassword" />
       <Route component={ Register } path = "/register" />
       <Route component={ User } exact path="/user" />
       <Route component={ Explore } path="/explore"/>

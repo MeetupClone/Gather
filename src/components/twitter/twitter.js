@@ -18,7 +18,7 @@ export default class Twitter extends Component{
             data-show-count="false"
             data-show-screen-name="false"
             data-size="large"
-          ><img src="http://stockchartguru.com/assets/img/tweet_this.jpg" className="tweet-img"/>
+          ><img src="http://stockchartguru.com/assets/img/tweet_this.jpg" className="tweet-img" alt="twitter"/>
           </a>
           </div>
         )

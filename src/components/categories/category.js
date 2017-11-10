@@ -18,7 +18,7 @@ export default class Category extends Component {
                 'Food',
                 'Health',
                 'Hobbies',
-                'Language', 
+                'Language',
                 'Learning',
                 'LGTBQ',
                 'Movements',
@@ -41,6 +41,11 @@ export default class Category extends Component {
     }
 
     handleChange = (val) => {
+        this.state.showCategories.map((x, i) => {
+            if (val === x) {
+                this.state.showCategories.splice(i, 1)
+            }
+        })
         let arr = this.state.categories
         arr.push(val)
         this.setState({
@@ -50,10 +55,14 @@ export default class Category extends Component {
     }
 
     removeCat = (cat) => {
-        let arr = this.state.categories;
-        arr.splice(arr.indexOf(cat), 1)
-        this.setState({ categories: arr})
-        this.updateParent(this.state.categories)
+        this.state.categories.map((x, i) => {
+            if (cat.toLowerCase() === x.toLowerCase()) {
+                this.state.categories.splice(i, 1)
+                let pushedCats = this.state.showCategories
+                pushedCats.push(x)
+                this.setState({showCategories: pushedCats.sort()})
+            }
+        })
     }
 
 
@@ -62,14 +71,14 @@ export default class Category extends Component {
         let selectedCats = this.state.categories.map(x => {
             return (
                 <button key={x} value={x} onClick={(event) => {
-                    // event.preventDefault();
+                    event.preventDefault();
                     this.removeCat(x);
                 }}> {x} </button>
             )
         })
 
         let showCats = this.state.showCategories.map(x => {
-          return (<button key ={x} value={x} onClick={(event) => {
+            return (<button key ={x} value={x} onClick={(event) => {
                 event.preventDefault();
                 this.handleChange(event.target.value)}}> {x}
               </button>)
@@ -77,7 +86,7 @@ export default class Category extends Component {
 
         return (
 
-        
+
 
 
             <div>

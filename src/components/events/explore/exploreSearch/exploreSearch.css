@@ -1,19 +1,45 @@
 .events-button {
-    width: 20%;
-    height: 20px;
-    font-size: 10px;
-    color: #fff;
-    background: #08A045; 
-}
+  margin-left: 2vw;
+  width: 20%;
+  height: 25px;
+  font-size: 12px;
+  color: #fff;
+  background: #08A045; }
 
 .group-button {
-    width: 20%;
-    height: 20px;
-    font-size: 10px;
-    color: #fff;
-    background: #08A045; 
-}
+  margin-left: 3vw;
+  width: 20%;
+  height: 25px;
+  font-size: 12px;
+  color: #fff;
+  background: #08A045; }
 
 .search {
-    text-align: center;
-}
+  border-bottom: 1px solid #757575; }
+
+.search:focus {
+  outline: none; }
+
+.group {
+  position: relative;
+  margin-bottom: 45px; }
+
+.label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all; }
+
+.filter-dropdown {
+  margin-left: 10vw; }
+
+Link {
+  text-decoration: none; }
+
+/*# sourceMappingURL=exploreSearch.css.map */

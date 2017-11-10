@@ -9,7 +9,7 @@
     flex-direction: row;
     justify-content: space-around;
     text-align: center;
-    padding: 4px 6px;
+    padding: 10px 6px;
     text-decoration: none;
     font-size: 20px;
 }
@@ -25,5 +25,12 @@
 }
 
 .nav-text {
+    margin: auto 0;
 	font-size: 20px;
+}
+
+.nav-icon {
+    margin: auto;
+    min-height: 6vh;
+    min-width: 6vh;
 }

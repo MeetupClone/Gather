@@ -45,7 +45,6 @@ export default class EditableProfile extends Component {
     }
     uploadImage(event) {
         event.preventDefault();
-        let userId = this.state.uid
         let file = this.state.file
         const storageRef = firebase.storage().ref();
         const uploadTask = storageRef.child('profilePictures/' + file.name).put(file);

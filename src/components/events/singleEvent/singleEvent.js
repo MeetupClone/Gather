@@ -7,10 +7,7 @@ import { joinEvent, leaveEvent } from "../../../ducks/event-redux"
 
 import { fire as firebase } from "../../../fire"
 
-
-import Twitter from '../../twitter/twitter'
-import Facebook from '../../facebook/facebook'
-import Email from '../../email/email'
+import {EventComment} from "../comments/eventComment"
 
 export class SingleEvent extends Component {
     constructor(props) {
@@ -75,15 +72,9 @@ export class SingleEvent extends Component {
             joinButton = (
                 <div>
                     <h1> This is your event! </h1>
-                    <Link to={`/event/edit/${this.props.match.params.id}`}><button onClick={() => {this.setState({edit:true})}}> Click here to go to edit your event. </button></Link>
+                    <Link to={`/event/edit/${this.props.match.params.id}`}><button onClick={() => {this.setState({edit:true})}}> Click here to edit your event. </button></Link>
                 </div>
                 )
-        }
-
-
-        let editButton = null
-        if (this.state.currentUserUid === this.state.organizerUid) {
-            editButton = <Link to={`/event/edit/${this.props.match.params.id}`}> Edit Event </Link>
         }
 
         return (
@@ -96,9 +87,8 @@ export class SingleEvent extends Component {
                 <h3>{this.state.eventMembers} Member(s)</h3>
                 <p>{this.state.eventDescription}</p>
                 {leaveButton}
-                <Twitter/>
-                <Facebook/>
-                <Email/>
+                <EventComment/>
+  
             </div>
         )
     }

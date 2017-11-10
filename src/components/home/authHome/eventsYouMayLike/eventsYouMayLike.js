@@ -47,10 +47,6 @@ export default class EventsYouMayLike extends Component {
                 console.log("no user")
             }
         })
-
-
-        this.state.eventsArr = _.uniq(this.state.eventsArr)
-        console.log(this.state.eventsArr)
     }
 
     componentDidMount() {
