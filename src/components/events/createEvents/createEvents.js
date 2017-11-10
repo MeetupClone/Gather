@@ -7,6 +7,8 @@ import { createEvent } from "../../../ducks/event-redux";
 import PlaceSearchForm from "../../placeSearchForm/placeSearchForm";
 import Category from "../../categories/category";
 
+import "./createEvents.css"
+
 import Datetime from "react-datetime";
 import moment from "moment";
 
@@ -96,16 +98,12 @@ export class CreateEvents extends Component {
             <div>
               {confirmModalElement}
               <h1 className="createTitle"> Create Event </h1>
-              <br/>
               <input required type="text"  placeholder="Name" onChange={e=>this.handleChange(e.target.value, "eventName")}  ref={(input)=>{
               this.eventName = input}}/>
-              <br/>
               <input required type="text"  placeholder="Description"   onChange={e=>this.handleChange(e.target.value, "description")}/>
               <PlaceSearchForm placeholder="Address" updateParent={(location) => {
                 this.setState({location: location.address, placeId: location.placeId})
               }}/>
-              <br/>
-              <br/>
               <input required type="date" min={moment().format('YYYY-MM-DD')}onChange={(event) => {
                 this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm")})
               }}/>
@@ -117,15 +115,11 @@ export class CreateEvents extends Component {
               <Category className="category-button" required updateParent={(state) => {
                 this.setState({categories: state})}}/>
               </div>
-                <br/>
                 <img src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
               
                  <input required
                     type="file"
                     onChange={(event)=>this.imageProcess(event)} />
-                    <br/>
-    
-              <br/>
               <button type="submit" className="submitEvent-button" onClick={(event) => {
                 event.preventDefault()
                 createEvent(this.state)

@@ -83,11 +83,11 @@ export default class AuthHome extends Component {
                         )
                     })}
 
-                </div>
+                
                 <div className="footer-padding">
-
                     <EventsYouMayLike/>
-                <Footer/>
+                    <Footer/>
+                </div>
             </div>
             </div>
             )

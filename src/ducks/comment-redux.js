@@ -15,12 +15,12 @@ export function postComment(componentState) {
     }
 }
 
-export default function postCommentReducer(state = initialState, action) {
+export default function CommentReducer(state = initialState, action) {
     switch (action.type) {
         case POST_COMMENT:
             axios.post('/api/comment/post', action.payload)
             return Object.assign({}, state, action.payload)
         default:
-            break;
+            return state
     }
 }

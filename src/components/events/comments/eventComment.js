@@ -44,6 +44,7 @@ export class EventComment extends Component {
     }
 
     render(){
+        console.log(this.props)
         const {postComment} = this.props;
         if(this.state.userName){
             return (

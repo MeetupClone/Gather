@@ -109,7 +109,6 @@ export default function AuthenticationReducer(state = initialState, action) {
                 })
             })
             return Object.assign({}, state, { authenticated: true })
-
         case AUTH_WITH_FACEBOOK + "_PENDING":
             return Object.assign({}, state, { authenticated: false })
         case AUTH_WITH_FACEBOOK + "_FULFILLED":
