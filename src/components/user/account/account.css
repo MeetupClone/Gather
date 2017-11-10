@@ -1,15 +1,15 @@
 .account-main-container {
-  display: flex;
+  display: fixed;
   flex-direction: row;
   height: 100vh; }
 
 .account-left-navbar {
-  display: flex;
-  height: 100%; }
+  display: flex; }
 
 .account-left-options {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around; }
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 20px; }
 
 /*# sourceMappingURL=account.css.map */

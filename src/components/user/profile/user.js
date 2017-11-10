@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 
 import axios from "axios";
 
-import { fire as firebase } from "../../../fire"
+import { fire as firebase } from "../../../fire";
+import Footer from '../../footer/footer';
+
+import moment from "moment";
 
 import "./profile.css"
 
@@ -106,10 +109,10 @@ export default class Login extends Component {
                 } else {
                     $userGroupsEvents = this.state.userEvents.map(key => {
                         return (
-                            <div key={key.id}>
+                            <div className="events-styles" key={key.id}>
                    <Link to = {`/event/${key.id}`}>{key.title}</Link>
-                    {key.event_date}
-                    {key.location}    
+                    <div>{moment(key.event_date).format("MM-DD-YYYY h:MM a")}</div>
+                    <div>{key.location}</div>    
                     </div>
                         )
                     })
@@ -125,10 +128,10 @@ export default class Login extends Component {
                 } else {
                     $userGroupsEvents = this.state.userAttending.map(key => {
                         return (
-                            <div key={key.id}>
+                            <div className="events-styles" key={key.id}>
                     <Link to = {`/event/${key.id}`}>{key.title}</Link>
-                    {key.event_date}
-                    {key.location}    
+                    <div>{moment(key.event_date).format("MM-DD-YYYY h:MM a")}</div>
+                    <div>{key.location}</div>    
                     </div>
                         )
                     })
@@ -145,9 +148,9 @@ export default class Login extends Component {
                 } else {
                     $userGroupsEvents = this.state.userGroups.map(key => {
                         return (
-                            <div key={key.id}>
+                            <div className="events-styles" key={key.id}>
                     <Link to = {`/groups/${key.id}`}>{key.name}</Link>
-                    {key.website}    
+                    <div>{key.website}</div>    
                     </div>
                         )
                     })
@@ -180,9 +183,10 @@ export default class Login extends Component {
                     {this.setState({showParams: "groups" })}}> Groups </button>
                 </div>
                 {$userGroupsEvents}
-                <div>
+                <div className="footer-padding">
                 <Link to ="/user/account"><button className="account-button" onClick={() => this.setState({accountSettings: true})} >Edit Account</button></Link>
                 </div>
+                <Footer/>
                 </div>
                 )
             }
