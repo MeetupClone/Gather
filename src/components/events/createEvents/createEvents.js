@@ -29,7 +29,7 @@ export class CreateEvents extends Component {
             location: '',
             placeId: '',
             categories: '',
-            created: null,
+            created: this.props.EventReducer.created,
             website: '',
             confirmModal: false,
             file: '',
@@ -71,14 +71,18 @@ export class CreateEvents extends Component {
     }
 
 
-    render() {
-        console.log(this.props)
-        let inputProps = {
-            placeholder: "Pick a Date and Time"
+
+    shouldComponentUpdate(newProps, newState) {
+        if (newState.imagePreviewUrl || this.state === newState || this.state.created !== newState.created) {
+            return true
+        } else {
+            return false
         }
 
-        let timeConstraints = { minutes: { min: 0, max: 59, step: 15 } }
+    }
 
+
+    render(){
 
         var yesterday = Datetime.moment().subtract(1, 'day');
         var valid = function(current) {
@@ -90,8 +94,8 @@ export class CreateEvents extends Component {
             <h3>Share your event!</h3>
             <Twitter/>
             <Facebook/>
-            <Email/></div>)
-            return confirmModalElement
+            <Email/>
+            </div>)
         }
         const { createEvent } = this.props
         return (
@@ -104,22 +108,23 @@ export class CreateEvents extends Component {
               <PlaceSearchForm placeholder="Address" updateParent={(location) => {
                 this.setState({location: location.address, placeId: location.placeId})
               }}/>
-              <input required type="date" min={moment().format('YYYY-MM-DD')}onChange={(event) => {
+              <input className="event-datetime" required type="date" min={moment().format('YYYY-MM-DD')}onChange={(event) => {
                 this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm")})
               }}/>
    
-              <input required type="time" onChange={(event) => {
+              <input className="event-datetime nunito-text" required type="time" onChange={(event) => {
                 console.log(event.target.value)
                 this.setState({eventTime: event.target.value, cronTime: moment.utc(event).subtract(3, 'hours').format()})}}/>
               <div className="category-title"> Categories
               <Category className="category-button" required updateParent={(state) => {
                 this.setState({categories: state})}}/>
               </div>
-                <img src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
-              
-                 <input required
+                <img className="event-picture" src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
+                <form>
+                 <input
                     type="file"
                     onChange={(event)=>this.imageProcess(event)} />
+                </form>
               <button type="submit" className="submitEvent-button" onClick={(event) => {
                 event.preventDefault()
                 createEvent(this.state)

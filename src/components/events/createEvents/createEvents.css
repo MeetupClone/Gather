@@ -11,6 +11,9 @@
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out; }
 
+.nunito-text {
+  font-family: Nunito, sans-serif; }
+
 .upload-button:hover {
   box-shadow: 3px 3px 30px 3px rgba(37, 244, 120, 0.4);
   text-decoration: none;
@@ -42,5 +45,13 @@
 .category-title {
   font-family: 'Nunito', sans-serif;
   font-weight: bold; }
+
+.event-picture {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%; }
+
+.event-datetime {
+  font-family: Nunito !important; }
 
 /*# sourceMappingURL=createEvents.css.map */
