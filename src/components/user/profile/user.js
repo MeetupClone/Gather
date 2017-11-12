@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 
 import axios from "axios";
 
-import { fire as firebase } from "../../../fire";
-import Footer from '../../footer/footer';
-
-import moment from "moment";
+import { fire as firebase } from "../../../fire"
 
 import "./profile.css"
 import '../../../helpers.css'
@@ -36,33 +33,33 @@ export default class Login extends Component {
         this.addRipple = this.addRipple.bind(this)
     }
 
-    addRipple(event) {
+    addRipple(event){
         event.target.classList.add('clicked')
     }
 
     componentDidMount() {
         if (localStorage.getItem('uid')) {
-
+            
             let user = localStorage.getItem('uid')
             console.log(this.state.uid)
             axios.get(`/api/event/user/${user}`).then(result => { this.setState({ userEvents: result.data }) })
-            axios.get(`/api/event/getAttendingEventsData/${user}`).then(result => {
-                this.setState({ userAttending: result.data })
-            }).catch(error => {
-                console.log(error)
-            })
-            axios.get(`/api/group/user/${user}`).then(result => { this.setState({ userGroups: result.data }) })
-            axios.get(`/api/user/getUserInfo/${user}`).then(result => {
-                console.log(result)
-                this.setState({
-                    userProfilePic: result.data[0].profile_image,
-                    userName: result.data[0].name,
-                    userLocation: result.data[0].location,
-                    userDescription: result.data[0].description,
-                    uid: user.uid
+                axios.get(`/api/event/getAttendingEventsData/${user}`).then(result => {
+                    this.setState({ userAttending: result.data })
+                }).catch(error => {
+                    console.log(error)
                 })
-            })
-            axios.get(`/api/user/account/getPref/${user}`).then(result => this.setState({ prefSettings: result.data.preference_settings }))
+                axios.get(`/api/group/user/${user}`).then(result => { this.setState({ userGroups: result.data }) })
+                axios.get(`/api/user/getUserInfo/${user}`).then(result => {
+                    console.log(result)
+                    this.setState({
+                        userProfilePic: result.data[0].profile_image,
+                        userName: result.data[0].name,
+                        userLocation: result.data[0].location,
+                        userDescription: result.data[0].description,
+                        uid: user.uid
+                    })
+                })
+                axios.get(`/api/user/account/getPref/${user}`).then(result => this.setState({prefSettings: result.data.preference_settings}))
         } else {
             firebase.auth().onAuthStateChanged(user => {
                 axios.get(`/api/event/user/${user.uid}`).then(result => { this.setState({ userEvents: result.data }) })
@@ -82,54 +79,53 @@ export default class Login extends Component {
                         uid: user.uid
                     })
                 })
-                axios.get(`/api/user/account/getPref/${user}`).then(result => this.setState({ prefSettings: result.data.preference_settings }))
+                axios.get(`/api/user/account/getPref/${user}`).then(result => this.setState({prefSettings: result.data.preference_settings}))
 
             })
         }
     }
 
     render() {
-            let $userDescription = null
-            let $userLoc = null
-            if (this.state.prefSettings) {
-                if (!this.state.userDescription) {
-                    $userDescription = (<div className=" nunito-text">
+        let $userDescription = null
+        let $userLoc = null
+        if(this.state.prefSettings){
+        if (!this.state.userDescription) { 
+            $userDescription = (<div className=" nunito-text">
                 <h5> Consider adding a description so people can learn more about you.
                 </h5>
                 </div>)
-                    $userLoc = this.state.userLocation
-                } else {
-                    $userDescription = (<p className="user-description nunito-text"> {this.state.userDescription} </p>)
-                }
-            }
+            $userLoc = this.state.userLocation    
+        } else {
+            $userDescription = (<p className="user-description nunito-text"> {this.state.userDescription} </p>)
+        }
+        }
 
-            if (localStorage.getItem('uid')) {
-                let $userGroupsEvents = null;
-                if (this.state.showParams === "events") {
-                    if (!this.state.userEvents.length) {
-                        $userGroupsEvents = (
-                            <div> 
+        if (localStorage.getItem('uid')) {
+            let $userGroupsEvents = null;
+            if (this.state.showParams === "events") {
+                if (!this.state.userEvents.length) {
+                    $userGroupsEvents = (
+                        <div> 
 
                         <h1> You haven't created any events!</h1>
                         <Link to="/event/create"><button> Create an Event </button>  </Link>
                         </div>)
-                    } else {
-                        $userGroupsEvents = this.state.userEvents.map(key => {
-                                    return (
-                                        <div>
+                } else {
+                    $userGroupsEvents = this.state.userEvents.map(key => {
+                        return (
                             <Link to = {`/event/${key.id}`}>
-                                <div key={key.id} className="event-card-container  nunito-text">
-                                div className="event-card-date nunito-text">
-                                    {key.event_date}
+                            <div key={key.id} className="event-card-container  nunito-text">
+                            <div className="event-card-date nunito-text">
+                                {key.event_date}
                             </div>
-                                <div className="event-card-info nunito-text">
-                                    <div className="event-card-loc">{key.location.toUpperCase()}</div>
-                                    <div>{key.title}</div>
-                                    <div>{key.category}</div>
-                                    <div className="event-card-desc"><p>{key.description}</p></div>
-                                </div>
-                                </Link>
+                            <div  className="event-card-info nunito-text">
+                                <div className="event-card-loc">{key.location.toUpperCase()}</div>
+                                <div>{key.title}</div>
+                                <div>{key.category}</div>
+                                <div className="event-card-desc"><p>{key.description}</p></div>
                             </div>
+                            </div>
+                            </Link>
                         )
                     })
                 }
@@ -137,23 +133,28 @@ export default class Login extends Component {
                 if (!this.state.userAttending.length) {
                     $userGroupsEvents = (
                         <div> 
-
                         <h1> You haven't joined any events!</h1>
-                        <Link to="/explore"><button> Find Some Events </button> </Link>
+                        <Link to="/explore"><button> Find Some Events </button>  </Link>
                         </div>)
                 } else {
                     $userGroupsEvents = this.state.userAttending.map(key => {
                         return (
-                    <div>
-                        <Link to = {`/event/${key.id}`}>
-                        <div className="events-styles" key={key.id}>
-                        {key.title}
-                        <div>{moment(key.event_date).format("MM-DD-YYYY h:MM a")}</div>
-                        <div>{key.location}</div>    
-                    <Link/>
-                    </div>
+                            <Link to = {`/event/${key.id}`}>
+                            <div key={key.id} className="event-card-container nunito-text">
+                            <div className="event-card-date nunito-text">
+                                {key.event_date}
+                            </div>
+                            <div  className="event-card-info nunito-text">
+                                <div className="event-card-loc">{key.location.toUpperCase()}</div>
+                                <div>{key.title}</div>
+                                <div>{key.category}</div>
+                                <div className="event-card-desc"><p>{key.description}</p></div>
+                            </div>
+                            </div>
+                            </Link>
                         )
                     })
+                }
             } else if (this.state.showParams === "groups") {
                 if (!this.state.userGroups.length) {
                     $userGroupsEvents = (<div className=" nunito-text"> 
@@ -166,10 +167,10 @@ export default class Login extends Component {
                 } else {
                     $userGroupsEvents = this.state.userGroups.map(key => {
                         return (
-                    <div className="events-styles" key={key.id}>
-                        <Link to = {`/groups/${key.id}`}>{key.name}
-                    <div>{key.website}  
-
+                            <Link to = {`/groups/${key.id}`}>
+                            <div key={key.id}>
+                    <div className="user-prof-group-name nunito-text">{key.name}</div>
+                    <div className="user-prof-group-page nunito-text">{key.website}</div>
                     </div>
                     </Link>
                         )
@@ -203,12 +204,9 @@ export default class Login extends Component {
                     {this.setState({showParams: "groups" })}}> Groups </button>
                 </div>
                 {$userGroupsEvents}
-
-                <div className="footer-padding">
-                <Link to ="/user/account"><button className="account-button" onClick={() => this.setState({accountSettings: true})} >Edit Account</button></Link>
-
+                <div>
+                <Link to ="/user/account"><button className="account-button  nunito-text" onClick={() => this.setState({accountSettings: true})} >Edit Account</button></Link>
                 </div>
-                <Footer/>
                 </div>
                 )
             }

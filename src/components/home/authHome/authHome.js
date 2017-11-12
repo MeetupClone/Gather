@@ -41,7 +41,7 @@ export default class AuthHome extends Component {
                     uid: user.uid
                 })
 
-                axios.get(`/api/event/user/${this.state.uid}`).then(result =>
+                axios.get(`/api/event/user/${this.state.uid}`).then(result => 
                     this.setState({ loading: false, userEvents: result.data }))
             }
         })
@@ -54,26 +54,23 @@ export default class AuthHome extends Component {
         let appShell = null;
         console.log(this.state.userEvents)
 
-        if (this.state.loading) {
+        if(this.state.loading){
             let arr = []
 
-            for (var i = 0; i < 8; i++) {
+            for(var i = 0; i < 8; i++){
                 arr.push(
-                    <h1 className="home-page-loading-container" key = {i}></h1>
+                    <h1 className="home-page-loading-container" key = {i}> loading </h1>
                 )
             }
             appShell = arr;
 
-            return (<div>
-                <h3 className= "nunito-text">Your Events</h3>
-                {appShell}
-                <Footer/>
-                </div>)
+            return (<div>{appShell}</div>)
 
         } else {
 
 
             return (
+                
                 <div>
                 <h3 className= "nunito-text">Your Events</h3>
                     {this.state.userEvents.map(key => {
