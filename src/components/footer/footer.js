@@ -73,9 +73,6 @@ export default class Footer extends Component {
                     <div className="create-button-space">
                         {createButton}
                     </div>
-                    <div className="footer-link-section">
-                        <Link to="/faq" className="footer-links"> About </Link>
-                    </div>
                 </div>
             )
         

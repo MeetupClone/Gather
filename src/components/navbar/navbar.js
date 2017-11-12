@@ -27,6 +27,7 @@ export default class Navbar extends Component {
     }
 
     render() {
+        console.log(this.props)
         let accountButton = null
         if (this.state.authenticated) {
                 accountButton = (<Link to = "/user">

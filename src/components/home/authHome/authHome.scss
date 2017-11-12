@@ -3,8 +3,10 @@
     margin-top: 10px;
     margin-bottom: 10px;
     height: 100px;
-    width: 100%;
+    width: 90%;
+    margin: 1vh auto;
     background-color: white;
+    border: none;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
@@ -34,7 +36,6 @@
     font-size: 12px;
     color: gray;
     font-weight: bold;
-    border-top: black solid 1px;
 }
 
 .auth-link {
@@ -43,8 +44,13 @@
 }
 
 
-.event-card-loading-container{
+.home-page-loading-container{
+      margin-top: 10px;
+    margin-bottom: 10px;
+    height: 100px;
+    width: 90%;
+    margin: 1vh auto;
     background-color: white;
-    height: 200px;
-    width: 100%;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
 }
