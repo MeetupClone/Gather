@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 
 import axios from "axios";
 
-import { fire as firebase } from "../../../fire";
-import Footer from '../../footer/footer';
-
-import moment from "moment";
+import { fire as firebase } from "../../../fire"
 
 import "./profile.css"
 import '../../../helpers.css'
@@ -128,6 +125,7 @@ export default class Login extends Component {
                                 <div className="event-card-desc"><p>{key.description}</p></div>
                             </div>
                             </div>
+                            </Link>
                         )
                     })
                 }
@@ -135,20 +133,25 @@ export default class Login extends Component {
                 if (!this.state.userAttending.length) {
                     $userGroupsEvents = (
                         <div> 
-
                         <h1> You haven't joined any events!</h1>
                         <Link to="/explore"><button> Find Some Events </button>  </Link>
                         </div>)
                 } else {
                     $userGroupsEvents = this.state.userAttending.map(key => {
                         return (
-                      Link to = {`/event/${key.id}`}>
-                     <div className="events-styles" key={key.id}>
-                    {key.title}
-                    <div>{moment(key.event_date).format("MM-DD-YYYY h:MM a")}</div>
-                    <div>{key.location}</div>    
-                    </div>
-</Link>
+                            <Link to = {`/event/${key.id}`}>
+                            <div key={key.id} className="event-card-container nunito-text">
+                            <div className="event-card-date nunito-text">
+                                {key.event_date}
+                            </div>
+                            <div  className="event-card-info nunito-text">
+                                <div className="event-card-loc">{key.location.toUpperCase()}</div>
+                                <div>{key.title}</div>
+                                <div>{key.category}</div>
+                                <div className="event-card-desc"><p>{key.description}</p></div>
+                            </div>
+                            </div>
+                            </Link>
                         )
                     })
                 }
@@ -164,10 +167,10 @@ export default class Login extends Component {
                 } else {
                     $userGroupsEvents = this.state.userGroups.map(key => {
                         return (
-<div className="events-styles" key={key.id}>
-                    <Link to = {`/groups/${key.id}`}>{key.name}</Link>
-                    <div>{key.website}</div>    
-
+                            <Link to = {`/groups/${key.id}`}>
+                            <div key={key.id}>
+                    <div className="user-prof-group-name nunito-text">{key.name}</div>
+                    <div className="user-prof-group-page nunito-text">{key.website}</div>
                     </div>
                     </Link>
                         )
@@ -201,12 +204,9 @@ export default class Login extends Component {
                     {this.setState({showParams: "groups" })}}> GROUPS </button>
                 </div>
                 {$userGroupsEvents}
-
-                <div className="footer-padding">
-                <Link to ="/user/account"><button className="account-button" onClick={() => this.setState({accountSettings: true})} >Edit Account</button></Link>
-
+                <div>
+                <Link to ="/user/account"><button className="account-button  nunito-text" onClick={() => this.setState({accountSettings: true})} >Edit Account</button></Link>
                 </div>
-                <Footer/>
                 </div>
                 )
             }
@@ -219,8 +219,6 @@ export default class Login extends Component {
                 <br/>
                 <button><Link to='/login'> Login or Create an account here. </Link> </button> 
                 </div> 
-
-
                 )
         }
     }

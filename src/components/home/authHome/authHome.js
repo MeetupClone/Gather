@@ -70,7 +70,7 @@ export default class AuthHome extends Component {
 
 
             return (
-                <div>
+                
                 <div>
                 <h3 className= "nunito-text">Your Events</h3>
                     {this.state.userEvents.map(key => {
@@ -92,8 +92,7 @@ export default class AuthHome extends Component {
                     
                 </div>
             </div>
-            </div>
-                </div>
             )
         }
     }
+}
