@@ -54,6 +54,7 @@ export class GroupCards extends Component {
 
     render() {
 
+
         const { searchText, searchFilter } = this.props;
         let appShell = null;
 
@@ -78,14 +79,14 @@ export class GroupCards extends Component {
                             return(
                                 <div key={key.id} className="group-card-container">
                                 <div className="group-card-image">
-                                    <img src={key.group_picture} alt={key.name}/>
+                                    <img src={key.group_picture} alt={require(`../../../../../web-p-category-pics/${key.category}.webp`)}/>
                                 </div>
                                 <div className="group-card-content">
                                     <div>
                                         <Link to = {`/groups/${key.id}`}><p className="group-card-name">{key.name}</p></Link>
                                     </div>
                                     <div>
-                                        {key.category}
+                                        {key.category.charAt(0).toUpperCase() + key.category.slice(1)}
                                     </div>
                                     <div>
                                         {key.number_of_members} Member(s)
@@ -106,14 +107,14 @@ export class GroupCards extends Component {
                             return(
                                 <div key={key.id} className="group-card-container">
                                 <div className="group-card-image">
-                                    <img src={key.group_picture} alt={key.name}/>
+                                    <img src={key.group_picture} alt={require(`../../../../../web-p-category-pics/${key.category}.webp`)}/>
                                 </div>
                                 <div className="group-card-content">
                                     <div>
                                         <Link to = {`/groups/${key.id}`}><p className="group-card-name">{key.name}</p></Link>
                                     </div>
                                     <div>
-                                        {key.category}
+                                        {key.category.charAt(0).toUpperCase() + key.category.slice(1)}
                                     </div>
                                     <div>
                                         {key.number_of_members} Member(s)
@@ -133,14 +134,14 @@ export class GroupCards extends Component {
                             return(
                                 <div key={key.id} className="group-card-container">
                                 <div className="group-card-image">
-                                    <img src={key.group_picture} alt={key.name}/>
+                                    <img src={key.group_picture} alt={require(`../../../../../web-p-category-pics/${key.category}.webp`)}/>
                                 </div>
                                 <div className="group-card-content">
                                     <div>
                                         <Link to = {`/groups/${key.id}`}><p className="group-card-name">{key.name}</p></Link>
                                     </div>
                                     <div>
-                                        {key.category}
+                                        {key.category.charAt(0).toUpperCase() + key.category.slice(1)}
                                     </div>
                                     <div>
                                         {key.number_of_members} Member(s)
@@ -160,14 +161,14 @@ export class GroupCards extends Component {
                         return(
                             <div key={key.id} className="group-card-container">
                                 <div className="group-card-image">
-                                    <img className="group-card-image" src={key.group_picture} alt={key.name}/>
+                                    <img className="group-card-image" src={key.group_picture || require(`../../../../../web-p-category-pics/${key.category}.webp`)}/>
                                 </div>
                                 <div className="group-card-content">
                                     <div>
                                         <Link to = {`/groups/${key.id}`} className="group-card-name nunito-text"><p >{key.name}</p></Link>
                                     </div>
                                     <div>
-                                        {key.category}
+                                        {key.category.charAt(0).toUpperCase() + key.category.slice(1)}
                                     </div>
                                     <div>
                                         {key.number_of_members} Member(s)
