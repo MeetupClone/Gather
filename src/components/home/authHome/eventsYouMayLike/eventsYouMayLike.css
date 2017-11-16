@@ -1,9 +1,8 @@
 .recc-events-card-info {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 90%;
     margin: 10px auto;
-    padding: 0px 30px 0px 30px;
     justify-content: center;
 }
 
@@ -12,6 +11,9 @@
     color: gray;
     font-weight: bold;
     border-top: black solid 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .recc-events-container {
