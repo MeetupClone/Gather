@@ -128,14 +128,22 @@ export class GroupPage extends Component {
 
         return (
             <div className="nunito-text">
-           
+                <div className="group-page-flex-box">
+                <div>
                 <h1>{this.state.groupName}</h1>
-                <img src={this.state.groupPic || groupImage} alt="" className="group-page-picture"/>
                 <h3>{this.state.groupMembers} Member(s)</h3>
-                <p>{this.state.groupDesc}</p>
+                {joinButton}
+                {leaveButton}
+                </div>
+                <img src={this.state.groupPic || groupImage} alt="" className="group-page-picture"/>
+                </div>
+                <p className="group-page-description">{this.state.groupDesc}</p>
+                
+                <div className="group-page-share">
                 <Twitter/>
                 <Facebook/>
                 <Email/>
+                </div>
                 <div>{this.state.groupEvents.map(key => {
                     return(
                         <div>
@@ -145,8 +153,7 @@ export class GroupPage extends Component {
                         </div>
                     )
                 })}</div>
-                {joinButton}
-                {leaveButton}
+                
             </div>
         )
     }

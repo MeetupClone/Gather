@@ -24,3 +24,17 @@
     max-width: auto;
     border-radius: 10px;
 }
+
+.group-page-flex-box{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.group-page-description{
+    font-size: 20px;
+}
+
+.group-page-share{
+    padding-top: 20px;
+}
