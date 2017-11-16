@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import { fire as firebase } from "../../fire";
 
 import "./footer.css";
 
-export default class Footer extends Component {
+export class Footer extends Component {
     constructor(props) {
         super(props);
 
@@ -14,9 +14,6 @@ export default class Footer extends Component {
             createButton: false,
             createButtonNonAuth: false
         }
-
-
-
     }
 
     componentDidMount() {
@@ -49,15 +46,15 @@ export default class Footer extends Component {
             }}> Groups
                 </button>)
         let loginButton = (<button className="footer-login-button" onClick={() => {this.props.history.push('/login')}}>Login</button>)
-         if (this.state.createButton){
+        if (this.state.createButton) {
             createButton = (
                 <div className="row-flex">
                 {createEventButton}
                 {createGroupButton}
                 </div>
-                )
+            )
         }
-        if (this.state.createButtonNonAuth){
+        if (this.state.createButtonNonAuth) {
             createGroupButton = null;
             createEventButton = null;
             createButton = (
@@ -65,18 +62,20 @@ export default class Footer extends Component {
                 <h3 className="login-text"> You must be logged in to create an event or group.</h3>
                 {loginButton}
                 </div>
-                 )
+            )
         }
-       
-            return (
-                <div className="footer-all">
+
+        return (
+            <div className="footer-all">
                     <div className="create-button-space">
                         {createButton}
                     </div>
                 </div>
-            )
-        
-            
+        )
+
+
 
     }
 }
+
+export default withRouter(Footer)

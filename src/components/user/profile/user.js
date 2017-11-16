@@ -191,7 +191,7 @@ export default class Login extends Component {
                 <h1> {this.state.userName} </h1>
                 <h3> {$userLoc} </h3>
 
-                {$userDescription}
+                <p className="user-description nunito-text"> {this.state.userDescription} </p>
 
                 <button className="edit-button" onClick={() => this.setState({editable: true})} >Edit Profile</button>
 

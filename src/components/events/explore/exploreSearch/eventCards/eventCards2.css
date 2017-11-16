@@ -1,7 +1,8 @@
 .event-card-container {
  
-  height: 100px;
-  width: 96%;
+  height: 120px;
+  padding: 2px;
+  width: 94%;
   margin: 10px auto;
   margin-top: 15px;
   margin-bottom: 10px;
@@ -77,7 +78,7 @@
 .event-card-loading-container {
   justify-content: space-around;
   background-color: white;
-  height: 100px;
+  height: 120px;
   width: 90%;
   margin: 10px auto;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);

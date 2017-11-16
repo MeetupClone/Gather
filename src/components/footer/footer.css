@@ -38,7 +38,8 @@
   -moz-transition: all 0.3s ease-in-out; }
 
 .footer-create-button {
-  margin-top: 2vh;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
   font-size: 20px;
   color: #fff;
   background: #08A045;

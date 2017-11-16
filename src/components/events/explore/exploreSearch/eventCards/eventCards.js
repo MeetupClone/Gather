@@ -75,13 +75,14 @@ export class EventCards extends Component {
 
             return (<div>{appShell}</div>)
         } else {
-            if (searchText !== "" && searchFilter === "Name") {
+            if (searchText !== "" && searchFilter === "Name" || searchText === "" ) {
                 const {events} = this.props
                 return (
                     <div>
-                {Object.keys(events).map(key => {
+                {this.state.events.map(key => {
+
                     let eventDate = new Date(key.event_date)
-                    if((key.title.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
+                        console.log(key)
                     
                     return(
                          <Link key={key.id} to = {`/event/${key.id}`}>
@@ -98,7 +99,7 @@ export class EventCards extends Component {
                             </div>
                             </Link>
 
-                )}
+                )
             })}</div>
                 )
             } else if (searchText !== "" && searchFilter === "Location") {
