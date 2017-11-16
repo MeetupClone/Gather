@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import "./singleEvent.css"
+
 import { joinEvent, leaveEvent } from "../../../ducks/event-redux"
 
 import { fire as firebase } from "../../../fire"
@@ -66,13 +68,19 @@ export class SingleEvent extends Component {
         const { joinEvent } = this.props
         let joinButton = null
         let leaveButton = null
-
+ 
         if (this.state.currentUserUid === this.state.organizerUid)
             {
             joinButton = (
                 <div>
                     <h1> This is your event! </h1>
-                    <Link to={`/event/edit/${this.props.match.params.id}`}><button onClick={() => {this.setState({edit:true})}}> Click here to edit your event. </button></Link>
+                    <Link to={`/event/edit/${this.props.match.params.id}`}><button className="edit-event-button" onClick={() => {this.setState({edit:true})}}> Click here to edit your event. </button></Link>
+                </div>
+                )
+        } else {
+            joinButton = (
+                <div>
+                    <button className="join-event-button" onClick={(event) => {joinEvent(this.state)}}> Join Event </button>
                 </div>
                 )
         }
@@ -80,15 +88,13 @@ export class SingleEvent extends Component {
         return (
             <div>
                 {joinButton} 
-                <h1>{this.state.eventName}</h1>
-                <img src={this.state.eventPic} alt={this.state.eventName}></img>
-                <h3>{this.state.eventLocation}</h3>
-                <h3>{this.state.eventDate}</h3>
-                <h3>{this.state.eventMembers} Member(s)</h3>
-                <p>{this.state.eventDescription}</p>
                 {leaveButton}
-                <EventComment/>
-  
+                    <h1>{this.state.eventName}</h1>
+                    <img src={this.state.eventPic} alt={this.state.eventName}></img>
+                    <h3>{this.state.eventLocation}</h3>
+                    <h3>{this.state.eventDate}</h3>
+                    <h3>{this.state.eventMembers} Member(s)</h3>
+                    <p>{this.state.eventDescription}</p>
             </div>
         )
     }

@@ -23,7 +23,6 @@ class App extends Component {
                     localStorage.setItem('userData', JSON.stringify(userData))
                 })
             } else {
-                console.log('yup')
             }
 
             // let getEvents = axios.get('/api/events').then(result => { return result.data})
@@ -43,18 +42,12 @@ class App extends Component {
 
         firebase.messaging().getToken()
             .then(function(currentToken) {
-                console.log(currentToken)
 
             })
-            .catch(function(err) {
-                console.log('An error occurred while retrieving token. ', err);
-
-            });
 
 
         firebase.messaging().onMessage(function(payload) {
             alert(payload.notification.title)
-            console.log(payload)
         });
     }
 
