@@ -11,6 +11,8 @@ import { fire as firebase } from "../../../fire"
 
 import {EventComment} from "../comments/eventComment"
 
+import Footer from "../../footer/footer"
+
 export class SingleEvent extends Component {
     constructor(props) {
         super(props);
@@ -94,7 +96,9 @@ export class SingleEvent extends Component {
                     <h3>{this.state.eventLocation}</h3>
                     <h3>{this.state.eventDate}</h3>
                     <h3>{this.state.eventMembers} Member(s)</h3>
-                    <p>{this.state.eventDescription}</p>
+                    <p className="description" >{this.state.eventDescription}</p>
+
+                <Footer/>
             </div>
         )
     }

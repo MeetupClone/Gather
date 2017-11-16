@@ -26,7 +26,7 @@ massive(connectionString).then(db => {
 
 const app = express();
 
-app.use(json());
+app.use(json({limit: '50mb'}));
 app.use(express.static('./public'));
 
 

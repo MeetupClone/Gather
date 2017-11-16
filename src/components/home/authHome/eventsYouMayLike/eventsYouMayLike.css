@@ -13,3 +13,7 @@
     font-weight: bold;
     border-top: black solid 1px;
 }
+
+.recc-events-container {
+    margin-bottom: 10vh;
+}

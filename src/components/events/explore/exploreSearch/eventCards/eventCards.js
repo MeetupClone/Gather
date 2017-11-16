@@ -6,7 +6,6 @@ import './eventCards2.css';
 import '../../../../../helpers.css'
 
 import { Link } from 'react-router-dom';
-import Footer from '../../../../footer/footer'
 
 
 export class EventCards extends Component {
@@ -102,7 +101,7 @@ export class EventCards extends Component {
                 )
             })}</div>
                 )
-            } else if (searchText !== "" && searchFilter === "Location") {
+            } else if (searchText !== "" && searchFilter === "Location" || searchText === "" ) {
 
                 return (
                     <div>{this.state.events.map(function(key){
@@ -127,7 +126,7 @@ export class EventCards extends Component {
                 )}
             })}</div>
                 )
-            } else if (searchText !== "" && searchFilter === "Category") {
+            } else if (searchText !== "" && searchFilter === "Category" || searchText === "" ) {
                 return (
                     <div>{this.state.events.map(function(key){
                     let eventDate = new Date(key.event_date)

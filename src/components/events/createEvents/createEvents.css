@@ -73,6 +73,13 @@
 .event-datetime {
   font-family: Nunito !important; }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 5vh 10vh;
+}
+
 /*# sourceMappingURL=createEvents.css.map */
 
 /*# sourceMappingURL=createEvents.css.map */

@@ -70,14 +70,15 @@ export class CreateEvents extends Component {
         reader.readAsDataURL(file)
     }
 
+    componentWillReceiveProps(newProps){
+        console.log(newProps)
+        this.setState({created: newProps.EventReducer.created})
+    }
+
 
 
     shouldComponentUpdate(newProps, newState) {
-        if (newState.imagePreviewUrl || this.state === newState || this.state.created !== newState.created) {
             return true
-        } else {
-            return false
-        }
     }
 
 
@@ -89,12 +90,18 @@ export class CreateEvents extends Component {
         };
         let confirmModalElement = null
         if (this.state.created === true) {
-            confirmModalElement = (<div><h1> Congratulations, you've made an event!</h1>
-            <h3>Share your event!</h3>
-            <Twitter/>
-            <Facebook/>
-            <Email/>
+            confirmModalElement = (
+            <div>
+                <h1> Congratulations, you've made an event!</h1>
+                <h3>Share your event!</h3>
+                <div className="flex-row">
+                    <Twitter/>
+                    <Facebook/>
+                    <Email/>
+                </div>
             </div>)
+
+            return (confirmModalElement)
         }
         const { createEvent } = this.props
         return (
@@ -112,7 +119,6 @@ export class CreateEvents extends Component {
               }}/>
             
               <input step="900" className="event-datetime nunito-text" required type="time" onChange={(event) => {
-                console.log(event.target.value)
                 this.setState({eventTime: event.target.value, cronTime: moment.utc(event).subtract(3, 'hours').format()})}}/>
 
               <div className="category-title"> Categories

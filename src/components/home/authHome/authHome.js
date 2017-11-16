@@ -83,17 +83,17 @@ export default class AuthHome extends Component {
                                 <div className="auth-event-card-loc">{key.location}</div>
                                 <div>{key.title}</div>
                                 {key.event_date}
-                                <div>{key.category}</div>
+                                <div>{key.category.charAt(0).toUpperCase() + key.category.slice(1)}</div>
                             </div>
                             </Link>
                         )
                     })}
 
 
-                <div className="footer-padding">
+                <div className="recc-events-container">
                     <EventsYouMayLike/>
-                    
                 </div>
+                <Footer/>
             </div>
             )
         }

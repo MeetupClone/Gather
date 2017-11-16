@@ -34,10 +34,8 @@ export default class EventsYouMayLike extends Component {
                 })
                 axios.get(`/api/event/user/${this.state.uid}`)
                     .then(result => this.setState({ userEvents: result.data }))
-                console.log(this.state)
                 axios.get(`/api/relevant/event/${this.state.uid}`)
                 .then(results => {
-                    console.log(results)
                     this.setState({reccEvents: results.data})})
                 .catch(err => console.log("relevant event not working", err))
         
