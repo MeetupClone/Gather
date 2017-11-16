@@ -45,7 +45,10 @@ export class Footer extends Component {
                 }
             }}> Groups
                 </button>)
-        let loginButton = (<button className="footer-login-button" onClick={() => {this.props.history.push('/login')}}>Login</button>)
+        let loginButton = (<button className="footer-login-button" onClick={() => {this.props.history.push('/login')
+            createButton = (<button className="footer-create-button" onClick={() => {this.setState({createButton: true})}}>Create</button>)
+            
+    }}>Login</button>)
         if (this.state.createButton) {
             createButton = (
                 <div className="row-flex">

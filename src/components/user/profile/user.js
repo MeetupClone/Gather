@@ -8,6 +8,7 @@ import { fire as firebase } from "../../../fire"
 
 import "./profile.css"
 import '../../../helpers.css'
+import Footer from '../../footer/footer'
 
 import EditableProfile from "../editableProfile/editableProfile";
 
@@ -207,6 +208,8 @@ export default class Login extends Component {
                 <div>
                 <Link to ="/user/account"><button className="account-button  nunito-text" onClick={() => this.setState({accountSettings: true})} >Edit Account</button></Link>
                 </div>
+
+                <Footer/>
                 </div>
                 )
             }

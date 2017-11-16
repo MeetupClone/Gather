@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 0px;
   width: 100%;
-  margin-top: -200px;
+  margin-top: 5vh;
   background-color: #007F35; }
 
 .footer-link-section {
@@ -27,7 +27,7 @@
 
 .inner-create-buttons {
   text-decoration: none;
-  margin-top: 2vh;
+  margin: 2vh 1vw;
   font-size: 20px;
   color: #fff;
   background: #08A045;

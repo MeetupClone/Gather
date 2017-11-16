@@ -56,7 +56,6 @@ class App extends Component {
 
             <div className="App">
             <Navbar/>
-            <Footer/>
             </div>
 
         );
