@@ -51,10 +51,7 @@ export function authWithFacebook(categories) {
 export function authWithEmailPassword(initialState) {
     return {
         type: AUTH_WITH_EMAIL_PASSWORD,
-        payload: firebase.auth().signInWithEmailAndPassword(initialState.email, initialState.password)
-            .then(user => {
-                return user
-            })
+        payload: initialState
     }
 }
 
@@ -118,7 +115,7 @@ export default function AuthenticationReducer(state = initialState, action) {
             return Object.assign({}, state, { authenticated: false })
         case LOGIN_WITH_EMAIL_PASSWORD + "_FULFILLED":
             let userInfo = action.payload
-            return { userInfo, authenticated: true }
+            return { userInfo: userInfo, authenticated: true }
         case GET_AUTH_INFO + "_PENDING":
             return Object.assign({}, state, { authenticated: false })
         case GET_AUTH_INFO + "_FULFILLED":
