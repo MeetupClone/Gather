@@ -148,7 +148,7 @@ export default class Login extends Component {
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
                                 <div>{key.title}</div>
                                 <div>{key.category}</div>
-                                <div className="event-card-desc"><p>{key.description}</p></div>
+                                <div className="event-card-desc"><p className="overflow">{key.description}</p></div>
                             </div>
                             </div>
                             </Link>
