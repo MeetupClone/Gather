@@ -1,7 +1,7 @@
 .group-card-container {
     margin-top: 20px;
     margin-bottom: 20px;
-    height: 120px;
+    height: 140px;
     width: 100%;
     box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
     
@@ -13,6 +13,8 @@
     min-width: 100px;
     float: left;
     padding: 0px 10px;
+    margin: 5px 0px;
+    border-radius: 50px;
 }
 
 .group-card-content {

@@ -58,6 +58,9 @@
   letter-spacing: 1px;
   padding-top: 9px;
   text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .event-card-desc {

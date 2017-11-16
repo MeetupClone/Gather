@@ -94,9 +94,7 @@ export class GroupPage extends Component {
         if(this.state.category){
             groupImage = require(`../../../web-p-category-pics/${this.state.category}.webp`);
         }
-        else{
-            groupImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5VYjjU6OM1lm1QyggD1_ShdKTc-kWDT-FcCeL5qlYCg2oZxIWQg";
-        }
+        
 
         if (this.state.currentUserUid === this.state.groupOrganizerUid)
             {
@@ -130,15 +128,22 @@ export class GroupPage extends Component {
 
         return (
             <div className="nunito-text">
-           
+                <div className="group-page-flex-box">
+                <div>
                 <h1>{this.state.groupName}</h1>
-                <img src={groupImage} alt=":-(" className="group-page-picture"/>
-                {/* <img src={require(groupImage)  || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5VYjjU6OM1lm1QyggD1_ShdKTc-kWDT-FcCeL5qlYCg2oZxIWQg"} alt=":D"/> */}
                 <h3>{this.state.groupMembers} Member(s)</h3>
-                <p>{this.state.groupDesc}</p>
+                {joinButton}
+                {leaveButton}
+                </div>
+                <img src={this.state.groupPic || groupImage} alt="" className="group-page-picture"/>
+                </div>
+                <p className="group-page-description">{this.state.groupDesc}</p>
+                
+                <div className="group-page-share">
                 <Twitter/>
                 <Facebook/>
                 <Email/>
+                </div>
                 <div>{this.state.groupEvents.map(key => {
                     return(
                         <div>
@@ -148,8 +153,7 @@ export class GroupPage extends Component {
                         </div>
                     )
                 })}</div>
-                {joinButton}
-                {leaveButton}
+                
             </div>
         )
     }
