@@ -1,9 +1,3 @@
-
-* {
-  color: black;
-  text-decoration: none;
-}
-
 .user-profile-pic {
   margin-top: 5vh;
   max-height: 150px !important;
@@ -24,22 +18,21 @@
 
 .user-spec-button-indiv {
   color: white;
-  height: 30px;
+  height: 50px;
   width: 100px;
   margin: 0 5px;
-  font-size: 11px;
-  padding: 1px;
+  font-size: 15px;
+  padding: 16px;
   border-radius: 2px;
   background-color: #42A5F5;
   -ms-touch-action: manipulation;
   touch-action: manipulation;
   cursor: pointer;
+  letter-spacing: 2px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  letter-spacing: 2px;
-  text-align: center;
   outline: 0; }
   .user-spec-button-indiv:focus {
     background: #0b78d0; }
@@ -95,65 +88,10 @@
   margin-right: 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23); }
 
-  .user-prof-group-name{
-    font-size: 30px;
-  }
-
-
-  .event-card-container {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    height: 120px;
-    width: 90%;
-    margin: 10px auto;
-    background-color: white;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
-  
-  .event-card-content-container {
-    display: flex;
-    flex-direction: row;
-    height: 200px;
-    padding-left: 10px;
-    padding-right: 10px; }
-  
-  .event-card-title {
-    font-weight: bold; }
-  
-  .event-card-info {
-    display: flex;
-    flex-direction: column;
-    text-align: left; }
-  
-  .event-card-category {
-    text-align: left;
-    font-size: 12px; }
-  
-  .event-card-date {
-    width: 100px;
-    height: 100%;
-    float: left;
-    margin-right: 10px; }
-  
-  .event-card-loc {
-    font-size: 12px;
-    color: gray;
-    font-weight: bold; }
-  
-  .event-card-desc {
-    text-align: left; }
-  
-  .event-title-link {
-    color: black;
-    text-decoration: none; }
-  
-  .event-card-loading-container {
-    justify-content: space-around;
-    background-color: white;
-    height: 120px;
-    width: 90%;
-    margin: 10px auto;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23); }
-
-
+.event-card-container {
+  height: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
 
 /*# sourceMappingURL=profile.css.map */
