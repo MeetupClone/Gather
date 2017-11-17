@@ -13,7 +13,7 @@ The app was developed with React, Redux, Express, Node, PostgresSQL, and Firebas
 
 ## Walkthrough
 
-![Non-Auth Homepage](/../<screenshot-branch-dont-ask-me-about-it>/public/images/screenshots/gather-non-auth-home.png?raw=true "Optional Title")
+![Non-Auth Homepage](/../<screenshot-branch-dont-ask-me-about-it>/public/screenshots/gather-non-auth-home.png?raw=true "Optional Title")
 ![Auth-Homepage](https://imgur.com/Reljktb)
 ![Explore-Page](https://imgur.com/uPjR670)
 ![Event-Specific](https://imgur.com/OhbjG3O)
