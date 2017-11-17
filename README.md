@@ -14,6 +14,17 @@ The app was developed with React, Redux, Express, Node, PostgresSQL, and Firebas
 ## Walkthrough
 
 ![Non-Auth-Home](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-non-auth-home.PNG)
+![Auth-Home](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-auth-home.PNG)
+![Explore-Events](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-explore-page.PNG)
+![Specific-Event](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-event-page.PNG)
+![Explore-Groups](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-explore-groups.PNG)
+![Specific-Group](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-group-page.PNG)
+![Create-Event](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-create-event.PNG)
+![Event-Confirmation](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-event-confirmation.PNG)
+![Login-Page](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-login-page.PNG)
+![User-Profile](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-profile.PNG)
+![Account-Preferences](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-account-preferences.PNG)
+![Account-Notifications](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-account-notifications.PNG)
 
 ## Built With
 
