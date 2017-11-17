@@ -92,7 +92,7 @@ export class EventCards extends Component {
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
                                 <div>{key.title}</div>
-                                <div>{key.category}</div>
+                                <div>{key.category.charAt(0).toUpperCase() + key.category.slice(1)}</div>
                                 <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>
                             </div>
@@ -141,7 +141,7 @@ export class EventCards extends Component {
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
                                 <div>{key.title}</div>
-                                <div>{key.category}</div>
+                                <div>{key.category.charAt(0).toUpperCase() + key.category.slice(1)}</div>
                                 <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>
                             </div>
@@ -164,7 +164,7 @@ export class EventCards extends Component {
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
                                 <div>{key.title}</div>
-                                <div>{key.category}</div>
+                                <div>{key.category.charAt(0).toUpperCase() + key.category.slice(1)}</div>
                                 <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>
                             </div>
