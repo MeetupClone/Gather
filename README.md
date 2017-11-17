@@ -3,7 +3,7 @@
 gath·er
 1. come together; assemble or accumulate.
 
-Gather is a app created by Shiva Patel, Chuck Cipione, Peter Miles, and Mackenzie Clark. What started as a clone of meetup.com turned into a reconstruction of the idea of gathering, and we recreated it in our own image. 
+Gather is an app created by Shiva Patel, Chuck Cipione, Peter Miles, and Mackenzie Clark. What started as a clone of meetup.com turned into a reconstruction of the idea of gathering, and we recreated it in our own image. 
 
 
 
@@ -13,17 +13,6 @@ The app was developed with React, Redux, Express, Node, PostgresSQL, and Firebas
 
 ## Walkthrough
 
-![Non-Auth Homepage](https://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-non-auth-home.png?raw=true "Optional Title")
-![Auth-Homepage](https://imgur.com/Reljktb)
-![Explore-Page](https://imgur.com/uPjR670)
-![Event-Specific](https://imgur.com/OhbjG3O)
-![Explore-Page-Groups](https://imgur.com/M0UkqA1)
-![Group-Page](https://imgur.com/jwZhVPP)
-![Event-Creation](https://imgur.com/v5eBThG)
-![Event-Confirmation](https://imgur.com/rZTUg96)
-![User-Profile](https://imgur.com/n0fchX9)
-![Account-Preferences](https://imgur.com/dKRG9mb)
-![Account-Notifications](https://imgur.com/ZzQfl8a)
 
 
 ## Built With
