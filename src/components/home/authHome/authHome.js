@@ -52,6 +52,7 @@ export default class AuthHome extends Component {
 
     render() {
         let appShell = null;
+        let keyCat = null;
 
         if(this.state.loading){
             let arr = []
@@ -77,13 +78,16 @@ export default class AuthHome extends Component {
                 <div>
                 <h3 className= "nunito-text">Your Events</h3>
                     {this.state.userEvents.map(key => {
+                        if(key.category){
+                            keyCat = key.category.charAt(0).toUpperCase() + key.category.slice(1);
+                        }
                         return(
                             <Link to = {`/event/${key.id}`} className="auth-link" key={key.id}>
                             <div  className="auth-event-card-container nunito-text">
                                 <div className="auth-event-card-loc">{key.location}</div>
                                 <div>{key.title}</div>
                                 {key.event_date}
-                                <div>{key.category.charAt(0).toUpperCase() + key.category.slice(1)}</div>
+                                <div>{keyCat}</div>
                             </div>
                             </Link>
                         )

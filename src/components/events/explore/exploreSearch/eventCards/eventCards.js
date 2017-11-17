@@ -56,8 +56,9 @@ export class EventCards extends Component {
     render() {
        
 
-
-        let now = new Date();
+        let eventCat = null;
+        let now = new Date().getTime();
+        let eventDate = null;
 
         const { searchText, searchFilter } = this.props;
         let appShell = null;
@@ -73,15 +74,17 @@ export class EventCards extends Component {
             appShell = arr;
 
             return (<div>{appShell}</div>)
-        } else {
+        } 
+        else {
             if (searchText !== "" && searchFilter === "Name" || searchText === "" ) {
                 const {events} = this.props
                 return (
                     <div>
                 {this.state.events.map(key => {
-
-                    let eventDate = new Date(key.event_date)
-                        console.log(key)
+                    if(key.category){
+                        eventCat = key.category.charAt(0).toUpperCase() + key.category.slice(1);
+                    }
+                    eventDate = new Date(key.event_date).getTime() 
                     
                     return(
                          <Link key={key.id} to = {`/event/${key.id}`}>
@@ -92,7 +95,7 @@ export class EventCards extends Component {
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
                                 <div>{key.title}</div>
-                                <div>{key.category.charAt(0).toUpperCase() + key.category.slice(1)}</div>
+                                <div>{eventCat}</div>
                                 <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>
                             </div>
@@ -101,11 +104,15 @@ export class EventCards extends Component {
                 )
             })}</div>
                 )
-            } else if (searchText !== "" && searchFilter === "Location" || searchText === "" ) {
+            } 
+        else if (searchText !== "" && searchFilter === "Location" || searchText === "" ) {
 
                 return (
                     <div>{this.state.events.map(function(key){
-                    let eventDate = new Date(key.event_date)
+                        if(key.category){
+                            eventCat = key.category.charAt(0).toUpperCase() + key.category.slice(1);
+                        }
+                    eventDate = new Date(key.event_date).getTime() 
                     if((key.location.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                       
                     return(
@@ -117,7 +124,7 @@ export class EventCards extends Component {
                             <div  className="event-card-info nunito-text">
                                     <div className="event-card-loc">{key.location.toUpperCase()}</div>
                                     <div>{key.title}</div>
-                                    <div>{key.category}</div>
+                                    <div>{eventCat}</div>
                                     <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>
                         </div>
@@ -126,10 +133,15 @@ export class EventCards extends Component {
                 )}
             })}</div>
                 )
-            } else if (searchText !== "" && searchFilter === "Category" || searchText === "" ) {
+            } 
+            else if (searchText !== "" && searchFilter === "Category" || searchText === "" ) {
                 return (
                     <div>{this.state.events.map(function(key){
-                    let eventDate = new Date(key.event_date)
+                        
+                        if(key.category){
+                            eventCat = key.category.charAt(0).toUpperCase() + key.category.slice(1);
+                        }
+                    eventDate = new Date(key.event_date).getTime() 
                     if((key.category.toLowerCase().includes(searchText.toLowerCase())) && eventDate < now){
                       
                     return(
@@ -141,7 +153,7 @@ export class EventCards extends Component {
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
                                 <div>{key.title}</div>
-                                <div>{key.category.charAt(0).toUpperCase() + key.category.slice(1)}</div>
+                                <div>{eventCat}</div>
                                 <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>
                             </div>
@@ -153,8 +165,11 @@ export class EventCards extends Component {
             } else {
                 return (
                     <div>{this.state.events.map(function(key){
-                let eventDate = new Date(key.event_date)
-            if(eventDate > now){
+                        if(key.category){
+                            eventCat = key.category.charAt(0).toUpperCase() + key.category.slice(1);
+                        }
+                eventDate = new Date(key.event_date).getTime() 
+            if(eventDate < now){
                 return(
                     <Link key={key.id}  to = {`/event/${key.id}`}>
                     <div className="event-card-container">
@@ -164,7 +179,7 @@ export class EventCards extends Component {
                             <div  className="event-card-info nunito-text">
                                 <div className="event-card-loc">{key.location.toUpperCase()}</div>
                                 <div>{key.title}</div>
-                                <div>{key.category.charAt(0).toUpperCase() + key.category.slice(1)}</div>
+                                <div>{eventCat}</div>
                                 <div className="event-card-desc"><p className="event-limit-desc">{key.description}</p></div>
                             </div>
                             </div>

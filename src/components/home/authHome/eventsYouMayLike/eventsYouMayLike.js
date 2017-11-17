@@ -36,7 +36,9 @@ export default class EventsYouMayLike extends Component {
                     .then(result => this.setState({ userEvents: result.data }))
                 axios.get(`/api/relevant/event/${this.state.uid}`)
                 .then(results => {
-                    this.setState({reccEvents: results.data})})
+                    this.setState({reccEvents: results.data})
+                    console.log(this.state.reccEvents)
+                })
                 .catch(err => console.log("relevant event not working", err))
         
                 
@@ -45,33 +47,35 @@ export default class EventsYouMayLike extends Component {
                 console.log("no user")
             }
         })
-    }
-
-    componentDidMount() {
-
-
 
     }
 
 
     render() {
+        let eventCat = null;
+        
         return (
             <div>
                     <h4>Events You May Like</h4>
-                        {this.state.eventsArr.map(function(event, index){
+                        {this.state.reccEvents.map(function(event, index){
+                            
+                            if(event.category){
+                                eventCat = event.category.charAt(0).toUpperCase() + event.category.slice(1);
+                            }
                             if(index < 5){
                         return(
                             <div key={event.id + event.category_name}>
                                 <div className="recc-events-card-info nunito-text">
                                 <div className="recc-events-location">{event.location.toUpperCase()}</div>
                                 <Link to = {`/event/${event.id}`}><div>{event.title}</div></Link>
-                                <div>{event.category}</div>
+                                {<div>{event.event_date}</div>}
+                                <div>{eventCat}</div>
                                 </div>
                             </div>
                         )
                     }})}
                     </div>
-        )
+       )
     }
 
 }
