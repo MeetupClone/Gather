@@ -199,7 +199,7 @@ export default class Login extends Component {
                 <div className="user-spec-buttons">
                 <button className="user-spec-button-indiv btn-active nunito-text" onClick={(event) => 
                     {this.setState({showParams: "events" })}}> Events </button>
-                <button className="user-spec-button-indiv btn-activ nunito-texte" onClick={() => 
+                <button className="user-spec-button-indiv btn-active nunito-texte" onClick={() => 
                     {this.setState({showParams: "attending" })}}> Attending </button>
                 <button className="user-spec-button-indiv btn-active nunito-text" onClick={() => 
                     {this.setState({showParams: "groups" })}}> Groups </button>

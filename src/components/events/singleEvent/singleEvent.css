@@ -15,4 +15,11 @@
   font-family: Nunito;
   margin: 0 10vh 10vh; }
 
+.event-picture {
+  max-width: 250px;
+  max-width: 250px;
+  border-radius: 50%;
+  margin: 3vh auto;
+}
+
 /*# sourceMappingURL=singleEvent.css.map */

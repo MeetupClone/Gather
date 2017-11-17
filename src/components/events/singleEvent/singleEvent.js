@@ -92,7 +92,7 @@ export class SingleEvent extends Component {
                 {joinButton} 
                 {leaveButton}
                     <h1>{this.state.eventName}</h1>
-                    <img src={this.state.eventPic} alt={this.state.eventName}></img>
+                    <img className="event-picture" src={this.state.eventPic} alt={this.state.eventName}></img>
                     <h3>{this.state.eventLocation}</h3>
                     <h3>{this.state.eventDate}</h3>
                     <h3>{this.state.eventMembers} Member(s)</h3>
