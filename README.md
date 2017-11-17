@@ -13,7 +13,7 @@ The app was developed with React, Redux, Express, Node, PostgresSQL, and Firebas
 
 ## Walkthrough
 
-![Non-Auth-Home](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-account-notifications.PNG)
+![Non-Auth-Home](http://raw.github.com/MeetupClone/Gather/screenshot-branch-dont-ask-me-about-it/public/screenshots/gather-non-auth-home.PNG)
 
 ## Built With
 
