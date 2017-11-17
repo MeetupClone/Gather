@@ -55,7 +55,6 @@ export class Account extends Component{
         }
             return(
                 <div className="account-main-container nunito-text">
-                    <div className="account-left-navbar">
                         <div className="account-left-options">
                             <div onClick={(e) => this.changeView(1)}>Notifications</div>
                             <div onClick={(e) => this.changeView(2)}>Preferences</div>
@@ -63,7 +62,6 @@ export class Account extends Component{
                                 this.props.history.push('/')
                             })}}>Link to Logout</div>
                         </div>
-                    </div>
                     <div className="account-right-content">
                     {displayMe}
                     </div>

@@ -7,11 +7,8 @@ ul {
   flex-direction: row;
   height: 100vh; }
 
-.account-left-navbar {
-  display: flex; }
-
 .account-left-options {
-  padding-left: 5px;
+  font-weight: bold;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

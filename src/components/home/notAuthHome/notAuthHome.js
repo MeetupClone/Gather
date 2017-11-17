@@ -9,7 +9,7 @@ export default class NotAuthHome extends Component {
     render(){
         return(
             <div className="home">
-                <img className="gather-logo-home" align="left" src="http://static1.squarespace.com/static/5298f415e4b05482b01af09c/t/5298f5cae4b0e021fe88cc1c/1507776280790/" alt="gather logo"/>
+                <img className="gather-logo-home" align="left" src={require('../../../assets/logo.svg')} alt="gather logo"/>
                 <h3>gath·er <br/> 1. come together; assemble or accumulate.</h3>
               <div className="home-event-card">
                 <img className="home-event-card-pic" src="/images/ben-duchac-66002.jpg" alt="event pic"/>
