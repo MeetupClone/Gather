@@ -1,3 +1,0 @@
-libwebp v0.5.2
-
-https://developers.google.com/speed/webp/download
