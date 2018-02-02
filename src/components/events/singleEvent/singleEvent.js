@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import "./singleEvent.css"
+import './singleEvent.css';
 
-import { joinEvent, leaveEvent } from "../../../ducks/event-redux"
+import { joinEvent, leaveEvent } from '../../../ducks/event-redux';
 
-import { fire as firebase } from "../../../fire"
+import { fire as firebase } from '../../../fire';
 
-import {EventComment} from "../comments/eventComment"
+import { EventComment } from '../comments/eventComment';
 
-import Footer from "../../footer/footer"
+import Footer from '../../footer/footer';
 
 export class SingleEvent extends Component {
     constructor(props) {
@@ -29,13 +29,11 @@ export class SingleEvent extends Component {
             userAttendingEvents: [],
             joined: false,
             eventMembers: 0,
-        }
+        };
     }
 
     componentWillMount() {
-
         axios.get(`/api/event/${this.state.eventId}`).then(response => {
-            console.log(response)
             this.setState({
                 eventName: response.data[0].title,
                 eventLocation: response.data[0].location,
@@ -43,72 +41,102 @@ export class SingleEvent extends Component {
                 eventPic: response.data[0].event_image,
                 eventDate: response.data[0].date,
                 organizerUid: response.data[0].organizer_uid,
-                eventMembers: response.data[0].members
-            })
-        })
+                eventMembers: response.data[0].members,
+            });
+        });
 
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.setState({ currentUserUid: user.uid })
-                let eventsArr = []
-                return axios.get(`/api/event/getAttendingEventsData/${this.state.currentUserUid}`).then(result => {
-                    result.data.map(event => {
-                        eventsArr.push(event.event_id)
-                    })
-                    this.setState({ userAttendingEvents: eventsArr })
-                    if (this.state.userAttendingEvents.includes(this.state.eventId)) {
-                        this.setState({ joined: true })
-                    } else {
-                        this.setState({ joined: false })
-                    }
-                })
-            } 
-        })
+                this.setState({ currentUserUid: user.uid });
+                let eventsArr = [];
+                return axios
+                    .get(
+                        `/api/event/getAttendingEventsData/${
+                            this.state.currentUserUid
+                        }`
+                    )
+                    .then(result => {
+                        result.data.map(event => {
+                            eventsArr.push(event.event_id);
+                        });
+                        this.setState({ userAttendingEvents: eventsArr });
+                        if (
+                            this.state.userAttendingEvents.includes(
+                                this.state.eventId
+                            )
+                        ) {
+                            this.setState({ joined: true });
+                        } else {
+                            this.setState({ joined: false });
+                        }
+                    });
+            }
+        });
     }
 
     render() {
-        const { joinEvent } = this.props
-        let joinButton = null
-        let leaveButton = null
- 
-        if (this.state.currentUserUid === this.state.organizerUid)
-            {
+        const { joinEvent } = this.props;
+        let joinButton = null;
+        let leaveButton = null;
+        if (this.state.currentUserUid === this.state.organizerUid) {
             joinButton = (
                 <div>
                     <h1> This is your event! </h1>
-                    <Link to={`/event/edit/${this.props.match.params.id}`}><button className="edit-event-button" onClick={() => {this.setState({edit:true})}}> Click here to edit your event. </button></Link>
+                    <Link to={`/event/edit/${this.props.match.params.id}`}>
+                        <button
+                            className="edit-event-button"
+                            onClick={() => {
+                                this.setState({ edit: true });
+                            }}>
+                            {' '}
+                            Click here to edit your event.{' '}
+                        </button>
+                    </Link>
                 </div>
-                )
+            );
         } else {
             joinButton = (
                 <div>
-                    <button className="join-event-button" onClick={(event) => {joinEvent(this.state)}}> Join Event </button>
+                    <button
+                        className="join-event-button"
+                        onClick={event => {
+                            joinEvent(this.state);
+                        }}>
+                        {' '}
+                        Join Event{' '}
+                    </button>
                 </div>
-                )
+            );
         }
 
         return (
             <div>
-                {joinButton} 
+                {joinButton}
                 {leaveButton}
-                    <h1>{this.state.eventName}</h1>
-                    <img className="event-picture" src={this.state.eventPic} alt={this.state.eventName}></img>
-                    <h3>{this.state.eventLocation}</h3>
-                    <h3>{this.state.eventDate}</h3>
-                    <h3>{this.state.eventMembers} Member(s)</h3>
-                    <p className="description" >{this.state.eventDescription}</p>
+                <h1>{this.state.eventName}</h1>
+                <img
+                    className="event-picture"
+                    src={this.state.eventPic}
+                    alt={this.state.eventName}
+                />
+                <h3>{this.state.eventLocation}</h3>
+                <h3>{this.state.eventDate}</h3>
+                <h3>{this.state.eventMembers} Member(s)</h3>
+                <p className="description">{this.state.eventDescription}</p>
 
-                <Footer/>
+                <Footer />
             </div>
-        )
+        );
     }
 }
 
-const mapStateToProps = (state) => { return {} }
+const mapStateToProps = state => {
+    return {};
+};
 
 const actions = {
     joinEvent,
-    leaveEvent
-}
+    leaveEvent,
+};
 
-export default connect(mapStateToProps, actions)(SingleEvent)
+export default connect(mapStateToProps, actions)(SingleEvent);
