@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import { EventCards } from './eventCards/eventCards.js';
 
 import { GroupCards } from './groupCards/groupCards.js';
 
 import './exploreSearch.css';
-
-//
 
 export class ExploreSearch extends Component {
     constructor(props) {
@@ -15,108 +13,79 @@ export class ExploreSearch extends Component {
         this.state = {
             searchText: '',
             searchFilter: 'Name',
-            searchField: 0,
+            searchEvents: true,
+            loading: true,
         };
-
-        this.updateSearchText = this.updateSearchText.bind(this);
-        this.updateSearchFilter = this.updateSearchFilter.bind(this);
-        this.updateSearchField = this.updateSearchFilter.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
-    updateSearchText(val) {
-        this.setState({ searchText: val });
+    componentDidMount() {
+        axios
+            .get('/api/events')
+            .then(result => {
+                this.setState({
+                    loading: false,
+                    events: result.data.sort((a, b) => {
+                        console.log(b, new Date(b.cron_time).getTime());
+                        return (
+                            new Date(b.cron_time).getTime() -
+                            new Date(a.cron_time).getTime()
+                        );
+                    }),
+                });
+            })
+            .catch(() => this.setState({ loading: false }));
     }
 
-    updateSearchFilter(val) {
-        this.setState({ searchFilter: val });
-    }
-
-    updateSearchFieldEvent() {
-        this.setState({ searchField: 0 });
-    }
-
-    updateSearchFieldGroup() {
-        this.setState({ searchField: 1 });
-    }
+    handleSearch() {}
 
     render() {
-        if (this.state.searchField === 0) {
-            return (
-                <div>
-                    <input
-                        className="search"
-                        type="text"
-                        placeholder="Search"
-                        onChange={e => this.updateSearchText(e.target.value)}
-                    />
-                    <span className="filter-dropdown">
-                        <select
-                            onChange={e =>
-                                this.updateSearchFilter(e.target.value)
-                            }>
-                            <option value="Name">Name</option>
-                            <option value="Location">Location</option>
-                            <option value="Category">Category</option>
-                            <option value="Group-Events">Group Events</option>
-                        </select>
-                    </span>
-                    <span className="filter-buttons">
-                        <button
-                            className="events-button"
-                            onClick={() => this.updateSearchFieldEvent()}>
-                            Events
-                        </button>
-                        <button
-                            className="group-button"
-                            onClick={() => this.updateSearchFieldGroup()}>
-                            Group
-                        </button>
-                    </span>
+        return this.state.loading ? null : (
+            <div>
+                <input
+                    className="search"
+                    type="text"
+                    placeholder="Search"
+                    onChange={e =>
+                        this.setState({ searchText: e.target.value })
+                    }
+                />
+                <span className="filter-dropdown">
+                    <select
+                        onChange={e =>
+                            this.setState({ searchFilter: e.target.value })
+                        }>
+                        <option value="Name">Name</option>
+                        <option value="Location">Location</option>
+                        <option value="Category">Category</option>
+                        <option value="Group-Events">Group Events</option>
+                    </select>
+                </span>
+                <span className="filter-buttons">
+                    <button
+                        className="events-button"
+                        onClick={() => this.setState({ searchEvents: true })}>
+                        Events
+                    </button>
+                    <button
+                        className="group-button"
+                        onClick={() => this.setState({ searchEvents: false })}>
+                        Groups
+                    </button>
+                </span>
+                {this.state.searchEvents ? (
                     <EventCards
+                        events={this.state.events}
                         searchFilter={this.state.searchFilter}
                         searchText={this.state.searchText}
                     />
-                </div>
-            );
-        } else {
-            return (
-                <div>
-                    <input
-                        className="search"
-                        type="text"
-                        placeholder="Search"
-                        onChange={e => this.updateSearchText(e.target.value)}
-                    />
-                    <span className="filter-dropdown">
-                        <select
-                            className="categorySelector"
-                            onChange={e =>
-                                this.updateSearchFilter(e.target.value)
-                            }>
-                            <option value="name">Name</option>
-                            <option value="location">Location</option>
-                            <option value="category">Category</option>
-                            <option value="group-events">Group Events</option>
-                        </select>
-                    </span>
-                    <span className="filter-buttons">
-                        <button
-                            className="events-button"
-                            onClick={() => this.updateSearchFieldEvent()}>
-                            EVENTS
-                        </button>
-                        <button
-                            className="group-button"
-                            onClick={() => this.updateSearchFieldGroup()}>
-                            GROUP
-                        </button>
-                    </span>
+                ) : (
                     <GroupCards
                         searchFilter={this.state.searchFilter}
                         searchText={this.state.searchText}
                     />
-                </div>
-            );
-        }
+                )}
+            </div>
+        );
     }
 }

@@ -44,7 +44,6 @@ export class Footer extends Component {
                         ? this.setState({ createButtonNonAuth: true })
                         : this.props.history.push('/event/create');
                 }}>
-                {' '}
                 Event
             </button>
         );
@@ -56,7 +55,6 @@ export class Footer extends Component {
                         ? this.setState({ createButtonNonAuth: true })
                         : this.props.history.push('/groups/create');
                 }}>
-                {' '}
                 Groups
             </button>
         );

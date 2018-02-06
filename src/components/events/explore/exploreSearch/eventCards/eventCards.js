@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import './eventCards2.css';
-import '../../../../../helpers.css';
-
-import { Link } from 'react-router-dom';
+import 'helpers.css';
 
 export class EventCards extends Component {
     constructor(props) {
@@ -19,224 +18,64 @@ export class EventCards extends Component {
             loading: true,
         };
 
-        this.componentWillMount = this.componentWillMount.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
-    componentWillReceiveProps(props) {
-        this.setState({
-            searchFilter: props.searchFilter,
-            searchText: props.searchText,
-        });
+    componentDidMount() {
+        axios
+            .get('/api/events')
+            .then(result => {
+                this.setState({
+                    loading: false,
+                    events: result.data.sort((a, b) => {
+                        return (
+                            new Date(b.cron_time).getTime() -
+                            new Date(a.cron_time).getTime()
+                        );
+                    }),
+                });
+            })
+            .catch(() => this.setState({ loading: false }));
     }
 
-    componentWillMount() {
-        axios.get('/api/events').then(result => {
-            this.setState({ loading: false, events: result.data });
-
-            this.setState({
-                loading: false,
-                events: result.data.sort(function(a, b) {
-                    return new Date(a.event_date) - new Date(b.event_date);
-                }),
-            });
-        });
-    }
-
-    shouldComponentUpdate(newProps) {
-        return (
-            this.props.searchText !== newProps.searchText ||
-            this.props.searchFilter !== newProps.searchFilter
-        );
-    }
+    handleSearch() {}
 
     render() {
         let eventCat = null;
-        let now = new Date().getTime();
-        let eventDate = null;
-
-        const { searchText, searchFilter } = this.props;
-        let appShell = null;
-
-        if (this.state.loading) {
-            let arr = [];
-            let count = 0;
-            while (count < 8) {
-                arr.push(
-                    <h1 className="event-card-loading-container" key={count} />
-                );
-                count++;
-            }
-            appShell = arr;
-
-            return <div>{appShell}</div>;
-        } else {
-            if (
-                (searchText !== '' && searchFilter === 'Name') ||
-                searchText === ''
-            ) {
-                return (
-                    <div>
-                        {this.state.events.map(key => {
-                            if (key.category) {
-                                eventCat =
-                                    key.category.charAt(0).toUpperCase() +
-                                    key.category.slice(1);
-                            }
-                            eventDate = new Date(key.event_date).getTime();
-
-                            return (
-                                <Link key={key.id} to={`/event/${key.id}`}>
-                                    <div className="event-card-container">
-                                        <div className="event-card-date nunito-text">
-                                            {key.event_date}
-                                        </div>
-                                        <div className="event-card-info nunito-text">
-                                            <div className="event-card-loc">
-                                                {key.location.toUpperCase()}
-                                            </div>
-                                            <div>{key.title}</div>
-                                            <div>{eventCat}</div>
-                                            <div className="event-card-desc">
-                                                <p className="event-limit-desc">
-                                                    {key.description}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Link>
-                            );
-                        })}
-                    </div>
-                );
-            } else if (
-                (searchText !== '' && searchFilter === 'Location') ||
-                searchText === ''
-            ) {
-                return (
-                    <div>
-                        {this.state.events.map(function(key) {
-                            if (key.category) {
-                                eventCat =
-                                    key.category.charAt(0).toUpperCase() +
-                                    key.category.slice(1);
-                            }
-                            eventDate = new Date(key.event_date).getTime();
-                            if (
-                                key.location
-                                    .toLowerCase()
-                                    .includes(searchText.toLowerCase()) &&
-                                eventDate < now
-                            ) {
-                                return (
-                                    <Link key={key.id} to={`/event/${key.id}`}>
-                                        <div
-                                            key={key.id}
-                                            className="event-card-container">
-                                            <div className="event-card-date nunito-text">
-                                                {key.event_date}
-                                            </div>
-                                            <div className="event-card-info nunito-text">
-                                                <div className="event-card-loc">
-                                                    {key.location.toUpperCase()}
-                                                </div>
-                                                <div>{key.title}</div>
-                                                <div>{eventCat}</div>
-                                                <div className="event-card-desc">
-                                                    <p className="event-limit-desc">
-                                                        {key.description}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                );
-                            }
-                        })}
-                    </div>
-                );
-            } else if (
-                (searchText !== '' && searchFilter === 'Category') ||
-                searchText === ''
-            ) {
-                return (
-                    <div>
-                        {this.state.events.map(function(key) {
-                            if (key.category) {
-                                eventCat =
-                                    key.category.charAt(0).toUpperCase() +
-                                    key.category.slice(1);
-                            }
-                            eventDate = new Date(key.event_date).getTime();
-                            if (
-                                key.category
-                                    .toLowerCase()
-                                    .includes(searchText.toLowerCase()) &&
-                                eventDate < now
-                            ) {
-                                return (
-                                    <Link key={key.id} to={`/event/${key.id}`}>
-                                        <div
-                                            key={key.id}
-                                            className="event-card-container">
-                                            <div className="event-card-date nunito-text">
-                                                {key.event_date}
-                                            </div>
-                                            <div className="event-card-info nunito-text">
-                                                <div className="event-card-loc">
-                                                    {key.location.toUpperCase()}
-                                                </div>
-                                                <div>{key.title}</div>
-                                                <div>{eventCat}</div>
-                                                <div className="event-card-desc">
-                                                    <p className="event-limit-desc">
-                                                        {key.description}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                );
-                            }
-                        })}
-                    </div>
-                );
-            } else {
-                return (
-                    <div>
-                        {this.state.events.map(function(key) {
-                            if (key.category) {
-                                eventCat =
-                                    key.category.charAt(0).toUpperCase() +
-                                    key.category.slice(1);
-                            }
-                            eventDate = new Date(key.event_date).getTime();
-                            if (eventDate < now) {
-                                return (
-                                    <Link key={key.id} to={`/event/${key.id}`}>
-                                        <div className="event-card-container">
-                                            <div className="event-card-date nunito-text">
-                                                {key.event_date}
-                                            </div>
-                                            <div className="event-card-info nunito-text">
-                                                <div className="event-card-loc">
-                                                    {key.location.toUpperCase()}
-                                                </div>
-                                                <div>{key.title}</div>
-                                                <div>{eventCat}</div>
-                                                <div className="event-card-desc">
-                                                    <p className="event-limit-desc">
-                                                        {key.description}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                );
-                            }
-                        })}
-                    </div>
-                );
-            }
-        }
+        return this.state.loading ? (
+            <div>
+                {Array.apply(null, { length: 4 }).map((x, i) => {
+                    return (
+                        <h1 className="event-card-loading-container" key={i} />
+                    );
+                })}
+            </div>
+        ) : (
+            <div>
+                {this.props.events.map((event, i) => {
+                    if (event.category) {
+                        eventCat =
+                            event.category.charAt(0).toUpperCase() +
+                            event.category.slice(1);
+                    }
+                    return (
+                        <Link key={i} to={`/event/${event.id}`}>
+                            <div className="card-container">
+                                <p>{event.title}</p>
+                                <p className="event-card-desc">
+                                    {event.description}
+                                </p>
+                                <p className="event-card-date nunito-text">
+                                    {event.event_date}
+                                </p>
+                                <p className="event-card-loc">
+                                    {event.location.toUpperCase()}
+                                </p>
+                            </div>
+                        </Link>
+                    );
+                })}
+            </div>
+        );
     }
 }
