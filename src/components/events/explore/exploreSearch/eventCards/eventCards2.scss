@@ -1,70 +1,87 @@
-.event-card-container {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    height: 100px;
-    width: 90%;
+.card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 120px;
+    padding: 2px;
+    width: 94%;
     margin: 10px auto;
+    margin-top: 15px;
+    margin-bottom: 10px;
     background-color: white;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    text-decoration: none;
 }
-  
- .event-card-content-container {
+
+.event-card-content-container {
     display: flex;
     flex-direction: row;
     height: 200px;
     padding-left: 10px;
-    padding-right: 10px; 
+    padding-right: 10px;
+    letter-spacing: 1px;
+    text-decoration: none;
 }
 
-  
- .event-card-title {
-    font-weight: bold; 
+.event-card-title {
+    font-weight: bold;
+    letter-spacing: 1px;
 }
-  
- .event-card-info {
+
+.event-card-info {
     display: flex;
     flex-direction: column;
-    text-align: left; 
+    text-align: left;
+    letter-spacing: 1px;
+    text-decoration: none;
 }
 
 .event-card-category {
     text-align: left;
-    font-size: 12px; 
-}
- .event-card-date {
-    width: 100px;
-    height: 100%;
-    float: left;
-    margin-right: 10px; 
-}
-  
-
- .event-card-loc {
     font-size: 12px;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.event-card-date {
+    letter-spacing: 1px;
+    font-size: 11px;
+    text-decoration: none;
+}
+
+.event-card-loc {
+    font-size: 11px;
     color: gray;
-    font-weight: bold; 
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding-top: 9px;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
- .event-card-desc {
-    text-align: left; 
+.event-card-desc {
+    letter-spacing: 1px;
+    font-size: 12px;
+    text-decoration: none;
 }
-  
- .event-title-link {
+
+.event-title-link {
     color: black;
-    text-decoration: none; 
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-size: 12px;
 }
-  
 
- .event-card-loading-container {
+.event-card-loading-container {
     justify-content: space-around;
     background-color: white;
-    height: 100px;
+    height: 120px;
     width: 90%;
     margin: 10px auto;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
-  }
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
+    letter-spacing: 1px;
+    text-decoration: none;
+}
 
-/*# sourceMappingURL=eventCards.css.map */
-
-
-  

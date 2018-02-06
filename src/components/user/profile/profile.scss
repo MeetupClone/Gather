@@ -1,5 +1,4 @@
-$button-color: #42A5F5;
-
+$button-color: #42a5f5;
 
 .user-profile-pic {
     margin-top: 5vh;
@@ -27,8 +26,10 @@ $button-color: #42A5F5;
     height: 50px;
     width: 100px;
     margin: 0 5px;
-    font-size: 15px;
-    padding: 16px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 2px;
     background-color: $button-color;
     -ms-touch-action: manipulation;
@@ -41,22 +42,21 @@ $button-color: #42A5F5;
     user-select: none;
     outline: 0;
     &:focus {
-        background: darken($button-color, 18%)
+        background: darken($button-color, 18%);
     }
 }
 
 .btn-active {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 
-              0 1px 5px 0 rgba(0, 0, 0, 0.12), 
-              0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  &:active {
-  	transform: scale(1.01);
-      box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                  0 3px 14px 2px rgba(0, 0, 0, 0.12),
-                  0 5px 5px -3px rgba(0, 0, 0, 0.4);
-  }
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+        0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:active {
+        transform: scale(1.01);
+        box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+            0 3px 14px 2px rgba(0, 0, 0, 0.12),
+            0 5px 5px -3px rgba(0, 0, 0, 0.4);
+    }
 }
 
 .social-media-input {
@@ -71,7 +71,7 @@ $button-color: #42A5F5;
 }
 
 .account-button {
-    background-color: #FF5252;
+    background-color: #ff5252;
     border-radius: 0;
     font-size: 14px;
     color: white;
@@ -87,29 +87,36 @@ $button-color: #42A5F5;
 
 .edit-button {
     width: 40%;
-    height: 20px;
+    height: 24px;
     font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
     color: #fff;
-    background: #08A045; 
+    background: #08a045;
 }
 .footer-padding {
     padding-bottom: 110px;
 }
 
 .events-styles {
-    display: grid;
-    grid-template-columns: fit-content(100%);
-    justify-content: space-around;
     background-color: white;
     height: 70px;
     margin-left: 20px;
     margin-right: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
 }
 
 .event-card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     height: 50px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+

@@ -4,7 +4,6 @@ import { devToolsEnhancer } from 'redux-devtools-extension';
 import AuthenticationReducer from './ducks/authentication-redux';
 import EventReducer from './ducks/event-redux';
 import GroupReducer from './ducks/group-redux';
-import CommentReducer from './ducks/comment-redux';
 import promiseMiddleware from 'redux-promise-middleware';
 
 let store = createStore(
@@ -12,7 +11,6 @@ let store = createStore(
 		AuthenticationReducer,
 		EventReducer,
 		GroupReducer,
-		CommentReducer,
 	}),
 	devToolsEnhancer(),
 	applyMiddleware(promiseMiddleware())

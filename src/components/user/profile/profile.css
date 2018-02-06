@@ -21,10 +21,12 @@
   height: 50px;
   width: 100px;
   margin: 0 5px;
-  font-size: 15px;
-  padding: 16px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 2px;
-  background-color: #42A5F5;
+  background-color: #42a5f5;
   -ms-touch-action: manipulation;
   touch-action: manipulation;
   cursor: pointer;
@@ -54,7 +56,7 @@
   padding: 0 auto; }
 
 .account-button {
-  background-color: #FF5252;
+  background-color: #ff5252;
   border-radius: 0;
   font-size: 14px;
   color: white;
@@ -63,25 +65,25 @@
   width: 30vw;
   margin-left: 70vw;
   margin-top: 3vh;
-  margin-bottom: 8vh;
   position: relative;
   bottom: 0;
   right: 0; }
 
 .edit-button {
   width: 40%;
-  height: 20px;
+  height: 24px;
   font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
   color: #fff;
-  background: #08A045; }
+  background: #08a045; }
 
 .footer-padding {
   padding-bottom: 110px; }
 
 .events-styles {
-  display: grid;
-  grid-template-columns: fit-content(100%);
-  justify-content: space-around;
   background-color: white;
   height: 70px;
   margin-left: 20px;
@@ -89,6 +91,10 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23); }
 
 .event-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 50px;
   white-space: nowrap;
   overflow: hidden;
