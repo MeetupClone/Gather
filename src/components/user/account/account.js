@@ -4,14 +4,11 @@ import './account.css';
 
 import '../../../helpers.css';
 
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { getAuthInfo } from '../../../ducks/authentication-redux';
-import Footer from '../../footer/footer';
 
 import { Notifications } from './notifications/notifications';
 import { Preferences } from './preferences/preferences';
-import { EditInfo } from './editInfo/editInfo';
 import { fire as firebase } from '../../../fire';
 
 export class Account extends Component {
@@ -53,14 +50,14 @@ export class Account extends Component {
         return (
             <div className="account-main-container nunito-text">
                 <div className="account-left-options">
-                    <div onClick={e => this.changeView(1)}>Notifications</div>
-                    <div onClick={e => this.changeView(2)}>Preferences</div>
+                    <div onClick={() => this.changeView(1)}>Notifications</div>
+                    <div onClick={() => this.changeView(2)}>Preferences</div>
                     <div
-                        onClick={e => {
+                        onClick={() => {
                             firebase
                                 .auth()
                                 .signOut()
-                                .then(result => {
+                                .then(() => {
                                     this.props.history.push('/');
                                 });
                         }}>

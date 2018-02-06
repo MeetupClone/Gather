@@ -21,6 +21,7 @@ export default class Facebook extends Component {
                     rel="noopener noreferrer"
                     href="http://gather.petermiles.io">
                     <img
+                        alt="facebook logo"
                         className="facebook-styling"
                         src={require('./share-facebook.png')}
                     />

@@ -42,25 +42,27 @@ export class ExploreSearch extends Component {
     render() {
         return this.state.loading ? null : (
             <div>
-                <input
-                    className="search"
-                    type="text"
-                    placeholder="Search"
-                    onChange={e =>
-                        this.setState({ searchText: e.target.value })
-                    }
-                />
-                <span className="filter-dropdown">
-                    <select
+                <div className="search-section">
+                    <input
+                        className="search"
+                        type="text"
+                        placeholder="Search"
                         onChange={e =>
-                            this.setState({ searchFilter: e.target.value })
-                        }>
-                        <option value="Name">Name</option>
-                        <option value="Location">Location</option>
-                        <option value="Category">Category</option>
-                        <option value="Group-Events">Group Events</option>
-                    </select>
-                </span>
+                            this.setState({ searchText: e.target.value })
+                        }
+                    />
+                    <span className="filter-dropdown">
+                        <select
+                            onChange={e =>
+                                this.setState({ searchFilter: e.target.value })
+                            }>
+                            <option value="Name">Name</option>
+                            <option value="Location">Location</option>
+                            <option value="Category">Category</option>
+                            <option value="Group-Events">Group Events</option>
+                        </select>
+                    </span>
+                </div>
                 <span className="filter-buttons">
                     <button
                         className="events-button"

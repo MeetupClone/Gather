@@ -1,10 +1,9 @@
 .card-container {
-    background-color: blue;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 4px;
-    width: 94%;
+    padding: 5px;
+    max-width: 90%;
     margin: 15px auto 10px auto;
     background-color: white;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -41,6 +40,7 @@
     color: gray;
     font-weight: bold;
     letter-spacing: 1px;
+    padding: 0 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
