@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fire as firebase } from "../../../fire";
+import { fire as firebase } from '../../../fire';
 import './createEvents.css';
-import { createEvent } from "../../../ducks/event-redux";
-import PlaceSearchForm from "../../placeSearchForm/placeSearchForm";
-import Category from "../../categories/category";
+import { createEvent } from '../../../ducks/event-redux';
+import PlaceSearchForm from '../../placeSearchForm/placeSearchForm';
+import Category from '../../categories/category';
 
-import "./createEvents.css"
+import './createEvents.css';
 
-import Datetime from "react-datetime";
-import moment from "moment";
+import Datetime from 'react-datetime';
+import moment from 'moment';
 
-import Facebook from '../../facebook/facebook'
-import Twitter from '../../twitter/twitter'
-import Email from '../../email/email'
+import Facebook from '../../facebook/facebook';
+import Twitter from '../../twitter/twitter';
+import Email from '../../email/email';
 
 export class CreateEvents extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             eventPic: '',
             eventName: '',
@@ -34,27 +34,25 @@ export class CreateEvents extends Component {
             confirmModal: false,
             file: '',
             imagePreviewUrl: '',
-            cronTime: ''
-        }
+            cronTime: '',
+        };
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({
-                    uid: user.uid
-                })
+                    uid: user.uid,
+                });
             }
-        })
-        this.updateParent = (state) => this.props.updateParent(this.state)
-        this.imageProcess = this.imageProcess.bind(this)
+        });
+        this.updateParent = state => this.props.updateParent(this.state);
+        this.imageProcess = this.imageProcess.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(val, prop) {
         this.setState({
-            [prop]: val
-        })
+            [prop]: val,
+        });
     }
-
-
 
     imageProcess(event) {
         event.preventDefault();
@@ -64,91 +62,149 @@ export class CreateEvents extends Component {
         reader.onloadend = () => {
             this.setState({
                 file: file,
-                imagePreviewUrl: reader.result
+                imagePreviewUrl: reader.result,
             });
-        }
-        reader.readAsDataURL(file)
+        };
+        reader.readAsDataURL(file);
     }
 
-    componentWillReceiveProps(newProps){
-        console.log(newProps)
-        this.setState({created: newProps.EventReducer.created})
+    componentWillReceiveProps(newProps) {
+        this.setState({ created: newProps.EventReducer.created });
     }
 
-
-
-    shouldComponentUpdate(newProps, newState) {
-            return true
-    }
-
-
-    render(){
-
+    render() {
         var yesterday = Datetime.moment().subtract(1, 'day');
         var valid = function(current) {
             return current.isAfter(yesterday);
         };
-        let confirmModalElement = null
+        let confirmModalElement = null;
         if (this.state.created === true) {
             confirmModalElement = (
-            <div>
-                <h1> Congratulations, you've made an event!</h1>
-                <h3>Share your event!</h3>
-                <div className="flex-row">
-                    <Twitter/>
-                    <Facebook/>
-                    <Email/>
+                <div>
+                    <h1> Congratulations, you've made an event!</h1>
+                    <h3>Share your event!</h3>
+                    <div className="flex-row">
+                        <Twitter />
+                        <Facebook />
+                        <Email />
+                    </div>
                 </div>
-            </div>)
+            );
 
-            return (confirmModalElement)
+            return confirmModalElement;
         }
-        const { createEvent } = this.props
+        const { createEvent } = this.props;
         return (
             <div>
-              {confirmModalElement}
-              <h1 className="createTitle"> Create Event </h1>
-              <input required type="text" className="nunito-text"   placeholder="Name" onChange={e=>this.handleChange(e.target.value, "eventName")}  ref={(input)=>{
-              this.eventName = input}}/>
-              <input required type="text" className="nunito-text"  placeholder="Description"   onChange={e=>this.handleChange(e.target.value, "description")}/>
-              <PlaceSearchForm placeholder="Address" updateParent={(location) => {
-                this.setState({location: location.address, placeId: location.placeId})
-              }}/>
-              <input className="event-datetime" required type="date" min={moment().format('YYYY-MM-DD')}onChange={(event) => {
-                this.setState({eventDate: moment(event).format("MM/DD/YYYY HH:mm")})
-              }}/>
-            
-              <input step="900" className="event-datetime nunito-text" required type="time" onChange={(event) => {
-                this.setState({eventTime: event.target.value, cronTime: moment.utc(event).subtract(3, 'hours').format()})}}/>
+                {confirmModalElement}
+                <h1 className="createTitle"> Create Event </h1>
+                <input
+                    required
+                    type="text"
+                    className="nunito-text"
+                    placeholder="Name"
+                    onChange={e =>
+                        this.handleChange(e.target.value, 'eventName')
+                    }
+                    ref={input => {
+                        this.eventName = input;
+                    }}
+                />
+                <input
+                    required
+                    type="text"
+                    className="nunito-text"
+                    placeholder="Description"
+                    onChange={e =>
+                        this.handleChange(e.target.value, 'description')
+                    }
+                />
+                <PlaceSearchForm
+                    placeholder="Address"
+                    updateParent={location => {
+                        this.setState({
+                            location: location.address,
+                            placeId: location.placeId,
+                        });
+                    }}
+                />
+                <input
+                    className="event-datetime"
+                    required
+                    type="date"
+                    min={moment().format('YYYY-MM-DD')}
+                    onChange={event => {
+                        this.setState({
+                            eventDate: moment(event).format('MM/DD/YYYY HH:mm'),
+                        });
+                    }}
+                />
 
-              <div className="category-title"> Categories
-              <Category className="category-button" required updateParent={(state) => {
-                this.setState({categories: state})}}/>
-              </div>
-                <img className="event-picture" src={this.state.imagePreviewUrl || this.state.eventPic} alt=""/>
+                <input
+                    step="900"
+                    className="event-datetime nunito-text"
+                    required
+                    type="time"
+                    onChange={event => {
+                        this.setState({
+                            eventTime: event.target.value,
+                            cronTime: moment
+                                .utc(event)
+                                .subtract(3, 'hours')
+                                .format(),
+                        });
+                    }}
+                />
+
+                <div className="category-title">
+                    {' '}
+                    Categories
+                    <Category
+                        className="category-button"
+                        required
+                        updateParent={state => {
+                            this.setState({ categories: state });
+                        }}
+                    />
+                </div>
+                <img
+                    className="event-picture"
+                    src={this.state.imagePreviewUrl || this.state.eventPic}
+                    alt=""
+                />
                 <form>
-                 <input id="input" className="input-picture btn-active"
-                    type="file"
-                    onChange={(event)=>this.imageProcess(event)} />
-                    <label className="input-label" htmlFor="input"> Add an Event Photo </label>
+                    <input
+                        id="input"
+                        className="input-picture btn-active"
+                        type="file"
+                        onChange={event => this.imageProcess(event)}
+                    />
+                    <label className="input-label" htmlFor="input">
+                        {' '}
+                        Add an Event Photo{' '}
+                    </label>
                 </form>
 
-              <button type="submit" className="submit-event-button btn-active" onClick={(event) => {
-                event.preventDefault()
-                createEvent(this.state)
-              }}>Submit</button>
-
+                <button
+                    type="submit"
+                    className="submit-event-button btn-active"
+                    onClick={event => {
+                        event.preventDefault();
+                        createEvent(this.state);
+                    }}>
+                    Submit
+                </button>
             </div>
-        )
+        );
     }
-
-
 }
 
-const mapStateToProps = (state) => { return state }
+const mapStateToProps = state => {
+    return state;
+};
 
 const actions = {
-    createEvent
-}
+    createEvent,
+};
 
-export default connect(mapStateToProps, actions)(CreateEvents)
+export default connect(mapStateToProps, actions)(CreateEvents);

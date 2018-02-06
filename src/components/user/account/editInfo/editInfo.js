@@ -1,19 +1,13 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 
+export class EditInfo extends Component {
+	constructor(props) {
+		super(props);
 
-export class EditInfo extends Component{
-    constructor(props){
-        super(props);
+		this.state = {};
+	}
 
-        this.state = {
-
-        }
-    }
-
-
-    render(){
-        return(
-            <h1> Change Profile pic, PW, </h1>
-        )
-}
+	render() {
+		return <h1> Change Profile pic, PW, </h1>;
+	}
 }
