@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Routes } from 'routes';
 import { fire as firebase } from 'fire';
 
 import './navbar.css';
 import 'helpers.css';
 
-export default class Navbar extends Component {
+class Navbar extends Component {
     constructor(props) {
         super(props);
 
@@ -67,3 +67,5 @@ export default class Navbar extends Component {
         }
     }
 }
+
+export default withRouter(Navbar);
