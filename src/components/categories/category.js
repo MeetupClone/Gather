@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../../helpers.css';
 import './category.css';
-import underscore from 'underscore';
 export default class Category extends Component {
     constructor(props) {
         super(props);

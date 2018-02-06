@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 import { fire as firebase } from '../../../fire';
-
-// import { Link } from "react-router-dom";
-
 import axios from 'axios';
 import Datetime from 'react-datetime';
 import { connect } from 'react-redux';
@@ -88,10 +85,7 @@ export class EditEvent extends Component {
 
         if (this.state.organizerUid !== this.state.currentUserUid) {
             notAuthenticated = (
-                <h1>
-                    {' '}
-                    You can't edit this event, you aren't the event owner.{' '}
-                </h1>
+                <h1>You can't edit this event, you aren't the event owner.</h1>
             );
         } else {
             deleteConfirm = (

@@ -73,30 +73,20 @@ export class CreateEvents extends Component {
     }
 
     render() {
-        var yesterday = Datetime.moment().subtract(1, 'day');
-        var valid = function(current) {
-            return current.isAfter(yesterday);
-        };
-        let confirmModalElement = null;
-        if (this.state.created === true) {
-            confirmModalElement = (
-                <div>
-                    <h1> Congratulations, you've made an event!</h1>
-                    <h3>Share your event!</h3>
-                    <div className="flex-row">
-                        <Twitter />
-                        <Facebook />
-                        <Email />
-                    </div>
-                </div>
-            );
-
-            return confirmModalElement;
-        }
         const { createEvent } = this.props;
         return (
             <div>
-                {confirmModalElement}
+                {this.state.created && (
+                    <div>
+                        <h1> Congratulations, you've made an event!</h1>
+                        <h3>Share your event!</h3>
+                        <div className="flex-row">
+                            <Twitter />
+                            <Facebook />
+                            <Email />
+                        </div>
+                    </div>
+                )}
                 <h1 className="createTitle"> Create Event </h1>
                 <input
                     required

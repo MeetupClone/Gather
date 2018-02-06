@@ -22,7 +22,6 @@ let redirect = () => {
 };
 
 export const Routes = uid => {
-  console.log(uid);
   return (
     <Switch>
       <Route component={Home} exact path="/" />

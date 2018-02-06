@@ -31,7 +31,7 @@ export class CreateGroup extends Component {
         });
         this.imageProcess = this.imageProcess.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.updateParent = state => this.props.updateParent(this.state);
+        this.updateParent = () => this.props.updateParent(this.state);
     }
 
     handleChange(val, prop) {
@@ -56,20 +56,15 @@ export class CreateGroup extends Component {
 
     render() {
         const { createGroup } = this.props;
-        let confirmModalElement = null;
-        if (this.state.confirmModal === true) {
-            confirmModalElement = <h1>You made a group!</h1>;
-            return confirmModalElement;
-        }
         return (
             <div>
-                {confirmModalElement}
+                {this.state.confirmModal ? <h1>You made a group!</h1> : null}
                 <h1>Create Group</h1>
                 <form>
                     <img
                         className="group-picture"
                         src={this.state.imagePreviewUrl || this.state.eventPic}
-                        alt=""
+                        alt="group picture"
                     />
                     <input
                         id="input"
@@ -141,8 +136,6 @@ const mapStateToProps = state => {
     return state;
 };
 
-const actions = {
+export default connect(mapStateToProps, {
     createGroup,
-};
-
-export default connect(mapStateToProps, actions)(CreateGroup);
+})(CreateGroup);

@@ -63,12 +63,12 @@ export class ExploreSearch extends Component {
                     <span className="filter-buttons">
                         <button
                             className="events-button"
-                            onClick={e => this.updateSearchFieldEvent()}>
+                            onClick={() => this.updateSearchFieldEvent()}>
                             Events
                         </button>
                         <button
                             className="group-button"
-                            onClick={e => this.updateSearchFieldGroup()}>
+                            onClick={() => this.updateSearchFieldGroup()}>
                             Group
                         </button>
                     </span>
@@ -102,12 +102,12 @@ export class ExploreSearch extends Component {
                     <span className="filter-buttons">
                         <button
                             className="events-button"
-                            onClick={e => this.updateSearchFieldEvent()}>
+                            onClick={() => this.updateSearchFieldEvent()}>
                             EVENTS
                         </button>
                         <button
                             className="group-button"
-                            onClick={e => this.updateSearchFieldGroup()}>
+                            onClick={() => this.updateSearchFieldGroup()}>
                             GROUP
                         </button>
                     </span>
