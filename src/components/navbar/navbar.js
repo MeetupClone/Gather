@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import routes from '../../routes';
+import { Routes } from '../../routes';
 import { fire as firebase } from '../../fire';
 
 import './navbar.css';
@@ -63,7 +63,7 @@ export default class Navbar extends Component {
                     </Link>
                     {accountButton}
                 </div>
-                <div> {routes} </div>
+                <Routes uid={false} />
             </div>
         );
     }
