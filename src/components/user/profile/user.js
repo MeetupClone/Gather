@@ -118,7 +118,6 @@ class Login extends Component {
                   <div className="event-card-date nunito-text">
                     {event.event_date}
                   </div>
-
                   <p className="event-card-desc">{event.description}</p>
                   <div className="event-card-loc">
                     {event.location.toUpperCase()}

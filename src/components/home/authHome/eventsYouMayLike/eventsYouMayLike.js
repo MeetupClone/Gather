@@ -50,26 +50,25 @@ export default class EventsYouMayLike extends Component {
         return !this.state.checked ? null : (
             <div>
                 <h4>Events You May Like</h4>
-                {this.state.reccEvents.map(function(event, index) {
-                    if (event.category) {
-                        eventCat =
-                            event.category.charAt(0).toUpperCase() +
-                            event.category.slice(1);
-                    }
-                    if (index < 5) {
+                {this.state.reccEvents.map((event, i) => {
+                    if (i < 5) {
                         return (
-                            <div key={event.id + event.category_name}>
-                                <div className="recc-events-card-info nunito-text">
-                                    <div className="recc-events-location">
-                                        {event.location.toUpperCase()}
+                            <Link key={i} to={`/event/${event.id}`}>
+                                <div
+                                    event={event.id}
+                                    className="card-container nunito-text">
+                                    <div>{event.title}</div>
+                                    <div className="event-card-date nunito-text">
+                                        {event.event_date}
                                     </div>
-                                    <Link to={`/event/${event.id}`}>
-                                        <div>{event.title}</div>
-                                    </Link>
-                                    {<div>{event.event_date}</div>}
-                                    <div>{eventCat}</div>
+                                    <p className="event-card-desc">
+                                        {event.description}
+                                    </p>
+                                    <p className="event-card-loc">
+                                        {event.location.toUpperCase()}
+                                    </p>
                                 </div>
-                            </div>
+                            </Link>
                         );
                     }
                 })}
