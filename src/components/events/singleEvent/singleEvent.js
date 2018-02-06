@@ -9,8 +9,6 @@ import { joinEvent, leaveEvent } from '../../../ducks/event-redux';
 
 import { fire as firebase } from '../../../fire';
 
-import { EventComment } from '../comments/eventComment';
-
 import Footer from '../../footer/footer';
 
 export class SingleEvent extends Component {
@@ -76,43 +74,33 @@ export class SingleEvent extends Component {
 
     render() {
         const { joinEvent } = this.props;
-        let joinButton = null;
-        let leaveButton = null;
-        if (this.state.currentUserUid === this.state.organizerUid) {
-            joinButton = (
-                <div>
-                    <h1> This is your event! </h1>
-                    <Link to={`/event/edit/${this.props.match.params.id}`}>
-                        <button
-                            className="edit-event-button"
-                            onClick={() => {
-                                this.setState({ edit: true });
-                            }}>
-                            {' '}
-                            Click here to edit your event.{' '}
-                        </button>
-                    </Link>
-                </div>
-            );
-        } else {
-            joinButton = (
-                <div>
-                    <button
-                        className="join-event-button"
-                        onClick={event => {
-                            joinEvent(this.state);
-                        }}>
-                        {' '}
-                        Join Event{' '}
-                    </button>
-                </div>
-            );
-        }
 
         return (
             <div>
-                {joinButton}
-                {leaveButton}
+                {this.state.currentUserUid === this.state.organizerUid ? (
+                    <div>
+                        <h1> This is your event! </h1>
+                        <Link to={`/event/edit/${this.props.match.params.id}`}>
+                            <button
+                                className="edit-event-button"
+                                onClick={() => {
+                                    this.setState({ edit: true });
+                                }}>
+                                {' '}
+                                Click here to edit your event.{' '}
+                            </button>
+                        </Link>
+                    </div>
+                ) : (
+                    <button
+                        className="join-event-button"
+                        onClick={() => {
+                            joinEvent(this.state);
+                        }}>
+                        Join The Event
+                    </button>
+                )}
+
                 <h1>{this.state.eventName}</h1>
                 <img
                     className="event-picture"
