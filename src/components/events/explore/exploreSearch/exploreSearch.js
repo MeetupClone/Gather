@@ -26,7 +26,6 @@ export class ExploreSearch extends Component {
                 this.setState({
                     loading: false,
                     events: result.data.sort((a, b) => {
-                        console.log(b, new Date(b.cron_time).getTime());
                         return (
                             new Date(b.cron_time).getTime() -
                             new Date(a.cron_time).getTime()
@@ -61,6 +60,7 @@ export class ExploreSearch extends Component {
                         <option value="Group-Events">Group Events</option>
                     </select>
                 </span>
+
                 <span className="filter-buttons">
                     <button
                         className="events-button"
