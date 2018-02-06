@@ -1,14 +1,12 @@
 .event-card-container {
- 
-  height: 120px;
-  padding: 2px;
-  width: 94%;
-  margin: 10px auto;
-  margin-top: 15px;
+  margin-top: 10px;
   margin-bottom: 10px;
+  height: 100px;
+  width: 90%;
+  margin: 10px auto;
   background-color: white;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); 
-  text-decoration: none; }
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
 
 .event-card-content-container {
   display: flex;
@@ -16,28 +14,21 @@
   height: 200px;
   padding-left: 10px;
   padding-right: 10px;
-  letter-spacing: 1px;
-  text-decoration: none;
 }
 
 .event-card-title {
-  font-weight: bold; 
-  letter-spacing: 1px;
+  font-weight: bold;
 }
 
 .event-card-info {
   display: flex;
   flex-direction: column;
-  text-align: left; 
-  letter-spacing: 1px;
-  text-decoration: none;
+  text-align: left;
 }
 
 .event-card-category {
   text-align: left;
-  font-size: 12px; 
-  letter-spacing: 1px;
-  text-decoration: none;
+  font-size: 12px;
 }
 
 .event-card-date {
@@ -45,50 +36,30 @@
   height: 100%;
   float: left;
   margin-right: 10px;
-  letter-spacing: 1px;
-  margin-top: 7px;
-  font-size: 11px;
-  text-decoration: none;
 }
 
 .event-card-loc {
-  font-size: 11px;
+  font-size: 12px;
   color: gray;
   font-weight: bold;
-  letter-spacing: 1px;
-  padding-top: 9px;
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .event-card-desc {
   text-align: left;
-  letter-spacing: 1px;
-  font-size: 12px;
-  text-decoration: none;
 }
 
 .event-title-link {
   color: black;
   text-decoration: none;
-  letter-spacing: 1px;
-  font-size: 12px;
-  
 }
 
 .event-card-loading-container {
   justify-content: space-around;
   background-color: white;
-  height: 120px;
+  height: 100px;
   width: 90%;
   margin: 10px auto;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
-  letter-spacing: 1px;
-  text-decoration: none;
 }
 
 /*# sourceMappingURL=eventCards.css.map */
-
-/*# sourceMappingURL=eventCards2.css.map */
