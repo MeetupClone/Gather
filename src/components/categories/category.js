@@ -5,7 +5,6 @@ import underscore from 'underscore';
 export default class Category extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             categories: [],
             showCategories: [
@@ -37,71 +36,79 @@ export default class Category extends Component {
         };
         this.updateParent = state => this.props.updateParent(state);
         this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.removeCat = this.removeCat.bind(this);
     }
 
-    handleChange = val => {
+    handleChange(val) {
         this.state.showCategories.map((x, i) => {
             if (val === x) {
                 this.state.showCategories.splice(i, 1);
             }
         });
-        let arr = this.state.categories;
-        arr.push(val);
-        this.setState({
-            categories: underscore.uniq(arr),
-        });
-        this.updateParent(this.state.categories);
-    };
+        this.setState(
+            {
+                categories: Array.from(
+                    new Set(this.state.categories.concat(val))
+                ),
+            },
+            () => {
+                this.updateParent(this.state.categories);
+            }
+        );
+    }
 
-    removeCat = cat => {
+    removeCat(cat) {
         this.state.categories.map((x, i) => {
             if (cat.toLowerCase() === x.toLowerCase()) {
                 this.state.categories.splice(i, 1);
                 let pushedCats = this.state.showCategories;
                 pushedCats.push(x);
-                this.setState({ showCategories: pushedCats.sort() });
+                this.setState(
+                    { showCategories: pushedCats.concat(x).sort() },
+                    () => {
+                        this.updateParent(this.state.showCategories);
+                    }
+                );
             }
         });
-    };
+    }
 
     render() {
-        let selectedCats = this.state.categories.map(x => {
-            return (
-                <button
-                    className="category-chosen-buttons"
-                    key={x}
-                    value={x}
-                    onClick={event => {
-                        event.preventDefault();
-                        this.removeCat(x);
-                    }}>
-                    {' '}
-                    {x}{' '}
-                </button>
-            );
-        });
-
-        let showCats = this.state.showCategories.map(x => {
-            return (
-                <button
-                    className="category-buttons random-color"
-                    key={x}
-                    value={x}
-                    onClick={event => {
-                        event.preventDefault();
-                        this.handleChange(event.target.value);
-                    }}>
-                    {' '}
-                    {x}
-                </button>
-            );
-        });
-
         return (
             <div>
-                <div className="category-buttons-container">{selectedCats}</div>
-                <div className="category-buttons-container">{showCats}</div>
+                <div className="category-buttons-container">
+                    {this.state.categories.map(x => {
+                        return (
+                            <button
+                                className="category-chosen-buttons"
+                                key={x}
+                                value={x}
+                                onClick={event => {
+                                    event.preventDefault();
+                                    this.removeCat(x);
+                                }}>
+                                {x}
+                            </button>
+                        );
+                    })}
+                </div>
+                <div className="category-buttons-container">
+                    {this.state.showCategories.map(x => {
+                        return (
+                            <button
+                                className="category-buttons random-color"
+                                key={x}
+                                value={x}
+                                onClick={event => {
+                                    event.preventDefault();
+                                    this.handleChange(event.target.value);
+                                }}>
+                                {x}
+                            </button>
+                        );
+                    })}
+                </div>
             </div>
         );
     }
