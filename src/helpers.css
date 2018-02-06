@@ -1,28 +1,28 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 .center {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
 }
 
 .row-center {
-  display: flex;
-  flex-direction: row;
-  justify-content: center; 
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
 .width-100 {
-  width: 100%; 
+	width: 100%;
 }
 
 .nunito-text {
-    font-family: 'Nunito';
+	font-family: 'Nunito';
 }
 
-
-
-
+.explore-bottom-padding {
+	padding-bottom: 60px;
+}
 
 /*# sourceMappingURL=helpers.css.map */
