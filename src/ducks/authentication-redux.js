@@ -83,10 +83,11 @@ export function loginWithEmailPassword(initialState) {
     };
 }
 
-export function getAuthInfo(initialState) {
+export function getAuthInfo(uid) {
     return {
         type: GET_AUTH_INFO,
         payload: firebase.auth().onAuthStateChanged(user => {
+            console.log(user);
             return user;
         }),
     };
@@ -112,7 +113,7 @@ export default function AuthenticationReducer(state = initialState, action) {
                     axios.post('/api/user/createUser', [
                         user.uid,
                         user.email,
-                        (nameValue: action.payload.name),
+                        action.payload.name,
                         'https://firebasestorage.googleapis.com/v0/b/gatherv0-b3651.appspot.com/o/defaultPic.webp?alt=media&token=73d67fbf-6f0e-40aa-8fc9-15ec9e8e4fd9',
                     ]);
                     return Object.assign({}, state, {
@@ -125,32 +126,31 @@ export default function AuthenticationReducer(state = initialState, action) {
         case AUTH_WITH_FACEBOOK + '_PENDING':
             return Object.assign({}, state, { authenticated: false });
         case AUTH_WITH_FACEBOOK + '_FULFILLED':
-            let user = action.payload;
-            return { user, authenticated: true };
+            return { user: action.payload, authenticated: true };
         case LOGIN_WITH_EMAIL_PASSWORD + '_PENDING':
             return Object.assign({}, state, { authenticated: false });
         case LOGIN_WITH_EMAIL_PASSWORD + '_FULFILLED':
-            let userInfo = action.payload;
-            return { userInfo: userInfo, authenticated: true };
+            return { userInfo: action.payload, authenticated: true };
         case GET_AUTH_INFO + '_PENDING':
-            return Object.assign({}, state, { authenticated: false });
+            return { useruid: action.payload.uid, authenticated: true };
         case GET_AUTH_INFO + '_FULFILLED':
-            let userInfo2 = action.payload;
-            return { userInfo2, authenticated: true };
+            return { useruid: action.payload.uid, authenticated: true };
         case REGISTER_FCM_KEY:
-            const messaging = firebase.messaging();
-            messaging.requestPermission().then(result => {
-                console.log('have permission');
-                return messaging.getToken().then(token => {
-                    console.log(token);
+            firebase
+                .messaging()
+                .requestPermission()
+                .then(() => {
+                    return firebase
+                        .messaging()
+                        .getToken()
+                        .then(token => {});
                 });
-            });
             return state;
         case SIGN_OUT:
             firebase
                 .auth()
                 .signOut()
-                .then(result => {
+                .then(() => {
                     return Object.assign({}, state, {
                         authenticated: false,
                     });
