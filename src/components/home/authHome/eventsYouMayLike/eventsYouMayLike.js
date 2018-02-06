@@ -39,9 +39,7 @@ export default class EventsYouMayLike extends Component {
                             checked: true,
                         });
                     })
-                    .catch(err =>
-                        console.log('relevant event not working', err)
-                    );
+                    .catch(console.log);
             }
         });
     }

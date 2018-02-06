@@ -35,16 +35,10 @@ export function createEvent(componentState) {
             const eventUploadTask = eventStorageRef
                 .child('eventPictures/' + eventFile.name)
                 .put(eventFile);
-            eventUploadTask.on(
-                'state_changed',
-                snapshot => {},
-                error => {},
-                function() {
-                    componentState.eventPic =
-                        eventUploadTask.snapshot.downloadURL;
-                    resolve(componentState);
-                }
-            );
+            eventUploadTask.on('state_changed', () => {}, () => {}, function() {
+                componentState.eventPic = eventUploadTask.snapshot.downloadURL;
+                resolve(componentState);
+            });
         }).then(() => {
             return axios
                 .post('/api/event/create', componentState)

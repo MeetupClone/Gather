@@ -42,12 +42,11 @@ export class EventCards extends Component {
         });
     }
 
-    shouldComponentUpdate(newProps, newState) {
-        const updatePropsText = this.props.searchText !== newProps.searchText;
-        const updatePropsFilter =
-            this.props.searchFilter !== newProps.searchFilter;
-
-        return !updatePropsText || !updatePropsFilter;
+    shouldComponentUpdate(newProps) {
+        return (
+            this.props.searchText !== newProps.searchText ||
+            this.props.searchFilter !== newProps.searchFilter
+        );
     }
 
     render() {
@@ -60,11 +59,12 @@ export class EventCards extends Component {
 
         if (this.state.loading) {
             let arr = [];
-
-            for (var i = 0; i < 8; i++) {
+            let count = 0;
+            while (count < 8) {
                 arr.push(
-                    <h1 className="event-card-loading-container" key={i} />
+                    <h1 className="event-card-loading-container" key={count} />
                 );
+                count++;
             }
             appShell = arr;
 
