@@ -45,8 +45,6 @@ export default class EventsYouMayLike extends Component {
     }
 
     render() {
-        let eventCat = null;
-
         return !this.state.checked ? null : (
             <div>
                 <h4>Events You May Like</h4>
@@ -70,6 +68,8 @@ export default class EventsYouMayLike extends Component {
                                 </div>
                             </Link>
                         );
+                    } else {
+                        return null;
                     }
                 })}
             </div>

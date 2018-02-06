@@ -2,21 +2,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 4px;
-    width: 94%;
+    padding: 5px;
+    max-width: 90%;
     margin: 15px auto 10px auto;
     background-color: white;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-}
-
-.event-card-content-container {
-    display: flex;
-    flex-direction: row;
-    height: 200px;
-    padding-left: 10px;
-    padding-right: 10px;
-    letter-spacing: 1px;
-    text-decoration: none;
 }
 
 .event-card-title {
@@ -50,6 +40,7 @@
     color: gray;
     font-weight: bold;
     letter-spacing: 1px;
+    padding: 0 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -69,11 +60,13 @@
 }
 
 .event-card-loading-container {
-    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4px;
+    width: 94%;
+    margin: 15px auto 10px auto;
     background-color: white;
-    height: 120px;
-    width: 90%;
-    margin: 10px auto;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
     letter-spacing: 1px;
     text-decoration: none;

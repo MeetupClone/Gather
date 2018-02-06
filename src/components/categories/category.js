@@ -40,7 +40,7 @@ export default class Category extends Component {
     }
 
     handleChange(val) {
-        this.state.showCategories.map((x, i) => {
+        this.state.showCategories.forEach((x, i) => {
             if (val === x) {
                 this.state.showCategories.splice(i, 1);
             }
@@ -58,7 +58,7 @@ export default class Category extends Component {
     }
 
     removeCat(cat) {
-        this.state.categories.map((x, i) => {
+        this.state.categories.forEach((x, i) => {
             if (cat.toLowerCase() === x.toLowerCase()) {
                 this.state.categories.splice(i, 1);
                 let pushedCats = this.state.showCategories;

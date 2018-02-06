@@ -44,7 +44,6 @@ export default class AuthHome extends Component {
 
     render() {
         let appShell = null;
-        let keyCat = null;
 
         if (this.state.loading) {
             let arr = [];

@@ -4,26 +4,48 @@ import { connect } from 'react-redux';
 import 'App.css';
 import 'helpers.css';
 import { fire as firebase } from 'fire';
+import { withRouter } from 'react-router-dom';
 import { getAuthInfo } from 'ducks/authentication-redux';
 import Navbar from 'components/navbar/navbar';
+import { Routes } from 'routes';
 
 class App extends Component {
     constructor() {
         super();
+        this.state = {
+            checkAuth: false,
+            uid: '',
+        };
+    }
+
+    componentDidMount() {
         localStorage.setItem('userData', '');
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                axios.get(`/api/user/getUserInfo/${user.uid}`).then(result => {
-                    this.props.getAuthInfo();
-                    let userData = {
-                        uid: user.uid,
-                        userPic: result.data[0].profile_image,
-                        userLocation: result.data[0].location,
-                        userName: result.data[0].name,
-                        userDescription: result.data[0].description,
-                    };
-                    localStorage.setItem('userData', JSON.stringify(userData));
-                });
+                axios
+                    .get(`/api/user/getUserInfo/${user.uid}`)
+                    .then(result => {
+                        this.props.getAuthInfo();
+                        let userData = {
+                            uid: user.uid,
+                            userPic: result.data[0].profile_image,
+                            userLocation: result.data[0].location,
+                            userName: result.data[0].name,
+                            userDescription: result.data[0].description,
+                        };
+                        this.setState(
+                            { uid: user.uid, checkAuth: true },
+                            () => {
+                                localStorage.setItem(
+                                    'userData',
+                                    JSON.stringify(userData)
+                                );
+                            }
+                        );
+                    })
+                    .catch(() => {
+                        this.setState({ checkAuth: false });
+                    });
             }
             // let getEvents = axios.get('/api/events').then(result => { return result.data})
 
@@ -39,12 +61,7 @@ class App extends Component {
             // })
         });
 
-        firebase
-            .messaging()
-            .getToken()
-            .then(token => {
-                token;
-            });
+        firebase.messaging().getToken();
 
         firebase.messaging().onMessage(function(payload) {
             alert(payload.notification.title);
@@ -52,12 +69,13 @@ class App extends Component {
     }
 
     render() {
-        return (
+        return this.state.checkAuth ? (
             <div className="App">
-                <Navbar />
+                <Navbar uid={this.state.uid} />
+                <Routes uid={this.state.uid} />
             </div>
-        );
+        ) : null;
     }
 }
 
-export default connect(() => ({}), { getAuthInfo })(App);
+export default withRouter(connect(null, { getAuthInfo })(App));

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import './groupCards.css';
-import '../../../../../helpers.css';
-
-import { Link } from 'react-router-dom';
+import 'helpers.css';
 
 export class GroupCards extends Component {
     constructor(props) {
@@ -65,7 +63,7 @@ export class GroupCards extends Component {
             if (searchText !== '' && searchFilter === 'name') {
                 return (
                     <div>
-                        {this.state.groups.map(function(key) {
+                        {this.state.groups.map(key => {
                             if (
                                 key.name
                                     .toLowerCase()

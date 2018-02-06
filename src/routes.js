@@ -28,12 +28,11 @@ export const Routes = uid => {
       <Route component={!uid ? Login : redirect} exact path="/login" />
       <Route
         component={!uid ? ForgotPassword : redirect}
-        exact
         path="/login/forgotPassword"
       />
       <Route component={!uid ? Register : redirect} path="/register" />
       <Route component={User} exact path="/user" />
-      <Route component={Explore} path="/explore" />
+      <Route component={Explore} exact path="/explore" />
       <Route component={CreateEvents} exact path="/event/create" />
       <Route component={EditEvent} path="/event/edit/:id" />
       <Route component={SingleEvent} exact path="/event/:id" />

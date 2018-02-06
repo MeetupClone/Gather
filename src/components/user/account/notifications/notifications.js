@@ -27,7 +27,7 @@ export class Notifications extends Component {
                     notifications: result.data[0].notification_settings,
                 });
             })
-            .catch(err => console.log('getPref error', err));
+            .catch(console.log);
     }
 
     changeNotificationPreferences() {
@@ -40,44 +40,35 @@ export class Notifications extends Component {
     }
 
     render() {
-        console.log(this.props);
-        let notificationText = null;
-        let notificationButton = null;
-        if (this.state.notifications) {
-            <div>
-                notificationText = (<h3>
-                    You currently have notifications turned on.
-                </h3>) notificationButton = (<button
-                    onClick={e => {
-                        this.changeNotificationPreferences();
-                    }}>
-                    Turn Off Notifications
-                </button>)
-            </div>;
-        } else {
-            notificationText = (
-                <div>
-                    <h3>You currently have notifications turned off.</h3>
-                    <h4>
-                        Turn on notifications to recieve reminders about events!
-                    </h4>
-                </div>
-            );
-            notificationButton = (
-                <button
-                    onClick={e => {
-                        this.changeNotificationPreferences();
-                    }}>
-                    Turn On Notifications
-                </button>
-            );
-        }
-
         return (
             <div>
                 <h1>Manage Notification Page</h1>
-                {notificationText}
-                {notificationButton}
+
+                {this.state.notifications ? (
+                    <span>
+                        <h3>You currently have notifications turned on.</h3>
+                        <button
+                            onClick={() => {
+                                this.changeNotificationPreferences();
+                            }}>
+                            Turn Off Notifications
+                        </button>{' '}
+                    </span>
+                ) : (
+                    <span>
+                        <h3>You currently have notifications turned off.</h3>
+                        <h4>
+                            Turn on notifications to recieve reminders about
+                            events!
+                        </h4>
+                        <button
+                            onClick={() => {
+                                this.changeNotificationPreferences();
+                            }}>
+                            Turn On Notifications
+                        </button>
+                    </span>
+                )}
             </div>
         );
     }

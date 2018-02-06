@@ -54,7 +54,7 @@ export class SingleEvent extends Component {
                         }`
                     )
                     .then(result => {
-                        result.data.map(event => {
+                        result.data.forEach(event => {
                             eventsArr.push(event.event_id);
                         });
                         this.setState({ userAttendingEvents: eventsArr });
