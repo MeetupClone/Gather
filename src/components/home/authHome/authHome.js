@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { fire as firebase } from '../../../fire';
+import { fire as firebase } from 'fire';
 import './authHome.css';
-import '../../../helpers.css';
+import 'helpers.css';
 
 import { Link } from 'react-router-dom';
-import Footer from '../../footer/footer';
+import Footer from 'components/footer/footer';
 
 import axios from 'axios';
 import EventsYouMayLike from './eventsYouMayLike/eventsYouMayLike';
 
-import '../../../components/events/explore/exploreSearch/eventCards/eventCards2.css';
+import 'components/events/explore/exploreSearch/eventCards/eventCards2.css';
 
 export default class AuthHome extends Component {
     constructor(props) {
@@ -67,24 +67,22 @@ export default class AuthHome extends Component {
             return (
                 <div>
                     <h3 className="nunito-text">Your Events</h3>
-                    {this.state.userEvents.map(key => {
-                        if (key.category) {
-                            keyCat =
-                                key.category.charAt(0).toUpperCase() +
-                                key.category.slice(1);
-                        }
+                    {this.state.userEvents.map((event, i) => {
                         return (
-                            <Link
-                                to={`/event/${key.id}`}
-                                className="auth-link"
-                                key={key.id}>
-                                <div className="auth-event-card-container nunito-text">
-                                    <div className="auth-event-card-loc">
-                                        {key.location}
+                            <Link key={i} to={`/event/${event.id}`}>
+                                <div
+                                    event={event.id}
+                                    className="card-container nunito-text">
+                                    <div>{event.title}</div>
+                                    <div className="event-card-date nunito-text">
+                                        {event.event_date}
                                     </div>
-                                    <div>{key.title}</div>
-                                    {key.event_date}
-                                    <div>{keyCat}</div>
+                                    <p className="event-card-desc">
+                                        {event.description}
+                                    </p>
+                                    <p className="event-card-loc">
+                                        {event.location.toUpperCase()}
+                                    </p>
                                 </div>
                             </Link>
                         );
