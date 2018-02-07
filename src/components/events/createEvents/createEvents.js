@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fire as firebase } from '../../../fire';
+import { fire as firebase } from 'fire';
 import './createEvents.css';
-import { createEvent } from '../../../ducks/event-redux';
-import PlaceSearchForm from '../../placeSearchForm/placeSearchForm';
-import Category from '../../categories/category';
+import { createEvent } from 'ducks/event-redux';
+import PlaceSearchForm from 'components/placeSearchForm/placeSearchForm';
+import Category from 'components/categories/category';
 
 import './createEvents.css';
 
-import Datetime from 'react-datetime';
 import moment from 'moment';
 
 import Facebook from '../../facebook/facebook';
@@ -43,7 +42,7 @@ export class CreateEvents extends Component {
                 });
             }
         });
-        this.updateParent = state => this.props.updateParent(this.state);
+        this.updateParent = () => this.props.updateParent(this.state);
         this.imageProcess = this.imageProcess.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -78,7 +77,7 @@ export class CreateEvents extends Component {
             <div>
                 {this.state.created && (
                     <div>
-                        <h1> Congratulations, you've made an event!</h1>
+                        <h1> {"Congratulations, you've made an event!"}</h1>
                         <h3>Share your event!</h3>
                         <div className="flex-row">
                             <Twitter />

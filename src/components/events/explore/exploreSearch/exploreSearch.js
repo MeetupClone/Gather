@@ -11,8 +11,10 @@ export class ExploreSearch extends Component {
         super(props);
 
         this.state = {
-            searchText: '',
-            searchFilter: 'Name',
+            events: [],
+            searchedEvents: [],
+            groups: [],
+            searchedGroups: [],
             searchEvents: true,
             loading: true,
         };
@@ -20,47 +22,59 @@ export class ExploreSearch extends Component {
     }
 
     componentDidMount() {
-        axios
+        let events = axios
             .get('/api/events')
-            .then(result => {
+            .then(events => {
                 this.setState({
-                    loading: false,
-                    events: result.data.sort((a, b) => {
+                    events: events.data.sort((a, b) => {
                         return (
-                            new Date(b.cron_time).getTime() -
+                            new Date(b.cron_time).getTime() <
                             new Date(a.cron_time).getTime()
                         );
                     }),
                 });
             })
             .catch(() => this.setState({ loading: false }));
+
+        let groups = axios.get('/api/groups').then(result => {
+            this.setState({ groups: result.data });
+        });
+
+        Promise.all([events, groups]).then(() => {
+            this.setState({ loading: false });
+        });
     }
 
-    handleSearch() {}
+    handleSearch(val) {
+        if (this.state.searchEvents) {
+            this.setState({
+                searchedEvents: this.state.events.filter(curr => {
+                    return (
+                        curr.title.includes(val) || curr.location.includes(val)
+                    );
+                }),
+            });
+        } else {
+            this.setState({
+                searchedGroups: this.state.groups.filter(curr => {
+                    return curr.name.includes(val);
+                    // return (
+                }),
+            });
+        }
+    }
 
     render() {
         return this.state.loading ? null : (
             <div>
-                <input
-                    className="search"
-                    type="text"
-                    placeholder="Search"
-                    onChange={e =>
-                        this.setState({ searchText: e.target.value })
-                    }
-                />
-                <span className="filter-dropdown">
-                    <select
-                        onChange={e =>
-                            this.setState({ searchFilter: e.target.value })
-                        }>
-                        <option value="Name">Name</option>
-                        <option value="Location">Location</option>
-                        <option value="Category">Category</option>
-                        <option value="Group-Events">Group Events</option>
-                    </select>
-                </span>
-
+                <div className="search-section">
+                    <input
+                        className="search"
+                        type="text"
+                        placeholder="Search"
+                        onChange={e => this.handleSearch(e.target.value)}
+                    />
+                </div>
                 <span className="filter-buttons">
                     <button
                         className="events-button"
@@ -75,17 +89,32 @@ export class ExploreSearch extends Component {
                 </span>
                 {this.state.searchEvents ? (
                     <EventCards
-                        events={this.state.events}
+                        events={
+                            this.state.searchedEvents.length
+                                ? this.state.searchedEvents
+                                : this.state.events
+                        }
+                        loading={this.state.loading}
                         searchFilter={this.state.searchFilter}
                         searchText={this.state.searchText}
                     />
                 ) : (
                     <GroupCards
+                        groups={
+                            this.state.searchedGroups.length
+                                ? this.state.searchedGroups
+                                : this.state.groups
+                        }
+                        loading={this.state.loading}
                         searchFilter={this.state.searchFilter}
                         searchText={this.state.searchText}
                     />
                 )}
             </div>
         );
+    }
+
+    componentDidCatch() {
+        console.log('dude');
     }
 }

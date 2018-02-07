@@ -5,7 +5,7 @@ import axios from 'axios';
 import './editableProfile.css';
 import '../profile/profile.css';
 
-import { fire as firebase } from '../../../fire';
+import { fire as firebase } from 'fire';
 
 export default class EditableProfile extends Component {
     constructor(props) {
@@ -49,27 +49,20 @@ export default class EditableProfile extends Component {
         const uploadTask = storageRef
             .child('profilePictures/' + file.name)
             .put(file);
-        uploadTask.on(
-            'state_changed',
-            snapshot => {},
-            function(error) {},
-            function() {
-                let downloadURL = uploadTask.snapshot.downloadURL;
-                this.setState({
-                    userProfilePic: downloadURL,
-                    imagePreviewUrl: downloadURL,
-                });
-                axios
-                    .post('/api/user/profile/update', this.state)
-                    .then(result => {
-                        this.setState({ updated: true });
-                    });
-            }
-        );
+        uploadTask.on('state_changed', () => {}, () => {}, function() {
+            let downloadURL = uploadTask.snapshot.downloadURL;
+            this.setState({
+                userProfilePic: downloadURL,
+                imagePreviewUrl: downloadURL,
+            });
+            axios.post('/api/user/profile/update', this.state).then(() => {
+                this.setState({ updated: true });
+            });
+        });
     }
 
     updateProfile() {
-        axios.post('/api/user/profile/update', this.state).then(result => {
+        axios.post('/api/user/profile/update', this.state).then(() => {
             this.setState({ updated: true });
         });
     }
@@ -98,15 +91,6 @@ export default class EditableProfile extends Component {
     }
 
     render() {
-        let updated = null;
-        if (this.state.updated) {
-            updated = (
-                <div>
-                    {' '}
-                    <h1>Your profile has been updated.</h1>{' '}
-                </div>
-            );
-        }
         return (
             <div className="previewComponent">
                 <div>
@@ -167,8 +151,7 @@ export default class EditableProfile extends Component {
                         onClick={() => {
                             this.updateProfile(this.state);
                         }}>
-                        {' '}
-                        Save Profile{' '}
+                        Save Profile
                     </button>
                 </div>
             </div>

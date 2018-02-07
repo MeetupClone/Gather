@@ -41,23 +41,17 @@ export class EventCards extends Component {
     handleSearch() {}
 
     render() {
-        let eventCat = null;
         return this.state.loading ? (
             <div>
                 {Array.apply(null, { length: 4 }).map((x, i) => {
                     return (
-                        <h1 className="event-card-loading-container" key={i} />
+                        <div className="event-card-loading-container" key={i} />
                     );
                 })}
             </div>
         ) : (
             <div>
                 {this.props.events.map((event, i) => {
-                    if (event.category) {
-                        eventCat =
-                            event.category.charAt(0).toUpperCase() +
-                            event.category.slice(1);
-                    }
                     return (
                         <Link key={i} to={`/event/${event.id}`}>
                             <div className="card-container">

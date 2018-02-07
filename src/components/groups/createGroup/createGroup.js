@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createGroup } from '../../../ducks/group-redux';
-import { fire as firebase } from '../../../fire';
-import Category from '../../categories/category';
+import { createGroup } from 'ducks/group-redux';
+import { fire as firebase } from 'fire';
+import Category from 'components/categories/category';
 
 import './createGroup.css';
 
@@ -64,7 +64,7 @@ export class CreateGroup extends Component {
                     <img
                         className="group-picture"
                         src={this.state.imagePreviewUrl || this.state.eventPic}
-                        alt="group picture"
+                        alt="your group pic"
                     />
                     <input
                         id="input"

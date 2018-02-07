@@ -61,12 +61,7 @@ class App extends Component {
             // })
         });
 
-        firebase
-            .messaging()
-            .getToken()
-            .then(token => {
-                token;
-            });
+        firebase.messaging().getToken();
 
         firebase.messaging().onMessage(function(payload) {
             alert(payload.notification.title);
