@@ -52,11 +52,11 @@ export class SingleEvent extends Component {
         return axios
           .get(`/api/event/getAttendingEventsData/${user.uid}`)
           .then(result => {
+            console.log(result);
             this.setState({
-              joined: result.data.filter(event => {
-                console.log(event, this.state.eventId);
+              joined: result.data.find(event => {
                 return event.event_id === this.state.eventId;
-              }).length,
+              }),
             });
           });
       }
@@ -67,11 +67,8 @@ export class SingleEvent extends Component {
     });
   }
 
-  componentDidUpdate(newProps) {
-    console.log(newProps.joined);
-    if (newProps.joined) {
-      this.setState({ joined: newProps.joined });
-    }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ joined: nextProps.joined });
   }
 
   render() {
@@ -98,23 +95,30 @@ export class SingleEvent extends Component {
               </button>
             </Link>
           </div>
-        ) : this.state.joined ? (
+        ) : !this.state.joined ? (
           <button
             className="join-event-button"
             onClick={() => {
-              this.props.joinEvent(this.state);
+              this.props.joinEvent({
+                uid: this.props.uid,
+                eventId: this.state.eventId,
+              });
             }}>
             Join The Event
           </button>
-        ) : null}
+        ) : (
+          <h4>You are going to this event</h4>
+        )}
 
         <div className="event-info">
           <p>{this.state.eventDescription}</p>
 
           <p>{this.state.eventDate}</p>
           <h3>
-            {this.state.eventMembers} Member{this.state.eventMembers !== '1' &&
-              's'}
+            {this.state.eventMembers}
+            {this.state.eventMembers === '1'
+              ? ' person going'
+              : ' people going'}
           </h3>
 
           <h3>{this.state.eventLocation}</h3>
@@ -125,8 +129,8 @@ export class SingleEvent extends Component {
   }
 }
 
-const mapStateToProps = ({ EventReducer }) => {
-  return { joined: EventReducer.joined };
+const mapStateToProps = ({ EventReducer, AuthenticationReducer }) => {
+  return { joined: EventReducer.joined, uid: AuthenticationReducer.uid };
 };
 
 const actions = {

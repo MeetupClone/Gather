@@ -52,6 +52,7 @@ export function createEvent(componentState) {
 }
 
 export function joinEvent(componentState) {
+    console.log(componentState);
     return {
         type: JOIN_EVENT,
         payload: axios

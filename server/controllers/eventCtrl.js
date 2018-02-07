@@ -19,20 +19,6 @@ const joinEvent = (req, res) => {
         .get('db')
         .joinEvent(req.body)
         .then(result => {
-            let postUrl =
-                'https://iid.googleapis.com/iid/v1/' +
-                result[0].fcm_key +
-                '/rel/topics/' +
-                result[0].event_id;
-            axios({
-                method: 'post',
-                url: postUrl,
-                headers: {
-                    'Content-Type': 'applicaton/json',
-                    Authorization:
-                        'key=AAAApU-NWw8:APA91bE3mN38UNc4kp2pFkJqNwBQ-C1RUxWHfRgdvTr8SN4L6NlOHRu74mIGrQWNdcI8MJopMmdmwC_PPNthcRxzbcJxKVd1yZu81qlIvILN6487N7EnFgP4ZUrkrkRLHtFLRtRL22JX',
-                },
-            });
             return res.json(result);
         });
 };
