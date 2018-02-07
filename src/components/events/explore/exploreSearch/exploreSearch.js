@@ -11,7 +11,7 @@ export class ExploreSearch extends Component {
         super(props);
 
         this.state = {
-            searchText: '',
+            searchedEvents: [],
             searchFilter: 'Name',
             searchEvents: true,
             loading: true,
@@ -26,7 +26,6 @@ export class ExploreSearch extends Component {
                 this.setState({
                     loading: false,
                     events: result.data.sort((a, b) => {
-                        console.log(b, new Date(b.cron_time).getTime());
                         return (
                             new Date(b.cron_time).getTime() -
                             new Date(a.cron_time).getTime()
@@ -37,7 +36,13 @@ export class ExploreSearch extends Component {
             .catch(() => this.setState({ loading: false }));
     }
 
-    handleSearch() {}
+    handleSearch(val) {
+        this.setState({
+            searchedEvents: this.state.events.filter(curr => {
+                return curr.title.includes(val) || curr.location.includes(val);
+            }),
+        });
+    }
 
     render() {
         return this.state.loading ? null : (
@@ -47,9 +52,7 @@ export class ExploreSearch extends Component {
                         className="search"
                         type="text"
                         placeholder="Search"
-                        onChange={e =>
-                            this.setState({ searchText: e.target.value })
-                        }
+                        onChange={e => this.handleSearch(e.target.value)}
                     />
                     <span className="filter-dropdown">
                         <select
@@ -77,7 +80,11 @@ export class ExploreSearch extends Component {
                 </span>
                 {this.state.searchEvents ? (
                     <EventCards
-                        events={this.state.events}
+                        events={
+                            this.state.searchedEvents.length
+                                ? this.state.searchedEvents
+                                : this.state.events
+                        }
                         searchFilter={this.state.searchFilter}
                         searchText={this.state.searchText}
                     />
@@ -89,5 +96,9 @@ export class ExploreSearch extends Component {
                 )}
             </div>
         );
+    }
+
+    componentDidCatch() {
+        console.log('dude');
     }
 }
