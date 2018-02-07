@@ -27,6 +27,7 @@ const getUsersGroups = (req, res) => {
 };
 
 const leaveGroup = (req, res) => {
+    console.log(req.body);
     req.app
         .get('db')
         .leaveGroup(req.body)

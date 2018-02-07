@@ -10,6 +10,7 @@ const initialState = {
     groupLocation: '',
     groupCategory: '',
     created: false,
+    joined: false,
     website: '',
     currentUserUid: '',
 };
@@ -27,31 +28,36 @@ export function createGroup(componentState) {
     };
 }
 
-export function joinGroup(componentState) {
+export function joinGroup(state) {
     return {
         type: JOIN_GROUP,
-        payload: [componentState.groupId, componentState.currentUserUid],
+        payload: axios.post('/api/group/join', state).then(res => res.data),
     };
 }
 
-export function leaveGroup(componentState) {
+export function leaveGroup(state) {
     return {
         type: LEAVE_GROUP,
-        payload: [componentState.groupId, componentState.currentUserUid],
+        payload: axios
+            .post('/api/group/leave', {
+                groupid: state.groupid,
+                uid: state.uid,
+            })
+            .then(res => res.data),
     };
 }
 
-export function editGroup(componentState) {
+export function editGroup(state) {
     return {
         type: EDIT_GROUP,
-        payload: componentState,
+        payload: axios.post('/api/group/edit', state).then(res => res.data),
     };
 }
 
-export function deleteGroup(componentState) {
+export function deleteGroup(state) {
     return {
         type: DELETE_GROUP,
-        payload: componentState,
+        payload: axios.post('/api/group/delete', state).then(res => res.data),
     };
 }
 
@@ -86,22 +92,33 @@ export default function GroupReducer(state = initialState, action) {
                         return Object.assign({}, state, action.payload);
                     });
             }
-        case JOIN_GROUP:
-            return axios.post('/api/group/join', action.payload).then(() => {
-                return Object.assign({}, state, action.payload);
+        case `${JOIN_GROUP}_PENDING`:
+            return Object.assign({}, state, action.payload);
+        case `${JOIN_GROUP}_FULFILLED`:
+            return Object.assign({}, state, { joined: true });
+        case `${JOIN_GROUP}_REJECTED`:
+            return Object.assign({}, state, action.payload);
+        case `${LEAVE_GROUP}_PENDING`:
+            return Object.assign({}, state, action.payload);
+        case `${LEAVE_GROUP}_FULFILLED`:
+            return Object.assign({}, state, { joined: false });
+        case `${LEAVE_GROUP}_REJECTED`:
+            return Object.assign({}, state, action.payload);
+        case `${EDIT_GROUP}_PENDING`:
+            return Object.assign({}, state, action.payload);
+        case `${EDIT_GROUP}_FULFILLED`:
+            return Object.assign({}, state, {
+                ...action.payload,
             });
-        case EDIT_GROUP:
-            return axios.post('/api/group/edit', action.payload).then(() => {
-                return Object.assign({}, state, action.payload);
-            });
-        case DELETE_GROUP:
-            return axios.post('/api/group/delete', action.payload).then(() => {
-                return Object.assign({}, state, action.payload);
-            });
-        case LEAVE_GROUP:
-            return axios.post('/api/group/leave', action.payload).then(() => {
-                return Object.assign({}, state, action.payload);
-            });
+        case `${EDIT_GROUP}_REJECTED`:
+            return Object.assign({}, state, action.payload);
+        case `${DELETE_GROUP}_PENDING`:
+            return Object.assign({}, state, action.payload);
+        case `${DELETE_GROUP}_FULFILLED`:
+            return Object.assign({}, state, { joined: false });
+        case `${DELETE_GROUP}_REJECTED`:
+            return Object.assign({}, state, action.payload);
+
         default:
             return state;
     }

@@ -35,16 +35,20 @@ export class SingleEvent extends Component {
     let eventData = axios
       .get(`/api/event/${this.props.match.params.id}`)
       .then(response => {
-        this.setState({
-          eventId: response.data[0].event_id,
-          eventName: response.data[0].title,
-          eventLocation: response.data[0].location,
-          eventDescription: response.data[0].description,
-          eventPic: response.data[0].event_image,
-          eventDate: response.data[0].event_date,
-          organizerUid: response.data[0].organizer_uid,
-          eventMembers: response.data[0].members,
-        });
+        if (response.data.length) {
+          this.setState({
+            eventId: response.data[0].event_id,
+            eventName: response.data[0].title,
+            eventLocation: response.data[0].location,
+            eventDescription: response.data[0].description,
+            eventPic: response.data[0].event_image,
+            eventDate: response.data[0].event_date,
+            organizerUid: response.data[0].organizer_uid,
+            eventMembers: response.data[0].members,
+          });
+        } else {
+          this.props.history.push('/explore');
+        }
       });
 
     let auth = firebase.auth().onAuthStateChanged(user => {
@@ -52,7 +56,6 @@ export class SingleEvent extends Component {
         return axios
           .get(`/api/event/getAttendingEventsData/${user.uid}`)
           .then(result => {
-            console.log(result);
             this.setState({
               joined: result.data.find(event => {
                 return event.event_id === this.state.eventId;
@@ -107,13 +110,24 @@ export class SingleEvent extends Component {
             Join The Event
           </button>
         ) : (
-          <h4>You are going to this event</h4>
+          <button
+            className="leave-event-button"
+            onClick={() => {
+              this.props.leaveEvent({
+                uid: this.props.uid,
+                eventId: this.state.eventId,
+              });
+            }}>
+            Leave This Event
+          </button>
         )}
 
         <div className="event-info">
+          <p>
+            <strong>{this.state.eventDate}</strong>
+          </p>
           <p>{this.state.eventDescription}</p>
 
-          <p>{this.state.eventDate}</p>
           <h3>
             {this.state.eventMembers}
             {this.state.eventMembers === '1'

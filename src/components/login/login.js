@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { fire as firebase } from '../../fire';
+import { fire as firebase } from 'fire';
 
 import './login.css';
-import '../../helpers.css';
+import 'helpers.css';
 
 import {
     loginWithEmailPassword,
     authWithFacebook,
-} from '../../ducks/authentication-redux';
+} from 'ducks/authentication-redux';
 
 export class Login extends Component {
     constructor(props) {
@@ -87,11 +87,9 @@ export class Login extends Component {
                             className="login-button box-shadow"
                             onClick={event => {
                                 event.preventDefault();
-                                loginWithEmailPassword(this.state).then(
-                                    result => {
-                                        this.props.history.push('/');
-                                    }
-                                );
+                                loginWithEmailPassword(this.state).then(() => {
+                                    this.props.history.push('/');
+                                });
                             }}>
                             Log In{' '}
                         </button>
@@ -128,13 +126,10 @@ export class Login extends Component {
         }
     }
 }
-const mapStateToProps = state => {
-    return state;
-};
 
 const actions = {
     loginWithEmailPassword,
     authWithFacebook,
 };
 
-export default connect(mapStateToProps, actions)(Login);
+export default connect(null, actions)(Login);
