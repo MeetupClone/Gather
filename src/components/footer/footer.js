@@ -11,6 +11,7 @@ export class Footer extends Component {
 
         this.state = {
             user: true,
+            checkAuth: false,
             createButton: false,
             createButtonNonAuth: false,
         };
@@ -20,7 +21,8 @@ export class Footer extends Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({
-                    user: true,
+                    checkAuth: true,
+                    user: Boolean(user.uid),
                 });
             }
         });
@@ -84,6 +86,7 @@ export class Footer extends Component {
                 </div>
             );
         }
+
         if (this.state.createButtonNonAuth) {
             createGroupButton = null;
             createEventButton = null;
@@ -98,7 +101,7 @@ export class Footer extends Component {
             );
         }
 
-        return (
+        return !this.state.checkAuth ? null : (
             <div className="footer-all">
                 <div className="create-button-space">{createButton}</div>
             </div>

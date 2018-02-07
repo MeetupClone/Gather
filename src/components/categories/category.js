@@ -47,9 +47,7 @@ export default class Category extends Component {
         });
         this.setState(
             {
-                categories: Array.from(
-                    new Set(this.state.categories.concat(val))
-                ),
+                categories: [...new Set(this.state.categories.concat(val))],
             },
             () => {
                 this.updateParent(this.state.categories);
