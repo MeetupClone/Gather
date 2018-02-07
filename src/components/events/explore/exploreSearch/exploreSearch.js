@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { EventCards } from './eventCards/eventCards.js';
-
 import { GroupCards } from './groupCards/groupCards.js';
 
 import './exploreSearch.css';
@@ -22,25 +21,24 @@ export class ExploreSearch extends Component {
     }
 
     componentDidMount() {
-        let events = axios
-            .get('/api/events')
-            .then(events => {
-                this.setState({
-                    events: events.data.sort((a, b) => {
-                        return (
-                            new Date(b.cron_time).getTime() <
-                            new Date(a.cron_time).getTime()
-                        );
-                    }),
-                });
-            })
-            .catch(() => this.setState({ loading: false }));
-
-        let groups = axios.get('/api/groups').then(result => {
-            this.setState({ groups: result.data });
-        });
-
-        Promise.all([events, groups]).then(() => {
+        Promise.all([
+            axios
+                .get('/api/events')
+                .then(events => {
+                    this.setState({
+                        events: events.data.sort((a, b) => {
+                            return (
+                                new Date(b.cron_time).getTime() <
+                                new Date(a.cron_time).getTime()
+                            );
+                        }),
+                    });
+                })
+                .catch(() => this.setState({ loading: false })),
+            axios.get('/api/groups').then(result => {
+                this.setState({ groups: result.data });
+            }),
+        ]).then(() => {
             this.setState({ loading: false });
         });
     }
@@ -112,9 +110,5 @@ export class ExploreSearch extends Component {
                 )}
             </div>
         );
-    }
-
-    componentDidCatch() {
-        console.log('dude');
     }
 }
