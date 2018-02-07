@@ -41,8 +41,7 @@ export class GroupDashboard extends Component {
         if (this.state.groupOrganizerUid !== this.state.currentUserUid) {
             notAuthenticated = (
                 <h1>
-                    {' '}
-                    You can't edit this group, you aren't the group owner.{' '}
+                    {"You can't edit this group, you aren't the group owner."}
                 </h1>
             );
         } else {
@@ -58,8 +57,7 @@ export class GroupDashboard extends Component {
                 <div>
                     <br />
                     <button onClick={() => deleteGroup(this.state)}>
-                        {' '}
-                        Delete group{' '}
+                        Delete group
                     </button>
                 </div>
             );

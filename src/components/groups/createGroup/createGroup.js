@@ -73,8 +73,7 @@ export class CreateGroup extends Component {
                         onChange={event => this.imageProcess(event)}
                     />
                     <label className="input-label" htmlFor="input">
-                        {' '}
-                        Add a Group Photo{' '}
+                        Add a Group Photo
                     </label>
                 </form>
                 <input

@@ -75,11 +75,11 @@ export default class Category extends Component {
         return (
             <div>
                 <div className="category-buttons-container">
-                    {this.state.categories.map(x => {
+                    {this.state.categories.map((x, i) => {
                         return (
                             <button
                                 className="category-chosen-buttons"
-                                key={x}
+                                key={i}
                                 value={x}
                                 onClick={event => {
                                     event.preventDefault();
@@ -91,11 +91,11 @@ export default class Category extends Component {
                     })}
                 </div>
                 <div className="category-buttons-container">
-                    {this.state.showCategories.map(x => {
+                    {this.state.showCategories.map((x, i) => {
                         return (
                             <button
                                 className="category-buttons random-color"
-                                key={x}
+                                key={i}
                                 value={x}
                                 onClick={event => {
                                     event.preventDefault();

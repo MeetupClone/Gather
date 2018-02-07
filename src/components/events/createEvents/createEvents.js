@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fire as firebase } from 'fire';
 import './createEvents.css';
 import { createEvent } from 'ducks/event-redux';
 import PlaceSearchForm from 'components/placeSearchForm/placeSearchForm';
@@ -28,20 +27,12 @@ export class CreateEvents extends Component {
             location: '',
             placeId: '',
             categories: '',
-            created: this.props.EventReducer.created,
-            website: '',
+            created: false,
             confirmModal: false,
             file: '',
             imagePreviewUrl: '',
             cronTime: '',
         };
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.setState({
-                    uid: user.uid,
-                });
-            }
-        });
         this.updateParent = () => this.props.updateParent(this.state);
         this.imageProcess = this.imageProcess.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -67,17 +58,13 @@ export class CreateEvents extends Component {
         reader.readAsDataURL(file);
     }
 
-    componentWillReceiveProps(newProps) {
-        this.setState({ created: newProps.EventReducer.created });
-    }
-
     render() {
         const { createEvent } = this.props;
         return (
             <div>
-                {this.state.created && (
+                {this.props.created ? (
                     <div>
-                        <h1> {"Congratulations, you've made an event!"}</h1>
+                        <h1>{"Congratulations, you've made an event!"}</h1>
                         <h3>Share your event!</h3>
                         <div className="flex-row">
                             <Twitter />
@@ -85,115 +72,123 @@ export class CreateEvents extends Component {
                             <Email />
                         </div>
                     </div>
+                ) : (
+                    <div>
+                        <h1 className="createTitle"> Create Event </h1>
+                        <input
+                            required
+                            type="text"
+                            className="nunito-text"
+                            placeholder="Name"
+                            onChange={e =>
+                                this.handleChange(e.target.value, 'eventName')
+                            }
+                            ref={input => {
+                                this.eventName = input;
+                            }}
+                        />
+                        <input
+                            required
+                            type="text"
+                            className="nunito-text"
+                            placeholder="Description"
+                            onChange={e =>
+                                this.handleChange(e.target.value, 'description')
+                            }
+                        />
+                        <PlaceSearchForm
+                            placeholder="Address"
+                            updateParent={location => {
+                                this.setState({
+                                    location: location.address,
+                                    placeId: location.placeId,
+                                });
+                            }}
+                        />
+                        <input
+                            className="event-datetime"
+                            required
+                            type="date"
+                            min={moment().format('YYYY-MM-DD')}
+                            onChange={event => {
+                                this.setState({
+                                    eventDate: moment(event).format(
+                                        'MM/DD/YYYY HH:mm'
+                                    ),
+                                });
+                            }}
+                        />
+
+                        <input
+                            step="900"
+                            className="event-datetime nunito-text"
+                            required
+                            type="time"
+                            onChange={event => {
+                                this.setState({
+                                    eventTime: event.target.value,
+                                    cronTime: moment
+                                        .utc(event)
+                                        .subtract(3, 'hours')
+                                        .format(),
+                                });
+                            }}
+                        />
+
+                        <div className="category-title">
+                            Categories
+                            <Category
+                                className="category-button"
+                                required
+                                updateParent={state => {
+                                    this.setState({ categories: state });
+                                }}
+                            />
+                        </div>
+                        <img
+                            className="event-picture"
+                            src={
+                                this.state.imagePreviewUrl ||
+                                this.state.eventPic
+                            }
+                            alt=""
+                        />
+                        <form>
+                            <input
+                                id="input"
+                                className="input-picture btn-active"
+                                type="file"
+                                onChange={event => this.imageProcess(event)}
+                            />
+                            <label className="input-label" htmlFor="input">
+                                Add an Event Photo
+                            </label>
+                        </form>
+
+                        <button
+                            type="submit"
+                            className="submit-event-button btn-active"
+                            onClick={() => {
+                                createEvent({
+                                    ...this.state,
+                                    uid: this.props.uid,
+                                });
+                            }}>
+                            Submit
+                        </button>
+                    </div>
                 )}
-                <h1 className="createTitle"> Create Event </h1>
-                <input
-                    required
-                    type="text"
-                    className="nunito-text"
-                    placeholder="Name"
-                    onChange={e =>
-                        this.handleChange(e.target.value, 'eventName')
-                    }
-                    ref={input => {
-                        this.eventName = input;
-                    }}
-                />
-                <input
-                    required
-                    type="text"
-                    className="nunito-text"
-                    placeholder="Description"
-                    onChange={e =>
-                        this.handleChange(e.target.value, 'description')
-                    }
-                />
-                <PlaceSearchForm
-                    placeholder="Address"
-                    updateParent={location => {
-                        this.setState({
-                            location: location.address,
-                            placeId: location.placeId,
-                        });
-                    }}
-                />
-                <input
-                    className="event-datetime"
-                    required
-                    type="date"
-                    min={moment().format('YYYY-MM-DD')}
-                    onChange={event => {
-                        this.setState({
-                            eventDate: moment(event).format('MM/DD/YYYY HH:mm'),
-                        });
-                    }}
-                />
-
-                <input
-                    step="900"
-                    className="event-datetime nunito-text"
-                    required
-                    type="time"
-                    onChange={event => {
-                        this.setState({
-                            eventTime: event.target.value,
-                            cronTime: moment
-                                .utc(event)
-                                .subtract(3, 'hours')
-                                .format(),
-                        });
-                    }}
-                />
-
-                <div className="category-title">
-                    {' '}
-                    Categories
-                    <Category
-                        className="category-button"
-                        required
-                        updateParent={state => {
-                            this.setState({ categories: state });
-                        }}
-                    />
-                </div>
-                <img
-                    className="event-picture"
-                    src={this.state.imagePreviewUrl || this.state.eventPic}
-                    alt=""
-                />
-                <form>
-                    <input
-                        id="input"
-                        className="input-picture btn-active"
-                        type="file"
-                        onChange={event => this.imageProcess(event)}
-                    />
-                    <label className="input-label" htmlFor="input">
-                        {' '}
-                        Add an Event Photo{' '}
-                    </label>
-                </form>
-
-                <button
-                    type="submit"
-                    className="submit-event-button btn-active"
-                    onClick={event => {
-                        event.preventDefault();
-                        createEvent(this.state);
-                    }}>
-                    Submit
-                </button>
             </div>
         );
     }
 }
 
-const mapStateToProps = state => {
-    return state;
+const mapStateToProps = ({ EventReducer, AuthenticationReducer }) => {
+    return {
+        created: EventReducer.created,
+        loading: EventReducer.loading,
+        uid: AuthenticationReducer.uid,
+    };
 };
 
-const actions = {
-    createEvent,
-};
-
-export default connect(mapStateToProps, actions)(CreateEvents);
+export default connect(mapStateToProps, { createEvent })(CreateEvents);

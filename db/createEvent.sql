@@ -12,4 +12,6 @@ VALUES (${eventPic}, ${eventName}, ${description}, ${location}, ${uid}, ${eventD
 RETURNING id, organizer_uid
 )
 INSERT INTO events_members (event_id, user_id) SELECT id, organizer_uid from rows;
-SELECT id FROM events ORDER BY id DESC limit 1;
+with id as (SELECT id FROM events ORDER BY id DESC limit 1)
+
+SELECT * from events where id = id

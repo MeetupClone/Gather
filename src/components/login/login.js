@@ -44,8 +44,7 @@ export class Login extends Component {
             return (
                 <div>
                     <button className="buttons" onClick={() => this.signOut()}>
-                        {' '}
-                        Log Out{' '}
+                        Log Out
                     </button>
                 </div>
             );
@@ -91,7 +90,7 @@ export class Login extends Component {
                                     this.props.history.push('/');
                                 });
                             }}>
-                            Log In{' '}
+                            Log In
                         </button>
 
                         <Link to="/register">
@@ -102,15 +101,14 @@ export class Login extends Component {
                                     className="auth-icon"
                                     src={require('./assets/facebook.svg')}
                                     alt="facebook"
-                                />{' '}
-                                Sign In With Facebook{' '}
+                                />
+                                Sign In With Facebook
                             </button>
                             <br />
                             <br />
                             <br />
                             <button className="register-button box-shadow">
-                                {' '}
-                                CREATE AN ACCOUNT{' '}
+                                CREATE AN ACCOUNT
                             </button>
                         </Link>
                     </form>

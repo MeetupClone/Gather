@@ -21,16 +21,16 @@ let redirect = () => {
   return <Redirect to="/" />;
 };
 
-export const Routes = uid => {
+export const Routes = props => {
   return (
     <Switch>
       <Route component={Home} exact path="/" />
-      <Route component={!uid ? Login : redirect} exact path="/login" />
+      <Route component={!props.uid ? Login : redirect} exact path="/login" />
       <Route
-        component={!uid ? ForgotPassword : redirect}
+        component={!props.uid ? ForgotPassword : redirect}
         path="/login/forgotPassword"
       />
-      <Route component={!uid ? Register : redirect} path="/register" />
+      <Route component={!props.uid ? Register : redirect} path="/register" />
       <Route component={User} exact path="/user" />
       <Route component={Explore} exact path="/explore" />
       <Route component={CreateEvents} exact path="/event/create" />

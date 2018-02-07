@@ -98,8 +98,7 @@ export class EditEvent extends Component {
         if (this.state.eventName === this.state.confirmDeleteInput) {
             finalDeleteButton = (
                 <button onClick={() => deleteEvent(this.state)}>
-                    {' '}
-                    Delete Event{' '}
+                    Delete Event
                 </button>
             );
         }
@@ -179,8 +178,7 @@ export class EditEvent extends Component {
                     onClick={() => {
                         return editEvent(this.state);
                     }}>
-                    {' '}
-                    Save Event{' '}
+                    Save Event
                 </button>
             </div>
         );

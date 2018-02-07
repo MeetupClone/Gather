@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
-
-import { connect } from 'react-redux';
-
-import axios from 'axios';
-
-import { joinGroup, leaveGroup } from 'ducks/group-redux';
-
-import { fire as firebase } from 'fire';
-
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
 import './groupPage.css';
 import 'helpers.css';
-
+import { joinGroup, leaveGroup } from 'ducks/group-redux';
 import Twitter from '../../twitter/twitter';
 import Facebook from '../../facebook/facebook';
 import Email from '../../email/email';
-
 import GroupDashboard from '../groupDashboard/groupDashboard';
 
 export class GroupPage extends Component {

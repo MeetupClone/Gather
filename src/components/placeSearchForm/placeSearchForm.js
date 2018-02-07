@@ -43,7 +43,7 @@ class PlaceSearchForm extends React.Component {
         };
         const AutocompleteItem = ({ formattedSuggestion }) => (
             <div>
-                <strong>{formattedSuggestion.mainText}</strong>{' '}
+                <strong>{formattedSuggestion.mainText}</strong>
                 <small>{formattedSuggestion.secondaryText}</small>
             </div>
         );
