@@ -68,23 +68,25 @@ export function leaveEvent(componentState) {
     };
 }
 
-export function editEvent(componentState) {
+export function editEvent(state) {
+    let eventFile = state.file;
+    const eventStorageRef = firebase.storage().ref();
+    const eventUploadTask = eventStorageRef
+        .child('eventPictures/' + eventFile.name)
+        .put(eventFile);
     return {
         type: EDIT_EVENT,
-        payload: new Promise(() => {
-            let eventFile = componentState.file;
-            const eventStorageRef = firebase.storage().ref();
-            const eventUploadTask = eventStorageRef
-                .child('eventPictures/' + eventFile.name)
-                .put(eventFile);
-
-            eventUploadTask.on('state_changed', () => {}, () => {}, function() {
-                componentState.eventPic = eventUploadTask.snapshot.downloadURL;
-                axios.post('/api/event/edit', componentState).then(result => {
-                    return result;
+        payload: eventUploadTask.on(
+            'state_changed',
+            () => {},
+            () => {},
+            () => {
+                state.eventPic = eventUploadTask.snapshot.downloadURL;
+                return axios.post('/api/event/edit', state).then(result => {
+                    return result.data;
                 });
-            });
-        }),
+            }
+        ),
     };
 }
 
@@ -102,7 +104,8 @@ export default function EventReducer(state = initialState, action) {
         case CREATE_EVENT + '_PENDING':
             return { loading: true, created: false };
         case CREATE_EVENT + '_FULFILLED':
-            return { loading: false, created: true };
+            let result = action.payload.result.data[0];
+            return { loading: false, created: true, ...result };
         case `${JOIN_EVENT}_PENDING`:
             return Object.assign({ loading: true });
         case `${JOIN_EVENT}_FULFILLED`:

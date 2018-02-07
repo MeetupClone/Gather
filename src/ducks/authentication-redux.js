@@ -5,6 +5,7 @@ import axios from 'axios';
 const initialState = {
     uid: '',
     email: '',
+    loading: false,
     authenticated: false,
 };
 firebase.auth().onAuthStateChanged(user => {
@@ -87,7 +88,6 @@ export function getAuthInfo(uid) {
     return {
         type: GET_AUTH_INFO,
         payload: firebase.auth().onAuthStateChanged(user => {
-            console.log(user);
             return user;
         }),
     };
@@ -132,9 +132,9 @@ export default function AuthenticationReducer(state = initialState, action) {
         case LOGIN_WITH_EMAIL_PASSWORD + '_FULFILLED':
             return { userInfo: action.payload, authenticated: true };
         case GET_AUTH_INFO + '_PENDING':
-            return { useruid: action.payload.uid, authenticated: true };
+            return { useruid: action.payload.uid, loading: true };
         case GET_AUTH_INFO + '_FULFILLED':
-            return { useruid: action.payload.uid, authenticated: true };
+            return { useruid: action.payload.uid, loading: false };
         case REGISTER_FCM_KEY:
             firebase
                 .messaging()

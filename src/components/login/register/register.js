@@ -75,8 +75,7 @@ export class Register extends Component {
                                 event.preventDefault();
                                 authWithEmailPassword(this.state);
                             }}>
-                            {' '}
-                            Create Account{' '}
+                            Create Account
                         </button>
                         <div id="providers-auth" className="center">
                             <button
@@ -91,8 +90,8 @@ export class Register extends Component {
                                     className="auth-icon"
                                     src={require('../assets/facebook.svg')}
                                     alt="facebook"
-                                />{' '}
-                                Sign Up With Facebook{' '}
+                                />
+                                Sign Up With Facebook
                             </button>
                         </div>
                     </div>
@@ -101,12 +100,11 @@ export class Register extends Component {
                         <h1> Choose some categories! </h1>
                         <h3>
                             These allow us to provide you with events that you
-                            may like{' '}
+                            may like
                         </h3>
                         <h6>
-                            {' '}
                             You can change these any time in your account
-                            settings{' '}
+                            settings
                         </h6>
                     </div>
                 )}

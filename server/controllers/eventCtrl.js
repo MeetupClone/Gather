@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 const createEvent = (req, res) => {
     req.app
         .get('db')
@@ -33,13 +31,12 @@ const editEvent = (req, res) => {
 };
 
 const leaveEvent = (req, res) => {
-    
-req.app
-    .get('db')
-    .leaveEvent(req.body)
-    .then(result => {
-        return res.json(result);
-    });
+    req.app
+        .get('db')
+        .leaveEvent(req.body)
+        .then(result => {
+            return res.json(result);
+        });
 };
 
 const deleteEvent = (req, res) => {

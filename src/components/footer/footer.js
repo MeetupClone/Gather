@@ -1,31 +1,19 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
-import { fire as firebase } from '../../fire';
+import { connect } from 'react-redux';
 
 import './footer.css';
 
-export class Footer extends Component {
+class Footer extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            user: true,
+            user: '',
             checkAuth: false,
             createButton: false,
             createButtonNonAuth: false,
         };
-    }
-
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.setState({
-                    checkAuth: true,
-                    user: Boolean(user.uid),
-                });
-            }
-        });
     }
 
     render() {
@@ -42,7 +30,7 @@ export class Footer extends Component {
             <button
                 className="inner-create-buttons"
                 onClick={() => {
-                    !this.state.user
+                    !this.props.uid
                         ? this.setState({ createButtonNonAuth: true })
                         : this.props.history.push('/event/create');
                 }}>
@@ -53,7 +41,7 @@ export class Footer extends Component {
             <button
                 className="inner-create-buttons"
                 onClick={() => {
-                    !this.state.user
+                    !this.props.uid
                         ? this.setState({ createButtonNonAuth: true })
                         : this.props.history.push('/groups/create');
                 }}>
@@ -93,7 +81,6 @@ export class Footer extends Component {
             createButton = (
                 <div>
                     <h3 className="login-text">
-                        {' '}
                         You must be logged in to create an event or group.
                     </h3>
                     {loginButton}
@@ -101,7 +88,7 @@ export class Footer extends Component {
             );
         }
 
-        return !this.state.checkAuth ? null : (
+        return this.props.loading ? null : (
             <div className="footer-all">
                 <div className="create-button-space">{createButton}</div>
             </div>
@@ -109,4 +96,11 @@ export class Footer extends Component {
     }
 }
 
-export default withRouter(Footer);
+const mapStateToProps = ({ AuthenticationReducer }) => {
+    return {
+        uid: AuthenticationReducer.uid,
+        loading: AuthenticationReducer.loading,
+    };
+};
+
+export default withRouter(connect(mapStateToProps, {})(Footer));

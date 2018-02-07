@@ -105,7 +105,7 @@ class Login extends Component {
             <div>
               <h1> {"You haven't created any events!"}</h1>
               <Link to="/event/create">
-                <button> Create an Event </button>{' '}
+                <button> Create an Event </button>
               </Link>
             </div>
           );
@@ -133,7 +133,7 @@ class Login extends Component {
             <div>
               <h1> {"You haven't joined any events!"}</h1>
               <Link to="/explore">
-                <button> Find Some Events </button>{' '}
+                <button> Find Some Events </button>
               </Link>
             </div>
           );

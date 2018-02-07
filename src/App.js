@@ -78,4 +78,8 @@ class App extends Component {
     }
 }
 
-export default withRouter(connect(null, { getAuthInfo })(App));
+const mapStateToProps = ({ AuthenticationReducer }) => {
+    return { uid: AuthenticationReducer.uid };
+};
+
+export default withRouter(connect(mapStateToProps, { getAuthInfo })(App));
