@@ -1,1 +1,1 @@
-DELETE FROM groups_members WHERE group_id = $1 AND user_id = $2;
+DELETE FROM groups_members WHERE group_id = ${groupid} AND user_id = ${uid};

@@ -8,54 +8,46 @@
   margin: 15px auto 10px auto;
   border-radius: 5px;
   background-color: white;
-  box-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.16), 0 1.5px 3px rgba(0, 0, 0, 0.23);
-}
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23); }
 
 .group-card-image {
   max-height: 100px;
   max-width: 100px;
-  border-radius: 5px;
-}
+  border-radius: 5px; }
 
 .group-card-content {
   padding: 10px 10px;
   display: flex;
-  flex-direction: column;
-}
+  flex-direction: column; }
 
 .group-card-name {
   font-size: 20px;
   font-weight: bold;
   color: black;
-  text-decoration: none;
-}
+  text-decoration: none; }
 
 .event-limit-desc {
   height: 50px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-}
+  text-overflow: ellipsis; }
 
 .events-button {
   width: 20%;
   height: 20px;
   font-size: 10px;
   color: #fff;
-  background: #08a045;
-}
+  background: #08a045; }
 
 .group-button {
   width: 20%;
   height: 20px;
   font-size: 10px;
   color: #fff;
-  background: #08a045;
-}
+  background: #08a045; }
 
 .search {
-  text-align: center;
-}
+  text-align: center; }
 
 .group-card-loading-container {
   justify-content: space-around;
@@ -63,7 +55,6 @@
   height: 50px;
   margin-left: 20px;
   margin-right: 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
-}
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23); }
 
 /*# sourceMappingURL=groupCards.css.map */

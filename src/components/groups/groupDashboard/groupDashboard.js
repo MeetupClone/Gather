@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import { editGroup, deleteGroup } from '../../../ducks/group-redux';
+import { editGroup, deleteGroup } from 'ducks/group-redux';
 
 export class GroupDashboard extends Component {
     constructor(props) {

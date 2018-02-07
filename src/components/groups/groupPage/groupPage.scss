@@ -1,0 +1,74 @@
+.group-page-join-button {
+    color: #fff;
+    text-align: center;
+    background: #4060b7;
+    border-radius: 5px;
+    outline: 0;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 400;
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    margin: 0px 25%;
+}
+
+.group-page-specific-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.group-page-picture {
+    align-self: center;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+
+.group-page-flex-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 94%;
+    margin: 10px auto;
+    padding-top: 10px;
+}
+
+.group-page-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 94%;
+    min-height: 18vh;
+    margin: 0 auto;
+    font-size: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
+    background-color: white;
+}
+
+.group-page-share {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+}
+
+.join-button {
+    background-color: #007f35;
+    padding: 5px 10px;
+    margin: 0 auto;
+    color: white;
+    font-size: 24px;
+}
+
+.leave-button {
+    background-color: #007f35;
+    padding: 5px 10px;
+    margin: 0 auto;
+    color: white;
+    font-size: 24px;
+}

@@ -1,4 +1,8 @@
-p {
+p,
+h1,
+h3,
+h3,
+h4 {
   margin: 3px;
   padding: 3px;
 }

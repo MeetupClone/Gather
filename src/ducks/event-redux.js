@@ -9,9 +9,11 @@ const initialState = {
     eventDescription: '',
     eventLocation: '',
     eventCategory: '',
-    created: false,
     website: '',
+    created: false,
+    joined: false,
     confirmModal: false,
+    loading: true,
 };
 
 firebase.auth().onAuthStateChanged(user => {
@@ -50,9 +52,12 @@ export function createEvent(componentState) {
 }
 
 export function joinEvent(componentState) {
+    console.log(componentState);
     return {
         type: JOIN_EVENT,
-        payload: componentState,
+        payload: axios
+            .post('/api/event/join', componentState)
+            .then(result => result.data),
     };
 }
 
@@ -72,21 +77,13 @@ export function editEvent(componentState) {
             const eventUploadTask = eventStorageRef
                 .child('eventPictures/' + eventFile.name)
                 .put(eventFile);
-            console.log(componentState);
-            eventUploadTask.on(
-                'state_changed',
-                snapshot => {},
-                function(error) {},
-                function() {
-                    componentState.eventPic =
-                        eventUploadTask.snapshot.downloadURL;
-                    axios
-                        .post('/api/event/edit', componentState)
-                        .then(result => {
-                            return result;
-                        });
-                }
-            );
+
+            eventUploadTask.on('state_changed', () => {}, () => {}, function() {
+                componentState.eventPic = eventUploadTask.snapshot.downloadURL;
+                axios.post('/api/event/edit', componentState).then(result => {
+                    return result;
+                });
+            });
         }),
     };
 }
@@ -94,7 +91,9 @@ export function editEvent(componentState) {
 export function deleteEvent(componentState) {
     return {
         type: DELETE_EVENT,
-        payload: componentState,
+        payload: axios
+            .post('/api/event/delete', componentState)
+            .then(result => result.data),
     };
 }
 
@@ -104,17 +103,12 @@ export default function EventReducer(state = initialState, action) {
             return { loading: true, created: false };
         case CREATE_EVENT + '_FULFILLED':
             return { loading: false, created: true };
-        case JOIN_EVENT:
-            return axios
-                .post('/api/event/join', action.payload)
-                .then(result => {
-                    console.log(result.data[0].fcm_key, result.data[0].id);
-                    return Object.assign({}, state, action.payload);
-                })
-                .catch(error => {
-                    console.log(error);
-                    return state;
-                });
+        case `${JOIN_EVENT}_PENDING`:
+            return Object.assign({ loading: true });
+        case `${JOIN_EVENT}_FULFILLED`:
+            return Object.assign({ loading: false, joined: true });
+        case `${JOIN_EVENT}_REJECTED`:
+            return Object.assign({ loading: true });
         case LEAVE_EVENT:
             return axios
                 .post('/api/event/leave', action.payload)
@@ -126,7 +120,6 @@ export default function EventReducer(state = initialState, action) {
         case EDIT_EVENT + '_FULFILLED':
             return Object.assign({}, state, { loading: false });
         case DELETE_EVENT:
-            axios.post('/api/event/delete', action.payload);
             return Object.assign({}, state, action.payload);
         default:
             return state;
