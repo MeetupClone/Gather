@@ -24,6 +24,7 @@ class Login extends Component {
       userName: '',
       userLocation: '',
       userDescription: '',
+      loading: true,
       editable: false,
       prefSettings: false,
       showParams: 'events',
@@ -34,160 +35,43 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('uid')) {
-      let user = localStorage.getItem('uid');
-      axios.get(`/api/event/user/${user}`).then(result => {
+    Promise.all([
+      axios.get(`/api/event/user/${this.props.uid}`).then(result => {
         this.setState({ userEvents: result.data });
-      });
+      }),
       axios
-        .get(`/api/event/getAttendingEventsData/${user}`)
+        .get(`/api/event/getAttendingEventsData/${this.props.uid}`)
         .then(result => {
           this.setState({ userAttending: result.data });
-        })
-        .catch(console.log);
-      axios.get(`/api/group/user/${user}`).then(result => {
+        }),
+      axios.get(`/api/group/user/${this.props.uid}`).then(result => {
         this.setState({ userGroups: result.data });
-      });
-      axios.get(`/api/user/getUserInfo/${user}`).then(result => {
+      }),
+      axios.get(`/api/user/getUserInfo/${this.props.uid}`).then(result => {
         this.setState({
           userProfilePic: result.data[0].profile_image,
           userName: result.data[0].name,
           userLocation: result.data[0].location,
           userDescription: result.data[0].description,
-          uid: user.uid,
+          uid: this.props.uid,
         });
-      });
-      axios.get(`/api/user/account/getPref/${user}`).then(result =>
+      }),
+      axios.get(`/api/user/account/getPref/${this.props.uid}`).then(result =>
         this.setState({
           prefSettings: result.data.preference_settings,
         })
-      );
-    } else {
-      firebase.auth().onAuthStateChanged(user => {
-        axios.get(`/api/event/user/${user.uid}`).then(result => {
-          this.setState({ userEvents: result.data });
-        });
-        axios
-          .get(`/api/event/getAttendingEventsData/${user.uid}`)
-          .then(result => {
-            this.setState({ userAttending: result.data });
-          })
-          .catch(console.log);
-        axios.get(`/api/group/user/${user.uid}`).then(result => {
-          this.setState({ userGroups: result.data });
-        });
-        axios.get(`/api/user/getUserInfo/${user.uid}`).then(result => {
-          this.setState({
-            userProfilePic: result.data[0].profile_image,
-            userName: result.data[0].name,
-            userLocation: result.data[0].location,
-            userDescription: result.data[0].description,
-            uid: user.uid,
-          });
-        });
-        axios.get(`/api/user/account/getPref/${user}`).then(result =>
-          this.setState({
-            prefSettings: result.data.preference_settings,
-          })
-        );
-      });
-    }
+      ),
+    ]).then(() => {
+      this.setState({ loading: false });
+    });
   }
 
   render() {
-    let $userLoc = null;
-
-    if (this.props.AuthenticationReducer.uid) {
-      let $userGroupsEvents = null;
-      if (this.state.showParams === 'events') {
-        if (!this.state.userEvents.length) {
-          $userGroupsEvents = (
-            <div>
-              <h1> {"You haven't created any events!"}</h1>
-              <Link to="/event/create">
-                <button> Create an Event </button>
-              </Link>
-            </div>
-          );
-        } else {
-          $userGroupsEvents = this.state.userEvents.map((event, i) => {
-            return (
-              <Link key={i} to={`/event/${event.id}`}>
-                <div event={event.id} className="card-container nunito-text">
-                  <div>{event.title}</div>
-                  <div className="event-card-date nunito-text">
-                    {event.event_date}
-                  </div>
-                  <p className="event-card-desc">{event.description}</p>
-                  <div className="event-card-loc">
-                    {event.location.toUpperCase()}
-                  </div>
-                </div>
-              </Link>
-            );
-          });
-        }
-      } else if (this.state.showParams === 'attending') {
-        if (!this.state.userAttending.length) {
-          $userGroupsEvents = (
-            <div>
-              <h1> {"You haven't joined any events!"}</h1>
-              <Link to="/explore">
-                <button> Find Some Events </button>
-              </Link>
-            </div>
-          );
-        } else {
-          $userGroupsEvents = this.state.userAttending.map((group, i) => {
-            return (
-              <Link key={i} to={`/event/${group.id}`}>
-                <div group={group.id} className="card-container nunito-text">
-                  <p className="nunito-text ">{group.event_date}</p>
-                  <p className="">{group.location.toUpperCase()}</p>
-                  <p className="">{group.title}</p>
-                  <p className="">{group.category}</p>
-
-                  <p className="overflow">{group.description}</p>
-                </div>
-              </Link>
-            );
-          });
-        }
-      } else if (this.state.showParams === 'groups') {
-        if (!this.state.userGroups.length) {
-          $userGroupsEvents = (
-            <div className=" nunito-text">
-              <h1> {"You haven't joined any groups!"}</h1>
-              <Link to="/explore">
-                <button> Join some Groups </button>
-              </Link>
-              <br />
-              <Link to="/groups/create">
-                <button> Create a Group! </button>
-              </Link>
-            </div>
-          );
-        } else {
-          $userGroupsEvents = this.state.userGroups.map((key, i) => {
-            return (
-              <Link key={i} to={`/groups/${key.id}`}>
-                <div key={key.id}>
-                  <div className="user-prof-group-name nunito-text">
-                    {key.name}
-                  </div>
-                  <div className="user-prof-group-page nunito-text">
-                    {key.website}
-                  </div>
-                </div>
-              </Link>
-            );
-          });
-        }
-      }
+    if (this.props.uid) {
       if (this.state.editable) {
         return <EditableProfile />;
       } else {
-        return (
+        return this.state.loading ? null : (
           <div>
             <img
               className="user-profile-pic"
@@ -198,42 +82,79 @@ class Login extends Component {
               alt={this.state.userName}
             />
             <h1> {this.state.userName} </h1>
-            <h3> {$userLoc} </h3>
-
             <p className="user-description nunito-text">
               {this.state.userDescription}
             </p>
-
             <button
               className="edit-button"
               onClick={() => this.setState({ editable: true })}>
               Edit Profile
             </button>
-
             <div className="user-spec-buttons">
-              <button
-                className="user-spec-button-indiv btn-active nunito-text"
-                onClick={() => {
-                  this.setState({ showParams: 'events' });
-                }}>
-                Events
-              </button>
-              <button
-                className="user-spec-button-indiv btn-active nunito-text"
-                onClick={() => {
-                  this.setState({ showParams: 'attending' });
-                }}>
-                Attending
-              </button>
-              <button
-                className="user-spec-button-indiv btn-active nunito-text"
-                onClick={() => {
-                  this.setState({ showParams: 'groups' });
-                }}>
-                Groups
-              </button>
+              {['events', 'attending', 'groups'].map((x, i) => {
+                return (
+                  <button
+                    key={i}
+                    className="user-spec-button-indiv btn-active nunito-text"
+                    onClick={() => {
+                      this.setState({ showParams: x });
+                    }}>
+                    {x.charAt(0).toUpperCase() + x.substr(1)}
+                  </button>
+                );
+              })}
             </div>
-            {$userGroupsEvents}
+            {this.state.showParams === 'events' && this.state.userEvents.length
+              ? this.state.userEvents.map((event, i) => {
+                  return (
+                    <Link key={i} to={`/event/${event.id}`}>
+                      <div className="card-container nunito-text">
+                        <h5 className="event-card-date nunito-text">
+                          {event.event_date}
+                        </h5>
+                        <h3>{event.title}</h3>
+
+                        <p className="overflow">{event.description}</p>
+                        <p className="event-card-loc">
+                          {event.location.toUpperCase()}
+                        </p>
+                      </div>
+                    </Link>
+                  );
+                })
+              : null}
+            {this.state.showParams === 'attending' &&
+            this.state.userAttending.length
+              ? this.state.userAttending.map((event, i) => {
+                  return (
+                    <Link key={i} to={`/event/${event.id}`}>
+                      <div className="card-container nunito-text">
+                        <h5 className="event-card-date nunito-text">
+                          {event.event_date}
+                        </h5>
+                        <h3>{event.title}</h3>
+                        <p className="overflow">{event.description}</p>
+                        <p className="event-card-loc">
+                          {event.location.toUpperCase()}
+                        </p>
+                      </div>
+                    </Link>
+                  );
+                })
+              : null}
+            {this.state.showParams === 'groups' &&
+              this.state.userGroups.length &&
+              this.state.userGroups.map((key, i) => {
+                return (
+                  <div key={key.id} className="card-container">
+                    <Link key={i} to={`/groups/${key.id}`}>
+                      <h2 className="nunito-text">{key.name}</h2>
+                      <h4 className="nunito-text">{key.location}</h4>
+                      <h4 className="nunito-text">{key.website}</h4>
+                    </Link>
+                  </div>
+                );
+              })}
             <div>
               <Link to="/user/account">
                 <button
@@ -243,7 +164,6 @@ class Login extends Component {
                 </button>
               </Link>
             </div>
-
             <Footer />
           </div>
         );
@@ -255,7 +175,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = ({ AuthenticationReducer }) => {
-  return { AuthenticationReducer };
+  return { uid: AuthenticationReducer.uid };
 };
 
 export default connect(mapStateToProps)(Login);

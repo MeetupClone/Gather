@@ -162,6 +162,7 @@ export class CreateEvents extends Component {
                         </form>
 
                         <button
+                            disabled={true}
                             type="submit"
                             className="submit-event-button btn-active"
                             onClick={() => {
