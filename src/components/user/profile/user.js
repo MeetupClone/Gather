@@ -5,8 +5,6 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-import { fire as firebase } from 'fire';
-
 import './profile.css';
 import 'helpers.css';
 import Footer from 'components/footer/footer';
