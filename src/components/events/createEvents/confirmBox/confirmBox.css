@@ -1,0 +1,38 @@
+.box-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 94%;
+  margin: 2vh auto;
+  padding: 0; }
+
+.confirm-box-congrats {
+  padding: 8px; }
+
+.box-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3%;
+  width: 94%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
+  margin-bottom: 6px; }
+
+.share-icons {
+  display: flex;
+  justify-content: space-around;
+  justify-content: center;
+  align-items: center; }
+
+.confirm-box-img {
+  max-width: 100%;
+  margin: 0 auto; }
+
+.confirm-box-desc {
+  width: 90%;
+  text-align: center; }
+
+/*# sourceMappingURL=confirmBox.css.map */

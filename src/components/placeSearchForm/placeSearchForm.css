@@ -2,16 +2,19 @@
   margin: auto;
   position: relative;
   padding-bottom: 0;
-  width: 90%; }
+  width: 100%;
+}
 
 .form-group {
-  width: 90%; }
+  width: 100%;
+}
 
 .auto-complete-container {
   position: absolute;
   top: 100%;
   background-color: white;
   width: 100%;
-  z-index: 25; }
+  z-index: 25;
+}
 
 /*# sourceMappingURL=placeSearchForm.css.map */
