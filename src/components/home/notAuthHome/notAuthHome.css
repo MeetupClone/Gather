@@ -1,24 +1,34 @@
+.home-container {
+  width: 94%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+
 .gather-logo-home {
   height: 100px;
   width: 100px; }
 
 .home-event-card-pic {
-  width: 98%;
-  border-radius: 10px;
- }
+  width: 100%; }
 
 .home-create-card-pic {
   margin-top: 30px;
-  padding-bottom: 110px;
-  border-radius: 10px;
-  width: 98%; }
-
+  width: 100%;
+  padding-bottom: 110px; }
 
 .home-buttonz {
-  width: 98%;
+  width: 100%;
   height: 50px;
   font-size: 20px;
   color: #fff;
-  background: #08A045; }
+  background: #08a045; }
+
+.home-title {
+  padding: 20px 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
 
 /*# sourceMappingURL=notAuthHome.css.map */
