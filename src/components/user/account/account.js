@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 import './account.css';
 
-import '../../../helpers.css';
+import 'helpers.css';
 
 import { connect } from 'react-redux';
-import { getAuthInfo } from '../../../ducks/authentication-redux';
+import { getAuthInfo } from 'ducks/authentication-redux';
 
 import { Notifications } from './notifications/notifications';
-import { Preferences } from './preferences/preferences';
-import { fire as firebase } from '../../../fire';
+import Preferences from './preferences/preferences';
+import { fire as firebase } from 'fire';
 
 export class Account extends Component {
     constructor(props) {
