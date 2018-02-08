@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { fire as firebase } from '../../../../fire';
+import { fire as firebase } from 'fire';
+import { connect } from 'react-redux';
 
 import './eventsYouMayLike.css';
-import '../../../../helpers.css';
+import 'helpers.css';
 
-export default class EventsYouMayLike extends Component {
+class EventsYouMayLike extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            uid: '',
             reccEvents: [],
             userEvents: [],
             eventsArr: [],
@@ -20,32 +20,28 @@ export default class EventsYouMayLike extends Component {
     }
 
     componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
+        Promise.all([
+            axios.get(`/api/event/user/${this.props.uid}`).then(result =>
                 this.setState({
-                    uid: user.uid,
-                });
-                axios.get(`/api/event/user/${this.state.uid}`).then(result =>
+                    userEvents: result.data,
+                })
+            ),
+            axios
+                .get(`/api/relevant/event/${this.props.uid}`)
+                .then(results => {
+                    console.log(results);
                     this.setState({
-                        userEvents: result.data,
-                        checked: true,
-                    })
-                );
-                axios
-                    .get(`/api/relevant/event/${this.state.uid}`)
-                    .then(results => {
-                        this.setState({
-                            reccEvents: results.data,
-                            checked: true,
-                        });
-                    })
-                    .catch(console.log);
-            }
+                        reccEvents: results.data,
+                    });
+                })
+                .catch(console.log),
+        ]).then(() => {
+            this.setState({ loading: false });
         });
     }
 
     render() {
-        return !this.state.checked ? null : (
+        return !this.state.loading ? null : (
             <div>
                 <h4>Events You May Like</h4>
                 {this.state.reccEvents.map((event, i) => {
@@ -76,3 +72,9 @@ export default class EventsYouMayLike extends Component {
         );
     }
 }
+
+const mapStateToProps = ({ AuthenticationReducer }) => {
+    return { uid: AuthenticationReducer.uid };
+};
+
+export default connect(mapStateToProps, {})(EventsYouMayLike);

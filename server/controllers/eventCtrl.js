@@ -91,6 +91,7 @@ const getEventByUserId = (req, res) => {
 };
 
 const getRelevantEvents = (req, res) => {
+    console.log(req.params.id);
     req.app
         .get('db')
         .getRelevantEvents(req.params.id)
