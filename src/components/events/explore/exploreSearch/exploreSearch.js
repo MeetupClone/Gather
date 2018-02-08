@@ -35,6 +35,7 @@ export class ExploreSearch extends Component {
                     });
                 })
                 .catch(() => this.setState({ loading: false })),
+
             axios.get('/api/groups').then(result => {
                 this.setState({ groups: result.data });
             }),

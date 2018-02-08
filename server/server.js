@@ -6,11 +6,9 @@ const { herokuDb } = require('./keys/config.js');
 
 const port = 3002;
 
-massive(herokuDb)
-	.then(db => {
-		app.set('db', db);
-	})
-	.catch(console.log);
+massive(herokuDb).then(db => {
+	app.set('db', db);
+});
 
 const app = express();
 
@@ -46,6 +44,7 @@ app.get('/api/events', eventCtrl.getAllEvents);
 app.get('/api/event/:id', eventCtrl.getEventById);
 app.get('/api/event/user/:id', eventCtrl.getEventByUserId);
 app.get('/api/relevant/event/:id', eventCtrl.getRelevantEvents);
+app.get('/api/recommendedEvents/:id', eventCtrl.getRecommended);
 app.get('/api/event/group/:id', eventCtrl.getEventsByGroupId);
 
 const groupCtrl = require('./controllers/groupCtrl');

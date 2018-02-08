@@ -108,6 +108,11 @@ const getEventsByGroupId = (req, res) => {
         );
 };
 
+const getRecommended = (req, res) => {
+    console.log(req.params.id);
+    return res.json('true');
+};
+
 module.exports = {
     getAllEvents,
     getAttendingEvents,
@@ -121,4 +126,5 @@ module.exports = {
     editEvent,
     getRelevantEvents,
     getEventsByGroupId,
+    getRecommended,
 };

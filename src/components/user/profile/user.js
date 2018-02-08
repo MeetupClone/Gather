@@ -11,7 +11,7 @@ import Footer from 'components/footer/footer';
 
 import EditableProfile from '../editableProfile/editableProfile';
 
-class Login extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ class Login extends Component {
       loading: true,
       editable: false,
       prefSettings: false,
-      showParams: 'events',
+      showParams: 'attending',
       userEvents: [],
       userAttending: [],
       userGroups: [],
@@ -89,7 +89,7 @@ class Login extends Component {
               Edit Profile
             </button>
             <div className="user-spec-buttons">
-              {['events', 'attending', 'groups'].map((x, i) => {
+              {['attending', 'events', 'groups'].map((x, i) => {
                 return (
                   <button
                     key={i}
@@ -102,25 +102,6 @@ class Login extends Component {
                 );
               })}
             </div>
-            {this.state.showParams === 'events' && this.state.userEvents.length
-              ? this.state.userEvents.map((event, i) => {
-                  return (
-                    <Link key={i} to={`/event/${event.id}`}>
-                      <div className="card-container nunito-text">
-                        <h5 className="event-card-date nunito-text">
-                          {event.event_date}
-                        </h5>
-                        <h3>{event.title}</h3>
-
-                        <p className="overflow">{event.description}</p>
-                        <p className="event-card-loc">
-                          {event.location.toUpperCase()}
-                        </p>
-                      </div>
-                    </Link>
-                  );
-                })
-              : null}
             {this.state.showParams === 'attending' &&
             this.state.userAttending.length
               ? this.state.userAttending.map((event, i) => {
@@ -140,19 +121,39 @@ class Login extends Component {
                   );
                 })
               : null}
-            {this.state.showParams === 'groups' &&
-              this.state.userGroups.length &&
-              this.state.userGroups.map((key, i) => {
-                return (
-                  <div key={key.id} className="card-container">
-                    <Link key={i} to={`/groups/${key.id}`}>
-                      <h2 className="nunito-text">{key.name}</h2>
-                      <h4 className="nunito-text">{key.location}</h4>
-                      <h4 className="nunito-text">{key.website}</h4>
+            {this.state.showParams === 'events' && this.state.userEvents.length
+              ? this.state.userEvents.map((event, i) => {
+                  return (
+                    <Link key={i} to={`/event/${event.id}`}>
+                      <div className="card-container nunito-text">
+                        <h5 className="event-card-date nunito-text">
+                          {event.event_date}
+                        </h5>
+                        <h3>{event.title}</h3>
+
+                        <p className="overflow">{event.description}</p>
+                        <p className="event-card-loc">
+                          {event.location.toUpperCase()}
+                        </p>
+                      </div>
                     </Link>
-                  </div>
-                );
-              })}
+                  );
+                })
+              : null}
+
+            {this.state.showParams === 'groups' && this.state.userGroups.length
+              ? this.state.userGroups.map((key, i) => {
+                  return (
+                    <div key={key.id} className="card-container">
+                      <Link key={i} to={`/groups/${key.id}`}>
+                        <h2 className="nunito-text">{key.name}</h2>
+                        <h4 className="nunito-text">{key.location}</h4>
+                        <h4 className="nunito-text">{key.website}</h4>
+                      </Link>
+                    </div>
+                  );
+                })
+              : null}
             <div>
               <Link to="/user/account">
                 <button
@@ -176,4 +177,4 @@ const mapStateToProps = ({ AuthenticationReducer }) => {
   return { uid: AuthenticationReducer.uid };
 };
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(Profile);

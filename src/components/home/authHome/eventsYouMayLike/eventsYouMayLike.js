@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { fire as firebase } from '../../../../fire';
 
 import './eventsYouMayLike.css';
-import '../../../../helpers.css';
+import 'helpers.css';
 
 export default class EventsYouMayLike extends Component {
     constructor(props) {
@@ -20,35 +19,28 @@ export default class EventsYouMayLike extends Component {
     }
 
     componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.setState({
-                    uid: user.uid,
-                });
-                axios.get(`/api/event/user/${this.state.uid}`).then(result =>
-                    this.setState({
-                        userEvents: result.data,
-                        checked: true,
-                    })
-                );
-                axios
-                    .get(`/api/relevant/event/${this.state.uid}`)
-                    .then(results => {
-                        this.setState({
-                            reccEvents: results.data,
-                            checked: true,
-                        });
-                    })
-                    .catch(console.log);
-            }
+        axios.get(`/api/recommendedEvents/${this.props.uid}`).then(result => {
+            console.log(result);
+        });
+
+        axios.get('/api/events').then(events => {
+            this.setState({
+                checked: true,
+                events: events.data.sort((a, b) => {
+                    return (
+                        new Date(b.cron_time).getTime() <
+                        new Date(a.cron_time).getTime()
+                    );
+                }),
+            });
         });
     }
 
     render() {
         return !this.state.checked ? null : (
             <div>
-                <h4>Events You May Like</h4>
-                {this.state.reccEvents.map((event, i) => {
+                <h4>New Events</h4>
+                {this.state.events.map((event, i) => {
                     if (i < 5) {
                         return (
                             <Link key={i} to={`/event/${event.id}`}>
@@ -76,3 +68,5 @@ export default class EventsYouMayLike extends Component {
         );
     }
 }
+
+
