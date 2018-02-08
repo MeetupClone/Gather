@@ -54,7 +54,7 @@ export class SingleEvent extends Component {
     let auth = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         return axios
-          .get(`/api/event/getAttendingEventsData/${user.uid}`)
+          .get(`/api/event/getAttendingEventsData/${this.props.uid}`)
           .then(result => {
             this.setState({
               joined: result.data.find(event => {
@@ -62,6 +62,8 @@ export class SingleEvent extends Component {
               }),
             });
           });
+      } else {
+        return;
       }
     });
 
@@ -85,43 +87,44 @@ export class SingleEvent extends Component {
             alt={this.state.eventName}
           />
         </div>
-        {this.state.currentUserUid === this.state.organizerUid ? (
-          <div>
-            <h1> This is your event! </h1>
-            <Link to={`/event/edit/${this.props.match.params.id}`}>
-              <button
-                className="edit-event-button"
-                onClick={() => {
-                  this.setState({ edit: true });
-                }}>
-                Click here to edit your event.
-              </button>
-            </Link>
-          </div>
-        ) : !this.state.joined ? (
-          <button
-            className="join-event-button"
-            onClick={() => {
-              this.props.joinEvent({
-                uid: this.props.uid,
-                eventId: this.state.eventId,
-              });
-            }}>
-            Join The Event
-          </button>
-        ) : (
-          <button
-            className="leave-event-button"
-            onClick={() => {
-              this.props.leaveEvent({
-                uid: this.props.uid,
-                eventId: this.state.eventId,
-              });
-            }}>
-            Leave This Event
-          </button>
-        )}
-
+        {this.props.uid ? (
+          this.state.currentUserUid === this.state.organizerUid ? (
+            <div>
+              <h1> This is your event! </h1>
+              <Link to={`/event/edit/${this.props.match.params.id}`}>
+                <button
+                  className="edit-event-button"
+                  onClick={() => {
+                    this.setState({ edit: true });
+                  }}>
+                  Click here to edit your event.
+                </button>
+              </Link>
+            </div>
+          ) : !this.state.joined ? (
+            <button
+              className="join-event-button"
+              onClick={() => {
+                this.props.joinEvent({
+                  uid: this.props.uid,
+                  eventId: this.state.eventId,
+                });
+              }}>
+              Join The Event
+            </button>
+          ) : (
+            <button
+              className="leave-event-button"
+              onClick={() => {
+                this.props.leaveEvent({
+                  uid: this.props.uid,
+                  eventId: this.state.eventId,
+                });
+              }}>
+              Leave This Event
+            </button>
+          )
+        ) : null}
         <div className="event-info">
           <p>
             <strong>{this.state.eventDate}</strong>

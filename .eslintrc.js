@@ -4,6 +4,7 @@ module.exports = {
         node: true,
         browser: true,
     },
+    globals: { Promise: true, Set: true },
     parserOptions: {
         ecmaVersion: 6,
         ecmaFeatures: {
