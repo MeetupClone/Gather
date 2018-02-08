@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { fire as firebase } from 'fire';
 import { connect } from 'react-redux';
 
 import './eventsYouMayLike.css';
@@ -26,15 +25,11 @@ class EventsYouMayLike extends Component {
                     userEvents: result.data,
                 })
             ),
-            axios
-                .get(`/api/relevant/event/${this.props.uid}`)
-                .then(results => {
-                    console.log(results);
-                    this.setState({
-                        reccEvents: results.data,
-                    });
-                })
-                .catch(console.log),
+            axios.get(`/api/relevant/event/${this.props.uid}`).then(results => {
+                this.setState({
+                    reccEvents: results.data,
+                });
+            }),
         ]).then(() => {
             this.setState({ loading: false });
         });

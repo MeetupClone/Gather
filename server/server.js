@@ -1,7 +1,7 @@
 const express = require('express');
 const massive = require('massive');
 const { json } = require('body-parser');
-
+const path = require('path');
 const { herokuDb } = require('./keys/config.js');
 
 const port = 3002;
@@ -15,7 +15,7 @@ massive(herokuDb)
 const app = express();
 
 app.use(json({ limit: '50mb' }));
-app.use(express.static('./public'));
+app.use(express.static(`${__dirname}/../build`));
 
 const userCtrl = require('./controllers/userCtrl');
 app.post('/api/user/createUser', userCtrl.createUser);
@@ -62,4 +62,8 @@ app.get('/api/group/owner/:id', groupCtrl.getGroupByOwner);
 
 app.listen(port, () => {
 	console.log(`Listening on ${port}.`);
+});
+
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, '../build/index.html'));
 });

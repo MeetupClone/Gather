@@ -1,27 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import './email.css';
 
-export default class Email extends Component {
-  constructor(props) {
-    super(props);
+const Email = () => {
+  return (
+    <div>
+      <a
+        href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site http://www.website.com."
+        title="Share by Email">
+        <img
+          src="https://www.genbook.com/blog/wp-content/uploads/2014/09/email.png"
+          className="email-pic"
+          alt="email"
+        />
+      </a>
+    </div>
+  );
+};
 
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <div>
-        <a
-          href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site http://www.website.com."
-          title="Share by Email">
-          <img
-            src="https://www.genbook.com/blog/wp-content/uploads/2014/09/email.png"
-            className="email-pic"
-            alt="email"
-          />
-        </a>
-      </div>
-    );
-  }
-}
+export default Email;

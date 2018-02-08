@@ -84,7 +84,7 @@ export function loginWithEmailPassword(initialState) {
     };
 }
 
-export function getAuthInfo(uid) {
+export function getAuthInfo() {
     return {
         type: GET_AUTH_INFO,
         payload: firebase.auth().onAuthStateChanged(user => {
@@ -140,10 +140,7 @@ export default function AuthenticationReducer(state = initialState, action) {
                 .messaging()
                 .requestPermission()
                 .then(() => {
-                    return firebase
-                        .messaging()
-                        .getToken()
-                        .then(token => {});
+                    return firebase.messaging().getToken();
                 });
             return state;
         case SIGN_OUT:
