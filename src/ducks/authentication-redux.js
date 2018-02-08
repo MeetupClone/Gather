@@ -84,7 +84,7 @@ export function loginWithEmailPassword(initialState) {
     };
 }
 
-export function getAuthInfo(uid) {
+export function getAuthInfo() {
     return {
         type: GET_AUTH_INFO,
         payload: firebase.auth().onAuthStateChanged(user => {

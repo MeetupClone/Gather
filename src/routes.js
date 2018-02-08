@@ -12,7 +12,8 @@ import EditEvent from './components/events/editEvent/editEvent';
 import SingleEvent from './components/events/singleEvent/singleEvent';
 import CreateGroup from './components/groups/createGroup/createGroup';
 import GroupPage from './components/groups/groupPage/groupPage';
-import Home from './components/home/home';
+import AuthHome from './components/home/authHome/authHome';
+import NotAuthHome from './components/home/notAuthHome/notAuthHome';
 import Footer from './components/footer/footer';
 import Account from './components/user/account/account';
 
@@ -23,7 +24,7 @@ let redirect = () => {
 export const Routes = props => {
   return (
     <Switch>
-      <Route component={Home} exact path="/" />
+      <Route component={!props.uid ? NotAuthHome : AuthHome} exact path="/" />
       <Route component={!props.uid ? Login : redirect} exact path="/login" />
       <Route
         component={!props.uid ? ForgotPassword : redirect}

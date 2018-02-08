@@ -20,25 +20,27 @@ class App extends Component {
 
     componentDidMount() {
         localStorage.setItem('userData', '');
+
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 axios
                     .get(`/api/user/getUserInfo/${user.uid}`)
                     .then(result => {
                         this.props.getAuthInfo();
-                        let userData = {
-                            uid: user.uid,
-                            userPic: result.data[0].profile_image,
-                            userLocation: result.data[0].location,
-                            userName: result.data[0].name,
-                            userDescription: result.data[0].description,
-                        };
+
                         this.setState(
                             { uid: user.uid, checkAuth: true },
                             () => {
                                 localStorage.setItem(
                                     'userData',
-                                    JSON.stringify(userData)
+                                    JSON.stringify({
+                                        uid: user.uid,
+                                        userPic: result.data[0].profile_image,
+                                        userLocation: result.data[0].location,
+                                        userName: result.data[0].name,
+                                        userDescription:
+                                            result.data[0].description,
+                                    })
                                 );
                             }
                         );
@@ -46,25 +48,9 @@ class App extends Component {
                     .catch(() => {
                         this.setState({ checkAuth: false });
                     });
+            } else {
+                this.setState({ checkAuth: true });
             }
-            // let getEvents = axios.get('/api/events').then(result => { return result.data})
-
-            // let getCat = axios.get(`/api/user/account/getCat/${user.uid}`).then(result => {
-            //     return result.data
-            // })
-            // let getPref = axios.get(`/api/user/account/getPref/${user.uid}`).then(result => {
-            //     return result.data
-            // })
-            // Promise.all([getEvents, getCat, getPref]).then(result => {
-            //     let offlineData = {events: result[0]}
-            //     localStorage.setItem('events', JSON.stringify(offlineData))
-            // })
-        });
-
-        firebase.messaging().getToken();
-
-        firebase.messaging().onMessage(function(payload) {
-            alert(payload.notification.title);
         });
     }
 
