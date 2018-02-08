@@ -15,7 +15,6 @@ import GroupPage from './components/groups/groupPage/groupPage';
 import Home from './components/home/home';
 import Footer from './components/footer/footer';
 import Account from './components/user/account/account';
-import FAQ from './components/info_faq/faq';
 
 let redirect = () => {
   return <Redirect to="/" />;
@@ -39,7 +38,6 @@ export const Routes = props => {
       <Route component={CreateGroup} path="/groups/create" />
       <Route component={GroupPage} path="/groups/:id" />
       <Route component={Account} exact path="/user/account" />
-      <Route component={FAQ} path="/faq" />
       <Route component={Footer} path="/" />
     </Switch>
   );
