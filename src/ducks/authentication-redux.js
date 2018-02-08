@@ -140,10 +140,7 @@ export default function AuthenticationReducer(state = initialState, action) {
                 .messaging()
                 .requestPermission()
                 .then(() => {
-                    return firebase
-                        .messaging()
-                        .getToken()
-                        .then(token => {});
+                    return firebase.messaging().getToken();
                 });
             return state;
         case SIGN_OUT:

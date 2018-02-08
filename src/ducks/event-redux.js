@@ -16,12 +16,6 @@ const initialState = {
     loading: true,
 };
 
-firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-        initialState.uid = user.uid;
-    }
-});
-
 const CREATE_EVENT = 'CREATE_EVENT';
 const JOIN_EVENT = 'JOIN_EVENT';
 const LEAVE_EVENT = 'LEAVE_EVENT';
@@ -31,7 +25,7 @@ const DELETE_EVENT = 'DELETE_EVENT';
 export function createEvent(componentState) {
     return {
         type: CREATE_EVENT,
-        payload: new Promise((resolve, reject) => {
+        payload: new Promise(resolve => {
             let eventFile = componentState.file;
             const eventStorageRef = firebase.storage().ref();
             const eventUploadTask = eventStorageRef
@@ -52,7 +46,6 @@ export function createEvent(componentState) {
 }
 
 export function joinEvent(componentState) {
-    console.log(componentState);
     return {
         type: JOIN_EVENT,
         payload: axios
@@ -104,8 +97,11 @@ export default function EventReducer(state = initialState, action) {
         case CREATE_EVENT + '_PENDING':
             return { loading: true, created: false };
         case CREATE_EVENT + '_FULFILLED':
-            let result = action.payload.result.data[0];
-            return { loading: false, created: true, ...result };
+            return {
+                loading: false,
+                created: true,
+                ...action.payload.result.data[0],
+            };
         case `${JOIN_EVENT}_PENDING`:
             return Object.assign({ loading: true });
         case `${JOIN_EVENT}_FULFILLED`:
@@ -113,11 +109,9 @@ export default function EventReducer(state = initialState, action) {
         case `${JOIN_EVENT}_REJECTED`:
             return Object.assign({ loading: true });
         case LEAVE_EVENT:
-            return axios
-                .post('/api/event/leave', action.payload)
-                .then(result => {
-                    return Object.assign({}, state, action.payload);
-                });
+            return axios.post('/api/event/leave', action.payload).then(() => {
+                return Object.assign({}, state, action.payload);
+            });
         case EDIT_EVENT + '_PENDING':
             return Object.assign({}, state, { loading: true });
         case EDIT_EVENT + '_FULFILLED':

@@ -85,7 +85,9 @@ export class EditEvent extends Component {
 
         if (this.state.organizerUid !== this.state.currentUserUid) {
             notAuthenticated = (
-                <h1>You can't edit this event, you aren't the event owner.</h1>
+                <h1>
+                    {"You can't edit this event, you aren't the event owner."}
+                </h1>
             );
         } else {
             deleteConfirm = (
@@ -112,7 +114,7 @@ export class EditEvent extends Component {
                         onChange={event => {
                             this.setState({
                                 confirmDeleteInput: event.target.value,
-                            }).then(result => {});
+                            });
                         }}
                     />
                     {finalDeleteButton}

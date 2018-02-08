@@ -19,10 +19,6 @@ export default class EventsYouMayLike extends Component {
     }
 
     componentDidMount() {
-        axios.get(`/api/recommendedEvents/${this.props.uid}`).then(result => {
-            console.log(result);
-        });
-
         axios.get('/api/events').then(events => {
             this.setState({
                 checked: true,
