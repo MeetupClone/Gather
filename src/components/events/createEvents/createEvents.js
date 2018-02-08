@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import moment from 'moment';
 import './createEvents.css';
 import { createEvent } from 'ducks/event-redux';
 import PlaceSearchForm from 'components/placeSearchForm/placeSearchForm';
 import Category from 'components/categories/category';
-
-import './createEvents.css';
-
-import moment from 'moment';
-
-import Facebook from '../../facebook/facebook';
-import Twitter from '../../twitter/twitter';
-import Email from '../../email/email';
+import ConfirmBox from './confirmBox/confirmBox';
 
 export class CreateEvents extends Component {
     constructor(props) {
@@ -63,88 +56,91 @@ export class CreateEvents extends Component {
         return (
             <div>
                 {this.props.created ? (
-                    <div>
-                        <h1>{"Congratulations, you've made an event!"}</h1>
-                        <h3>Share your event!</h3>
-                        <div className="flex-row">
-                            <Twitter />
-                            <Facebook />
-                            <Email />
-                        </div>
-                    </div>
+                    <ConfirmBox
+                        name={this.state.eventName}
+                        date={`${this.state.eventDate} ${this.state.eventTime}`}
+                        picture={this.state.imagePreviewUrl}
+                        eventLocation={this.state.location}
+                        description={this.state.description}
+                        id={24}
+                    />
                 ) : (
                     <div>
-                        <h1 className="createTitle"> Create Event </h1>
-                        <input
-                            required
-                            type="text"
-                            className="nunito-text"
-                            placeholder="Name"
-                            onChange={e =>
-                                this.handleChange(e.target.value, 'eventName')
-                            }
-                            ref={input => {
-                                this.eventName = input;
-                            }}
-                        />
-                        <input
-                            required
-                            type="text"
-                            className="nunito-text"
-                            placeholder="Description"
-                            onChange={e =>
-                                this.handleChange(e.target.value, 'description')
-                            }
-                        />
-                        <PlaceSearchForm
-                            placeholder="Address"
-                            updateParent={location => {
-                                this.setState({
-                                    location: location.address,
-                                    placeId: location.placeId,
-                                });
-                            }}
-                        />
-                        <input
-                            className="event-datetime"
-                            required
-                            type="date"
-                            min={moment().format('YYYY-MM-DD')}
-                            onChange={event => {
-                                this.setState({
-                                    eventDate: moment(event).format(
-                                        'MM/DD/YYYY HH:mm'
-                                    ),
-                                });
-                            }}
-                        />
-
-                        <input
-                            step="900"
-                            className="event-datetime nunito-text"
-                            required
-                            type="time"
-                            onChange={event => {
-                                this.setState({
-                                    eventTime: event.target.value,
-                                    cronTime: moment
-                                        .utc(event)
-                                        .subtract(3, 'hours')
-                                        .format(),
-                                });
-                            }}
-                        />
-
-                        <div className="category-title">
-                            Categories
-                            <Category
-                                className="category-button"
+                        <h1 className="create-title"> Create Event </h1>
+                        <div className="form-container">
+                            <input
                                 required
-                                updateParent={state => {
-                                    this.setState({ categories: state });
+                                type="text"
+                                className="nunito-text"
+                                placeholder="Name"
+                                onChange={e =>
+                                    this.handleChange(
+                                        e.target.value,
+                                        'eventName'
+                                    )
+                                }
+                                ref={input => {
+                                    this.eventName = input;
+                                }}
+                            />
+                            <input
+                                required
+                                type="text"
+                                className="nunito-text"
+                                placeholder="Description"
+                                onChange={e =>
+                                    this.handleChange(
+                                        e.target.value,
+                                        'description'
+                                    )
+                                }
+                            />
+                            <PlaceSearchForm
+                                placeholder="Address"
+                                updateParent={location => {
+                                    this.setState({
+                                        location: location.address,
+                                        placeId: location.placeId,
+                                    });
+                                }}
+                            />
+                            <input
+                                className="event-datetime"
+                                required
+                                type="date"
+                                min={moment().format('YYYY-MM-DD')}
+                                onChange={event => {
+                                    this.setState({
+                                        eventDate: moment(event).format(
+                                            'MM/DD/YYYY HH:mm'
+                                        ),
+                                    });
+                                }}
+                            />
+                            <input
+                                step="900"
+                                className="event-datetime nunito-text"
+                                required
+                                type="time"
+                                onChange={event => {
+                                    this.setState({
+                                        eventTime: event.target.value,
+                                        cronTime: moment
+                                            .utc(event)
+                                            .subtract(3, 'hours')
+                                            .format(),
+                                    });
                                 }}
                             />
                         </div>
+                        <h2 className="category-title">Categories</h2>
+                        <Category
+                            className="category-button"
+                            required
+                            updateParent={state => {
+                                this.setState({ categories: state });
+                            }}
+                        />
                         <img
                             className="event-picture"
                             src={

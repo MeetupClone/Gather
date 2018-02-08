@@ -29,32 +29,27 @@ class PlaceSearchForm extends React.Component {
     };
 
     render() {
-        const cssClasses = {
-            root: 'root',
-            input: 'form-control',
-            autocompleteContainer: 'auto-complete-container',
-        };
-
-        const inputProps = {
-            value: this.state.address,
-            onChange: this.onChange,
-            onBlur: this.handleFormSubmit,
-            placeholder: 'Pick a Location',
-        };
-        const AutocompleteItem = ({ formattedSuggestion }) => (
-            <div>
-                <strong>{formattedSuggestion.mainText}</strong>
-                <small>{formattedSuggestion.secondaryText}</small>
-            </div>
-        );
-
         return (
             <form>
                 <PlacesAutocomplete
                     googleLogo={false}
-                    inputProps={inputProps}
-                    autocompleteItem={AutocompleteItem}
-                    classNames={cssClasses}
+                    inputProps={{
+                        value: this.state.address,
+                        onChange: this.onChange,
+                        onBlur: this.handleFormSubmit,
+                        placeholder: 'Pick a Location',
+                    }}
+                    autocompleteItem={({ formattedSuggestion }) => (
+                        <div>
+                            <strong>{formattedSuggestion.mainText}</strong>
+                            <small>{formattedSuggestion.secondaryText}</small>
+                        </div>
+                    )}
+                    classNames={{
+                        root: 'root',
+                        input: 'form-control',
+                        autocompleteContainer: 'auto-complete-container',
+                    }}
                 />
             </form>
         );

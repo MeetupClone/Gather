@@ -2,7 +2,9 @@ p,
 h1,
 h3,
 h3,
-h4 {
+h4,
+h5,
+h6 {
   margin: 3px;
   padding: 3px;
 }
